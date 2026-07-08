@@ -1,0 +1,156 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+type ResumeUploadFormProps = {
+  compact?: boolean;
+};
+
+const maxFileSize = 10 * 1024 * 1024;
+const allowedExtensions = [".pdf", ".doc", ".docx", ".jpg", ".jpeg", ".png"];
+const allowedMimeTypes = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "image/jpeg",
+  "image/png"
+];
+
+export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
+  const router = useRouter();
+  const [file, setFile] = useState<File | null>(null);
+  const [error, setError] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const errorParam = params.get("error");
+    if (errorParam) setError(errorParam);
+  }, []);
+
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+
+    if (!file) {
+      setError("Please choose a resume file: PDF, DOCX, DOC, JPG, JPEG, or PNG.");
+      return;
+    }
+
+    const validationError = validateFile(file);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append("resume", file);
+
+    try {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 75_000);
+
+      router.push("/analyzing");
+      const res = await fetch("/api/analyze", {
+        method: "POST",
+        body: formData,
+        signal: controller.signal
+      });
+      window.clearTimeout(timeout);
+
+      const data = await readApiResponse(res);
+      if (!res.ok) {
+        const step = data.step ? `Step: ${data.step}. ` : "";
+        const requestId = data.requestId ? ` Request ID: ${data.requestId}.` : "";
+        throw new Error(`${data.error || "Analysis failed."} ${step}${requestId}`.trim());
+      }
+
+      router.push(`/preview/${data.id}`);
+    } catch (err) {
+      setIsUploading(false);
+      const message =
+        err instanceof DOMException && err.name === "AbortError"
+          ? "Unable to connect to AI service. Please try again later."
+          : err instanceof Error
+            ? err.message
+            : "Analysis failed.";
+      setError(message);
+      router.push(`/upload?error=${encodeURIComponent(message)}`);
+    }
+  }
+
+  return (
+    <form
+      onSubmit={onSubmit}
+      className={[
+        "nexx-card animate-editorial-reveal p-5",
+        compact ? "sm:p-6" : "sm:p-7"
+      ].join(" ")}
+    >
+      <div className="flex items-center justify-between gap-4">
+        <div>
+          <p className="text-sm font-semibold text-[#171714]">Start with your resume</p>
+          <p className="mt-1 text-sm text-[#706b61]">Upload your resume as PDF, DOCX, or image.</p>
+        </div>
+        <span className="rounded-full bg-[#eef8de] px-3 py-1 text-xs font-semibold text-[#36521f]">
+          Free preview
+        </span>
+      </div>
+
+      <label className="mt-5 block">
+        <span className="sr-only">Resume file</span>
+        <input
+          className="focus-ring block w-full cursor-pointer rounded-[1.5rem] border border-dashed border-[#cfc7b9] bg-[#faf8f3] px-4 py-7 text-sm text-[#625c52] transition hover:border-[#a89f8f] file:mr-4 file:rounded-full file:border-0 file:bg-[#171714] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
+          type="file"
+          accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png"
+          onChange={(event) => setFile(event.target.files?.[0] || null)}
+        />
+      </label>
+      <p className="mt-3 text-xs leading-5 text-[#817a6e]">
+        PDF or DOCX recommended for best results. JPG/PNG supported when text is readable.
+      </p>
+
+      {file ? <p className="mt-3 text-sm text-[#706b61]">Selected: {file.name}</p> : null}
+      {error ? <p className="nexx-error mt-4">{error}</p> : null}
+
+      <button
+        disabled={isUploading}
+        className="nexx-button-primary mt-5 w-full py-3.5 shadow-[0_16px_36px_rgba(20,20,18,0.18)]"
+      >
+        {isUploading ? "Reading your resume..." : "Analyze My Resume - Free"}
+      </button>
+    </form>
+  );
+}
+
+function validateFile(file: File) {
+  if (file.size > maxFileSize) {
+    return "Please upload a resume file smaller than 10MB.";
+  }
+
+  const lowerName = file.name.toLowerCase();
+  const hasAllowedExtension = allowedExtensions.some((extension) => lowerName.endsWith(extension));
+  const hasAllowedMime = allowedMimeTypes.includes(file.type);
+
+  if (!hasAllowedExtension || !hasAllowedMime) {
+    return "Unsupported file type. Please upload a PDF, DOCX, DOC, JPG, JPEG, or PNG resume.";
+  }
+
+  return "";
+}
+
+async function readApiResponse(res: Response) {
+  const text = await res.text();
+
+  if (!text) return {};
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    return {
+      error: `API returned non-JSON response: ${text.slice(0, 300)}`
+    };
+  }
+}
