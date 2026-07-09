@@ -57,6 +57,12 @@ export type ResumePrecheckResult = {
   detectedSectionHeadings: string[];
   estimatedBulletCount: number;
   quantifiedBulletCount: number;
+  leadershipSignalCount: number;
+  ownershipSignalCount: number;
+  communicationSignalCount: number;
+  technicalSignalCount: number;
+  businessImpactSignalCount: number;
+  roleFocusSignalCount: number;
   weakPhraseCount: number;
   actionVerbCount: number;
   datePatternCount: number;
@@ -71,8 +77,19 @@ export type ResumePrecheckSummary = {
   hasPhone: boolean;
   hasLinkedIn: boolean;
   hasExperienceSection: boolean;
+  hasSummarySection: boolean;
+  hasEducationSection: boolean;
   hasSkillsSection: boolean;
+  estimatedBulletCount: number;
   quantifiedBulletCount: number;
+  leadershipSignalCount: number;
+  ownershipSignalCount: number;
+  communicationSignalCount: number;
+  technicalSignalCount: number;
+  businessImpactSignalCount: number;
+  roleFocusSignalCount: number;
+  actionVerbCount: number;
+  datePatternCount: number;
   weakPhraseCount: number;
   extractionQualityWarnings: string[];
 };
@@ -95,7 +112,7 @@ export type CategoryBreakdown = {
 
 export type ResumeCategoryBreakdown = Record<ScoringCategoryKey, CategoryBreakdown>;
 
-export type InterviewReadinessLevel = "Low" | "Moderate" | "Strong" | "Excellent";
+export type InterviewReadinessLevel = "Low" | "Medium" | "High";
 
 export type Recommendation = {
   whatWeNoticed: string;

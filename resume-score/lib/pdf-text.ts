@@ -34,7 +34,12 @@ export async function extractPdfText(buffer: Buffer): Promise<PdfTextResult> {
 }
 
 function cleanText(text: string) {
-  return text.replace(/\s+/g, " ").trim();
+  return text
+    .replace(/\r\n?/g, "\n")
+    .replace(/[^\S\n]+/g, " ")
+    .replace(/ *\n */g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
 }
 
 function extractBestEffortPdfText(buffer: Buffer) {
@@ -46,12 +51,12 @@ function extractBestEffortPdfText(buffer: Buffer) {
   return [
     ...extractLiteralStrings(chunks),
     ...extractHexStrings(chunks)
-  ].join(" ");
+  ].join("\n");
 }
 
 function extractPdfStreams(source: string) {
   const streams: string[] = [];
-  const pattern = /stream\r?\n([\s\S]*?)\r?\nendstream/g;
+  const pattern = /stream\r?\n([\s\S]*?)\r?\n?endstream/g;
   let match: RegExpExecArray | null;
 
   while ((match = pattern.exec(source))) {
@@ -62,13 +67,59 @@ function extractPdfStreams(source: string) {
 }
 
 function decodeStream(stream: string) {
-  const bytes = Buffer.from(stream, "latin1");
+  const source = stream.trim();
 
   try {
+    const bytes = source.endsWith("~>")
+      ? decodeAscii85(source)
+      : Buffer.from(stream, "latin1");
     return inflateSync(bytes).toString("latin1");
   } catch {
     return stream;
   }
+}
+
+function decodeAscii85(source: string) {
+  const input = source.replace(/\s+/g, "").replace(/^<~/, "").replace(/~>$/, "");
+  const output: number[] = [];
+  let group: number[] = [];
+
+  for (const character of input) {
+    if (character === "z" && group.length === 0) {
+      output.push(0, 0, 0, 0);
+      continue;
+    }
+
+    const value = character.charCodeAt(0) - 33;
+    if (value < 0 || value > 84) continue;
+    group.push(value);
+
+    if (group.length === 5) {
+      appendAscii85Group(group, 4, output);
+      group = [];
+    }
+  }
+
+  if (group.length > 1) {
+    const byteCount = group.length - 1;
+    while (group.length < 5) group.push(84);
+    appendAscii85Group(group, byteCount, output);
+  }
+
+  return Buffer.from(output);
+}
+
+function appendAscii85Group(group: number[], byteCount: number, output: number[]) {
+  let value = 0;
+  for (const digit of group) value = value * 85 + digit;
+
+  const bytes = [
+    (value >>> 24) & 0xff,
+    (value >>> 16) & 0xff,
+    (value >>> 8) & 0xff,
+    value & 0xff
+  ];
+  output.push(...bytes.slice(0, byteCount));
 }
 
 function extractLiteralStrings(content: string) {

@@ -47,13 +47,20 @@ Scoring:
 - Each categoryBreakdown score must be 0-20.
 - Convert each category to a 0-100 category score by multiplying by 5.
 - overallScore must equal the sum of the five 0-20 category scores.
-- Score conservatively. Do not inflate scores to be nice.
+- Calibrate against these overall bands: 0-30 poor, 31-55 weak, 56-75 average, 76-90 strong, 91-100 exceptional.
+- A focused, readable resume with relevant skills, clear sections, and multiple evidenced achievements should normally score 76-90.
+- A generic task-based resume with weak role focus and little evidence should normally score 31-55.
+- Do not compress most resumes into the bottom of the scale. Score conservatively, but use the full range.
 - Trigger specific rules from the rulebook when the resume violates or needs improvement against that rule.
 - triggeredRules must use real rule IDs from the rulebook, such as ATS-001, CLR-002, IMP-003, KEY-004, or PRS-005.
 - Confidence scores must be 0-100 and reflect how confident the engine is based on text quality and evidence clarity.
-- Use deterministicPrechecks as evidence.
-- Do not contradict deterministicPrechecks unless the resume text clearly justifies the contradiction.
+- Use deterministicPrechecks as evidence, not as unquestionable truth.
+- Reconcile deterministicPrechecks with the resume text. If visible evidence contradicts a precheck, trust the visible evidence and do not repeat the faulty flag.
 - If deterministicPrechecks detect missing contact details, missing sections, zero quantified bullets, weak phrases, or extraction warnings, reflect that in scores, triggered rules, and confidence.
+- Metrics may appear anywhere, including percentages, revenue, savings, users, customers, team size, projects, volume, time, growth, delivery, quality, and performance improvements.
+- Evaluate leadership, ownership, communication, technical depth, progression, business impact, and role relevance from evidence rather than job-title seniority.
+- When no target role is supplied, score keyword relevance from internal role-family coherence and evidenced skills. Do not claim a true ATS job-match score without a job description.
+- interviewReadinessLevel must be Low, Medium, or High. Strong resumes must not receive Low solely because contact details are incomplete.
 
 Feedback rules:
 - Be honest, specific, practical, and encouraging.
@@ -86,6 +93,10 @@ Hiring-manager quality bar:
 - categoryBreakdown.evidenceFromResume should quote or closely paraphrase short resume signals when possible.
 - categoryBreakdown.improvementAdvice should contain concrete next edits, not principles.
 - topIssues should be the three conversion blockers most likely to affect recruiter attention.
+- Each top issue should state what was detected, why it affects recruiter or ATS judgment, the highest-impact change, and the likely benefit. Keep it to one concise sentence.
+- Never use more than one top issue for contact information. Contact details should not displace role clarity, relevance, achievement evidence, or readability unless the resume has no usable contact channel.
+- Do not repeat the same diagnosis with different wording across topIssues, hesitationSignals, weaknesses, and fiveMostImportantChanges.
+- Order fiveMostImportantChanges by impact: the first two High Impact, the next two Medium Impact, and the final one Low Impact. Include the impact label naturally in whatWeNoticed.
 - encouragingClosingNote should be brief, credible, and action-oriented.
 
 Output:

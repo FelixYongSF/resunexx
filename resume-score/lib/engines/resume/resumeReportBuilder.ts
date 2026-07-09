@@ -51,7 +51,7 @@ export function buildDownloadableReportData(report: ResumeReport) {
 }
 
 export function normalizeResumeReport(report: ResumeReport): ResumeReport {
-  const categoryBreakdown = applyPrecheckScoreCaps(normalizeCategoryBreakdown(report.categoryBreakdown), report);
+  const categoryBreakdown = calibrateCategoryBreakdown(normalizeCategoryBreakdown(report.categoryBreakdown), report);
   const categoryScores = {
     atsCompatibilityScore: categoryBreakdown.atsCompatibility.score * 5,
     clarityStructureScore: categoryBreakdown.clarityStructure.score * 5,
@@ -60,12 +60,33 @@ export function normalizeResumeReport(report: ResumeReport): ResumeReport {
     professionalPresentationScore: categoryBreakdown.professionalPresentation.score * 5
   };
   const overallScore = categoryKeys.reduce((sum, key) => sum + categoryBreakdown[key].score, 0);
+  const interviewReadinessScore = clampScore(
+    Math.round(
+      overallScore * 0.65 +
+      categoryScores.impactAchievementsScore * 0.2 +
+      categoryScores.clarityStructureScore * 0.15
+    ),
+    0,
+    100
+  );
+  const recruiterAttentionScore = clampScore(
+    Math.round(
+      categoryScores.clarityStructureScore * 0.35 +
+      categoryScores.impactAchievementsScore * 0.4 +
+      categoryScores.professionalPresentationScore * 0.25
+    ),
+    0,
+    100
+  );
 
   const normalized: ResumeReport = {
     ...report,
     engineVersion,
     categoryBreakdown,
     overallScore: clampScore(overallScore, 0, 100),
+    interviewReadinessScore,
+    recruiterAttentionScore,
+    interviewReadinessLevel: readinessLevel(interviewReadinessScore),
     overallConfidence: clampScore(report.overallConfidence, 0, 100),
     atsConfidence: clampScore(report.atsConfidence, 0, 100),
     clarityConfidence: clampScore(report.clarityConfidence, 0, 100),
@@ -102,39 +123,127 @@ function normalizeCategoryBreakdown(categoryBreakdown: ResumeCategoryBreakdown):
   ) as ResumeCategoryBreakdown;
 }
 
-function applyPrecheckScoreCaps(categoryBreakdown: ResumeCategoryBreakdown, report: ResumeReport) {
-  const updated = { ...categoryBreakdown };
+function calibrateCategoryBreakdown(categoryBreakdown: ResumeCategoryBreakdown, report: ResumeReport) {
   const summary = report.precheckSummary;
-
-  if (!summary.hasEmail) updated.atsCompatibility = capCategory(updated.atsCompatibility, 16);
-  if (!summary.hasExperienceSection) updated.clarityStructure = capCategory(updated.clarityStructure, 14);
-  if (summary.quantifiedBulletCount === 0) updated.impactAchievements = capCategory(updated.impactAchievements, 13);
-
-  return updated;
-}
-
-function capCategory(category: CategoryBreakdown, maxScore: number): CategoryBreakdown {
-  const score = Math.min(category.score, maxScore);
-
-  return {
-    ...category,
-    score,
-    grade: gradeCategory(score)
+  const anchors: Record<ScoringCategoryKey, number> = {
+    atsCompatibility:
+      9 +
+      Number(summary.hasExperienceSection) +
+      Number(summary.hasEducationSection) +
+      Number(summary.hasSkillsSection) * 2 +
+      Number(summary.datePatternCount > 0) +
+      Number(summary.estimatedBulletCount >= 3) * 2 +
+      Number(summary.extractionQualityWarnings.length === 0) * 2 +
+      Number(summary.hasEmail || summary.hasPhone),
+    clarityStructure:
+      7 +
+      Number(summary.hasSummarySection) * 2 +
+      Number(summary.hasExperienceSection) * 2 +
+      Number(summary.hasEducationSection) +
+      Number(summary.hasSkillsSection) +
+      Math.min(2, Math.floor(summary.estimatedBulletCount / 3)) +
+      Math.min(2, summary.roleFocusSignalCount) +
+      Number(summary.actionVerbCount >= 3),
+    impactAchievements:
+      5 +
+      Math.min(8, summary.quantifiedBulletCount * 2) +
+      Math.min(3, Math.floor(summary.actionVerbCount / 2)) +
+      Math.min(2, summary.ownershipSignalCount) +
+      Math.min(2, summary.businessImpactSignalCount) -
+      Math.min(3, summary.weakPhraseCount),
+    keywordRelevance:
+      8 +
+      Number(summary.hasSkillsSection) * 3 +
+      Math.min(4, summary.technicalSignalCount) +
+      Math.min(3, summary.roleFocusSignalCount) +
+      Number(summary.businessImpactSignalCount > 0),
+    professionalPresentation:
+      9 +
+      Number(summary.hasSummarySection) +
+      Number(summary.hasExperienceSection) +
+      Number(summary.hasEducationSection) +
+      Number(summary.hasSkillsSection) +
+      Number(summary.estimatedBulletCount >= 3) * 2 +
+      Number(summary.extractionQualityWarnings.length === 0) * 2 +
+      Number(summary.actionVerbCount >= 3) -
+      Math.min(2, summary.weakPhraseCount)
   };
+
+  return Object.fromEntries(
+    categoryKeys.map((key) => {
+      const score = clampScore(Math.round(categoryBreakdown[key].score * 0.15 + anchors[key] * 0.85), 0, 20);
+      return [key, { ...categoryBreakdown[key], score, grade: gradeCategory(score) }];
+    })
+  ) as ResumeCategoryBreakdown;
 }
 
 function buildPrecheckAwareTopIssues(report: ResumeReport) {
-  const issues: string[] = [];
+  const highImpactIssues: string[] = [];
+  const secondaryIssues: string[] = [];
   const summary = report.precheckSummary;
 
-  if (!summary.hasEmail) issues.push("Your resume appears to be missing an email address.");
-  if (!summary.hasExperienceSection) issues.push("No clear work experience section was detected.");
-  if (!summary.hasSkillsSection) issues.push("No clear skills section was detected.");
-  if (summary.quantifiedBulletCount === 0) issues.push("No quantified achievements were detected.");
-  if (summary.weakPhraseCount >= 2) issues.push("Several weak phrases may make your impact sound less specific.");
-  if (summary.extractionQualityWarnings.length > 0) issues.push("The uploaded file may have text extraction quality issues.");
+  if (!summary.hasExperienceSection) {
+    highImpactIssues.push("Your experience is not grouped under a recognizable heading, so recruiters may struggle to find your evidence quickly; use a standard Experience heading and a consistent role-date-bullet structure.");
+  }
+  if (summary.quantifiedBulletCount === 0) {
+    highImpactIssues.push("Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.");
+  }
+  if (!summary.hasSkillsSection) {
+    highImpactIssues.push("Your role-specific capabilities are not consolidated in a skills section, reducing fast recruiter and ATS recognition; add a focused list of tools and functional skills supported elsewhere in the resume.");
+  }
+  if (summary.roleFocusSignalCount === 0) {
+    highImpactIssues.push("The target role is difficult to infer in the first scan, which weakens recruiter confidence; name one role direction in the summary and align the first experience bullets to it.");
+  }
+  if (summary.weakPhraseCount >= 2) {
+    highImpactIssues.push("Several bullets lead with passive responsibility language, which hides ownership; replace those openings with the specific action you took and the result or scope of the work.");
+  }
+  if (summary.extractionQualityWarnings.length > 0) {
+    secondaryIssues.push("Some resume text did not extract cleanly, which may hide otherwise strong evidence; export a simple text-based DOCX or PDF and confirm headings and bullets remain readable.");
+  }
+  if (!summary.hasEmail && !summary.hasPhone) {
+    secondaryIssues.push("No direct contact channel was detected; add one professional email and phone number in the document body so a recruiter can act on a positive review.");
+  }
 
-  return [...issues, ...report.topIssues].slice(0, 3);
+  const candidates = [...highImpactIssues, ...report.topIssues, ...secondaryIssues];
+  return uniqueIssues(candidates).slice(0, 3);
+}
+
+function uniqueIssues(issues: string[]) {
+  const unique: string[] = [];
+
+  for (const issue of issues.map((item) => item.trim()).filter(Boolean)) {
+    const normalized = issue
+      .toLowerCase()
+      .replace(/\b(email|phone|linkedin|contact information|contact details)\b/g, "contact")
+      .replace(/[^a-z0-9 ]/g, " ")
+      .replace(/\s+/g, " ");
+    const words = new Set(normalized.split(" ").filter((word) => word.length > 3));
+    const duplicate = unique.some((existing) => {
+      const existingWords = new Set(
+        existing.toLowerCase().replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter((word) => word.length > 3)
+      );
+      const overlap = [...words].filter((word) => existingWords.has(word)).length;
+      return overlap >= Math.min(4, Math.max(2, Math.floor(words.size * 0.45)));
+    });
+    if (!duplicate) unique.push(issue);
+  }
+
+  const fallbacks = [
+    "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction.",
+    "The strongest evidence is not consistently placed first; lead each role with the result that best demonstrates readiness for the target work.",
+    "Some capabilities appear as claims rather than demonstrated experience; connect the most important skills to a specific project, action, or outcome."
+  ];
+  for (const fallback of fallbacks) {
+    if (unique.length >= 3) break;
+    unique.push(fallback);
+  }
+  return unique;
+}
+
+function readinessLevel(score: number): ResumeReport["interviewReadinessLevel"] {
+  if (score >= 76) return "High";
+  if (score >= 56) return "Medium";
+  return "Low";
 }
 
 function buildResumeEnginePreCheck(report: ResumeReport) {

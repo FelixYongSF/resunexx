@@ -30,6 +30,15 @@ const actionVerbs = [
   "supported"
 ];
 
+const signalPatterns = {
+  leadership: /\b(led|lead|managed|mentored|supervised|directed|headed|coached|facilitated|team lead)\b/gi,
+  ownership: /\b(owned|initiated|launched|built|created|designed|implemented|founded|established|drove|delivered)\b/gi,
+  communication: /\b(presented|communicated|collaborated|partnered|stakeholder|client|customer|workshop|trained|documented|coordinated)\b/gi,
+  technical: /\b(sql|python|java(?:script)?|typescript|react|next\.?js|node\.?js|aws|azure|gcp|docker|kubernetes|tableau|power bi|excel|figma|salesforce|hubspot|google analytics|amplitude|postgres(?:ql)?|api|automation|financial model)\b/gi,
+  businessImpact: /\b(revenue|pipeline|sales|conversion|retention|renewal|activation|cost|savings|efficiency|productivity|adoption|growth|profit|budget|time-to-value|response time|acquisition)\b/gi,
+  roleFocus: /\b(engineer|developer|designer|analyst|marketing|product manager|sales|customer success|operations|finance|coordinator|specialist|consultant|researcher)\b/gi
+};
+
 const sectionPatterns = [
   ["Summary", /\b(summary|profile|objective|professional summary)\b/i],
   ["Experience", /\b(experience|work experience|employment|internship|professional experience)\b/i],
@@ -47,7 +56,7 @@ export function runResumePrechecks(resumeText: string, targetRole?: string): Res
     .filter(([, pattern]) => pattern.test(text))
     .map(([label]) => label);
   const estimatedBulletCount = countMatches(text, /(^|\n)\s*(?:[-*•]|\d+[.)])\s+/g);
-  const quantifiedBulletCount = countQuantifiedBullets(text);
+  const quantifiedBulletCount = countQuantifiedAchievements(text);
   const weakPhraseCount = weakPhrases.reduce(
     (sum, phrase) => sum + countMatches(lower, new RegExp(escapeRegExp(phrase), "g")),
     0
@@ -74,6 +83,12 @@ export function runResumePrechecks(resumeText: string, targetRole?: string): Res
     detectedSectionHeadings,
     estimatedBulletCount,
     quantifiedBulletCount,
+    leadershipSignalCount: countMatches(text, signalPatterns.leadership),
+    ownershipSignalCount: countMatches(text, signalPatterns.ownership),
+    communicationSignalCount: countMatches(text, signalPatterns.communication),
+    technicalSignalCount: countMatches(text, signalPatterns.technical),
+    businessImpactSignalCount: countMatches(text, signalPatterns.businessImpact),
+    roleFocusSignalCount: countMatches(text, signalPatterns.roleFocus),
     weakPhraseCount,
     actionVerbCount,
     datePatternCount: countMatches(text, /\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s+\d{4}|\b20\d{2}\b|\b19\d{2}\b/gi),
@@ -94,8 +109,19 @@ export function toPrecheckSummary(prechecks: ResumePrecheckResult) {
     hasPhone: prechecks.hasPhone,
     hasLinkedIn: prechecks.hasLinkedIn,
     hasExperienceSection: prechecks.hasExperienceSection,
+    hasSummarySection: prechecks.hasSummarySection,
+    hasEducationSection: prechecks.hasEducationSection,
     hasSkillsSection: prechecks.hasSkillsSection,
+    estimatedBulletCount: prechecks.estimatedBulletCount,
     quantifiedBulletCount: prechecks.quantifiedBulletCount,
+    leadershipSignalCount: prechecks.leadershipSignalCount,
+    ownershipSignalCount: prechecks.ownershipSignalCount,
+    communicationSignalCount: prechecks.communicationSignalCount,
+    technicalSignalCount: prechecks.technicalSignalCount,
+    businessImpactSignalCount: prechecks.businessImpactSignalCount,
+    roleFocusSignalCount: prechecks.roleFocusSignalCount,
+    actionVerbCount: prechecks.actionVerbCount,
+    datePatternCount: prechecks.datePatternCount,
     weakPhraseCount: prechecks.weakPhraseCount,
     extractionQualityWarnings: prechecks.extractionQualityWarnings
   };
@@ -107,9 +133,14 @@ function buildPrecheckTriggeredRules(
 ): PrecheckTriggeredRule[] {
   const triggered: PrecheckTriggeredRule[] = [];
 
-  if (!result.hasEmail) triggered.push(precheckRule("ATS-003", "No email address was detected."));
-  if (!result.hasPhone) triggered.push(precheckRule("ATS-003", "No phone number was detected."));
-  if (!result.hasLinkedIn) triggered.push(precheckRule("ATS-003", "No LinkedIn signal was detected."));
+  const missingContactSignals = [
+    !result.hasEmail && "email",
+    !result.hasPhone && "phone",
+    !result.hasLinkedIn && "LinkedIn"
+  ].filter(Boolean);
+  if (missingContactSignals.length > 0) {
+    triggered.push(precheckRule("ATS-003", `Missing contact signals: ${missingContactSignals.join(", ")}.`));
+  }
   if (result.wordCount < 250) triggered.push(precheckRule("CLR-010", `Resume text is short at ${result.wordCount} words.`));
   if (!result.hasExperienceSection) triggered.push(precheckRule("CLR-004", "No clear work experience section was detected."));
   if (!result.hasSkillsSection) triggered.push(precheckRule("ATS-010", "No clear skills section was detected."));
@@ -140,11 +171,21 @@ function precheckRule(ruleId: string, evidence: string): PrecheckTriggeredRule {
   };
 }
 
-function countQuantifiedBullets(text: string) {
+function countQuantifiedAchievements(text: string) {
   return text
     .split(/\n+/)
-    .filter((line) => /^\s*(?:[-*•]|\d+[.)])\s+/.test(line) && /(\d|%|\$|reduced|increased|improved|grew|saved)/i.test(line))
+    .map((line) => line.trim())
+    .filter((line) => line.length >= 18)
+    .filter((line) => hasAchievementMetric(line) && hasAchievementContext(line))
     .length;
+}
+
+function hasAchievementMetric(line: string) {
+  return /(?:\b\d+(?:[.,]\d+)?\s*(?:%|percent|users?|customers?|clients?|accounts?|projects?|campaigns?|tests?|teams?|stakeholders?|regions?|markets?|hours?|days?|weeks?|months?|years?|people|members?|attendees?|responses?|records?|transactions?)\b)|(?:[$£€]\s?\d)|(?:\b\d+(?:[.,]\d+)?\s?(?:k|m|b)\b)|(?:\bfrom\s+\d+(?:[.,]\d+)?\s*%?\s+to\s+\d+(?:[.,]\d+)?\s*%?)|(?:\b\d+-person\b)/i.test(line);
+}
+
+function hasAchievementContext(line: string) {
+  return /\b(built|created|launched|improved|reduced|increased|grew|saved|generated|achieved|managed|led|delivered|optimized|automated|designed|analyzed|supported|coordinated|identified|resolved|tested|standardized|raised|cut|contributed|covering|used by|adopted)\b/i.test(line);
 }
 
 function getExtractionQualityWarnings(text: string) {

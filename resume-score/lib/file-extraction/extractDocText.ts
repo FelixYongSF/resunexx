@@ -67,14 +67,30 @@ function findEndOfCentralDirectory(buffer: Buffer) {
 }
 
 function cleanDocxText(xml: string) {
-  return xml
-    .replace(/<w:tab\/>/g, " ")
-    .replace(/<\/w:p>/g, "\n")
-    .replace(/<[^>]+>/g, "")
+  const paragraphs = xml.match(/<w:p\b[\s\S]*?<\/w:p>/g) || [];
+
+  return paragraphs
+    .map((paragraph) => {
+      const text = Array.from(paragraph.matchAll(/<w:t(?:\s[^>]*)?>([\s\S]*?)<\/w:t>/g))
+        .map((match) => decodeXml(match[1]))
+        .join("")
+        .replace(/\s+/g, " ")
+        .trim();
+      if (!text) return "";
+
+      const isListItem = /<w:numPr\b/.test(paragraph);
+      return `${isListItem ? "- " : ""}${text}`;
+    })
+    .filter(Boolean)
+    .join("\n")
+    .trim();
+}
+
+function decodeXml(value: string) {
+  return value
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
-    .replace(/&apos;/g, "'")
-    .trim();
+    .replace(/&apos;/g, "'");
 }

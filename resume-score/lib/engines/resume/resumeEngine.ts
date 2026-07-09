@@ -281,7 +281,7 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
     impactConfidence: hasMetrics ? 80 : 68,
     keywordConfidence: input.targetRole ? 82 : 66,
     presentationConfidence: 72,
-    interviewReadinessLevel: overallScore >= 82 ? "Strong" : overallScore >= 62 ? "Moderate" : "Low",
+    interviewReadinessLevel: overallScore >= 76 ? "High" : overallScore >= 56 ? "Medium" : "Low",
     summaryDiagnosis:
       `The resume shows useful early-career material, but a hiring manager may need to work too hard to connect it to ${targetRole}. The biggest opportunity is to make role fit, evidence of contribution, and job-specific keywords visible in the top third.`,
     precheckSummary: toPrecheckSummary(prechecks),
@@ -327,7 +327,7 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
     freePreview: {
       overallScore,
       atsReadinessScore: atsCompatibilityScore,
-      interviewReadinessLevel: overallScore >= 82 ? "Strong" : overallScore >= 62 ? "Moderate" : "Low",
+      interviewReadinessLevel: overallScore >= 76 ? "High" : overallScore >= 56 ? "Medium" : "Low",
       top3Issues: topIssues
     },
     paidReport: {
@@ -472,6 +472,41 @@ Skills: Excel, Canva, Google Analytics, copywriting, campaign reporting.
 Education: BA Marketing, State University.
 `
   }, prechecks);
+  const strongControl = generateMockReport({
+    targetRole: "Software Engineer",
+    resumeText: `
+PROFESSIONAL SUMMARY
+Software engineer focused on reliable customer-facing web products.
+EXPERIENCE
+Software Engineer | 2024 - 2026
+- Shipped React onboarding improvements that increased activation by 14% across 8,000 monthly users.
+- Reduced frontend bundle size by 28% through code splitting and dependency cleanup.
+- Resolved 40 production defects and introduced monitoring that reduced repeat incidents by 22%.
+PROJECTS
+- Built a Node.js scheduling API used by 120 users and reduced booking conflicts by 35%.
+- Created 48 automated tests and raised coverage from 54% to 86%.
+SKILLS
+TypeScript, React, Next.js, Node.js, PostgreSQL, Playwright, Datadog
+EDUCATION
+Bachelor of Engineering, Software Engineering, 2024
+`
+  });
+  const weakControl = generateMockReport({
+    targetRole: "Software Engineer",
+    resumeText: `
+PROFESSIONAL SUMMARY
+Motivated professional seeking a software role.
+EXPERIENCE
+Junior Developer | 2024 - 2026
+- Responsible for maintaining application features.
+- Helped with testing and documentation.
+- Worked on API integrations.
+SKILLS
+JavaScript, Git
+EDUCATION
+Diploma, Software Development, 2024
+`
+  });
 
   return {
     prechecksRun: prechecks.wordCount > 0,
@@ -480,7 +515,11 @@ Education: BA Marketing, State University.
     receivedResumeText: true,
     structuredResult: report.engineVersion === engineVersion && typeof report.overallScore === "number",
     freePreviewGenerated: report.freePreview.top3Issues.length === 3,
-    paidReportGenerated: report.paidReport.top10ImprovementPriorities.length === 10
+    paidReportGenerated: report.paidReport.top10ImprovementPriorities.length === 10,
+    quantifiedAchievementsDetected: strongControl.precheckSummary.quantifiedBulletCount >= 5,
+    strongControlOutranksWeak: strongControl.overallScore > weakControl.overallScore,
+    strongControlReadiness: strongControl.interviewReadinessLevel,
+    weakControlReadiness: weakControl.interviewReadinessLevel
   };
 }
 
