@@ -11,7 +11,11 @@ const weakPhrases = [
 
 const actionVerbs = [
   "built",
+  "booked",
   "created",
+  "delivered",
+  "generated",
+  "achieved",
   "launched",
   "improved",
   "reduced",
@@ -21,13 +25,18 @@ const actionVerbs = [
   "led",
   "managed",
   "designed",
+  "redesigned",
   "implemented",
   "developed",
   "organized",
   "optimized",
   "reported",
   "researched",
-  "supported"
+  "supported",
+  "tested",
+  "standardized",
+  "resolved",
+  "identified"
 ];
 
 const signalPatterns = {
@@ -36,7 +45,7 @@ const signalPatterns = {
   communication: /\b(presented|communicated|collaborated|partnered|stakeholder|client|customer|workshop|trained|documented|coordinated)\b/gi,
   technical: /\b(sql|python|java(?:script)?|typescript|react|next\.?js|node\.?js|aws|azure|gcp|docker|kubernetes|tableau|power bi|excel|figma|salesforce|hubspot|google analytics|amplitude|postgres(?:ql)?|api|automation|financial model)\b/gi,
   businessImpact: /\b(revenue|pipeline|sales|conversion|retention|renewal|activation|cost|savings|efficiency|productivity|adoption|growth|profit|budget|time-to-value|response time|acquisition)\b/gi,
-  roleFocus: /\b(engineer(?:ing)?|developer|designer|analyst|marketing|product manager|sales|customer success|operations|finance|coordinator|specialist|consultant|researcher)\b/gi
+  roleFocus: /\b(engineer(?:ing)?|developer|designer|analyst|marketing|product manager|sales|business development|account executive|customer success|operations|finance|coordinator|specialist|consultant|researcher)\b/gi
 };
 
 const sectionPatterns = [
@@ -181,11 +190,11 @@ function countQuantifiedAchievements(text: string) {
 }
 
 function hasAchievementMetric(line: string) {
-  return /(?:\b\d+(?:[.,]\d+)?\s*%)|(?:\b\d+(?:[.,]\d+)?\s*(?:percent|users?|customers?|clients?|accounts?|projects?|campaigns?|tests?|teams?|stakeholders?|regions?|markets?|hours?|days?|weeks?|months?|years?|people|members?|attendees?|responses?|records?|transactions?|meetings?|companies|defects?|components?|procedures?|metrics?|interviews?|items?)\b)|(?:[$£€]\s?\d)|(?:\b\d+(?:[.,]\d+)?\s?(?:k|m|b)\b)|(?:\bfrom\s+\d+(?:[.,]\d+)?\s*%?\s+to\s+\d+(?:[.,]\d+)?\s*%?)|(?:\b\d+-person\b)/i.test(line);
+  return /(?:\b\d+(?:[.,]\d+)?\s*%)|(?:\b\d+(?:[.,]\d+)?\s*(?:percent|users?|customers?|clients?|accounts?|projects?|campaigns?|tests?|teams?|stakeholders?|regions?|markets?|hours?|days?|weeks?|months?|years?|people|members?|attendees?|responses?|records?|transactions?|meetings?|companies|defects?|components?|procedures?|metrics?|interviews?|items?)\b)|(?:[$£€]\s?\d)|(?:\b\d+(?:[.,]\d+)?\s?(?:k|m|b)\b)|(?:\bfrom\s+\d+(?:[.,]\d+)?\s*%?\s+to\s+\d+(?:[.,]\d+)?\s*%?)|(?:\b\d+-(?:person|component|item|member|team|project|step)\b)/i.test(line);
 }
 
 function hasAchievementContext(line: string) {
-  return /\b(built|created|launched|shipped|booked|improved|reduced|increased|grew|saved|generated|achieved|managed|led|delivered|optimized|automated|designed|analyzed|supported|coordinated|identified|resolved|tested|standardized|raised|cut|contributed|covering|used by|adopted)\b/i.test(line);
+  return /\b(built|created|launched|shipped|booked|improved|reduced|increased|grew|saved|generated|achieved|managed|led|delivered|optimized|automated|designed|redesigned|analyzed|supported|coordinated|identified|resolved|tested|standardized|raised|cut|contributed|covering|used by|adopted)\b/i.test(line);
 }
 
 function getExtractionQualityWarnings(text: string) {

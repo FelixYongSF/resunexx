@@ -213,7 +213,10 @@ function buildPrecheckAwareTopIssues(report: ResumeReport) {
     secondaryIssues.push("No direct contact channel was detected; add one professional email and phone number in the document body so a recruiter can act on a positive review.");
   }
 
-  const candidates = [...highImpactIssues, ...report.topIssues, ...secondaryIssues];
+  const modelIssues = report.topIssues.filter(
+    (issue) => !(summary.quantifiedBulletCount >= 3 && issueTopic(issue) === "evidence")
+  );
+  const candidates = [...highImpactIssues, ...modelIssues, ...secondaryIssues];
   return uniqueIssues(candidates).slice(0, 3);
 }
 
@@ -255,7 +258,7 @@ function issueTopic(issue: string) {
   const lower = issue.toLowerCase();
   if (/\b(email|phone|linkedin|contact)\b/.test(lower)) return "contact";
   if (/\b(metric|quantif|scale|result|achievement|impact)\b/.test(lower)) return "evidence";
-  if (/\b(skill|capabilit|tool)\b/.test(lower)) return "skills";
+  if (/\b(skills?|capabilit(?:y|ies)|tools?)\b/.test(lower)) return "skills";
   if (/\b(target role|role direction|role-specific|role focus)\b/.test(lower)) return "role";
   if (/\b(responsib|passive|action verb|ownership)\b/.test(lower)) return "ownership";
   if (/\b(extract|parse|file format)\b/.test(lower)) return "extraction";
