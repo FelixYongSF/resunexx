@@ -36,7 +36,7 @@ const signalPatterns = {
   communication: /\b(presented|communicated|collaborated|partnered|stakeholder|client|customer|workshop|trained|documented|coordinated)\b/gi,
   technical: /\b(sql|python|java(?:script)?|typescript|react|next\.?js|node\.?js|aws|azure|gcp|docker|kubernetes|tableau|power bi|excel|figma|salesforce|hubspot|google analytics|amplitude|postgres(?:ql)?|api|automation|financial model)\b/gi,
   businessImpact: /\b(revenue|pipeline|sales|conversion|retention|renewal|activation|cost|savings|efficiency|productivity|adoption|growth|profit|budget|time-to-value|response time|acquisition)\b/gi,
-  roleFocus: /\b(engineer|developer|designer|analyst|marketing|product manager|sales|customer success|operations|finance|coordinator|specialist|consultant|researcher)\b/gi
+  roleFocus: /\b(engineer(?:ing)?|developer|designer|analyst|marketing|product manager|sales|customer success|operations|finance|coordinator|specialist|consultant|researcher)\b/gi
 };
 
 const sectionPatterns = [

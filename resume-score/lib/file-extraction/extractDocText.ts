@@ -78,7 +78,9 @@ function cleanDocxText(xml: string) {
         .trim();
       if (!text) return "";
 
-      const isListItem = /<w:numPr\b/.test(paragraph);
+      const isListItem =
+        /<w:numPr\b/.test(paragraph) ||
+        /<w:pStyle\b[^>]*w:val="[^"]*(?:list|bullet|number)[^"]*"/i.test(paragraph);
       return `${isListItem ? "- " : ""}${text}`;
     })
     .filter(Boolean)
