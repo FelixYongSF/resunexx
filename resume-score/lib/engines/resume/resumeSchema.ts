@@ -261,6 +261,21 @@ export const resumeReportJsonSchema = {
   }
 } as const;
 
+const derivedReportFields = new Set([
+  "precheckSummary",
+  "precheckTriggeredRules",
+  "freePreview",
+  "paidReport"
+]);
+
+export const resumeAnalysisJsonSchema = {
+  ...resumeReportJsonSchema,
+  required: resumeReportJsonSchema.required.filter((field) => !derivedReportFields.has(field)),
+  properties: Object.fromEntries(
+    Object.entries(resumeReportJsonSchema.properties).filter(([field]) => !derivedReportFields.has(field))
+  )
+};
+
 export function validateResumeReport(value: unknown): asserts value is ResumeReport {
   if (!value || typeof value !== "object") {
     throw new Error("AI response is not an object.");

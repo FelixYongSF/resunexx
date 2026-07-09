@@ -6,10 +6,11 @@ import { saveReport } from "@/lib/report-store";
 import { toPreview, StoredReport } from "@/lib/report-schema";
 
 export const runtime = "nodejs";
-export const maxDuration = 90;
+export const maxDuration = 120;
 
 export async function POST(request: Request) {
   const requestId = crypto.randomUUID();
+  const requestStartedAt = Date.now();
   let step = "request:start";
 
   try {
@@ -35,10 +36,13 @@ export async function POST(request: Request) {
     }
 
     step = "file:extract-text";
+    const parsingStartedAt = Date.now();
     const parsed = await extractResumeText(file);
     const resumeText = parsed.text;
+    const parsingDurationMs = Date.now() - parsingStartedAt;
 
     console.info(`[analyze:${requestId}] resume file parsed`, {
+      durationMs: parsingDurationMs,
       fileType: parsed.fileType,
       extractionMethod: parsed.extractionMethod,
       warnings: parsed.warnings,
@@ -56,13 +60,16 @@ export async function POST(request: Request) {
     }
 
     step = "engine:analyze-resume";
+    const engineStartedAt = Date.now();
     console.info(`[analyze:${requestId}] running resume engine`, {
       model: process.env.OPENAI_MODEL || "gpt-4o-mini",
       inputCharacters: resumeText.length
     });
 
     const report = await analyzeResumeWithEngine({ resumeText });
+    const engineDurationMs = Date.now() - engineStartedAt;
     console.info(`[analyze:${requestId}] resume engine analysis returned`, {
+      durationMs: engineDurationMs,
       engineVersion: report.engineVersion,
       overallScore: report.overallScore
     });
@@ -83,8 +90,14 @@ export async function POST(request: Request) {
     };
 
     step = "storage:save-report";
+    const storageStartedAt = Date.now();
     await saveReport(stored);
-    console.info(`[analyze:${requestId}] report saved`, { reportId: id });
+    const storageDurationMs = Date.now() - storageStartedAt;
+    console.info(`[analyze:${requestId}] report saved`, {
+      reportId: id,
+      storageDurationMs,
+      totalDurationMs: Date.now() - requestStartedAt
+    });
 
     return NextResponse.json({
       id,

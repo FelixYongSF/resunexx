@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 import { fetch as undiciFetch, ProxyAgent } from "undici";
 
-const OPENAI_TIMEOUT_MS = 80_000;
+const OPENAI_TIMEOUT_MS = 105_000;
 
 export function createOpenAiClient() {
   const proxyUrl = getProxyUrl();

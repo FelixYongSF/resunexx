@@ -4,7 +4,7 @@ import { analysisPrompt, buildResumeUserPrompt } from "./resumePrompt";
 import { runResumePrechecks, toPrecheckSummary } from "./resumePrechecks";
 import { resumeRulebook, scoringCategories } from "./resumeRules";
 import { normalizeResumeReport } from "./resumeReportBuilder";
-import { resumeReportJsonSchema, validateResumeReport } from "./resumeSchema";
+import { resumeAnalysisJsonSchema, resumeReportJsonSchema, validateResumeReport } from "./resumeSchema";
 import { AnalyzeResumeInput, ResumeEngineResult, ResumePrecheckResult, ResumeReport } from "./resumeTypes";
 import { engineLanguage, engineMarket, engineName, engineVersion } from "./resumeVersion";
 
@@ -41,7 +41,7 @@ export async function analyzeResumeWithEngineResult(input: AnalyzeResumeInput): 
     });
 
     validateResumeReport(report);
-    return { ok: true, report: normalizeResumeReport(report) };
+    return { ok: true, report };
   } catch (error) {
     const message = error instanceof Error ? error.message : "Resume analysis failed.";
     const code = message.includes("valid JSON")
@@ -72,26 +72,37 @@ export async function generateOpenAIReport(
 
   const client = createOpenAiClient();
   const requestStartedAt = Date.now();
+  const prechecks = input.deterministicPrechecks || runResumePrechecks(input.resumeText, input.targetRole);
+  const userPrompt = buildResumeUserPrompt({
+    ...input,
+    deterministicPrechecks: prechecks
+  });
+
+  console.info("[resume-engine:v1] OpenAI request prepared.", {
+    estimatedInputTokens: Math.ceil(
+      (analysisPrompt.length + userPrompt.length + JSON.stringify(resumeAnalysisJsonSchema).length) / 4
+    ),
+    model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+    resumeCharacters: input.resumeText.length,
+    schemaCharacters: JSON.stringify(resumeAnalysisJsonSchema).length,
+    systemPromptCharacters: analysisPrompt.length,
+    userPromptCharacters: userPrompt.length
+  });
 
   try {
     const response = await client.chat.completions.create({
       model: process.env.OPENAI_MODEL || "gpt-4o-mini",
       temperature: 0.15,
+      max_tokens: 5_000,
       messages: [
         { role: "system", content: analysisPrompt },
-        {
-          role: "user",
-          content: buildResumeUserPrompt({
-            ...input,
-            deterministicPrechecks: input.deterministicPrechecks || runResumePrechecks(input.resumeText, input.targetRole)
-          })
-        }
+        { role: "user", content: userPrompt }
       ],
       response_format: {
         type: "json_schema",
         json_schema: {
           name: "resume_engine_v1_report",
-          schema: resumeReportJsonSchema,
+          schema: resumeAnalysisJsonSchema,
           strict: true
         }
       }
@@ -101,18 +112,33 @@ export async function generateOpenAIReport(
     if (!content) throw new Error("OpenAI returned an empty analysis.");
 
     console.info("[resume-engine:v1] OpenAI request completed.", {
+      completionTokens: response.usage?.completion_tokens,
       elapsedMs: Date.now() - requestStartedAt,
-      model: process.env.OPENAI_MODEL || "gpt-4o-mini"
+      model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+      promptTokens: response.usage?.prompt_tokens,
+      responseCharacters: content.length,
+      totalTokens: response.usage?.total_tokens
     });
 
     try {
-      const report = JSON.parse(content) as ResumeReport;
-      const prechecks = input.deterministicPrechecks || runResumePrechecks(input.resumeText, input.targetRole);
-      return {
-        ...report,
+      const processingStartedAt = Date.now();
+      const analysis = JSON.parse(content) as Omit<
+        ResumeReport,
+        "precheckSummary" | "precheckTriggeredRules" | "freePreview" | "paidReport"
+      >;
+      const report = normalizeResumeReport({
+        ...analysis,
         precheckSummary: toPrecheckSummary(prechecks),
-        precheckTriggeredRules: prechecks.precheckTriggeredRules
-      };
+        precheckTriggeredRules: prechecks.precheckTriggeredRules,
+        freePreview: undefined,
+        paidReport: undefined
+      } as unknown as ResumeReport);
+
+      console.info("[resume-engine:v1] response processed.", {
+        elapsedMs: Date.now() - processingStartedAt
+      });
+
+      return report;
     } catch {
       throw new Error("OpenAI response was not valid JSON.");
     }

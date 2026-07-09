@@ -2,6 +2,18 @@ import { resumeRulebook } from "./resumeRules";
 import { ResumePrecheckResult } from "./resumeTypes";
 import { engineLanguage, engineMarket, engineName, engineVersion } from "./resumeVersion";
 
+const promptRulebook = resumeRulebook.map(
+  ({ id, category, title, description, priority, weight, recommendation }) => ({
+    id,
+    category,
+    title,
+    description,
+    priority,
+    weight,
+    recommendation
+  })
+);
+
 export const analysisPrompt = `You are ScoreLab ${engineName} v${engineVersion}.
 
 Language: ${engineLanguage}.
@@ -22,7 +34,7 @@ Target user:
 Do not optimize for senior executives or very experienced candidates.
 
 Follow this Resume Engine v1.2 structured rulebook exactly:
-${JSON.stringify(resumeRulebook, null, 2)}
+${JSON.stringify(promptRulebook)}
 
 Scoring:
 - Total score is 100.
@@ -82,12 +94,7 @@ Output:
 - Do not include prose outside JSON.
 - Use the exact schema provided by the API call.
 - engineVersion must be exactly "${engineVersion}".
-- freePreview must include only overallScore, atsReadinessScore, interviewReadinessLevel, and top3Issues.
-- paidReport must include categoryBreakdown, detailedExplanation, sectionFeedback, top10ImprovementPriorities, missingKeywords, rewriteExamples, and finalActionPlan.
-- paidReport must include triggeredRules.
-- freePreview must not include triggeredRules.
-- Include precheckSummary and precheckTriggeredRules.
-- precheckSummary must match deterministicPrechecks.
+- Do not return freePreview, paidReport, precheckSummary, or precheckTriggeredRules. The application derives those fields deterministically after analysis.
 
 Disclaimer requirement:
 The disclaimer must communicate that the report is AI-generated feedback, is not professional career, legal, or employment advice, and does not guarantee interviews or job offers.`;
@@ -106,7 +113,7 @@ export function buildResumeUserPrompt(input: {
 ${targetRoleLine}
 
 Deterministic prechecks:
-${JSON.stringify(input.deterministicPrechecks, null, 2)}
+${JSON.stringify(input.deterministicPrechecks)}
 
 Resume text:
 ${input.resumeText.slice(0, 30000)}`;
