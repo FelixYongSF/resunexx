@@ -52,12 +52,21 @@ export function buildDownloadableReportData(report: ResumeReport) {
 
 export function normalizeResumeReport(report: ResumeReport): ResumeReport {
   const categoryBreakdown = calibrateCategoryBreakdown(normalizeCategoryBreakdown(report.categoryBreakdown), report);
-  const categoryScores = {
+  const baseCategoryScores = {
     atsCompatibilityScore: categoryBreakdown.atsCompatibility.score * 5,
     clarityStructureScore: categoryBreakdown.clarityStructure.score * 5,
     impactAchievementsScore: categoryBreakdown.impactAchievements.score * 5,
     keywordRelevanceScore: categoryBreakdown.keywordRelevance.score * 5,
     professionalPresentationScore: categoryBreakdown.professionalPresentation.score * 5
+  };
+  const categoryScores = {
+    ...baseCategoryScores,
+    atsCompatibilityScore: Math.round(
+      baseCategoryScores.atsCompatibilityScore * 0.55 +
+      baseCategoryScores.clarityStructureScore * 0.15 +
+      baseCategoryScores.impactAchievementsScore * 0.15 +
+      baseCategoryScores.keywordRelevanceScore * 0.15
+    )
   };
   const overallScore = categoryKeys.reduce((sum, key) => sum + categoryBreakdown[key].score, 0);
   const interviewReadinessScore = clampScore(
@@ -212,6 +221,7 @@ function uniqueIssues(issues: string[]) {
   const unique: string[] = [];
 
   for (const issue of issues.map((item) => item.trim()).filter(Boolean)) {
+    const topic = issueTopic(issue);
     const normalized = issue
       .toLowerCase()
       .replace(/\b(email|phone|linkedin|contact information|contact details)\b/g, "contact")
@@ -219,6 +229,7 @@ function uniqueIssues(issues: string[]) {
       .replace(/\s+/g, " ");
     const words = new Set(normalized.split(" ").filter((word) => word.length > 3));
     const duplicate = unique.some((existing) => {
+      if (topic && issueTopic(existing) === topic) return true;
       const existingWords = new Set(
         existing.toLowerCase().replace(/[^a-z0-9 ]/g, " ").split(/\s+/).filter((word) => word.length > 3)
       );
@@ -238,6 +249,17 @@ function uniqueIssues(issues: string[]) {
     unique.push(fallback);
   }
   return unique;
+}
+
+function issueTopic(issue: string) {
+  const lower = issue.toLowerCase();
+  if (/\b(email|phone|linkedin|contact)\b/.test(lower)) return "contact";
+  if (/\b(metric|quantif|scale|result|achievement|impact)\b/.test(lower)) return "evidence";
+  if (/\b(skill|capabilit|tool)\b/.test(lower)) return "skills";
+  if (/\b(target role|role direction|role-specific|role focus)\b/.test(lower)) return "role";
+  if (/\b(responsib|passive|action verb|ownership)\b/.test(lower)) return "ownership";
+  if (/\b(extract|parse|file format)\b/.test(lower)) return "extraction";
+  return "";
 }
 
 function readinessLevel(score: number): ResumeReport["interviewReadinessLevel"] {

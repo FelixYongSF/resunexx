@@ -181,11 +181,11 @@ function countQuantifiedAchievements(text: string) {
 }
 
 function hasAchievementMetric(line: string) {
-  return /(?:\b\d+(?:[.,]\d+)?\s*(?:%|percent|users?|customers?|clients?|accounts?|projects?|campaigns?|tests?|teams?|stakeholders?|regions?|markets?|hours?|days?|weeks?|months?|years?|people|members?|attendees?|responses?|records?|transactions?)\b)|(?:[$£€]\s?\d)|(?:\b\d+(?:[.,]\d+)?\s?(?:k|m|b)\b)|(?:\bfrom\s+\d+(?:[.,]\d+)?\s*%?\s+to\s+\d+(?:[.,]\d+)?\s*%?)|(?:\b\d+-person\b)/i.test(line);
+  return /(?:\b\d+(?:[.,]\d+)?\s*%)|(?:\b\d+(?:[.,]\d+)?\s*(?:percent|users?|customers?|clients?|accounts?|projects?|campaigns?|tests?|teams?|stakeholders?|regions?|markets?|hours?|days?|weeks?|months?|years?|people|members?|attendees?|responses?|records?|transactions?|meetings?|companies|defects?|components?|procedures?|metrics?|interviews?|items?)\b)|(?:[$£€]\s?\d)|(?:\b\d+(?:[.,]\d+)?\s?(?:k|m|b)\b)|(?:\bfrom\s+\d+(?:[.,]\d+)?\s*%?\s+to\s+\d+(?:[.,]\d+)?\s*%?)|(?:\b\d+-person\b)/i.test(line);
 }
 
 function hasAchievementContext(line: string) {
-  return /\b(built|created|launched|improved|reduced|increased|grew|saved|generated|achieved|managed|led|delivered|optimized|automated|designed|analyzed|supported|coordinated|identified|resolved|tested|standardized|raised|cut|contributed|covering|used by|adopted)\b/i.test(line);
+  return /\b(built|created|launched|shipped|booked|improved|reduced|increased|grew|saved|generated|achieved|managed|led|delivered|optimized|automated|designed|analyzed|supported|coordinated|identified|resolved|tested|standardized|raised|cut|contributed|covering|used by|adopted)\b/i.test(line);
 }
 
 function getExtractionQualityWarnings(text: string) {
