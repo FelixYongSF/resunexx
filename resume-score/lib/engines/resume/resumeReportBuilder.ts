@@ -249,6 +249,8 @@ function uniqueIssues(issues: string[]) {
   ];
   for (const fallback of fallbacks) {
     if (unique.length >= 3) break;
+    const topic = issueTopic(fallback);
+    if (topic && unique.some((issue) => issueTopic(issue) === topic)) continue;
     unique.push(fallback);
   }
   return unique;

@@ -1,5 +1,5 @@
 export const engineName = "Resume Engine";
-export const engineVersion = "1.3.0";
+export const engineVersion = "1.4.0";
 export const engineLanguage = "English";
 export const engineMarket = "US / UK / Canada / Australia style resumes";
 

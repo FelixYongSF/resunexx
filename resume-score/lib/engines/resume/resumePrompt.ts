@@ -1,4 +1,5 @@
 import { resumeRulebook } from "./resumeRules";
+import { buildReportWriterContext, reportWriterPrompt } from "./resumeReportWriter";
 import { ResumePrecheckResult } from "./resumeTypes";
 import { engineLanguage, engineMarket, engineName, engineVersion } from "./resumeVersion";
 
@@ -83,6 +84,8 @@ Feedback rules:
 - Rewrite examples must preserve truthfulness. If a metric is not present, use a structure with a placeholder-like instruction inside the sentence such as "measured by [specific metric]" only when necessary, but prefer non-numeric truthful rewrites.
 - The final action plan must be ordered by impact and effort: fix the top third first, then bullets, then skills/keywords, then formatting/export.
 
+${reportWriterPrompt}
+
 Hiring-manager quality bar:
 - recruiterFirstImpression should answer what a busy reviewer would understand in the first 6-10 seconds.
 - wouldRecruiterKeepReading should give a realistic judgment and the reason.
@@ -125,6 +128,9 @@ ${targetRoleLine}
 
 Deterministic prechecks:
 ${JSON.stringify(input.deterministicPrechecks)}
+
+Report Writer context:
+${buildReportWriterContext(input.deterministicPrechecks)}
 
 Resume text:
 ${input.resumeText.slice(0, 30000)}`;
