@@ -12,17 +12,16 @@ export type ResumeTextExtractionResult = {
   warnings: string[];
 };
 
-const maxUploadSize = 10 * 1024 * 1024;
+const maxUploadSize = 4 * 1024 * 1024;
 
-const allowedMimeTypes = new Set([
-  "application/pdf",
-  "application/msword",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-  "image/jpeg",
-  "image/png"
-]);
-
-const allowedExtensions = new Set([".pdf", ".doc", ".docx", ".jpg", ".jpeg", ".png"]);
+const allowedMimeTypesByExtension: Record<string, Set<string>> = {
+  ".pdf": new Set(["application/pdf"]),
+  ".doc": new Set(["application/msword"]),
+  ".docx": new Set(["application/vnd.openxmlformats-officedocument.wordprocessingml.document"]),
+  ".jpg": new Set(["image/jpeg"]),
+  ".jpeg": new Set(["image/jpeg"]),
+  ".png": new Set(["image/png"])
+};
 
 export async function extractResumeText(file: File): Promise<ResumeTextExtractionResult> {
   validateResumeFile(file);
@@ -49,12 +48,13 @@ export async function extractResumeText(file: File): Promise<ResumeTextExtractio
 
 export function validateResumeFile(file: File) {
   if (file.size > maxUploadSize) {
-    throw new Error("Please upload a resume file smaller than 10MB.");
+    throw new Error("Please upload a resume file smaller than 4MB.");
   }
 
   const extension = getFileExtension(file.name);
-  if (!allowedExtensions.has(extension) || !allowedMimeTypes.has(file.type)) {
-    throw new Error("Unsupported file type. Please upload a PDF, DOCX, DOC, JPG, JPEG, or PNG resume.");
+  const allowedMimeTypes = allowedMimeTypesByExtension[extension];
+  if (!allowedMimeTypes?.has(file.type)) {
+    throw new Error("Unsupported file type. Only PDF and DOCX resumes can currently be analyzed.");
   }
 }
 
@@ -68,7 +68,12 @@ export function detectFileType(file: File): ResumeFileType {
 }
 
 function ensureReadableText(result: ResumeTextExtractionResult): ResumeTextExtractionResult {
-  const text = result.text.replace(/\s+/g, " ").trim();
+  const text = result.text
+    .replace(/\r\n?/g, "\n")
+    .replace(/[^\S\n]+/g, " ")
+    .replace(/ *\n */g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
 
   if (text.length < 400) {
     throw new Error(

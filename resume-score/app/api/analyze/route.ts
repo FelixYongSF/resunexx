@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     const file = formData.get("resume");
 
     if (!(file instanceof File)) {
-      return fail(requestId, step, "Please upload a resume file: PDF, DOCX, DOC, JPG, JPEG, or PNG.", 400);
+      return fail(requestId, step, "Please upload a PDF or DOCX resume.", 400);
     }
 
     console.info(`[analyze:${requestId}] file received`, {
@@ -30,8 +30,8 @@ export async function POST(request: Request) {
     });
 
     step = "upload:validate-file";
-    if (file.size > 10 * 1024 * 1024) {
-      return fail(requestId, step, "Please upload a resume file smaller than 10MB.", 400);
+    if (file.size > 4 * 1024 * 1024) {
+      return fail(requestId, step, "Please upload a resume file smaller than 4MB.", 400);
     }
 
     step = "file:extract-text";
@@ -139,7 +139,7 @@ function getUserFacingError(step: string, message: string) {
     if (message.includes("Image resume upload is experimental")) return message;
     if (message.includes("PDF or DOCX")) return message;
     if (message.includes("Unsupported file type")) return message;
-    if (message.includes("10MB")) return message;
+    if (message.includes("4MB")) return message;
     return "Text extraction failed. Please upload a text-based PDF or DOCX resume for best results.";
   }
 

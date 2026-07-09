@@ -7,15 +7,11 @@ type ResumeUploadFormProps = {
   compact?: boolean;
 };
 
-const maxFileSize = 10 * 1024 * 1024;
-const allowedExtensions = [".pdf", ".doc", ".docx", ".jpg", ".jpeg", ".png"];
-const allowedMimeTypes = [
-  "application/pdf",
-  "application/msword",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-  "image/jpeg",
-  "image/png"
-];
+const maxFileSize = 4 * 1024 * 1024;
+const allowedMimeTypesByExtension: Record<string, string> = {
+  ".pdf": "application/pdf",
+  ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+};
 
 export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
   const router = useRouter();
@@ -34,7 +30,7 @@ export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
     setError("");
 
     if (!file) {
-      setError("Please choose a resume file: PDF, DOCX, DOC, JPG, JPEG, or PNG.");
+      setError("Please choose a PDF or DOCX resume.");
       return;
     }
 
@@ -92,7 +88,7 @@ export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
       <div className="flex items-center justify-between gap-4">
         <div>
           <p className="text-sm font-semibold text-[#171714]">Start with your resume</p>
-          <p className="mt-1 text-sm text-[#706b61]">Upload your resume as PDF, DOCX, or image.</p>
+          <p className="mt-1 text-sm text-[#706b61]">Upload your resume as PDF or DOCX.</p>
         </div>
         <span className="rounded-full bg-[#eef8de] px-3 py-1 text-xs font-semibold text-[#36521f]">
           Free preview
@@ -104,12 +100,12 @@ export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
         <input
           className="focus-ring block w-full cursor-pointer rounded-[1.5rem] border border-dashed border-[#cfc7b9] bg-[#faf8f3] px-4 py-7 text-sm text-[#625c52] transition hover:border-[#a89f8f] file:mr-4 file:rounded-full file:border-0 file:bg-[#171714] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
           type="file"
-          accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png"
+          accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           onChange={(event) => setFile(event.target.files?.[0] || null)}
         />
       </label>
       <p className="mt-3 text-xs leading-5 text-[#817a6e]">
-        PDF or DOCX recommended for best results. JPG/PNG supported when text is readable.
+        Text-based PDF or DOCX, up to 4MB.
       </p>
 
       {file ? <p className="mt-3 text-sm text-[#706b61]">Selected: {file.name}</p> : null}
@@ -127,15 +123,15 @@ export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
 
 function validateFile(file: File) {
   if (file.size > maxFileSize) {
-    return "Please upload a resume file smaller than 10MB.";
+    return "Please upload a resume file smaller than 4MB.";
   }
 
   const lowerName = file.name.toLowerCase();
-  const hasAllowedExtension = allowedExtensions.some((extension) => lowerName.endsWith(extension));
-  const hasAllowedMime = allowedMimeTypes.includes(file.type);
+  const extension = Object.keys(allowedMimeTypesByExtension).find((candidate) => lowerName.endsWith(candidate));
+  const hasMatchingMime = extension ? allowedMimeTypesByExtension[extension] === file.type : false;
 
-  if (!hasAllowedExtension || !hasAllowedMime) {
-    return "Unsupported file type. Please upload a PDF, DOCX, DOC, JPG, JPEG, or PNG resume.";
+  if (!hasMatchingMime) {
+    return "Unsupported file type. Please upload a PDF or DOCX resume.";
   }
 
   return "";

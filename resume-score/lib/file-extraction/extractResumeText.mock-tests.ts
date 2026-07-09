@@ -9,15 +9,15 @@ export function runResumeFileExtractionMockTests() {
   );
   const image = makeFile("resume.png", "image/png", 500_000);
   const unsupported = makeFile("resume.txt", "text/plain", 10_000);
-  const tooLarge = makeFile("resume.pdf", "application/pdf", 11 * 1024 * 1024);
+  const tooLarge = makeFile("resume.pdf", "application/pdf", 5 * 1024 * 1024);
   const tooLittleReadableText = "Short resume";
 
   return {
     pdfTextInput: expectNoThrow(() => validateResumeFile(pdf)) && detectFileType(pdf) === "pdf",
     docxTextInput: expectNoThrow(() => validateResumeFile(docx)) && detectFileType(docx) === "docx",
-    imageOcrFallback: expectNoThrow(() => validateResumeFile(image)) && detectFileType(image) === "image",
+    imageRoutesToUnsupportedOcr: expectNoThrow(() => validateResumeFile(image)) && detectFileType(image) === "image",
     unsupportedFileType: expectThrow(() => validateResumeFile(unsupported), "Unsupported file type"),
-    fileTooLarge: expectThrow(() => validateResumeFile(tooLarge), "10MB"),
+    fileTooLarge: expectThrow(() => validateResumeFile(tooLarge), "4MB"),
     tooLittleReadableText: tooLittleReadableText.length < 400
   };
 }

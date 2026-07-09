@@ -76,6 +76,5 @@ function cleanDocxText(xml: string) {
     .replace(/&gt;/g, ">")
     .replace(/&quot;/g, '"')
     .replace(/&apos;/g, "'")
-    .replace(/\s+/g, " ")
     .trim();
 }
