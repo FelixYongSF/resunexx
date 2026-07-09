@@ -1,18 +1,12 @@
 import { NextResponse } from "next/server";
 import { markReportPaid } from "@/lib/report-store";
-import { verifyPaddleWebhookSignature } from "@/lib/paddle";
+import { isPaidPaddleTransaction, PaddleTransaction, verifyPaddleWebhookSignature } from "@/lib/paddle";
 
 export const runtime = "nodejs";
 
 type PaddleWebhookEvent = {
   event_type?: string;
-  data?: {
-    id?: string;
-    status?: string;
-    custom_data?: {
-      reportId?: string;
-    } | null;
-  };
+  data?: PaddleTransaction;
 };
 
 export async function POST(request: Request) {
@@ -30,8 +24,17 @@ export async function POST(request: Request) {
       const transactionId = event.data?.id;
       const reportId = event.data?.custom_data?.reportId;
 
-      if (transactionId && reportId) {
-        await markReportPaid(reportId, transactionId);
+      if (!transactionId || !reportId || !event.data) {
+        return NextResponse.json({ error: "Payment event is missing report metadata." }, { status: 400 });
+      }
+
+      if (!isPaidPaddleTransaction(event.data, reportId)) {
+        return NextResponse.json({ error: "Payment event does not match the configured product." }, { status: 409 });
+      }
+
+      const report = await markReportPaid(reportId, transactionId);
+      if (!report) {
+        return NextResponse.json({ error: "Matching report was not found." }, { status: 409 });
       }
     }
 

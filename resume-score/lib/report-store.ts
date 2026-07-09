@@ -10,15 +10,19 @@ globalForReports.resumeScoreReports = memoryStore;
 type KvResponse<T> = { result: T };
 
 export function hasPersistentReportStore() {
-  return Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+  const { url, token } = getKvConfig();
+  return Boolean(url && token);
 }
 
 async function kvCommand<T>(command: unknown[]): Promise<T> {
-  const res = await fetch(`${process.env.KV_REST_API_URL}`, {
+  const { url, token } = getKvConfig();
+  if (!url || !token) throw new Error("Persistent report storage is not configured.");
+
+  const res = await fetch(url, {
     method: "POST",
     body: JSON.stringify(command),
     headers: {
-      Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json"
     },
     cache: "no-store"
@@ -27,6 +31,13 @@ async function kvCommand<T>(command: unknown[]): Promise<T> {
   if (!res.ok) throw new Error(`KV request failed: ${res.status}`);
   const json = (await res.json()) as KvResponse<T>;
   return json.result;
+}
+
+function getKvConfig() {
+  return {
+    url: process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || "",
+    token: process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || ""
+  };
 }
 
 export async function saveReport(report: StoredReport) {

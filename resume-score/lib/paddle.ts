@@ -5,6 +5,12 @@ export type PaddleEnvironment = "sandbox" | "production";
 export type PaddleTransaction = {
   id: string;
   status: string;
+  items?: Array<{
+    price?: {
+      id?: string;
+    } | null;
+    price_id?: string;
+  }>;
   custom_data?: {
     reportId?: string;
     [key: string]: unknown;
@@ -68,8 +74,20 @@ export async function getPaddleTransaction(transactionId: string) {
   return json.data;
 }
 
-export function isPaidPaddleTransaction(transaction: PaddleTransaction) {
-  return transaction.status === "completed" || transaction.status === "paid";
+export function isPaidPaddleTransaction(transaction: PaddleTransaction, expectedReportId?: string) {
+  const configuredPriceId = process.env.PADDLE_PRICE_ID;
+  const transactionReportId = transaction.custom_data?.reportId;
+  const hasConfiguredPrice = Boolean(
+    configuredPriceId &&
+      transaction.items?.some((item) => item.price?.id === configuredPriceId || item.price_id === configuredPriceId)
+  );
+
+  return (
+    (transaction.status === "completed" || transaction.status === "paid") &&
+    Boolean(transactionReportId) &&
+    (!expectedReportId || transactionReportId === expectedReportId) &&
+    hasConfiguredPrice
+  );
 }
 
 export function verifyPaddleWebhookSignature(rawBody: string, signatureHeader: string | null) {
@@ -79,16 +97,19 @@ export function verifyPaddleWebhookSignature(rawBody: string, signatureHeader: s
 
   if (!signatureHeader) return false;
 
-  const entries = Object.fromEntries(
-    signatureHeader.split(";").map((part) => {
-      const [key, ...value] = part.split("=");
-      return [key, value.join("=")];
-    })
-  );
-  const timestamp = entries.ts;
-  const signature = entries.h1;
+  const entries = signatureHeader.split(";").reduce<Record<string, string[]>>((result, part) => {
+    const [key, ...value] = part.split("=");
+    if (key && value.length > 0) {
+      result[key] = [...(result[key] || []), value.join("=")];
+    }
+    return result;
+  }, {});
+  const timestamp = entries.ts?.[0];
+  const signatures = entries.h1 || [];
 
-  if (!timestamp || !signature) return false;
+  if (!timestamp || signatures.length === 0) return false;
+  const timestampSeconds = Number(timestamp);
+  if (!Number.isFinite(timestampSeconds) || Math.abs(Date.now() / 1000 - timestampSeconds) > 5) return false;
 
   const signedPayload = `${timestamp}:${rawBody}`;
   const expected = createHmac("sha256", process.env.PADDLE_WEBHOOK_SECRET)
@@ -96,8 +117,9 @@ export function verifyPaddleWebhookSignature(rawBody: string, signatureHeader: s
     .digest("hex");
 
   const expectedBuffer = Buffer.from(expected, "hex");
-  const signatureBuffer = Buffer.from(signature, "hex");
 
-  if (expectedBuffer.length !== signatureBuffer.length) return false;
-  return timingSafeEqual(expectedBuffer, signatureBuffer);
+  return signatures.some((signature) => {
+    const signatureBuffer = Buffer.from(signature, "hex");
+    return expectedBuffer.length === signatureBuffer.length && timingSafeEqual(expectedBuffer, signatureBuffer);
+  });
 }

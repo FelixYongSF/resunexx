@@ -17,15 +17,22 @@ export default async function SuccessPage({
   }
 
   let reportId = reportIdFromUrl;
+  let verifiedReportId = "";
 
   if (transactionId) {
     try {
       const transaction = await getPaddleTransaction(transactionId);
-      reportId = transaction.custom_data?.reportId || reportId;
+      const transactionReportId = transaction.custom_data?.reportId;
 
-      if (isPaidPaddleTransaction(transaction) && reportId) {
-        const unlockedReport = await markReportPaid(reportId, transaction.id);
-        if (unlockedReport) redirect(`/report/${reportId}`);
+      if (!transactionReportId || (reportIdFromUrl && transactionReportId !== reportIdFromUrl)) {
+        throw new Error("Paddle transaction does not match this report.");
+      }
+
+      reportId = transactionReportId;
+
+      if (isPaidPaddleTransaction(transaction, transactionReportId)) {
+        const unlockedReport = await markReportPaid(transactionReportId, transaction.id);
+        if (unlockedReport) verifiedReportId = transactionReportId;
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "Paddle could not verify this payment.";
@@ -44,6 +51,8 @@ export default async function SuccessPage({
       );
     }
   }
+
+  if (verifiedReportId) redirect(`/report/${verifiedReportId}`);
 
   if (reportId) {
     const report = await getReport(reportId);
