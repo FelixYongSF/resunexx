@@ -46,7 +46,7 @@ export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
 
     try {
       const controller = new AbortController();
-      const timeout = window.setTimeout(() => controller.abort(), 75_000);
+      const timeout = window.setTimeout(() => controller.abort(), 85_000);
 
       router.push("/analyzing");
       const res = await fetch("/api/analyze", {

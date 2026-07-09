@@ -100,12 +100,10 @@ export async function generateOpenAIReport(
     const content = response.choices[0]?.message?.content;
     if (!content) throw new Error("OpenAI returned an empty analysis.");
 
-    if (process.env.NODE_ENV !== "production") {
-      console.info("[resume-engine:v1] OpenAI request completed.", {
-        elapsedMs: Date.now() - requestStartedAt,
-        model: process.env.OPENAI_MODEL || "gpt-4o-mini"
-      });
-    }
+    console.info("[resume-engine:v1] OpenAI request completed.", {
+      elapsedMs: Date.now() - requestStartedAt,
+      model: process.env.OPENAI_MODEL || "gpt-4o-mini"
+    });
 
     try {
       const report = JSON.parse(content) as ResumeReport;
@@ -120,13 +118,12 @@ export async function generateOpenAIReport(
     }
   } catch (error) {
     const message = formatOpenAiError(error);
-    if (process.env.NODE_ENV !== "production") {
-      console.error("[resume-engine:v1] OpenAI request failed.", {
-        elapsedMs: Date.now() - requestStartedAt,
-        error: message,
-        model: process.env.OPENAI_MODEL || "gpt-4o-mini"
-      });
-    }
+    console.error("[resume-engine:v1] OpenAI request failed.", {
+      elapsedMs: Date.now() - requestStartedAt,
+      error: message,
+      model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+      runtime: process.env.VERCEL === "1" ? "vercel" : "local"
+    });
     throw new Error(`OpenAI request failed: ${message}`);
   }
 }

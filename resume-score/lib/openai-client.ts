@@ -1,10 +1,20 @@
 import OpenAI from "openai";
 import { fetch as undiciFetch, ProxyAgent } from "undici";
 
-const OPENAI_TIMEOUT_MS = 60_000;
+const OPENAI_TIMEOUT_MS = 80_000;
 
 export function createOpenAiClient() {
   const proxyUrl = getProxyUrl();
+  const configuredProxy = getConfiguredProxyUrl();
+
+  console.info("[openai-client] initialized", {
+    apiKeyConfigured: Boolean(process.env.OPENAI_API_KEY),
+    model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+    openAiTimeoutMs: OPENAI_TIMEOUT_MS,
+    proxyConfigured: Boolean(configuredProxy),
+    proxyUsed: Boolean(proxyUrl),
+    runtime: process.env.VERCEL === "1" ? "vercel" : "local"
+  });
 
   if (!proxyUrl) {
     return new OpenAI({
@@ -15,12 +25,6 @@ export function createOpenAiClient() {
   }
 
   const dispatcher = new ProxyAgent(proxyUrl);
-
-  if (process.env.NODE_ENV !== "production") {
-    console.info("[openai-client] Using proxy for OpenAI requests.", {
-      proxy: sanitizeProxyUrl(proxyUrl)
-    });
-  }
 
   return new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -36,6 +40,11 @@ export function createOpenAiClient() {
 }
 
 export function getProxyUrl() {
+  if (process.env.VERCEL === "1") return "";
+  return getConfiguredProxyUrl();
+}
+
+function getConfiguredProxyUrl() {
   return (
     process.env.HTTPS_PROXY ||
     process.env.https_proxy ||
@@ -45,8 +54,4 @@ export function getProxyUrl() {
     process.env.http_proxy ||
     ""
   );
-}
-
-function sanitizeProxyUrl(value: string) {
-  return value.replace(/:\/\/[^@]+@/, "://***@");
 }
