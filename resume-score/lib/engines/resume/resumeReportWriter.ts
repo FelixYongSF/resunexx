@@ -86,10 +86,15 @@ export function buildReportWriterContext(prechecks: ResumePrecheckResult) {
       ? "A role direction is visible. Do not claim the target is unclear unless competing signals genuinely conflict."
       : "Role direction may be ambiguous. Explain which visible signals point to possible role families.";
 
+  const lengthTreatment =
+    prechecks.estimatedBulletCount >= 4 && prechecks.wordCount >= 80
+      ? "The resume is concise but has enough evidence for review. Do not use length as a top issue; identify the specific missing context instead."
+      : "Content depth may be limited. Name the exact section and evidence needed instead of merely saying the resume is short.";
+
   const contactTreatment =
     !prechecks.hasEmail && !prechecks.hasPhone
       ? "Contact channels were not detected. Mention this at most once and do not let it dominate the diagnosis."
       : "At least one direct contact channel is present. Do not raise a generic contact issue.";
 
-  return [evidenceDensity, roleClarity, contactTreatment].join("\n");
+  return [evidenceDensity, roleClarity, lengthTreatment, contactTreatment].join("\n");
 }

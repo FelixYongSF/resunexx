@@ -213,10 +213,18 @@ function buildPrecheckAwareTopIssues(report: ResumeReport) {
     secondaryIssues.push("No direct contact channel was detected; add one professional email and phone number in the document body so a recruiter can act on a positive review.");
   }
 
-  const modelIssues = report.topIssues.filter(
-    (issue) => !(summary.quantifiedBulletCount >= 3 && issueTopic(issue) === "evidence")
-  );
-  const candidates = [...highImpactIssues, ...modelIssues, ...secondaryIssues];
+  const modelIssues = report.topIssues
+    .filter((issue) => !(summary.quantifiedBulletCount >= 3 && issueTopic(issue) === "evidence"))
+    .filter((issue) => !(summary.roleFocusSignalCount >= 2 && issueTopic(issue) === "role"))
+    .filter(
+      (issue) =>
+        !(
+          summary.estimatedBulletCount >= 4 &&
+          summary.wordCount >= 80 &&
+          /\b(short|brief|word count|only \d+ words)\b/i.test(issue)
+        )
+    );
+  const candidates = [...highImpactIssues, ...modelIssues, ...secondaryIssues].map(ensureActionableIssue);
   return uniqueIssues(candidates).slice(0, 3);
 }
 
@@ -265,6 +273,31 @@ function issueTopic(issue: string) {
   if (/\b(responsib|passive|action verb|ownership)\b/.test(lower)) return "ownership";
   if (/\b(extract|parse|file format)\b/.test(lower)) return "extraction";
   return "";
+}
+
+function ensureActionableIssue(issue: string) {
+  if (
+    /\b(add|rewrite|replace|clarify|move|name|connect|group|remove|expand|prioritize|lead|include|define|quantify|revise|refine|align|incorporate|highlight|research|specify|provide|use)\b/i.test(
+      issue
+    )
+  ) {
+    return issue;
+  }
+
+  switch (issueTopic(issue)) {
+    case "contact":
+      return `${issue.replace(/[.\s]+$/, "")}; add one professional email and phone number in the document body.`;
+    case "evidence":
+      return `${issue.replace(/[.\s]+$/, "")}; rewrite the first two experience bullets to show the action, scope, and result.`;
+    case "skills":
+      return `${issue.replace(/[.\s]+$/, "")}; add a focused skills section and connect its most important capabilities to experience evidence.`;
+    case "role":
+      return `${issue.replace(/[.\s]+$/, "")}; name one target role in the summary and align the first three bullets to that direction.`;
+    case "ownership":
+      return `${issue.replace(/[.\s]+$/, "")}; replace passive openings with the specific decision, action, or improvement you owned.`;
+    default:
+      return `${issue.replace(/[.\s]+$/, "")}; revise the relevant section with one concrete example that resolves this uncertainty.`;
+  }
 }
 
 function readinessLevel(score: number): ResumeReport["interviewReadinessLevel"] {

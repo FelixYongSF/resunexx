@@ -122,7 +122,7 @@ function buildReport(runResults, baselineReport) {
   const allIssues = passed.flatMap((item) => item.topIssues);
   const uniqueIssues = new Set(allIssues.map(normalizeIssue));
   const actionableIssues = allIssues.filter((issue) =>
-    /\b(add|rewrite|replace|clarify|move|name|connect|group|remove|expand|prioritize|lead|include|define|quantify)\b/i.test(issue)
+    /\b(add|rewrite|replace|clarify|move|name|connect|group|remove|expand|prioritize|lead|include|define|quantify|revise|refine|align|incorporate|highlight|research|specify|provide|use|ensure)\b/i.test(issue)
   );
   const duplicateTopicSamples = passed.filter((item) => hasDuplicateTopics(item.topIssues));
   const baselineById = new Map((baselineReport?.results || []).map((item) => [item.id, item]));

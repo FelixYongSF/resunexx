@@ -1,0 +1,649 @@
+{
+  "generatedAt": "2026-07-09T14:27:34.816Z",
+  "baseUrl": "https://resunexx-prod.vercel.app",
+  "datasetVersion": "1.0.0",
+  "sampleCount": 30,
+  "engineVersion": "1.4.0",
+  "summary": {
+    "passed": 30,
+    "failed": 0,
+    "averageDurationMs": 28924.37,
+    "medianDurationMs": 24414,
+    "averageOverallScore": 70.37,
+    "averageAtsScore": 74.53,
+    "readinessDistribution": {
+      "Medium": 11,
+      "Low": 10,
+      "High": 9
+    },
+    "issueDiversityPercent": 74.44
+  },
+  "tiers": {
+    "strong": {
+      "count": 10,
+      "averageOverall": 82.1,
+      "averageAts": 82.8
+    },
+    "medium": {
+      "count": 10,
+      "averageOverall": 71.3,
+      "averageAts": 74.8
+    },
+    "weak": {
+      "count": 10,
+      "averageOverall": 57.7,
+      "averageAts": 66
+    }
+  },
+  "qualityGate": {
+    "status": "review",
+    "allAnalysesSucceeded": true,
+    "tierOrderingCorrect": true,
+    "strongWeakSeparation": 24.4,
+    "duplicateTopicSamples": [],
+    "actionableIssueRate": 57.78
+  },
+  "regressions": [],
+  "results": [
+    {
+      "id": "graduate-strong",
+      "category": "graduate",
+      "tier": "strong",
+      "targetRole": "Marketing Coordinator",
+      "success": true,
+      "status": 200,
+      "durationMs": 33140,
+      "engineVersion": "1.4.0",
+      "overallScore": 77,
+      "atsScore": 79,
+      "readiness": "Medium",
+      "topIssues": [
+        "Missing contact information limits your visibility to recruiters and ATS, which can hinder your chances of being contacted; add your email and phone number at the top.",
+        "The resume is quite short at 94 words, which may not provide enough detail for recruiters to assess your qualifications; consider expanding on your experiences.",
+        "Limited use of role-specific keywords may affect ATS matching; incorporate relevant marketing keywords from job descriptions."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "graduate-medium",
+      "category": "graduate",
+      "tier": "medium",
+      "targetRole": "Operations Analyst",
+      "success": true,
+      "status": 200,
+      "durationMs": 23953,
+      "engineVersion": "1.4.0",
+      "overallScore": 64,
+      "atsScore": 69,
+      "readiness": "Medium",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information affects recruiter ability to reach you, which can lead to missed opportunities; add your email and phone number at the top.",
+        "The summary is vague and does not highlight specific strengths or experiences; revise it to clearly communicate your value and fit for the operations analyst role."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "graduate-weak",
+      "category": "graduate",
+      "tier": "weak",
+      "targetRole": "Business Graduate Role",
+      "success": true,
+      "status": 200,
+      "durationMs": 17688,
+      "engineVersion": "1.4.0",
+      "overallScore": 57,
+      "atsScore": 66,
+      "readiness": "Low",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information affects recruiter outreach.",
+        "Generic language and weak phrases dilute professionalism."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "software-strong",
+      "category": "software",
+      "tier": "strong",
+      "targetRole": "Software Engineer",
+      "success": true,
+      "status": 200,
+      "durationMs": 24907,
+      "engineVersion": "1.4.0",
+      "overallScore": 88,
+      "atsScore": 89,
+      "readiness": "High",
+      "topIssues": [
+        "Missing contact information limits recruiter outreach and ATS parsing; add email and phone details at the top.",
+        "The summary lacks a clear target role, making it harder for recruiters to assess fit; refine it to specify your desired position.",
+        "While you have strong quantified achievements, the lack of role-specific keywords may hinder ATS matching; align skills with job descriptions."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "software-medium",
+      "category": "software",
+      "tier": "medium",
+      "targetRole": "Junior Software Engineer",
+      "success": true,
+      "status": 200,
+      "durationMs": 68634,
+      "engineVersion": "1.4.0",
+      "overallScore": 72,
+      "atsScore": 76,
+      "readiness": "Medium",
+      "topIssues": [
+        "Missing contact information makes it difficult for recruiters to reach you, which can significantly hinder your chances of being considered for roles; add your email and phone number at the top.",
+        "The resume lacks sufficient quantifiable achievements, which are crucial for demonstrating your impact; consider adding metrics to your experience bullets.",
+        "The role focus is somewhat unclear due to the lack of a targeted summary and specific keywords; refine your summary to align with common software engineering roles."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "software-weak",
+      "category": "software",
+      "tier": "weak",
+      "targetRole": "Software Developer",
+      "success": true,
+      "status": 200,
+      "durationMs": 29978,
+      "engineVersion": "1.4.0",
+      "overallScore": 60,
+      "atsScore": 69,
+      "readiness": "Low",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information affects recruiter outreach and first impressions; add email and phone details to the top of the resume.",
+        "Weak phrases in experience sections reduce perceived initiative; rewrite bullets to start with strong action verbs."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "product-strong",
+      "category": "product",
+      "tier": "strong",
+      "targetRole": "Associate Product Manager",
+      "success": true,
+      "status": 200,
+      "durationMs": 34306,
+      "engineVersion": "1.4.0",
+      "overallScore": 85,
+      "atsScore": 82,
+      "readiness": "High",
+      "topIssues": [
+        "Missing contact information affects recruiter outreach and ATS processing; add email and phone details at the top.",
+        "The summary lacks specificity regarding the desired product management role, which may confuse recruiters; refine it to clarify your focus.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "product-medium",
+      "category": "product",
+      "tier": "medium",
+      "targetRole": "Associate Product Manager",
+      "success": true,
+      "status": 200,
+      "durationMs": 27139,
+      "engineVersion": "1.4.0",
+      "overallScore": 72,
+      "atsScore": 75,
+      "readiness": "Medium",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information affects recruiter outreach and ATS parsing; add email and phone details to the top of the resume.",
+        "Lack of specific keywords may hinder matching with product roles; align your skills and experience with job descriptions."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "product-weak",
+      "category": "product",
+      "tier": "weak",
+      "targetRole": "Product Manager",
+      "success": true,
+      "status": 200,
+      "durationMs": 23763,
+      "engineVersion": "1.4.0",
+      "overallScore": 54,
+      "atsScore": 61,
+      "readiness": "Low",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Your role-specific capabilities are not consolidated in a skills section, reducing fast recruiter and ATS recognition; add a focused list of tools and functional skills supported elsewhere in the resume.",
+        "Missing contact information affects recruiter ability to reach you."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "marketing-strong",
+      "category": "marketing",
+      "tier": "strong",
+      "targetRole": "Growth Marketing Specialist",
+      "success": true,
+      "status": 200,
+      "durationMs": 28151,
+      "engineVersion": "1.4.0",
+      "overallScore": 83,
+      "atsScore": 84,
+      "readiness": "High",
+      "topIssues": [
+        "Missing contact information limits your visibility to recruiters and ATS, which can hinder outreach; add email and phone details at the top.",
+        "The professional summary lacks a clear target role, making it harder for recruiters to assess fit; clarify your desired position.",
+        "While you have several quantified achievements, adding context about the scope of your work would enhance clarity and impact."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "marketing-medium",
+      "category": "marketing",
+      "tier": "medium",
+      "targetRole": "Marketing Coordinator",
+      "success": true,
+      "status": 200,
+      "durationMs": 24476,
+      "engineVersion": "1.4.0",
+      "overallScore": 76,
+      "atsScore": 78,
+      "readiness": "Medium",
+      "topIssues": [
+        "Missing contact information prevents recruiters from reaching you, which is critical for follow-up; add email and phone details at the top.",
+        "Limited quantification in achievements reduces impact; include metrics in more bullet points to demonstrate effectiveness.",
+        "Lack of specific keywords may hinder ATS matching; research marketing coordinator roles and incorporate relevant terms."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "marketing-weak",
+      "category": "marketing",
+      "tier": "weak",
+      "targetRole": "Marketing Assistant",
+      "success": true,
+      "status": 200,
+      "durationMs": 29388,
+      "engineVersion": "1.4.0",
+      "overallScore": 57,
+      "atsScore": 65,
+      "readiness": "Low",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information limits recruiter access and visibility, which is critical for follow-up; add email and phone at the top to improve accessibility.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "sales-strong",
+      "category": "sales",
+      "tier": "strong",
+      "targetRole": "Business Development Representative",
+      "success": true,
+      "status": 200,
+      "durationMs": 24372,
+      "engineVersion": "1.4.0",
+      "overallScore": 81,
+      "atsScore": 82,
+      "readiness": "High",
+      "topIssues": [
+        "Missing contact information limits accessibility for recruiters, which can hinder your chances of being contacted; add your email and phone number at the top.",
+        "The resume is quite brief at 89 words, which may not fully convey your qualifications; consider expanding on your experience and skills.",
+        "Limited use of specific sales-related keywords may affect ATS matching; incorporate terms from job postings to enhance relevance."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "sales-medium",
+      "category": "sales",
+      "tier": "medium",
+      "targetRole": "Sales Development Representative",
+      "success": true,
+      "status": 200,
+      "durationMs": 23082,
+      "engineVersion": "1.4.0",
+      "overallScore": 67,
+      "atsScore": 70,
+      "readiness": "Medium",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information limits recruiter access and communication, which is critical for follow-up; add email and phone details to improve accessibility.",
+        "The resume lacks specific keywords relevant to sales development roles, which may hinder ATS matching; incorporate terms from job postings to enhance relevance."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "sales-weak",
+      "category": "sales",
+      "tier": "weak",
+      "targetRole": "Sales Representative",
+      "success": true,
+      "status": 200,
+      "durationMs": 24842,
+      "engineVersion": "1.4.0",
+      "overallScore": 57,
+      "atsScore": 63,
+      "readiness": "Low",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Your role-specific capabilities are not consolidated in a skills section, reducing fast recruiter and ATS recognition; add a focused list of tools and functional skills supported elsewhere in the resume.",
+        "Missing contact information limits recruiter outreach."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "finance-strong",
+      "category": "finance",
+      "tier": "strong",
+      "targetRole": "Financial Analyst",
+      "success": true,
+      "status": 200,
+      "durationMs": 49667,
+      "engineVersion": "1.4.0",
+      "overallScore": 84,
+      "atsScore": 84,
+      "readiness": "High",
+      "topIssues": [
+        "Missing contact information affects recruiter outreach and ATS compatibility; add email and phone details at the top.",
+        "The professional summary lacks specificity regarding the target role, which may confuse recruiters; refine it to clarify your career direction.",
+        "While achievements are quantified, the resume could benefit from clearer ownership signals; highlight where you led initiatives or projects."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "finance-medium",
+      "category": "finance",
+      "tier": "medium",
+      "targetRole": "Junior Financial Analyst",
+      "success": true,
+      "status": 200,
+      "durationMs": 63921,
+      "engineVersion": "1.4.0",
+      "overallScore": 74,
+      "atsScore": 77,
+      "readiness": "Medium",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information affects recruiter reachability and ATS parsing; add email and phone details at the top.",
+        "Limited detail in experience section reduces clarity on your role; expand on your responsibilities and outcomes."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "finance-weak",
+      "category": "finance",
+      "tier": "weak",
+      "targetRole": "Finance Assistant",
+      "success": true,
+      "status": 200,
+      "durationMs": 47696,
+      "engineVersion": "1.4.0",
+      "overallScore": 59,
+      "atsScore": 67,
+      "readiness": "Low",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information limits recruiter access and communication.",
+        "Weak phrasing in bullet points fails to demonstrate initiative or ownership."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "operations-strong",
+      "category": "operations",
+      "tier": "strong",
+      "targetRole": "Operations Analyst",
+      "success": true,
+      "status": 200,
+      "durationMs": 24456,
+      "engineVersion": "1.4.0",
+      "overallScore": 82,
+      "atsScore": 83,
+      "readiness": "High",
+      "topIssues": [
+        "Missing contact information limits recruiter ability to reach you, which can significantly reduce your chances of being considered for roles; include your email and phone number at the top.",
+        "The resume is very short at 96 words, which may not provide enough detail for recruiters to assess your qualifications; consider expanding on your achievements and skills.",
+        "Lack of alignment with specific operations analyst keywords may hinder ATS matching; ensure to incorporate relevant terms from job postings."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "operations-medium",
+      "category": "operations",
+      "tier": "medium",
+      "targetRole": "Operations Coordinator",
+      "success": true,
+      "status": 200,
+      "durationMs": 21819,
+      "engineVersion": "1.4.0",
+      "overallScore": 76,
+      "atsScore": 78,
+      "readiness": "Medium",
+      "topIssues": [
+        "Missing contact information limits recruiter outreach.",
+        "Quantified achievements are minimal, reducing impact.",
+        "Lack of specific keywords may hinder ATS matching."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "operations-weak",
+      "category": "operations",
+      "tier": "weak",
+      "targetRole": "Operations Assistant",
+      "success": true,
+      "status": 200,
+      "durationMs": 20899,
+      "engineVersion": "1.4.0",
+      "overallScore": 62,
+      "atsScore": 70,
+      "readiness": "Low",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information limits recruiter ability to reach you.",
+        "Generic skills do not effectively showcase your qualifications for specific operations roles."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "design-strong",
+      "category": "design",
+      "tier": "strong",
+      "targetRole": "Product Designer",
+      "success": true,
+      "status": 200,
+      "durationMs": 23624,
+      "engineVersion": "1.4.0",
+      "overallScore": 78,
+      "atsScore": 80,
+      "readiness": "High",
+      "topIssues": [
+        "Missing contact information limits your visibility to recruiters and ATS, which can hinder outreach; add your email and phone number at the top.",
+        "The summary lacks a clear target role, making it harder for recruiters to quickly understand your fit; clarify your desired position in the summary.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "design-medium",
+      "category": "design",
+      "tier": "medium",
+      "targetRole": "Junior Product Designer",
+      "success": true,
+      "status": 200,
+      "durationMs": 22250,
+      "engineVersion": "1.4.0",
+      "overallScore": 70,
+      "atsScore": 75,
+      "readiness": "Medium",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information prevents recruiters from reaching you, which is critical for follow-up; add your email and phone number at the top.",
+        "The summary does not clearly communicate your unique value; rewrite it to highlight specific design goals or outcomes."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "design-weak",
+      "category": "design",
+      "tier": "weak",
+      "targetRole": "UI Designer",
+      "success": true,
+      "status": 200,
+      "durationMs": 20481,
+      "engineVersion": "1.4.0",
+      "overallScore": 60,
+      "atsScore": 69,
+      "readiness": "Low",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information limits recruiter outreach.",
+        "Weak phrasing in experience section reduces clarity and strength."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "customer-success-strong",
+      "category": "customer-success",
+      "tier": "strong",
+      "targetRole": "Customer Success Manager",
+      "success": true,
+      "status": 200,
+      "durationMs": 19889,
+      "engineVersion": "1.4.0",
+      "overallScore": 84,
+      "atsScore": 84,
+      "readiness": "High",
+      "topIssues": [
+        "Missing contact information limits recruiter access and ATS compatibility; add email and phone details at the top.",
+        "The resume is concise but could benefit from more detail in the experience section; consider expanding on your achievements.",
+        "While you have strong metrics, adding more specific keywords from job postings can enhance relevance."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "customer-success-medium",
+      "category": "customer-success",
+      "tier": "medium",
+      "targetRole": "Customer Success Specialist",
+      "success": true,
+      "status": 200,
+      "durationMs": 18931,
+      "engineVersion": "1.4.0",
+      "overallScore": 73,
+      "atsScore": 77,
+      "readiness": "Medium",
+      "topIssues": [
+        "Missing contact information affects recruiter outreach and ATS processing; add email and phone details at the top.",
+        "Limited quantification of achievements reduces impact; include metrics in more bullet points to demonstrate effectiveness.",
+        "Lack of specific keywords may hinder matching with customer success roles; incorporate relevant terms from job descriptions."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "customer-success-weak",
+      "category": "customer-success",
+      "tier": "weak",
+      "targetRole": "Customer Success Associate",
+      "success": true,
+      "status": 200,
+      "durationMs": 20300,
+      "engineVersion": "1.4.0",
+      "overallScore": 56,
+      "atsScore": 64,
+      "readiness": "Low",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information affects recruiter ability to reach you.",
+        "Weak phrases in experience section do not effectively communicate your contributions."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "cross-functional-strong",
+      "category": "cross-functional",
+      "tier": "strong",
+      "targetRole": "Business Analyst",
+      "success": true,
+      "status": 200,
+      "durationMs": 32781,
+      "engineVersion": "1.4.0",
+      "overallScore": 79,
+      "atsScore": 81,
+      "readiness": "High",
+      "topIssues": [
+        "Missing contact information limits recruiter outreach and ATS compatibility; add email and phone details at the top.",
+        "The lack of a defined target role makes it difficult for recruiters to assess fit; clarify your desired position in the summary.",
+        "The resume lacks specific keywords relevant to business analyst roles, which may hinder ATS matching; incorporate terms from job descriptions."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "cross-functional-medium",
+      "category": "cross-functional",
+      "tier": "medium",
+      "targetRole": "Project Coordinator",
+      "success": true,
+      "status": 200,
+      "durationMs": 22019,
+      "engineVersion": "1.4.0",
+      "overallScore": 69,
+      "atsScore": 73,
+      "readiness": "Medium",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information affects recruiter outreach and ATS parsing; add email and phone details at the top.",
+        "Limited use of role-specific keywords may hinder ATS matching; incorporate relevant terms from job descriptions."
+      ],
+      "error": null,
+      "step": null
+    },
+    {
+      "id": "cross-functional-weak",
+      "category": "cross-functional",
+      "tier": "weak",
+      "targetRole": "Entry-Level Professional",
+      "success": true,
+      "status": 200,
+      "durationMs": 21179,
+      "engineVersion": "1.4.0",
+      "overallScore": 55,
+      "atsScore": 66,
+      "readiness": "Low",
+      "topIssues": [
+        "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
+        "Missing contact information limits recruiter outreach.",
+        "Vague experience descriptions do not demonstrate specific skills or achievements."
+      ],
+      "error": null,
+      "step": null
+    }
+  ]
+}
