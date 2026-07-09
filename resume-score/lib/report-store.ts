@@ -1,11 +1,4 @@
-import { StoredReport } from "@/lib/report-schema";
-
-const globalForReports = globalThis as typeof globalThis & {
-  resumeScoreReports?: Map<string, StoredReport>;
-};
-
-const memoryStore = globalForReports.resumeScoreReports ?? new Map<string, StoredReport>();
-globalForReports.resumeScoreReports = memoryStore;
+import type { StoredReport } from "@/lib/report-schema";
 
 type KvResponse<T> = { result: T };
 
@@ -35,28 +28,19 @@ async function kvCommand<T>(command: unknown[]): Promise<T> {
 
 function getKvConfig() {
   return {
-    url: process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || "",
-    token: process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || ""
+    url: process.env.KV_REST_API_URL || "",
+    token: process.env.KV_REST_API_TOKEN || ""
   };
 }
 
 export async function saveReport(report: StoredReport) {
-  if (hasPersistentReportStore()) {
-    await kvCommand<"OK">(["SET", `report:${report.id}`, JSON.stringify(report)]);
-    return;
-  }
-
-  memoryStore.set(report.id, report);
+  await kvCommand<"OK">(["SET", `report:${report.id}`, JSON.stringify(report)]);
 }
 
 export async function getReport(id: string) {
-  if (hasPersistentReportStore()) {
-    const value = await kvCommand<string | null>(["GET", `report:${id}`]);
-    if (!value) return null;
-    return JSON.parse(value) as StoredReport;
-  }
-
-  return memoryStore.get(id) || null;
+  const value = await kvCommand<string | null>(["GET", `report:${id}`]);
+  if (!value) return null;
+  return JSON.parse(value) as StoredReport;
 }
 
 export async function markReportPaid(id: string, paddleTransactionId: string) {

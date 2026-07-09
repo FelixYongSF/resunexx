@@ -89,7 +89,7 @@ KV_REST_API_URL
 KV_REST_API_TOKEN
 ```
 
-Without KV, the app uses memory storage, which is acceptable for local testing only.
+Both KV variables are required. The app does not fall back to process-local memory storage.
 
 ## Notes
 

@@ -89,7 +89,7 @@ Local fallback:
 
 ## Report Persistence
 
-Local development uses in-memory storage when KV is not configured.
+Local and production environments require the configured KV REST store. There is no process-local storage fallback.
 
 For Vercel or any production deployment, configure:
 

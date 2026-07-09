@@ -85,7 +85,7 @@ Never print API keys or secrets in logs.
 
 ## Data Storage
 
-For local MVP testing, in-memory storage is acceptable.
+Use the configured KV REST store in local and production environments so report behavior matches Vercel.
 
 Before public launch on Vercel, add persistent storage for report/payment state. Keep it simple:
 
