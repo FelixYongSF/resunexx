@@ -27,10 +27,17 @@ async function kvCommand<T>(command: unknown[]): Promise<T> {
 }
 
 function getKvConfig() {
-  return {
-    url: process.env.KV_REST_API_URL || "",
-    token: process.env.KV_REST_API_TOKEN || ""
+  const config = {
+    url: process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || "",
+    token: process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || ""
   };
+
+  console.info("[report-store] Redis configuration", {
+    kvUrlConfigured: Boolean(config.url),
+    kvTokenConfigured: Boolean(config.token)
+  });
+
+  return config;
 }
 
 export async function saveReport(report: StoredReport) {
