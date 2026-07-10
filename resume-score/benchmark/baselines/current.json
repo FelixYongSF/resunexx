@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-09T14:42:24.384Z",
+  "generatedAt": "2026-07-10T16:46:20.732Z",
   "baseUrl": "https://resunexx-prod.vercel.app",
   "datasetVersion": "1.0.0",
   "sampleCount": 30,
@@ -7,47 +7,47 @@
   "summary": {
     "passed": 30,
     "failed": 0,
-    "averageDurationMs": 23310.8,
-    "medianDurationMs": 22453,
-    "averageOverallScore": 70.5,
-    "averageAtsScore": 74.9,
+    "averageDurationMs": 17846.33,
+    "medianDurationMs": 17686,
+    "averageOverallScore": 70.77,
+    "averageAtsScore": 75.03,
     "readinessDistribution": {
       "Medium": 11,
       "Low": 10,
       "High": 9
     },
-    "issueDiversityPercent": 61.11
+    "issueDiversityPercent": 44.3
   },
   "tiers": {
     "strong": {
       "count": 10,
-      "averageOverall": 82.3,
-      "averageAts": 83.7
+      "averageOverall": 82.4,
+      "averageAts": 83.8
     },
     "medium": {
       "count": 10,
-      "averageOverall": 70.6,
-      "averageAts": 74.2
+      "averageOverall": 72.4,
+      "averageAts": 75.8
     },
     "weak": {
       "count": 10,
-      "averageOverall": 58.6,
-      "averageAts": 66.8
+      "averageOverall": 57.5,
+      "averageAts": 65.5
     }
   },
   "qualityGate": {
     "status": "pass",
     "allAnalysesSucceeded": true,
     "tierOrderingCorrect": true,
-    "strongWeakSeparation": 23.7,
+    "strongWeakSeparation": 24.9,
     "duplicateTopicSamples": [],
     "actionableIssueRate": 100
   },
   "regressions": [
     {
       "id": "graduate-strong",
-      "overallDelta": 0,
-      "atsDelta": 0,
+      "overallDelta": -1,
+      "atsDelta": -1,
       "readinessChanged": false
     },
     {
@@ -70,38 +70,38 @@
     },
     {
       "id": "software-medium",
-      "overallDelta": 1,
-      "atsDelta": 1,
+      "overallDelta": 2,
+      "atsDelta": 4,
       "readinessChanged": false
     },
     {
       "id": "software-weak",
-      "overallDelta": 1,
-      "atsDelta": 0,
+      "overallDelta": 5,
+      "atsDelta": 5,
       "readinessChanged": false
     },
     {
       "id": "product-strong",
-      "overallDelta": -1,
-      "atsDelta": 2,
+      "overallDelta": 2,
+      "atsDelta": 4,
       "readinessChanged": false
     },
     {
       "id": "product-medium",
-      "overallDelta": 1,
-      "atsDelta": 1,
+      "overallDelta": -1,
+      "atsDelta": -1,
       "readinessChanged": false
     },
     {
       "id": "product-weak",
-      "overallDelta": 0,
-      "atsDelta": 0,
+      "overallDelta": 4,
+      "atsDelta": 4,
       "readinessChanged": false
     },
     {
       "id": "marketing-strong",
-      "overallDelta": 1,
-      "atsDelta": 2,
+      "overallDelta": 0,
+      "atsDelta": 0,
       "readinessChanged": false
     },
     {
@@ -112,15 +112,15 @@
     },
     {
       "id": "marketing-weak",
-      "overallDelta": 0,
-      "atsDelta": 0,
+      "overallDelta": -5,
+      "atsDelta": -5,
       "readinessChanged": false
     },
     {
       "id": "sales-strong",
-      "overallDelta": 0,
-      "atsDelta": 0,
-      "readinessChanged": false
+      "overallDelta": 9,
+      "atsDelta": 7,
+      "readinessChanged": true
     },
     {
       "id": "sales-medium",
@@ -136,8 +136,8 @@
     },
     {
       "id": "finance-strong",
-      "overallDelta": 3,
-      "atsDelta": 5,
+      "overallDelta": 2,
+      "atsDelta": 4,
       "readinessChanged": false
     },
     {
@@ -148,8 +148,8 @@
     },
     {
       "id": "finance-weak",
-      "overallDelta": 4,
-      "atsDelta": 4,
+      "overallDelta": 0,
+      "atsDelta": 0,
       "readinessChanged": false
     },
     {
@@ -160,50 +160,50 @@
     },
     {
       "id": "operations-medium",
-      "overallDelta": -1,
+      "overallDelta": 0,
       "atsDelta": 0,
       "readinessChanged": false
     },
     {
       "id": "operations-weak",
+      "overallDelta": 5,
+      "atsDelta": 5,
+      "readinessChanged": false
+    },
+    {
+      "id": "design-strong",
       "overallDelta": 0,
       "atsDelta": 0,
       "readinessChanged": false
     },
     {
-      "id": "design-strong",
+      "id": "design-medium",
+      "overallDelta": 1,
+      "atsDelta": 1,
+      "readinessChanged": false
+    },
+    {
+      "id": "design-weak",
+      "overallDelta": 4,
+      "atsDelta": 5,
+      "readinessChanged": false
+    },
+    {
+      "id": "customer-success-strong",
       "overallDelta": 1,
       "atsDelta": 2,
       "readinessChanged": false
     },
     {
-      "id": "design-medium",
-      "overallDelta": -6,
-      "atsDelta": -6,
-      "readinessChanged": false
-    },
-    {
-      "id": "design-weak",
-      "overallDelta": 0,
-      "atsDelta": 0,
-      "readinessChanged": false
-    },
-    {
-      "id": "customer-success-strong",
-      "overallDelta": -1,
-      "atsDelta": 0,
-      "readinessChanged": false
-    },
-    {
       "id": "customer-success-medium",
-      "overallDelta": -1,
-      "atsDelta": -1,
+      "overallDelta": 1,
+      "atsDelta": 0,
       "readinessChanged": false
     },
     {
       "id": "customer-success-weak",
-      "overallDelta": 3,
-      "atsDelta": 4,
+      "overallDelta": -3,
+      "atsDelta": -4,
       "readinessChanged": false
     },
     {
@@ -214,14 +214,14 @@
     },
     {
       "id": "cross-functional-medium",
-      "overallDelta": -6,
-      "atsDelta": -6,
+      "overallDelta": 0,
+      "atsDelta": 0,
       "readinessChanged": false
     },
     {
       "id": "cross-functional-weak",
-      "overallDelta": 1,
-      "atsDelta": 0,
+      "overallDelta": -2,
+      "atsDelta": -4,
       "readinessChanged": false
     }
   ],
@@ -233,15 +233,15 @@
       "targetRole": "Marketing Coordinator",
       "success": true,
       "status": 200,
-      "durationMs": 22688,
+      "durationMs": 17381,
       "engineVersion": "1.4.0",
       "overallScore": 77,
       "atsScore": 79,
       "readiness": "Medium",
       "topIssues": [
-        "Missing contact information limits recruiter access, which can hinder your chances of being contacted; add email and phone details at the top.",
-        "Lack of specific metrics in several bullet points reduces the impact of your achievements; quantify your contributions where possible to enhance clarity.",
-        "Absence of targeted keywords may affect ATS matching; review job descriptions for marketing roles and incorporate relevant terms."
+        "Lack of quantified achievements reduces impact and clarity; rewrite the first two experience bullets to show the action, scope, and result.",
+        "Absence of targeted keywords may hinder ATS matching; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -253,15 +253,15 @@
       "targetRole": "Operations Analyst",
       "success": true,
       "status": 200,
-      "durationMs": 22481,
+      "durationMs": 17041,
       "engineVersion": "1.4.0",
       "overallScore": 69,
       "atsScore": 74,
       "readiness": "Medium",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Missing contact information limits recruiter outreach and ATS visibility; add email and phone details at the top.",
-        "Lack of specific keywords related to operations analyst roles may hinder ATS matching; incorporate relevant terms from job descriptions."
+        "Absence of relevant keywords may hinder ATS matching; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -273,15 +273,14 @@
       "targetRole": "Business Graduate Role",
       "success": true,
       "status": 200,
-      "durationMs": 20928,
+      "durationMs": 16510,
       "engineVersion": "1.4.0",
       "overallScore": 57,
       "atsScore": 66,
       "readiness": "Low",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Weak phrases in your experience section reduce the perceived value of your contributions, making it harder to stand out to recruiters; revise the relevant section with one concrete example that resolves this uncertainty.",
-        "No direct contact channel was detected; add one professional email and phone number in the document body so a recruiter can act on a positive review."
+        "Vague language in experience section fails to demonstrate skills effectively; add a focused skills section and connect its most important capabilities to experience evidence."
       ],
       "error": null,
       "step": null
@@ -293,13 +292,13 @@
       "targetRole": "Software Engineer",
       "success": true,
       "status": 200,
-      "durationMs": 25673,
+      "durationMs": 20723,
       "engineVersion": "1.4.0",
       "overallScore": 87,
       "atsScore": 87,
       "readiness": "High",
       "topIssues": [
-        "Missing contact information limits recruiter access and ATS compatibility; add email and phone details to the top of the resume.",
+        "Some achievements could benefit from additional context to highlight ownership.",
         "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction.",
         "The strongest evidence is not consistently placed first; lead each role with the result that best demonstrates readiness for the target work."
       ],
@@ -313,15 +312,15 @@
       "targetRole": "Junior Software Engineer",
       "success": true,
       "status": 200,
-      "durationMs": 20300,
+      "durationMs": 16531,
       "engineVersion": "1.4.0",
       "overallScore": 73,
       "atsScore": 77,
       "readiness": "Medium",
       "topIssues": [
-        "Missing contact information limits recruiter communication and ATS processing; add email and phone details at the top.",
-        "Lack of quantifiable achievements reduces impact; include metrics for all relevant contributions to demonstrate effectiveness.",
-        "Role focus is unclear due to limited context; clarify the target role by aligning skills and experiences with specific job descriptions."
+        "Lack of quantifiable achievements reduces impact and clarity; rewrite the first two experience bullets to show the action, scope, and result.",
+        "Role focus is unclear, making it difficult to assess fit for specific positions; name one target role in the summary and align the first three bullets to that direction.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -333,15 +332,14 @@
       "targetRole": "Software Developer",
       "success": true,
       "status": 200,
-      "durationMs": 26729,
+      "durationMs": 14870,
       "engineVersion": "1.4.0",
       "overallScore": 61,
       "atsScore": 69,
       "readiness": "Low",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Missing contact information affects recruiter outreach and ATS compatibility; add email and phone details at the top.",
-        "Weak phrasing and lack of action verbs reduce the effectiveness of experience descriptions; rewrite bullets to start with strong action verbs."
+        "Generic skills do not effectively showcase qualifications for specific roles; add a focused skills section and connect its most important capabilities to experience evidence."
       ],
       "error": null,
       "step": null
@@ -353,14 +351,13 @@
       "targetRole": "Associate Product Manager",
       "success": true,
       "status": 200,
-      "durationMs": 22424,
+      "durationMs": 14873,
       "engineVersion": "1.4.0",
-      "overallScore": 84,
-      "atsScore": 84,
+      "overallScore": 86,
+      "atsScore": 88,
       "readiness": "High",
       "topIssues": [
-        "Missing contact information limits your visibility to recruiters, which can hinder outreach opportunities; add your email and phone number at the top.",
-        "While you have strong quantified achievements, aligning your skills with specific job descriptions can improve ATS matching; consider refining your skills section; add a focused skills section and connect its most important capabilities to experience evidence.",
+        "Skills section could benefit from more specific keywords related to product management; add a focused skills section and connect its most important capabilities to experience evidence.",
         "The strongest evidence is not consistently placed first; lead each role with the result that best demonstrates readiness for the target work."
       ],
       "error": null,
@@ -373,15 +370,14 @@
       "targetRole": "Associate Product Manager",
       "success": true,
       "status": 200,
-      "durationMs": 22221,
+      "durationMs": 16082,
       "engineVersion": "1.4.0",
-      "overallScore": 73,
-      "atsScore": 76,
+      "overallScore": 72,
+      "atsScore": 75,
       "readiness": "Medium",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Missing contact information affects recruiter outreach and ATS parsing; add email and phone details at the top.",
-        "Limited keyword usage may hinder matching with job descriptions; enhance the skills section with relevant terms; add a focused skills section and connect its most important capabilities to experience evidence."
+        "Generic skills may not effectively showcase specific capabilities; add a focused skills section and connect its most important capabilities to experience evidence."
       ],
       "error": null,
       "step": null
@@ -393,15 +389,14 @@
       "targetRole": "Product Manager",
       "success": true,
       "status": 200,
-      "durationMs": 22834,
+      "durationMs": 16362,
       "engineVersion": "1.4.0",
       "overallScore": 54,
       "atsScore": 61,
       "readiness": "Low",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Your role-specific capabilities are not consolidated in a skills section, reducing fast recruiter and ATS recognition; add a focused list of tools and functional skills supported elsewhere in the resume.",
-        "Missing contact information limits recruiter access and may lead to immediate disqualification."
+        "Your role-specific capabilities are not consolidated in a skills section, reducing fast recruiter and ATS recognition; add a focused list of tools and functional skills supported elsewhere in the resume."
       ],
       "error": null,
       "step": null
@@ -413,14 +408,13 @@
       "targetRole": "Growth Marketing Specialist",
       "success": true,
       "status": 200,
-      "durationMs": 20284,
+      "durationMs": 17991,
       "engineVersion": "1.4.0",
-      "overallScore": 84,
-      "atsScore": 86,
+      "overallScore": 83,
+      "atsScore": 84,
       "readiness": "High",
       "topIssues": [
-        "Missing contact information limits recruiter outreach; add one professional email and phone number in the document body.",
-        "Achievements could benefit from additional context to enhance perceived impact; rewrite the first two experience bullets to show the action, scope, and result.",
+        "Additional metrics in achievements would enhance impact and clarity; rewrite the first two experience bullets to show the action, scope, and result.",
         "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
@@ -433,15 +427,15 @@
       "targetRole": "Marketing Coordinator",
       "success": true,
       "status": 200,
-      "durationMs": 19859,
+      "durationMs": 18154,
       "engineVersion": "1.4.0",
       "overallScore": 76,
       "atsScore": 78,
       "readiness": "Medium",
       "topIssues": [
-        "Missing contact information limits recruiter outreach; add one professional email and phone number in the document body.",
-        "Lack of quantified achievements reduces impact and clarity of contributions; rewrite the first two experience bullets to show the action, scope, and result.",
-        "Insufficient use of relevant keywords may hinder ATS matching."
+        "Limited quantifiable achievements reduce impact and clarity of contributions; rewrite the first two experience bullets to show the action, scope, and result.",
+        "Lack of specific keywords may hinder ATS matching and recruiter understanding; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -453,15 +447,15 @@
       "targetRole": "Marketing Assistant",
       "success": true,
       "status": 200,
-      "durationMs": 20907,
+      "durationMs": 15973,
       "engineVersion": "1.4.0",
       "overallScore": 57,
       "atsScore": 65,
       "readiness": "Low",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Missing contact information limits recruiter ability to reach you; add one professional email and phone number in the document body.",
-        "Weak phrasing in experience section reduces clarity and effectiveness; revise the relevant section with one concrete example that resolves this uncertainty."
+        "Weak phrases and lack of action verbs reduce the effectiveness of your experience descriptions; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -473,14 +467,13 @@
       "targetRole": "Business Development Representative",
       "success": true,
       "status": 200,
-      "durationMs": 27543,
+      "durationMs": 20350,
       "engineVersion": "1.4.0",
-      "overallScore": 81,
+      "overallScore": 82,
       "atsScore": 82,
       "readiness": "High",
       "topIssues": [
-        "Missing contact information limits recruiter access and may hinder your chances of being contacted; add email and phone details at the top.",
-        "While you have strong quantified achievements, adding context to these results would enhance their impact; include details about team size or market scope.",
+        "Achievements could benefit from additional context to clarify impact.",
         "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
@@ -493,15 +486,15 @@
       "targetRole": "Sales Development Representative",
       "success": true,
       "status": 200,
-      "durationMs": 20585,
+      "durationMs": 19620,
       "engineVersion": "1.4.0",
-      "overallScore": 67,
-      "atsScore": 70,
+      "overallScore": 72,
+      "atsScore": 75,
       "readiness": "Medium",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Missing contact information affects recruiter ability to reach you, which can significantly reduce interest; add one professional email and phone number in the document body.",
-        "The resume is very short and lacks depth, which may cause recruiters to overlook your qualifications; revise the relevant section with one concrete example that resolves this uncertainty."
+        "Underutilization of relevant keywords affects discoverability; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -513,15 +506,14 @@
       "targetRole": "Sales Representative",
       "success": true,
       "status": 200,
-      "durationMs": 28517,
+      "durationMs": 19616,
       "engineVersion": "1.4.0",
-      "overallScore": 57,
-      "atsScore": 63,
+      "overallScore": 56,
+      "atsScore": 62,
       "readiness": "Low",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Your role-specific capabilities are not consolidated in a skills section, reducing fast recruiter and ATS recognition; add a focused list of tools and functional skills supported elsewhere in the resume.",
-        "Missing contact information affects recruiter ability to reach you; add one professional email and phone number in the document body."
+        "Your role-specific capabilities are not consolidated in a skills section, reducing fast recruiter and ATS recognition; add a focused list of tools and functional skills supported elsewhere in the resume."
       ],
       "error": null,
       "step": null
@@ -533,15 +525,15 @@
       "targetRole": "Financial Analyst",
       "success": true,
       "status": 200,
-      "durationMs": 23019,
+      "durationMs": 19540,
       "engineVersion": "1.4.0",
-      "overallScore": 87,
-      "atsScore": 89,
+      "overallScore": 86,
+      "atsScore": 88,
       "readiness": "High",
       "topIssues": [
-        "Missing contact information limits recruiter outreach and ATS visibility; add email and phone details at the top.",
-        "Limited keyword usage may hinder ATS matching; research and incorporate relevant keywords from financial analyst job postings.",
-        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
+        "While the resume is concise, it lacks specific keywords that could enhance its relevance to financial analyst positions, limiting ATS effectiveness; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction.",
+        "The strongest evidence is not consistently placed first; lead each role with the result that best demonstrates readiness for the target work."
       ],
       "error": null,
       "step": null
@@ -553,15 +545,15 @@
       "targetRole": "Junior Financial Analyst",
       "success": true,
       "status": 200,
-      "durationMs": 22193,
+      "durationMs": 20400,
       "engineVersion": "1.4.0",
       "overallScore": 74,
       "atsScore": 77,
       "readiness": "Medium",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Missing contact information limits recruiter ability to reach you, which can hinder interview opportunities; add email and phone details at the top.",
-        "Limited content depth may prevent recruiters from fully understanding your qualifications; expand on experience with more detailed bullet points."
+        "Insufficient keywords may hinder ATS matching and recruiter recognition; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -573,15 +565,15 @@
       "targetRole": "Finance Assistant",
       "success": true,
       "status": 200,
-      "durationMs": 20353,
+      "durationMs": 18106,
       "engineVersion": "1.4.0",
-      "overallScore": 63,
-      "atsScore": 71,
+      "overallScore": 59,
+      "atsScore": 67,
       "readiness": "Low",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Missing contact information limits recruiter outreach; add one professional email and phone number in the document body.",
-        "Weak phrasing in experience sections reduces perceived initiative and professionalism; revise the relevant section with one concrete example that resolves this uncertainty."
+        "Weak phrasing in experience descriptions reduces the perceived value of your contributions; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -593,15 +585,14 @@
       "targetRole": "Operations Analyst",
       "success": true,
       "status": 200,
-      "durationMs": 24676,
+      "durationMs": 19663,
       "engineVersion": "1.4.0",
       "overallScore": 82,
       "atsScore": 83,
       "readiness": "High",
       "topIssues": [
-        "Missing contact information affects recruiter outreach and ATS compatibility; add email and phone details at the top.",
-        "The resume could benefit from additional keywords relevant to operations roles, which may improve ATS matching and recruiter recognition; revise the relevant section with one concrete example that resolves this uncertainty.",
-        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction.",
+        "The strongest evidence is not consistently placed first; lead each role with the result that best demonstrates readiness for the target work."
       ],
       "error": null,
       "step": null
@@ -613,15 +604,15 @@
       "targetRole": "Operations Coordinator",
       "success": true,
       "status": 200,
-      "durationMs": 23757,
+      "durationMs": 15769,
       "engineVersion": "1.4.0",
-      "overallScore": 75,
+      "overallScore": 76,
       "atsScore": 78,
       "readiness": "Medium",
       "topIssues": [
-        "Missing contact information limits recruiter ability to reach you, which is critical for follow-up; add email and phone details at the top.",
-        "The resume is short at 77 words, which may not provide enough detail for recruiters to assess your qualifications; expand on your experience and skills.",
-        "Quantified achievements are limited, which weakens the impact of your contributions; add metrics to other bullet points to enhance your profile."
+        "Limited metrics and outcomes reduce impact and clarity; rewrite the first two experience bullets to show the action, scope, and result.",
+        "Lack of specific keywords may hinder ATS matching; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -633,15 +624,15 @@
       "targetRole": "Operations Assistant",
       "success": true,
       "status": 200,
-      "durationMs": 23694,
+      "durationMs": 15656,
       "engineVersion": "1.4.0",
       "overallScore": 62,
       "atsScore": 70,
       "readiness": "Low",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Generic skills listed do not align with specific operations roles, which may lead to a mismatch in perceived qualifications.",
-        "No direct contact channel was detected; add one professional email and phone number in the document body so a recruiter can act on a positive review."
+        "Weak phrasing in experience section reduces perceived initiative; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -653,15 +644,15 @@
       "targetRole": "Product Designer",
       "success": true,
       "status": 200,
-      "durationMs": 28018,
+      "durationMs": 18455,
       "engineVersion": "1.4.0",
-      "overallScore": 79,
-      "atsScore": 82,
+      "overallScore": 78,
+      "atsScore": 80,
       "readiness": "High",
       "topIssues": [
-        "Missing contact information limits recruiter outreach; add one professional email and phone number in the document body.",
-        "Ambiguous role focus may confuse recruiters about your fit; name one target role in the summary and align the first three bullets to that direction.",
-        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
+        "Lack of a clear target role may confuse recruiters about fit; name one target role in the summary and align the first three bullets to that direction.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction.",
+        "The strongest evidence is not consistently placed first; lead each role with the result that best demonstrates readiness for the target work."
       ],
       "error": null,
       "step": null
@@ -673,14 +664,14 @@
       "targetRole": "Junior Product Designer",
       "success": true,
       "status": 200,
-      "durationMs": 31392,
+      "durationMs": 16082,
       "engineVersion": "1.4.0",
-      "overallScore": 64,
-      "atsScore": 69,
+      "overallScore": 70,
+      "atsScore": 75,
       "readiness": "Medium",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Missing contact information limits recruiter outreach; add one professional email and phone number in the document body.",
+        "Limited keyword usage may hinder ATS discoverability; revise the relevant section with one concrete example that resolves this uncertainty.",
         "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
@@ -693,15 +684,15 @@
       "targetRole": "UI Designer",
       "success": true,
       "status": 200,
-      "durationMs": 20963,
+      "durationMs": 16365,
       "engineVersion": "1.4.0",
       "overallScore": 60,
       "atsScore": 69,
       "readiness": "Low",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Missing contact information limits recruiter engagement; add one professional email and phone number in the document body.",
-        "Weak phrasing in experience section fails to convey active contributions; revise the relevant section with one concrete example that resolves this uncertainty."
+        "Weak phrasing in experience section diminishes perceived contributions; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -713,15 +704,14 @@
       "targetRole": "Customer Success Manager",
       "success": true,
       "status": 200,
-      "durationMs": 23586,
+      "durationMs": 20175,
       "engineVersion": "1.4.0",
-      "overallScore": 83,
-      "atsScore": 84,
+      "overallScore": 84,
+      "atsScore": 86,
       "readiness": "High",
       "topIssues": [
-        "Missing contact information limits recruiter outreach and may hinder ATS processing; add email and phone details at the top.",
-        "While achievements are quantified, additional context on the scope of responsibilities is needed to enhance clarity; consider adding team size or project details; revise the relevant section with one concrete example that resolves this uncertainty.",
-        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction.",
+        "The strongest evidence is not consistently placed first; lead each role with the result that best demonstrates readiness for the target work."
       ],
       "error": null,
       "step": null
@@ -733,15 +723,14 @@
       "targetRole": "Customer Success Specialist",
       "success": true,
       "status": 200,
-      "durationMs": 21917,
+      "durationMs": 19102,
       "engineVersion": "1.4.0",
-      "overallScore": 72,
+      "overallScore": 73,
       "atsScore": 76,
       "readiness": "Medium",
       "topIssues": [
-        "Missing contact information limits recruiter ability to reach you, which can significantly reduce your chances of being considered; add email and phone number at the top.",
-        "The resume is very short at 76 words, which may not fully convey your experience and skills; expand on your experience section with more detailed bullet points.",
-        "The strongest evidence is not consistently placed first; lead each role with the result that best demonstrates readiness for the target work."
+        "Limited quantifiable achievements reduce impact; rewrite the first two experience bullets to show the action, scope, and result.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -753,15 +742,15 @@
       "targetRole": "Customer Success Associate",
       "success": true,
       "status": 200,
-      "durationMs": 19387,
+      "durationMs": 16506,
       "engineVersion": "1.4.0",
-      "overallScore": 59,
-      "atsScore": 68,
+      "overallScore": 56,
+      "atsScore": 64,
       "readiness": "Low",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Missing contact information limits recruiter ability to reach you; add one professional email and phone number in the document body.",
-        "Weak phrasing in experience descriptions reduces the perceived value of your contributions; revise the relevant section with one concrete example that resolves this uncertainty."
+        "Weak phrasing in experience section reduces perceived value; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -773,15 +762,15 @@
       "targetRole": "Business Analyst",
       "success": true,
       "status": 200,
-      "durationMs": 33082,
+      "durationMs": 19587,
       "engineVersion": "1.4.0",
       "overallScore": 79,
       "atsScore": 81,
       "readiness": "High",
       "topIssues": [
-        "Missing contact information limits recruiter outreach and reduces credibility; add email and phone details to the top of the resume.",
-        "The professional summary does not specify a target role, making it harder for recruiters to assess fit; clarify the desired position in the summary.",
-        "Lack of industry-specific keywords may hinder ATS matching; incorporate relevant terms from job postings for business analysts."
+        "Lack of a defined target role makes it difficult to assess fit; name one target role in the summary and align the first three bullets to that direction.",
+        "Achievements could benefit from additional context to demonstrate impact; rewrite the first two experience bullets to show the action, scope, and result.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -793,15 +782,15 @@
       "targetRole": "Project Coordinator",
       "success": true,
       "status": 200,
-      "durationMs": 20165,
+      "durationMs": 22838,
       "engineVersion": "1.4.0",
-      "overallScore": 63,
-      "atsScore": 67,
+      "overallScore": 69,
+      "atsScore": 73,
       "readiness": "Medium",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "The resume is very brief, which may lead recruiters to question your experience and qualifications for project coordination roles.",
-        "No direct contact channel was detected; add one professional email and phone number in the document body so a recruiter can act on a positive review."
+        "Insufficient keywords may hinder ATS matching for project coordinator roles; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null
@@ -813,15 +802,15 @@
       "targetRole": "Entry-Level Professional",
       "success": true,
       "status": 200,
-      "durationMs": 19149,
+      "durationMs": 15069,
       "engineVersion": "1.4.0",
-      "overallScore": 56,
-      "atsScore": 66,
+      "overallScore": 53,
+      "atsScore": 62,
       "readiness": "Low",
       "topIssues": [
         "Your experience describes activity without enough evidence of scale or results, which makes your contribution difficult to compare; add truthful volume, time, quality, revenue, user, or delivery context to the strongest bullets.",
-        "Missing contact information limits recruiter outreach; add one professional email and phone number in the document body.",
-        "Vague language in experience section reduces clarity and professionalism; revise the relevant section with one concrete example that resolves this uncertainty."
+        "Vague experience descriptions do not convey role fit or achievements; revise the relevant section with one concrete example that resolves this uncertainty.",
+        "The resume would benefit from a clearer target-role story; connect the summary, skills, and first experience entry around the same direction."
       ],
       "error": null,
       "step": null

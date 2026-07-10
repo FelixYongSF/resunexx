@@ -319,7 +319,7 @@ function issueTopic(issue) {
   if (/\b(email|phone|linkedin|contact)\b/.test(lower)) return "contact";
   if (/\b(metric|quantif|achievement|scale|result|outcome)\b/.test(lower)) return "evidence";
   if (/\b(skills?|capabilit(?:y|ies)|tools?)\b/.test(lower)) return "skills";
-  if (/\b(target role|role direction|role focus)\b/.test(lower)) return "role";
+  if (/\b(target[- ]role|role direction|role focus)\b/.test(lower)) return "role";
   if (/\b(passive|responsib|action verb|ownership)\b/.test(lower)) return "ownership";
   if (/\b(keyword|ats match)\b/.test(lower)) return "keywords";
   return "";
