@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     step = "request:rate-limit";
     const rateLimit = checkRateLimit({
       key: `analyze:${getRequestIp(request)}`,
-      limit: 20,
+      limit: 80,
       windowMs: 60 * 60 * 1000
     });
     if (!rateLimit.allowed) {
