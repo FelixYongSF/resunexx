@@ -228,10 +228,6 @@ function buildPrecheckAwareTopIssues(report: ResumeReport) {
   if (summary.extractionQualityWarnings.length > 0) {
     secondaryIssues.push("Some resume text did not extract cleanly, which may hide otherwise strong evidence; export a simple text-based DOCX or PDF and confirm headings and bullets remain readable.");
   }
-  if (!summary.hasEmail && !summary.hasPhone) {
-    secondaryIssues.push("No direct contact channel was detected; add one professional email and phone number in the document body so a recruiter can act on a positive review.");
-  }
-
   const modelIssues = report.topIssues
     .filter((issue) => issueTopic(issue) !== "contact")
     .filter((issue) => !(summary.quantifiedBulletCount >= 3 && issueTopic(issue) === "evidence"))
