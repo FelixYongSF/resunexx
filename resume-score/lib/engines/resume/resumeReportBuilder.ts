@@ -1,11 +1,16 @@
 import { gradeCategory } from "./resumeRules";
 import {
+  BiggestOpportunity,
   CategoryBreakdown,
+  HighImpactImprovement,
+  PremiumReportExperience,
   ResumeCategoryBreakdown,
   ResumeFreePreview,
   ResumePaidReport,
   ResumeReport,
-  ScoringCategoryKey
+  ScoringCategoryKey,
+  SuggestedRewrite,
+  ThirtyMinuteImprovementPlan
 } from "./resumeTypes";
 import { engineVersion } from "./resumeVersion";
 
@@ -28,6 +33,7 @@ export function buildFreePreview(report: ResumeReport): ResumeFreePreview {
 
 export function buildPaidReport(report: ResumeReport): ResumePaidReport {
   return {
+    premiumReport: buildPremiumReportExperience(report),
     categoryBreakdown: report.categoryBreakdown,
     detailedExplanation: report.summaryDiagnosis,
     sectionFeedback: report.sectionFeedback,
@@ -47,6 +53,19 @@ export function buildDownloadableReportData(report: ResumeReport) {
     freePreview: report.freePreview,
     paidReport: report.paidReport,
     disclaimer: report.disclaimer
+  };
+}
+
+export function buildPremiumReportExperience(report: ResumeReport): PremiumReportExperience {
+  return {
+    executiveSummary: buildExecutiveSummary(report),
+    biggestOpportunity: buildBiggestOpportunity(report),
+    highImpactImprovements: buildHighImpactImprovements(report),
+    suggestedRewrite: buildSuggestedRewrite(report),
+    recruiterFirstImpression: report.recruiterFirstImpression,
+    atsPerspective: buildAtsPerspective(report),
+    thirtyMinuteImprovementPlan: buildThirtyMinutePlan(report),
+    longTermCareerSignal: buildLongTermCareerSignal(report)
   };
 }
 
@@ -214,6 +233,7 @@ function buildPrecheckAwareTopIssues(report: ResumeReport) {
   }
 
   const modelIssues = report.topIssues
+    .filter((issue) => issueTopic(issue) !== "contact")
     .filter((issue) => !(summary.quantifiedBulletCount >= 3 && issueTopic(issue) === "evidence"))
     .filter((issue) => !(summary.roleFocusSignalCount >= 2 && issueTopic(issue) === "role"))
     .filter(
@@ -344,6 +364,119 @@ function buildTop10Priorities(report: ResumeReport) {
   }
 
   return unique.slice(0, 10);
+}
+
+function buildExecutiveSummary(report: ResumeReport) {
+  const primaryStrength = report.strengths[0] || "You already have credible material to work with.";
+  const firstIssue = report.freePreview?.top3Issues?.[0] || report.topIssues[0] || report.whatToFixFirst;
+  const opportunity = summarizeSentence(firstIssue);
+
+  return [
+    primaryStrength,
+    `The biggest opportunity is not to rewrite everything, but to make your strongest evidence easier for a recruiter to recognize in the first scan.`,
+    `If you improve ${opportunity.toLowerCase()}, the resume should feel clearer, more focused, and more useful for both ATS review and human screening.`
+  ].join(" ");
+}
+
+function buildBiggestOpportunity(report: ResumeReport): BiggestOpportunity {
+  const firstChange = report.fiveMostImportantChanges[0];
+  const whatToImprove = firstChange?.whatToChangeNext || report.whatToFixFirst;
+  const whyItMatters = firstChange?.whyItMattersToRecruiters || report.whyThisMattersToRecruiters;
+  const example = report.rewriteExamples.improvedBulletPoints[0] || report.rewriteExamples.improvedProfessionalSummary;
+
+  return {
+    whatToImprove: `If you only improve one thing today, make it this: ${whatToImprove}`,
+    whyItMatters,
+    example,
+    expectedImpact:
+      "This can help the reader understand your direction faster, connect your experience to the target role, and spend less effort guessing what you can contribute."
+  };
+}
+
+function buildHighImpactImprovements(report: ResumeReport): HighImpactImprovement[] {
+  const priorities: Array<"High" | "Medium" | "Low"> = ["High", "High", "Medium"];
+  const fallbackAts = [
+    "Clear headings and role keywords can help ATS parsing and recruiter scanning.",
+    "Better evidence wording may not directly change parsing, but it improves how matched experience is interpreted.",
+    "A focused skills section can improve discoverability when the keywords are truthful and supported by experience."
+  ];
+
+  return report.fiveMostImportantChanges.slice(0, 3).map((change, index) => ({
+    priorityLevel: priorities[index],
+    whatWasDetected: change.whatWeNoticed,
+    whyItMatters: change.whyItMattersToRecruiters,
+    recruiterImpact:
+      index === 0
+        ? "Recruiters can place you into the right role category faster."
+        : "Recruiters get a clearer reason to keep reading instead of treating the resume as interchangeable.",
+    atsImpact: fallbackAts[index],
+    recommendedAction: change.whatToChangeNext,
+    expectedBenefit:
+      index === 0
+        ? "A sharper first impression and less ambiguity in the first 20-30 seconds."
+        : "Stronger confidence that your experience connects to the work you want next."
+  }));
+}
+
+function buildSuggestedRewrite(report: ResumeReport): SuggestedRewrite {
+  const issue = report.fiveMostImportantChanges[0]?.whatWeNoticed || report.topIssues[0];
+  const after = report.rewriteExamples.improvedBulletPoints[0] || report.rewriteExamples.improvedProfessionalSummary;
+
+  return {
+    before: reconstructWeakExample(issue),
+    after,
+    whyThisWorksBetter:
+      "The stronger version leads with action, adds clearer context, and gives the reader a more concrete reason to believe the experience matters."
+  };
+}
+
+function buildAtsPerspective(report: ResumeReport) {
+  const ats = report.categoryBreakdown.atsCompatibility;
+  const readable = ats.score >= 14 ? "The resume appears structurally readable for ATS-style parsing." : "The resume may need simpler structure and more standard section signals for ATS-style parsing.";
+  const mayMiss = report.missingKeywords.length
+    ? `What may be missed: ${report.missingKeywords.slice(0, 4).join(", ")}.`
+    : "The main risk is less about missing keywords and more about whether the strongest evidence is visible in standard sections.";
+
+  return `${readable} ${mayMiss} Improve discoverability by keeping headings standard, grouping skills clearly, and using role keywords only where they match real experience.`;
+}
+
+function buildThirtyMinutePlan(report: ResumeReport): ThirtyMinuteImprovementPlan {
+  const summaryAction = report.sectionFeedback.summary || report.finalActionPlan[0];
+  const impactAction = report.fiveMostImportantChanges[0]?.whatToChangeNext || report.finalActionPlan[1];
+  const skillsAction = report.sectionFeedback.skills || report.finalActionPlan[2];
+
+  return {
+    tenMinutes: `Rewrite the top summary so it names the target direction and one proof point. ${summaryAction}`,
+    nextTenMinutes: `Improve the strongest experience bullet first. ${impactAction}`,
+    finalTenMinutes: `Clean up the skills and ATS signals. ${skillsAction}`
+  };
+}
+
+function buildLongTermCareerSignal(report: ResumeReport) {
+  const standout = report.positiveStandouts[0] || report.strengths[0] || "your strongest existing experience";
+
+  return `Your longer-term opportunity is to turn ${standout.toLowerCase()} into a clearer career signal. The more consistently you communicate ownership, evidence, and role direction, the easier it becomes for recruiters to see you as ready for the next level of responsibility.`;
+}
+
+function reconstructWeakExample(issue: string) {
+  const lower = issue.toLowerCase();
+  if (/\bmetric|impact|result|outcome|scale|achievement\b/.test(lower)) {
+    return "Helped with team projects and completed assigned tasks.";
+  }
+  if (/\bsummary|target|role|direction\b/.test(lower)) {
+    return "Motivated candidate seeking an opportunity to grow and contribute.";
+  }
+  if (/\bskill|keyword|tool\b/.test(lower)) {
+    return "Skills listed without showing where the most important ones were used.";
+  }
+  return "Responsible for supporting projects, communication, and daily tasks.";
+}
+
+function summarizeSentence(value: string) {
+  return value
+    .replace(/^if you only improve one thing today, make it this:\s*/i, "")
+    .replace(/[.;].*$/, "")
+    .trim();
 }
 
 function clampScore(value: number, min: number, max: number) {

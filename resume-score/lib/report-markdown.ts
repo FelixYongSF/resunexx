@@ -2,6 +2,8 @@ import { engineName } from "@/lib/resumeEngine";
 import { ResumeReport } from "@/lib/report-schema";
 
 export function reportToMarkdown(report: ResumeReport) {
+  const premiumReport = report.paidReport.premiumReport;
+
   return `# Recruiter Mind Report
 
 ## Scores
@@ -17,13 +19,45 @@ export function reportToMarkdown(report: ResumeReport) {
 
 ${report.topIssues.map((item, index) => `${index + 1}. ${item}`).join("\n")}
 
+## Executive Summary
+
+${premiumReport.executiveSummary}
+
+## Biggest Opportunity
+
+${premiumReport.biggestOpportunity.whatToImprove}
+
+- Why it matters: ${premiumReport.biggestOpportunity.whyItMatters}
+- Example: ${premiumReport.biggestOpportunity.example}
+- Expected impact: ${premiumReport.biggestOpportunity.expectedImpact}
+
+## High Impact Improvements
+
+${premiumReport.highImpactImprovements
+  .map(
+    (item, index) =>
+      `${index + 1}. ${item.priorityLevel} priority\n   What was detected: ${item.whatWasDetected}\n   Why it matters: ${item.whyItMatters}\n   Recruiter impact: ${item.recruiterImpact}\n   ATS impact: ${item.atsImpact}\n   Recommended action: ${item.recommendedAction}\n   Expected benefit: ${item.expectedBenefit}`
+  )
+  .join("\n")}
+
+## Suggested Rewrite
+
+Before:
+${premiumReport.suggestedRewrite.before}
+
+After:
+${premiumReport.suggestedRewrite.after}
+
+Why this works better:
+${premiumReport.suggestedRewrite.whyThisWorksBetter}
+
 ## Recruiter First Impression
 
-${report.recruiterFirstImpression}
+${premiumReport.recruiterFirstImpression}
 
-## Would a Recruiter Keep Reading?
+## ATS Perspective
 
-${report.wouldRecruiterKeepReading}
+${premiumReport.atsPerspective}
 
 ## What Stands Out Positively?
 
@@ -86,9 +120,15 @@ ${report.rewriteExamples.improvedBulletPoints.map((item) => `- ${item}`).join("\
 ### Improved Professional Summary
 ${report.rewriteExamples.improvedProfessionalSummary}
 
-## Final Action Plan
+## 30-Minute Improvement Plan
 
-${report.finalActionPlan.map((item, index) => `${index + 1}. ${item}`).join("\n")}
+1. ${premiumReport.thirtyMinuteImprovementPlan.tenMinutes}
+2. ${premiumReport.thirtyMinuteImprovementPlan.nextTenMinutes}
+3. ${premiumReport.thirtyMinuteImprovementPlan.finalTenMinutes}
+
+## Long-Term Career Signal
+
+${premiumReport.longTermCareerSignal}
 
 ## Encouraging Closing Note
 

@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "benchmark": "node benchmark/run-benchmark.mjs",
+    "benchmark:quality": "node benchmark/report-writer-quality.mjs",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"

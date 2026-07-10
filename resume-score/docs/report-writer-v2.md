@@ -33,15 +33,26 @@ These ideas should read as natural coaching, not as a repetitive five-label temp
 
 ## Premium Structure
 
+- Executive Summary: a 30-second senior career coach read that names strengths,
+  the largest opportunity, and what the next edit can unlock.
+- Biggest Opportunity: one primary recommendation framed as "If you only improve
+  one thing today, make it this." It includes what to improve, why it matters,
+  an example, and expected communication impact.
+- High Impact Improvements: the top three improvements only. Each explains what
+  was detected, why it matters, recruiter impact, ATS impact where relevant, the
+  recommended action, and expected benefit.
+- Suggested Rewrite: a practical Before / After / Why this works better example
+  for the most important issue.
 - Recruiter First Impression: visible direction, strongest proof, and main uncertainty.
-- Would a Recruiter Keep Reading: direct judgment, evidence, and the condition that
-  would improve the judgment.
+- ATS Perspective: what ATS likely reads well, what it may miss, and how to improve
+  discoverability without adding false keywords.
+- 30-Minute Improvement Plan: three 10-minute edits that make the report immediately useful.
+- Long-Term Career Signal: a short coach insight connecting resume communication to future positioning.
 - Positive Standouts: resume-specific proof only.
 - Hesitation Signals: decision-relevant uncertainty, not a repeated issue list.
 - Five Most Important Changes: High, High, Medium, Medium, and Low impact.
 - Section Feedback: what works and one focused next edit.
 - Rewrite Examples: truthful, denser, and ready to adapt.
-- Final Action Plan: ordered work that fits one focused editing session.
 - Closing Note: credible confidence grounded in the candidate's existing foundation.
 
 ## Voice

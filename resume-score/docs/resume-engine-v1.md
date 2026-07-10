@@ -449,6 +449,32 @@ It confirms:
 - free preview can be generated
 - paid report can be generated
 
+## Report Writer 2.0 Premium Experience
+
+Resume Engine v1.4 separates report writing from scoring. The AI analysis
+identifies evidence, scores, rules, and coaching inputs. The Report Writer layer
+turns that structured result into a higher-value Premium Report without changing
+payment, upload, persistence, or checkout logic.
+
+Premium Report sections:
+
+- Executive Summary
+- Biggest Opportunity
+- High Impact Improvements
+- Suggested Rewrite
+- Recruiter's First Impression
+- ATS Perspective
+- 30-Minute Improvement Plan
+- Long-Term Career Signal
+
+Quality principles:
+
+- Give fewer recommendations, but make each one sharper.
+- Explain the recruiter or ATS interpretation behind the advice.
+- Preserve the candidate's facts and never invent metrics.
+- Make the paid report feel substantially more useful than the free preview.
+- Keep the tone warm, calm, premium, and honest.
+
 ## Future Upgrade Ideas
 
 - Target role matching against a job description

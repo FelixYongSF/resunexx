@@ -331,6 +331,7 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
       top3Issues: topIssues
     },
     paidReport: {
+      premiumReport: undefined as never,
       categoryBreakdown,
       detailedExplanation:
         `The resume can become more competitive quickly if it is rewritten around ${targetRole}. The highest-impact work is to make the top third communicate fit, then turn the strongest bullets into evidence of contribution.`,

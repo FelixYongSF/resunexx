@@ -41,6 +41,7 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
   }
 
   const report = stored.report;
+  const premiumReport = report.paidReport.premiumReport;
 
   return (
     <main className="min-h-screen bg-[#f6f4ef]">
@@ -70,14 +71,65 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
         </div>
 
         <section className="nexx-card mt-8 p-7">
+          <p className="text-sm font-semibold text-blue-600">Executive Summary</p>
+          <p className="mt-3 text-base leading-7 text-slate-700">{premiumReport.executiveSummary}</p>
+        </section>
+
+        <section className="nexx-card mt-8 p-7">
+          <p className="text-sm font-semibold text-blue-600">Biggest Opportunity</p>
+          <h2 className="mt-3 text-2xl font-semibold text-slate-950">{premiumReport.biggestOpportunity.whatToImprove}</h2>
+          <div className="mt-5 grid gap-4 text-sm leading-6 text-slate-700 md:grid-cols-3">
+            <p><span className="font-semibold text-slate-950">Why it matters:</span> {premiumReport.biggestOpportunity.whyItMatters}</p>
+            <p><span className="font-semibold text-slate-950">Example:</span> {premiumReport.biggestOpportunity.example}</p>
+            <p><span className="font-semibold text-slate-950">Expected impact:</span> {premiumReport.biggestOpportunity.expectedImpact}</p>
+          </div>
+        </section>
+
+        <section className="nexx-card mt-8 p-7">
+          <h2 className="text-2xl font-semibold text-slate-950">High Impact Improvements</h2>
+          <div className="mt-6 grid gap-4">
+            {premiumReport.highImpactImprovements.map((item) => (
+              <article key={item.whatWasDetected} className="rounded-2xl bg-slate-50 p-5">
+                <p className="text-sm font-semibold text-blue-600">{item.priorityLevel} priority</p>
+                <div className="mt-3 grid gap-3 text-sm leading-6 text-slate-700">
+                  <p><span className="font-semibold text-slate-950">What was detected:</span> {item.whatWasDetected}</p>
+                  <p><span className="font-semibold text-slate-950">Why it matters:</span> {item.whyItMatters}</p>
+                  <p><span className="font-semibold text-slate-950">Recruiter impact:</span> {item.recruiterImpact}</p>
+                  <p><span className="font-semibold text-slate-950">ATS impact:</span> {item.atsImpact}</p>
+                  <p><span className="font-semibold text-slate-950">Recommended action:</span> {item.recommendedAction}</p>
+                  <p><span className="font-semibold text-slate-950">Expected benefit:</span> {item.expectedBenefit}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="nexx-card mt-8 p-7">
+          <h2 className="text-2xl font-semibold text-slate-950">Suggested Rewrite</h2>
+          <div className="mt-6 grid gap-4 lg:grid-cols-2">
+            <div className="rounded-2xl bg-slate-50 p-5">
+              <p className="text-sm font-semibold text-slate-500">Before</p>
+              <p className="mt-3 text-sm leading-6 text-slate-700">{premiumReport.suggestedRewrite.before}</p>
+            </div>
+            <div className="rounded-2xl bg-blue-50 p-5">
+              <p className="text-sm font-semibold text-blue-700">After</p>
+              <p className="mt-3 text-sm leading-6 text-blue-950">{premiumReport.suggestedRewrite.after}</p>
+            </div>
+          </div>
+          <p className="mt-4 text-sm leading-6 text-slate-700">
+            <span className="font-semibold text-slate-950">Why this works better:</span> {premiumReport.suggestedRewrite.whyThisWorksBetter}
+          </p>
+        </section>
+
+        <section className="nexx-card mt-8 p-7">
           <div className="grid gap-6 md:grid-cols-2">
             <div>
               <p className="text-sm font-semibold text-blue-600">Recruiter First Impression</p>
-              <p className="mt-3 text-sm leading-6 text-slate-700">{report.recruiterFirstImpression}</p>
+              <p className="mt-3 text-sm leading-6 text-slate-700">{premiumReport.recruiterFirstImpression}</p>
             </div>
             <div>
-              <p className="text-sm font-semibold text-blue-600">Would a recruiter keep reading?</p>
-              <p className="mt-3 text-sm leading-6 text-slate-700">{report.wouldRecruiterKeepReading}</p>
+              <p className="text-sm font-semibold text-blue-600">ATS Perspective</p>
+              <p className="mt-3 text-sm leading-6 text-slate-700">{premiumReport.atsPerspective}</p>
             </div>
           </div>
         </section>
@@ -142,15 +194,24 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
         </section>
 
         <section className="nexx-card mt-8 p-7">
-          <h2 className="text-2xl font-semibold text-slate-950">Final action plan</h2>
+          <h2 className="text-2xl font-semibold text-slate-950">30-Minute Improvement Plan</h2>
           <ol className="mt-6 grid gap-3">
-            {report.finalActionPlan.map((item, index) => (
+            {[
+              premiumReport.thirtyMinuteImprovementPlan.tenMinutes,
+              premiumReport.thirtyMinuteImprovementPlan.nextTenMinutes,
+              premiumReport.thirtyMinuteImprovementPlan.finalTenMinutes
+            ].map((item, index) => (
               <li key={item} className="flex gap-4 rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-700">
-                <span className="font-semibold text-blue-600">{index + 1}</span>
+                <span className="font-semibold text-blue-600">{index === 0 ? "10" : index === 1 ? "20" : "30"}</span>
                 <span>{item}</span>
               </li>
             ))}
           </ol>
+        </section>
+
+        <section className="nexx-card mt-8 p-7">
+          <h2 className="text-2xl font-semibold text-slate-950">Long-Term Career Signal</h2>
+          <p className="mt-4 text-sm leading-6 text-slate-700">{premiumReport.longTermCareerSignal}</p>
         </section>
 
         <div className="mt-8">

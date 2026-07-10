@@ -55,6 +55,85 @@ const rewriteExamplesSchema = {
   }
 } as const;
 
+const premiumReportSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: [
+    "executiveSummary",
+    "biggestOpportunity",
+    "highImpactImprovements",
+    "suggestedRewrite",
+    "recruiterFirstImpression",
+    "atsPerspective",
+    "thirtyMinuteImprovementPlan",
+    "longTermCareerSignal"
+  ],
+  properties: {
+    executiveSummary: { type: "string" },
+    biggestOpportunity: {
+      type: "object",
+      additionalProperties: false,
+      required: ["whatToImprove", "whyItMatters", "example", "expectedImpact"],
+      properties: {
+        whatToImprove: { type: "string" },
+        whyItMatters: { type: "string" },
+        example: { type: "string" },
+        expectedImpact: { type: "string" }
+      }
+    },
+    highImpactImprovements: {
+      type: "array",
+      minItems: 3,
+      maxItems: 3,
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: [
+          "priorityLevel",
+          "whatWasDetected",
+          "whyItMatters",
+          "recruiterImpact",
+          "atsImpact",
+          "recommendedAction",
+          "expectedBenefit"
+        ],
+        properties: {
+          priorityLevel: { type: "string", enum: ["High", "Medium", "Low"] },
+          whatWasDetected: { type: "string" },
+          whyItMatters: { type: "string" },
+          recruiterImpact: { type: "string" },
+          atsImpact: { type: "string" },
+          recommendedAction: { type: "string" },
+          expectedBenefit: { type: "string" }
+        }
+      }
+    },
+    suggestedRewrite: {
+      type: "object",
+      additionalProperties: false,
+      required: ["before", "after", "whyThisWorksBetter"],
+      properties: {
+        before: { type: "string" },
+        after: { type: "string" },
+        whyThisWorksBetter: { type: "string" }
+      }
+    },
+    recruiterFirstImpression: { type: "string" },
+    atsPerspective: { type: "string" },
+    thirtyMinuteImprovementPlan: {
+      type: "object",
+      additionalProperties: false,
+      required: ["tenMinutes", "nextTenMinutes", "finalTenMinutes"],
+      properties: {
+        tenMinutes: { type: "string" },
+        nextTenMinutes: { type: "string" },
+        finalTenMinutes: { type: "string" }
+      }
+    },
+    longTermCareerSignal: { type: "string" }
+  }
+} as const;
+
 const recommendationSchema = {
   type: "object",
   additionalProperties: false,
@@ -249,6 +328,7 @@ export const resumeReportJsonSchema = {
       type: "object",
       additionalProperties: false,
       required: [
+        "premiumReport",
         "categoryBreakdown",
         "detailedExplanation",
         "sectionFeedback",
@@ -260,6 +340,7 @@ export const resumeReportJsonSchema = {
         "resumeEnginePreCheck"
       ],
       properties: {
+        premiumReport: premiumReportSchema,
         categoryBreakdown: categoryBreakdownSchema,
         detailedExplanation: { type: "string" },
         sectionFeedback: sectionFeedbackSchema,

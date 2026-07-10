@@ -133,6 +133,46 @@ export type RewriteExamples = {
   improvedProfessionalSummary: string;
 };
 
+export type BiggestOpportunity = {
+  whatToImprove: string;
+  whyItMatters: string;
+  example: string;
+  expectedImpact: string;
+};
+
+export type HighImpactImprovement = {
+  priorityLevel: "High" | "Medium" | "Low";
+  whatWasDetected: string;
+  whyItMatters: string;
+  recruiterImpact: string;
+  atsImpact: string;
+  recommendedAction: string;
+  expectedBenefit: string;
+};
+
+export type SuggestedRewrite = {
+  before: string;
+  after: string;
+  whyThisWorksBetter: string;
+};
+
+export type ThirtyMinuteImprovementPlan = {
+  tenMinutes: string;
+  nextTenMinutes: string;
+  finalTenMinutes: string;
+};
+
+export type PremiumReportExperience = {
+  executiveSummary: string;
+  biggestOpportunity: BiggestOpportunity;
+  highImpactImprovements: HighImpactImprovement[];
+  suggestedRewrite: SuggestedRewrite;
+  recruiterFirstImpression: string;
+  atsPerspective: string;
+  thirtyMinuteImprovementPlan: ThirtyMinuteImprovementPlan;
+  longTermCareerSignal: string;
+};
+
 export type ResumeFreePreview = {
   overallScore: number;
   atsReadinessScore: number;
@@ -141,6 +181,7 @@ export type ResumeFreePreview = {
 };
 
 export type ResumePaidReport = {
+  premiumReport: PremiumReportExperience;
   categoryBreakdown: ResumeCategoryBreakdown;
   detailedExplanation: string;
   sectionFeedback: SectionFeedback;

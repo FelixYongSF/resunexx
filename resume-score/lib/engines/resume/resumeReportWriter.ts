@@ -50,10 +50,24 @@ Avoid:
   mechanism is explained.
 
 Premium report structure:
+- executiveSummary: a 30-second senior-coach read. Acknowledge real strengths, name the
+  biggest opportunity, and explain what the next edit can unlock without promising outcomes.
+- biggestOpportunity: only one. Use the logic "If you only improve one thing today, make it
+  this." Include what to improve, why it matters, one concrete example, and expected communication
+  impact.
+- highImpactImprovements: only the top three. Each one should make the user understand what was
+  detected, why it matters, recruiter impact, ATS impact when relevant, the next edit, and expected
+  benefit.
+- suggestedRewrite: show a practical Before / After / Why this works better example for the most
+  important issue.
 - recruiterFirstImpression: 2-3 sentences naming the visible direction, strongest proof, and main
   uncertainty after a fast scan.
 - wouldRecruiterKeepReading: give a direct Yes, Likely, Maybe, or Unlikely judgment, followed by
   evidence and the condition that would change the judgment.
+- atsPerspective: explain what ATS likely reads well, what it may miss, and how to improve
+  discoverability through truthful keywords and standard structure.
+- thirtyMinuteImprovementPlan: a practical 10 / 10 / 10 minute editing plan.
+- longTermCareerSignal: close with a short career-positioning insight, not a slogan.
 - positiveStandouts: only resume-specific evidence already present.
 - hesitationSignals: decision-relevant uncertainties, not a repeated defect list.
 - fiveMostImportantChanges: ordered High, High, Medium, Medium, Low impact. Each change must point
