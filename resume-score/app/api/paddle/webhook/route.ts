@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { trackServerEvent } from "@/lib/analytics";
+import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
 import { markReportPaid } from "@/lib/report-store";
 import { isPaidPaddleTransaction, PaddleTransaction, verifyPaddleWebhookSignature } from "@/lib/paddle";
 
@@ -10,6 +12,15 @@ type PaddleWebhookEvent = {
 };
 
 export async function POST(request: Request) {
+  const rateLimit = checkRateLimit({
+    key: `paddle-webhook:${getRequestIp(request)}`,
+    limit: 120,
+    windowMs: 60 * 60 * 1000
+  });
+  if (!rateLimit.allowed) {
+    return NextResponse.json({ error: "Too many webhook attempts." }, { status: 429 });
+  }
+
   const body = await request.text();
   const signature = request.headers.get("paddle-signature");
 
@@ -36,6 +47,15 @@ export async function POST(request: Request) {
       if (!report) {
         return NextResponse.json({ error: "Matching report was not found." }, { status: 409 });
       }
+      trackServerEvent({
+        event: "payment_completed",
+        reportId,
+        source: "paddle_webhook",
+        metadata: {
+          transactionId,
+          eventType: event.event_type
+        }
+      });
     }
 
     return NextResponse.json({ received: true });

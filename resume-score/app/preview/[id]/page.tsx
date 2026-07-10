@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { AnalyticsPageView } from "@/components/analytics-page-view";
 import { Header } from "@/components/header";
 import { ScoreRing } from "@/components/score-ring";
 import { Disclaimer } from "@/components/disclaimer";
@@ -35,6 +36,7 @@ export default async function PreviewPage({ params }: { params: Promise<{ id: st
 
   return (
     <main className="min-h-screen bg-[#f6f4ef]">
+      <AnalyticsPageView event="preview_viewed" reportId={id} />
       <Header />
       <section className="nexx-shell py-12 sm:py-14">
         <div className="grid gap-8 lg:grid-cols-[1fr_360px]">

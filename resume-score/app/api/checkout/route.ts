@@ -1,11 +1,21 @@
 import { NextResponse } from "next/server";
 import { appUrl, assertPaddleCheckoutConfig, getPaddleEnvironment } from "@/lib/paddle";
+import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
 import { getReport, hasPersistentReportStore } from "@/lib/report-store";
 
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   try {
+    const rateLimit = checkRateLimit({
+      key: `checkout:${getRequestIp(request)}`,
+      limit: 30,
+      windowMs: 60 * 60 * 1000
+    });
+    if (!rateLimit.allowed) {
+      return NextResponse.json({ error: "Too many checkout attempts. Please wait a little and try again." }, { status: 429 });
+    }
+
     const { reportId } = (await request.json()) as { reportId?: string };
     if (!reportId) return NextResponse.json({ error: "Missing reportId." }, { status: 400 });
 
@@ -38,7 +48,7 @@ export async function POST(request: Request) {
     console.error(error);
     const message = error instanceof Error ? error.message : "Could not start Paddle Checkout.";
     const userMessage = message.includes("Paddle is not configured")
-      ? `Payment is not configured yet. ${message}`
+      ? "Checkout is not available yet. Please contact support if you need help."
       : message;
 
     return NextResponse.json(

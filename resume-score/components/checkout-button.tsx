@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackClientEvent } from "@/lib/analytics";
 
 type CheckoutResponse = {
   provider?: "paddle";
@@ -60,6 +61,7 @@ export function CheckoutButton({ reportId }: { reportId: string }) {
     setError("");
 
     try {
+      trackClientEvent({ event: "checkout_clicked", reportId, source: "preview_unlock_button" });
       const controller = new AbortController();
       const timeout = window.setTimeout(() => controller.abort(), 25_000);
       const res = await fetch("/api/checkout", {
@@ -72,7 +74,7 @@ export function CheckoutButton({ reportId }: { reportId: string }) {
       const data = (await readApiResponse(res)) as CheckoutResponse;
       if (!res.ok) throw new Error(data.error || "Could not start checkout.");
       if (!data.clientToken || !data.priceId || !data.successUrl || !data.environment) {
-        throw new Error("Payment is not configured yet. Please add Paddle credentials before accepting payments.");
+        throw new Error("Checkout is not available yet. Please contact support if you need help.");
       }
 
       await loadPaddleScript();

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AnalyticsPageView } from "@/components/analytics-page-view";
 import { Header } from "@/components/header";
 import { Disclaimer } from "@/components/disclaimer";
 import { ResumeUploadForm } from "@/components/resume-upload-form";
@@ -37,6 +38,7 @@ const faqs = [
 export default function HomePage() {
   return (
     <main className="min-h-screen overflow-hidden bg-white text-[#151512]">
+      <AnalyticsPageView event="landing_page_visit" />
       <Header />
 
       <section className="bg-white">

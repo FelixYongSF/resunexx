@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { trackServerEvent } from "@/lib/analytics";
 import { getReport, markReportPaid } from "@/lib/report-store";
 import { getPaddleTransaction, isPaidPaddleTransaction } from "@/lib/paddle";
 
@@ -32,13 +33,21 @@ export default async function SuccessPage({
 
       if (isPaidPaddleTransaction(transaction, transactionReportId)) {
         const unlockedReport = await markReportPaid(transactionReportId, transaction.id);
-        if (unlockedReport) verifiedReportId = transactionReportId;
+        if (unlockedReport) {
+          verifiedReportId = transactionReportId;
+          trackServerEvent({
+            event: "payment_completed",
+            reportId: transactionReportId,
+            source: "success_page",
+            metadata: { transactionId: transaction.id }
+          });
+        }
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "Paddle could not verify this payment.";
       console.error("[paddle:success] payment verification failed", { error: message });
       const userMessage = message.includes("Paddle is not configured")
-        ? `Payment verification is not configured yet. ${message}`
+        ? "Payment verification is not available yet. Please contact support if payment was completed."
         : "Payment verification failed. Please return to your preview and try again, or contact support if payment was completed.";
 
       return (

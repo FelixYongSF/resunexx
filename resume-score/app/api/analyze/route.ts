@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { createHash } from "node:crypto";
 import { analyzeResumeWithEngine } from "@/lib/resumeEngine";
 import { extractResumeText } from "@/lib/file-extraction";
+import { trackServerEvent } from "@/lib/analytics";
+import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
 import { saveReport } from "@/lib/report-store";
 import { toPreview, StoredReport } from "@/lib/report-schema";
 
@@ -15,6 +17,16 @@ export async function POST(request: Request) {
 
   try {
     console.info(`[analyze:${requestId}] request received`);
+
+    step = "request:rate-limit";
+    const rateLimit = checkRateLimit({
+      key: `analyze:${getRequestIp(request)}`,
+      limit: 20,
+      windowMs: 60 * 60 * 1000
+    });
+    if (!rateLimit.allowed) {
+      return fail(requestId, step, "Too many resume analysis attempts. Please wait a little and try again.", 429);
+    }
 
     step = "request:form-data";
     const formData = await request.formData();
@@ -98,6 +110,16 @@ export async function POST(request: Request) {
       storageDurationMs,
       totalDurationMs: Date.now() - requestStartedAt
     });
+    trackServerEvent({
+      event: "analysis_completed",
+      reportId: id,
+      source: "api_analyze",
+      metadata: {
+        durationMs: Date.now() - requestStartedAt,
+        engineVersion: report.engineVersion,
+        overallScore: report.overallScore
+      }
+    });
 
     return NextResponse.json({
       id,
@@ -124,8 +146,7 @@ function fail(requestId: string, step: string, error: string, status: number, de
     {
       error,
       step,
-      requestId,
-      details
+      requestId
     },
     { status }
   );
@@ -133,19 +154,19 @@ function fail(requestId: string, step: string, error: string, status: number, de
 
 function getUserFacingError(step: string, message: string) {
   if (step === "engine:analyze-resume" && message.includes("OPENAI_API_KEY is not configured")) {
-    return "AI analysis is not configured yet. Please add an OpenAI API key before using real analysis.";
+    return "Resume analysis is temporarily unavailable. Please try again later.";
   }
 
   if (step === "engine:analyze-resume" && isOpenAiQuotaError(message)) {
-    return "OpenAI API quota exceeded. Please check your OpenAI billing or use another API key.";
+    return "Resume analysis is temporarily unavailable. Please try again later.";
   }
 
   if (step === "engine:analyze-resume" && message.includes("unexpected report format")) {
-    return "AI analysis returned an unexpected format. Please try again.";
+    return "We couldn't complete the resume analysis. Please try again.";
   }
 
   if (step === "engine:analyze-resume" && isAiConnectivityError(message)) {
-    return "Unable to connect to AI service. Please try again later.";
+    return "We couldn't analyze your resume right now. Please try again.";
   }
 
   if (step === "file:extract-text") {

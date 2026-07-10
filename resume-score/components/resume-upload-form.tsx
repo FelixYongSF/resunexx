@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { trackClientEvent } from "@/lib/analytics";
 
 type ResumeUploadFormProps = {
   compact?: boolean;
@@ -41,6 +42,14 @@ export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
     }
 
     setIsUploading(true);
+    trackClientEvent({
+      event: "upload_started",
+      source: compact ? "home_upload_form" : "upload_page",
+      metadata: {
+        fileType: file.type || "unknown",
+        fileSize: file.size
+      }
+    });
     const formData = new FormData();
     formData.append("resume", file);
 
@@ -58,20 +67,24 @@ export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
 
       const data = await readApiResponse(res);
       if (!res.ok) {
-        const step = data.step ? `Step: ${data.step}. ` : "";
-        const requestId = data.requestId ? ` Request ID: ${data.requestId}.` : "";
-        throw new Error(`${data.error || "Analysis failed."} ${step}${requestId}`.trim());
+        const requestId = data.requestId ? ` Reference ID: ${data.requestId}.` : "";
+        throw new Error(`${data.error || "We couldn't analyze your resume right now. Please try again."}${requestId}`);
       }
 
+      trackClientEvent({
+        event: "upload_completed",
+        reportId: data.id,
+        source: compact ? "home_upload_form" : "upload_page"
+      });
       router.push(`/preview/${data.id}`);
     } catch (err) {
       setIsUploading(false);
       const message =
         err instanceof DOMException && err.name === "AbortError"
-          ? "Unable to connect to AI service. Please try again later."
+          ? "We couldn't analyze your resume right now. Please try again."
           : err instanceof Error
             ? err.message
-            : "Analysis failed.";
+            : "We couldn't analyze your resume right now. Please try again.";
       setError(message);
       router.push(`/upload?error=${encodeURIComponent(message)}`);
     }
@@ -146,7 +159,7 @@ async function readApiResponse(res: Response) {
     return JSON.parse(text);
   } catch {
     return {
-      error: `API returned non-JSON response: ${text.slice(0, 300)}`
+      error: "We couldn't read the server response. Please try again."
     };
   }
 }
