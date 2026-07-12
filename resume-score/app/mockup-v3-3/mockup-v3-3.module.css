@@ -1,0 +1,164 @@
+.page :global(#report) {
+  padding-bottom: 64px;
+}
+
+.page :global(#report > div:last-of-type) {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.38fr);
+  align-items: start;
+  gap: 24px;
+  margin-top: 38px;
+}
+
+.page :global(#report > div:last-of-type > article) {
+  height: auto;
+  border: 1px solid rgba(21, 21, 21, 0.13);
+  box-shadow: 0 20px 44px rgba(21, 21, 21, 0.12);
+}
+
+.page :global(#report > div:last-of-type > article > header) {
+  padding: 16px 22px;
+}
+
+.page :global(#report > div:last-of-type > article > div:nth-of-type(1)) {
+  padding: 22px 30px 18px;
+  border-bottom: 1px solid #d8d1c5;
+}
+
+.page :global(#report > div:last-of-type > article > div:nth-of-type(1)::before) {
+  content: "EXECUTIVE SUMMARY";
+  display: block;
+  margin-bottom: 12px;
+  color: #777064;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.page :global(#report > div:last-of-type > article > div:nth-of-type(1) > p) {
+  margin-bottom: 9px;
+  font-size: 13px;
+}
+
+.page :global(#report > div:last-of-type > article > div:nth-of-type(1) h3) {
+  font-size: clamp(1.85rem, 3vw, 3rem);
+}
+
+.page :global(#report > div:last-of-type > article > div:nth-of-type(2) > div) {
+  min-height: 98px;
+  padding: 16px 18px;
+}
+
+.page :global(#report > div:last-of-type > article > div:nth-of-type(3)) {
+  padding: 2px 22px 8px;
+}
+
+.page :global(#report > div:last-of-type > article > div:nth-of-type(3) section) {
+  padding: 12px 0;
+}
+
+.page :global(#pricing) {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid rgba(21, 21, 21, 0.14);
+  border-radius: 18px;
+  background: #d5d1c8;
+  box-shadow: 0 20px 44px rgba(21, 21, 21, 0.11);
+}
+
+.page :global(#pricing > div) {
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  border: 1px solid rgba(21, 21, 21, 0.1);
+  border-radius: 11px;
+  background: #f7f4ee;
+  box-shadow: none;
+  color: #151515;
+  padding: 16px;
+  transition: background 220ms ease, color 220ms ease, border-color 220ms ease;
+}
+
+.page :global(#pricing > div > span) {
+  color: #625c52;
+}
+
+.page :global(#pricing > div > strong) {
+  margin-top: 7px;
+  font-size: clamp(1.65rem, 2.4vw, 2.35rem);
+}
+
+.page :global(#pricing > div ul) {
+  gap: 4px;
+  margin-top: 9px;
+  font-size: clamp(0.62rem, 0.72vw, 0.72rem);
+  line-height: 1.22;
+}
+
+.page :global(#pricing > div .planCta) {
+  margin-top: auto;
+  padding: 9px 11px;
+}
+
+.page :global(#pricing > div:nth-child(1):hover),
+.page :global(#pricing > div:nth-child(1):focus-within) {
+  border-color: #ff5a36;
+  background: #ff5a36;
+}
+
+.page :global(#pricing > div:nth-child(2):hover),
+.page :global(#pricing > div:nth-child(2):focus-within) {
+  border-color: #d7ff4f;
+  background: #d7ff4f;
+}
+
+.page :global(#pricing > div:nth-child(3):hover),
+.page :global(#pricing > div:nth-child(3):focus-within) {
+  border-color: #151515;
+  background: #151515;
+  color: #f3f0e9;
+}
+
+.page :global(#pricing > div:nth-child(3):hover > span),
+.page :global(#pricing > div:nth-child(3):focus-within > span) {
+  color: rgba(243, 240, 233, 0.65);
+}
+
+.page :global(#pricing > div:nth-child(3):hover .planCta),
+.page :global(#pricing > div:nth-child(3):focus-within .planCta) {
+  border-color: #f3f0e9;
+  background: #f3f0e9;
+  color: #151515;
+}
+
+.page :global(#pricing > div:hover .planCta),
+.page :global(#pricing > div:focus-within .planCta) {
+  background: #151515;
+  color: #f3f0e9;
+}
+
+.page :global(#pricing > div:nth-child(3):hover .planCta),
+.page :global(#pricing > div:nth-child(3):focus-within .planCta) {
+  background: #f3f0e9;
+  color: #151515;
+}
+
+@media (max-width: 760px) {
+  .page :global(#report > div:last-of-type) {
+    grid-template-columns: 1fr;
+    margin-top: 44px;
+  }
+
+  .page :global(#pricing) {
+    gap: 10px;
+  }
+
+  .page :global(#pricing > div) {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .page :global(#pricing > div ul) {
+    font-size: 0.78rem;
+  }
+}
