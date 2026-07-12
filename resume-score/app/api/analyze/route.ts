@@ -6,6 +6,7 @@ import { trackServerEvent } from "@/lib/analytics";
 import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
 import { saveReport } from "@/lib/report-store";
 import { toPreview, StoredReport } from "@/lib/report-schema";
+import { isReportPlan, type ReportPlan } from "@/lib/report-plan";
 
 export const runtime = "nodejs";
 export const maxDuration = 120;
@@ -31,6 +32,8 @@ export async function POST(request: Request) {
     step = "request:form-data";
     const formData = await request.formData();
     const file = formData.get("resume");
+    const requestedPlanValue = formData.get("selectedPlan");
+    const requestedPlan: ReportPlan = isReportPlan(requestedPlanValue) ? requestedPlanValue : "free";
 
     if (!(file instanceof File)) {
       return fail(requestId, step, "Please upload a PDF or DOCX resume.", 400);
@@ -97,6 +100,8 @@ export async function POST(request: Request) {
       resumeTextPreview: resumeText.slice(0, 700),
       paid: false,
       paymentStatus: "unpaid",
+      requestedPlan,
+      accessPlan: "free",
       analysisMode: "openai",
       report
     };

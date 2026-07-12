@@ -17,7 +17,8 @@ OPENAI_MODEL=gpt-4o-mini
 PADDLE_API_KEY=
 PADDLE_CLIENT_TOKEN=
 PADDLE_WEBHOOK_SECRET=
-PADDLE_PRICE_ID=
+PADDLE_STANDARD_PRICE_ID=
+PADDLE_FULL_PRICE_ID=
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 KV_REST_API_URL=
@@ -45,14 +46,15 @@ Expected behavior:
 
 ## Paddle Checkout
 
-Use Paddle Checkout for the one-time $4.99 `Resume Improvement Plan`.
+Use Paddle Checkout for the one-time $4.99 Standard Report and $9.99 Full Report.
 
 Required setup:
 
 - `PADDLE_API_KEY`: server-side Paddle API key.
 - `PADDLE_CLIENT_TOKEN`: client-side Paddle token for Paddle.js.
 - `PADDLE_WEBHOOK_SECRET`: Paddle notification destination secret.
-- `PADDLE_PRICE_ID`: price ID for the one-time report purchase.
+- `PADDLE_STANDARD_PRICE_ID`: price ID for the $4.99 Standard Report.
+- `PADDLE_FULL_PRICE_ID`: price ID for the $9.99 Full Report.
 - `NEXT_PUBLIC_APP_URL`: local or deployed app URL.
 
 The API key controls environment:
@@ -63,7 +65,7 @@ The API key controls environment:
 Checkout opens from the existing preview page CTA. The user flow remains:
 
 ```text
-Preview -> Unlock My Improvement Plan -> Paddle Checkout -> Success -> Full Report
+Preview -> selected plan checkout -> Paddle verification -> Standard or Full Report
 ```
 
 ## Payment Verification
@@ -154,7 +156,8 @@ OPENAI_MODEL=gpt-4o-mini
 PADDLE_API_KEY=
 PADDLE_CLIENT_TOKEN=
 PADDLE_WEBHOOK_SECRET=
-PADDLE_PRICE_ID=
+PADDLE_STANDARD_PRICE_ID=
+PADDLE_FULL_PRICE_ID=
 NEXT_PUBLIC_APP_URL=
 KV_REST_API_URL=
 KV_REST_API_TOKEN=
@@ -179,9 +182,9 @@ Deployment steps:
 ## Final Launch Checklist
 
 1. Paddle account verification approved.
-2. Paddle product created: `Resume Improvement Plan`.
-3. Paddle one-time price created for `$4.99 USD`.
-4. `PADDLE_PRICE_ID` copied from that price.
+2. Paddle Standard and Full products/prices created.
+3. One-time prices created for `$4.99 USD` and `$9.99 USD`.
+4. `PADDLE_STANDARD_PRICE_ID` and `PADDLE_FULL_PRICE_ID` copied from those prices.
 5. `PADDLE_API_KEY` configured for the correct environment.
 6. `PADDLE_CLIENT_TOKEN` configured for the same environment.
 7. Paddle notification destination configured at `<NEXT_PUBLIC_APP_URL>/api/paddle/webhook`.

@@ -2,7 +2,13 @@ import { NextResponse } from "next/server";
 import { trackServerEvent } from "@/lib/analytics";
 import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
 import { getReport, markReportPaid } from "@/lib/report-store";
-import { isPaidPaddleTransaction, PaddleTransaction, verifyPaddleWebhookSignature } from "@/lib/paddle";
+import {
+  getPaidPlanFromPaddleTransaction,
+  isPaidPaddleTransaction,
+  PaddleTransaction,
+  verifyPaddleWebhookSignature
+} from "@/lib/paddle";
+import { hasPlanAccess } from "@/lib/report-plan";
 
 export const runtime = "nodejs";
 
@@ -35,8 +41,9 @@ export async function POST(request: Request) {
     if (event.event_type === "transaction.completed" || event.event_type === "transaction.paid") {
       const transactionId = event.data?.id;
       const reportId = event.data?.custom_data?.reportId;
+      const purchasedPlan = event.data ? getPaidPlanFromPaddleTransaction(event.data) : null;
 
-      if (!transactionId || !reportId || !event.data) {
+      if (!transactionId || !reportId || !event.data || !purchasedPlan) {
         return NextResponse.json({ error: "Payment event is missing report metadata." }, { status: 400 });
       }
 
@@ -49,7 +56,8 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "Matching report was not found." }, { status: 409 });
       }
 
-      if (existingReport.paid) {
+      const currentPlan = existingReport.accessPlan || (existingReport.paid ? "standard" : "free");
+      if (hasPlanAccess(currentPlan, purchasedPlan)) {
         console.info("[paddle:webhook] duplicate payment event ignored", {
           eventType: event.event_type,
           reportId
@@ -57,7 +65,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ received: true, duplicate: true });
       }
 
-      const report = await markReportPaid(reportId, transactionId);
+      const report = await markReportPaid(reportId, transactionId, purchasedPlan);
       if (!report) {
         return NextResponse.json({ error: "Matching report was not found." }, { status: 409 });
       }
@@ -67,7 +75,8 @@ export async function POST(request: Request) {
         source: "paddle_webhook",
         metadata: {
           transactionId,
-          eventType: event.event_type
+          eventType: event.event_type,
+          purchasedPlan
         }
       });
     }

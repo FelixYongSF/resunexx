@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { appUrl, assertPaddleCheckoutConfig, getPaddleEnvironment } from "@/lib/paddle";
+import { getConfiguredPaddlePriceId, hasPlanAccess, isPaidReportPlan, type PaidReportPlan } from "@/lib/report-plan";
 import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
 import { getReport, hasPersistentReportStore } from "@/lib/report-store";
 
@@ -16,15 +17,18 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Too many checkout attempts. Please wait a little and try again." }, { status: 429 });
     }
 
-    const { reportId } = (await request.json()) as { reportId?: string };
+    const { reportId, plan } = (await request.json()) as { reportId?: string; plan?: unknown };
     if (!reportId) return NextResponse.json({ error: "Missing reportId." }, { status: 400 });
+    if (!isPaidReportPlan(plan)) return NextResponse.json({ error: "Please choose a valid paid report plan." }, { status: 400 });
+    const selectedPlan: PaidReportPlan = plan;
 
     const report = await getReport(reportId);
     if (!report) return NextResponse.json({ error: "Report not found." }, { status: 404 });
-    if (report.paid) {
-      return NextResponse.json({ error: "This report is already unlocked." }, { status: 409 });
+    const currentPlan = report.accessPlan || (report.paid ? "standard" : "free");
+    if (hasPlanAccess(currentPlan, selectedPlan)) {
+      return NextResponse.json({ error: "This report plan is already unlocked." }, { status: 409 });
     }
-    assertPaddleCheckoutConfig();
+    assertPaddleCheckoutConfig(selectedPlan);
 
     if (process.env.NODE_ENV === "production" && !hasPersistentReportStore()) {
       return NextResponse.json(
@@ -40,9 +44,9 @@ export async function POST(request: Request) {
       provider: "paddle",
       environment: getPaddleEnvironment(),
       clientToken: process.env.PADDLE_CLIENT_TOKEN,
-      priceId: process.env.PADDLE_PRICE_ID,
+      priceId: getConfiguredPaddlePriceId(selectedPlan),
       successUrl: `${appUrl()}/success?report_id=${reportId}`,
-      customData: { reportId }
+      customData: { reportId, selectedPlan }
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Could not start Paddle Checkout.";
@@ -50,11 +54,15 @@ export async function POST(request: Request) {
       message,
       hasApiKey: Boolean(process.env.PADDLE_API_KEY),
       hasClientToken: Boolean(process.env.PADDLE_CLIENT_TOKEN),
-      hasPriceId: Boolean(process.env.PADDLE_PRICE_ID),
+      selectedPlan: "request_validation_failed",
+      hasStandardPriceId: Boolean(getConfiguredPaddlePriceId("standard")),
+      hasFullPriceId: Boolean(getConfiguredPaddlePriceId("full")),
       appUrlConfigured: Boolean(process.env.NEXT_PUBLIC_APP_URL)
     });
     const userMessage = message.includes("Paddle is not configured")
-      ? "Checkout is not available yet. Please contact support if you need help."
+      ? process.env.NODE_ENV === "development"
+        ? message
+        : "Checkout is not available yet. Please contact support if you need help."
       : message;
 
     return NextResponse.json(

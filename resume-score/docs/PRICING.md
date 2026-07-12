@@ -9,7 +9,8 @@ The first goal is not maximizing revenue per user. The first goal is proving tha
 ## Current Model
 
 - Free preview: $0
-- Resume Review / Improvement Plan: $4.99
+- Standard Report: $4.99
+- Full Report: $9.99
 
 The paid product should be positioned as:
 
@@ -31,11 +32,9 @@ The free preview should show enough value to build trust:
 
 The preview should not reveal the full improvement plan, rewrite examples, or downloadable PDF.
 
-## Paid Resume Review
+## Standard Report
 
-Price:
-
-$4.99
+Price: $4.99
 
 Paid value:
 
@@ -43,7 +42,19 @@ Paid value:
 - Understand what may be hurting interview chances
 - Get the 5 most important changes to make
 - Receive rewrite examples
-- Download a personalized report
+- Download a standard personalized PDF report
+
+## Full Report
+
+Price: $9.99
+
+Paid value:
+
+- Everything in Standard
+- Target-role fit assessment
+- Missing and weakly represented keyword placement guidance
+- Factual rewritten summary and five achievement-bullet structures
+- 30-minute action plan and full PDF report
 
 ## Future Offers
 
@@ -68,9 +79,10 @@ Generate a role-specific interview preparation kit from the resume and target jo
 Possible future ladder:
 
 1. Free recruiter-style preview
-2. $4.99 Resume Improvement Plan
-3. $14.99-$19.99 Target Match
-4. $29.99-$39.99 Interview Kit
+2. $4.99 Standard Report
+3. $9.99 Full Report
+4. $14.99-$19.99 Target Match
+5. $29.99-$39.99 Interview Kit
 
 Do not add subscriptions until there is evidence of repeated use.
 
@@ -88,11 +100,11 @@ Do not add subscriptions until there is evidence of repeated use.
 
 Primary paid CTA:
 
-Unlock My Improvement Plan - $4.99
+Unlock Standard Report - $4.99
 
 Supporting line:
 
-Know what to fix before the next application goes out.
+Choose the level of guidance you need before the next application goes out.
 
 ## Checkout Requirements
 

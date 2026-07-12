@@ -1,4 +1,5 @@
 import type { StoredReport } from "@/lib/report-schema";
+import { shouldApplyPurchasedPlan, type PaidReportPlan } from "@/lib/report-plan";
 
 type KvResponse<T> = { result: T };
 
@@ -50,15 +51,18 @@ export async function getReport(id: string) {
   return JSON.parse(value) as StoredReport;
 }
 
-export async function markReportPaid(id: string, paddleTransactionId: string) {
+export async function markReportPaid(id: string, paddleTransactionId: string, purchasedPlan: PaidReportPlan) {
   const report = await getReport(id);
   if (!report) return null;
-  if (report.paid) return report;
+  const existingPlan = report.accessPlan || (report.paid ? "standard" : "free");
+  if (!shouldApplyPurchasedPlan(existingPlan, purchasedPlan)) return report;
 
   const updated = {
     ...report,
     paid: true,
     paymentStatus: "paid" as const,
+    accessPlan: purchasedPlan,
+    purchasedPlan,
     paddleTransactionId,
     updatedAt: new Date().toISOString()
   };

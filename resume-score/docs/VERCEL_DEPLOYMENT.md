@@ -22,7 +22,8 @@ OPENAI_MODEL
 PADDLE_API_KEY
 PADDLE_CLIENT_TOKEN
 PADDLE_WEBHOOK_SECRET
-PADDLE_PRICE_ID
+PADDLE_STANDARD_PRICE_ID
+PADDLE_FULL_PRICE_ID
 NEXT_PUBLIC_APP_URL
 KV_REST_API_URL
 KV_REST_API_TOKEN
@@ -49,9 +50,9 @@ Connect an Upstash Redis database through Vercel Marketplace or provide compatib
 
 ## Paddle Configuration
 
-1. Create the `Resume Improvement Plan` product.
-2. Create its one-time `$4.99 USD` price.
-3. Add the corresponding price ID as `PADDLE_PRICE_ID`.
+1. Create the `ResuNexx Standard Report` and `ResuNexx Full Report` products, or two prices beneath one product.
+2. Create one-time `$4.99 USD` and `$9.99 USD` prices.
+3. Add their IDs as `PADDLE_STANDARD_PRICE_ID` and `PADDLE_FULL_PRICE_ID`.
 4. Create a notification destination:
 
 ```text
@@ -94,7 +95,7 @@ Upload -> extraction -> OpenAI analysis -> preview -> Paddle Checkout
 - [ ] OpenAI billing and production key are active
 - [ ] Upstash REST storage is connected
 - [ ] Paddle account is approved
-- [ ] Paddle product and `$4.99` price exist
+- [ ] Paddle Standard `$4.99` and Full `$9.99` prices exist
 - [ ] Paddle credentials all use the same environment
 - [ ] Paddle webhook is configured on the final domain
 - [ ] `NEXT_PUBLIC_APP_URL` matches the final domain

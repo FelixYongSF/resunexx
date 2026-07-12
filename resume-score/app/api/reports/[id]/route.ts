@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getReport } from "@/lib/report-store";
 import { toPreview } from "@/lib/report-schema";
+import { hasPlanAccess } from "@/lib/report-plan";
 
 export const runtime = "nodejs";
 
@@ -17,7 +18,8 @@ export async function GET(
     return NextResponse.json({ error: "Report not found." }, { status: 404 });
   }
 
-  if (full && !report.paid) {
+  const accessPlan = report.accessPlan || (report.paid ? "standard" : "free");
+  if (full && !hasPlanAccess(accessPlan, "standard")) {
     return NextResponse.json({ error: "Payment is required to view the full report." }, { status: 402 });
   }
 
@@ -27,6 +29,7 @@ export async function GET(
     createdAt: report.createdAt,
     paid: report.paid,
     paymentStatus: report.paymentStatus,
+    accessPlan,
     analysisMode: report.analysisMode,
     preview: toPreview(report.report),
     report: full ? report.report : undefined

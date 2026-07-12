@@ -64,7 +64,8 @@ Required or supported:
 - `PADDLE_API_KEY`
 - `PADDLE_CLIENT_TOKEN`
 - `PADDLE_WEBHOOK_SECRET`
-- `PADDLE_PRICE_ID`
+- `PADDLE_STANDARD_PRICE_ID`
+- `PADDLE_FULL_PRICE_ID`
 - `NEXT_PUBLIC_APP_URL`
 
 Local development may also use:
@@ -78,8 +79,8 @@ Never print API keys or secrets in logs.
 ## Paddle Principles
 
 - Use Paddle Checkout in sandbox first.
-- Verify payment before showing the full report.
-- Do not expose the full report before successful payment.
+- Verify payment and the exact Paddle price before granting plan access.
+- Do not expose Standard or Full report content before the matching successful payment.
 - If Paddle variables are missing, show a clear developer error.
 - Keep one-time purchase simple before adding upgrades.
 

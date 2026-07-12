@@ -9,7 +9,8 @@
     "benchmark:quality": "node benchmark/report-writer-quality.mjs",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:plans": "node --experimental-strip-types --test tests/report-plan.test.ts"
   },
   "dependencies": {
     "next": "^15.1.6",

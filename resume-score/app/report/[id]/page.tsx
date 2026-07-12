@@ -4,6 +4,7 @@ import { Disclaimer } from "@/components/disclaimer";
 import { ScoreRing } from "@/components/score-ring";
 import { getReport } from "@/lib/report-store";
 import { engineName } from "@/lib/resumeEngine";
+import { hasPlanAccess } from "@/lib/report-plan";
 
 export const runtime = "nodejs";
 
@@ -25,7 +26,8 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
     );
   }
 
-  if (!stored.paid) {
+  const accessPlan = stored.accessPlan || (stored.paid ? "standard" : "free");
+  if (!hasPlanAccess(accessPlan, "standard")) {
     return (
       <main className="min-h-screen bg-slate-50">
         <Header />
@@ -42,6 +44,7 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
 
   const report = stored.report;
   const premiumReport = report.paidReport.premiumReport;
+  const isFullReport = hasPlanAccess(accessPlan, "full");
 
   return (
     <main className="min-h-screen bg-[#f6f4ef]">
@@ -49,7 +52,7 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
       <section className="nexx-shell py-12">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <p className="text-sm font-semibold text-blue-600">Full AI-generated report</p>
+            <p className="text-sm font-semibold text-blue-600">{isFullReport ? "Full AI-generated report" : "Standard AI-generated report"}</p>
             <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
               Recruiter Mind Report
             </h1>
@@ -138,7 +141,7 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
           <ReportCard title="What stands out positively?" items={report.positiveStandouts} />
           <ReportCard title="What may cause hesitation?" items={report.hesitationSignals} />
           <ReportCard title="Strengths" items={report.strengths} />
-          <ReportCard title="Missing Keywords" items={report.missingKeywords} />
+          {isFullReport ? <ReportCard title="Missing Keywords" items={report.missingKeywords} /> : null}
         </section>
 
         <section className="nexx-card mt-8 p-7">
@@ -180,7 +183,7 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
           </div>
         </section>
 
-        <section className="nexx-card mt-8 p-7">
+        {isFullReport ? <section className="nexx-card mt-8 p-7">
           <h2 className="text-2xl font-semibold text-slate-950">Suggested rewrite examples</h2>
           <div className="mt-6 grid gap-4">
             {report.rewriteExamples.improvedBulletPoints.map((bullet) => (
@@ -191,9 +194,9 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
               <p className="mt-2 leading-7">{report.rewriteExamples.improvedProfessionalSummary}</p>
             </div>
           </div>
-        </section>
+        </section> : null}
 
-        <section className="nexx-card mt-8 p-7">
+        {isFullReport ? <section className="nexx-card mt-8 p-7">
           <h2 className="text-2xl font-semibold text-slate-950">30-Minute Improvement Plan</h2>
           <ol className="mt-6 grid gap-3">
             {[
@@ -207,12 +210,37 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
               </li>
             ))}
           </ol>
-        </section>
+        </section> : null}
 
-        <section className="nexx-card mt-8 p-7">
+        {isFullReport ? <section className="nexx-card mt-8 p-7">
           <h2 className="text-2xl font-semibold text-slate-950">Long-Term Career Signal</h2>
           <p className="mt-4 text-sm leading-6 text-slate-700">{premiumReport.longTermCareerSignal}</p>
-        </section>
+        </section> : null}
+
+        {isFullReport ? <>
+          <section className="nexx-card mt-8 p-7">
+            <h2 className="text-2xl font-semibold text-slate-950">Target Role Match</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-700">{report.fullReport.targetRoleMatch.fitAssessment}</p>
+            <div className="mt-5 grid gap-5 md:grid-cols-2">
+              <ReportCard title="Strongest matching evidence" items={report.fullReport.targetRoleMatch.strongestMatchingEvidence} />
+              <ReportCard title="Missing role signals" items={report.fullReport.targetRoleMatch.missingRoleSignals} />
+            </div>
+          </section>
+          <section className="nexx-card mt-8 p-7">
+            <h2 className="text-2xl font-semibold text-slate-950">Keyword placement guidance</h2>
+            <div className="mt-5 grid gap-3">
+              {report.fullReport.missingKeywordDetails.map((item) => <article key={item.keyword} className="rounded-2xl bg-slate-50 p-4 text-sm leading-6 text-slate-700"><p className="font-semibold text-slate-950">{item.keyword} <span className="font-normal text-slate-500">({item.status.replace("_", " ")})</span></p><p className="mt-2">{item.whyItMatters}</p><p className="mt-2"><span className="font-semibold text-slate-950">Placement:</span> {item.placementRecommendation}</p></article>)}
+            </div>
+          </section>
+          <section className="nexx-card mt-8 p-7">
+            <h2 className="text-2xl font-semibold text-slate-950">Full rewrite toolkit</h2>
+            <div className="mt-5 grid gap-4">
+              <p className="rounded-2xl bg-slate-950 p-5 text-sm leading-6 text-white">{report.fullReport.rewrittenSummary}</p>
+              {report.fullReport.rewrittenAchievementBullets.map((bullet) => <p key={bullet} className="rounded-2xl bg-blue-50 p-4 text-sm leading-6 text-blue-950">{bullet}</p>)}
+              <p className="text-sm leading-6 text-slate-500">{report.fullReport.rewriteEvidenceCaveat}</p>
+            </div>
+          </section>
+        </> : null}
 
         <div className="mt-8">
           <Disclaimer />

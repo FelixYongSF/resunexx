@@ -4,6 +4,7 @@ import {
   ScoringCategory,
   resumeReportJsonSchema
 } from "@/lib/engines/resume";
+import type { ReportPlan } from "@/lib/report-plan";
 
 export type { Recommendation, ResumeReport, ScoringCategory, SectionFeedback } from "@/lib/engines/resume";
 
@@ -16,6 +17,9 @@ export type StoredReport = {
   resumeTextPreview: string;
   paid: boolean;
   paymentStatus: "unpaid" | "paid";
+  requestedPlan?: ReportPlan;
+  accessPlan?: ReportPlan;
+  purchasedPlan?: "standard" | "full";
   analysisMode: "openai";
   paddleTransactionId?: string;
   report: ResumeReport;

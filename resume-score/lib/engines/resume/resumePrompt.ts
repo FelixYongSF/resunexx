@@ -101,6 +101,10 @@ Hiring-manager quality bar:
 - Do not repeat the same diagnosis with different wording across topIssues, hesitationSignals, weaknesses, and fiveMostImportantChanges.
 - Order fiveMostImportantChanges by impact: the first two High Impact, the next two Medium Impact, and the final one Low Impact. Include the impact label naturally in whatWeNoticed.
 - encouragingClosingNote should be brief, credible, and action-oriented.
+- fullReport.targetRoleMatch must assess fit cautiously, list only supported matching evidence, and name missing role signals without inventing experience.
+- fullReport.missingKeywordDetails must include the keyword, whether it is missing or weakly represented, why it matters, and the most truthful placement recommendation.
+- fullReport.rewrittenSummary and all five fullReport.rewrittenAchievementBullets must preserve the candidate's known facts. Do not invent metrics, employers, tools, scope, or outcomes. fullReport.rewriteEvidenceCaveat must clearly note where the candidate should verify or add evidence.
+- fullReport.thirtyMinuteActionPlan must be a practical three-step sequence for the next 30 minutes.
 
 Output:
 - Return JSON only.

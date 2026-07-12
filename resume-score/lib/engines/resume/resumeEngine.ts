@@ -324,6 +324,47 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
         `Early-career candidate targeting ${targetRole}, with experience organizing workstreams, communicating across teams, and turning project details into clear next steps.`
     },
     finalActionPlan,
+    fullReport: {
+      targetRoleMatch: {
+        fitAssessment: `The resume has a credible foundation for ${targetRole}, but the strongest evidence needs to be easier to spot in the opening and first experience entry.`,
+        strongestMatchingEvidence: [
+          hasExperience ? "Relevant experience or project language is present in the resume." : "The resume contains early-career material that can be positioned more clearly.",
+          hasSkills ? "Relevant skills or tools are visible in the extracted text." : "The resume has room for a more explicit skills signal."
+        ],
+        missingRoleSignals: [
+          `A direct statement of the target role: ${targetRole}.`,
+          "A first bullet that connects a real action to scope or outcome."
+        ]
+      },
+      missingKeywordDetails: [
+        "stakeholder management",
+        "process improvement",
+        "cross-functional collaboration",
+        "data analysis",
+        "project coordination"
+      ].map((keyword) => ({
+        keyword,
+        status: "missing" as const,
+        whyItMatters: `This is a common signal for ${targetRole} roles when it is supported by real experience.`,
+        placementRecommendation: "Add it only where a real project, internship, or work bullet can demonstrate it."
+      })),
+      rewrittenSummary:
+        `Early-career candidate targeting ${targetRole}, with experience organizing workstreams, communicating across teams, and turning project details into clear next steps.`,
+      rewrittenAchievementBullets: [
+        "Organized weekly project updates into a shared tracker, making priorities and next steps easier for teammates to review.",
+        "Coordinated tasks across stakeholders and kept deadlines visible through clear follow-up and documentation.",
+        "Reviewed recurring project or customer patterns and summarized practical next steps for the team.",
+        "Supported delivery of project work by maintaining accurate status information and resolving open questions promptly.",
+        "Applied relevant tools and communication skills to make team processes easier to follow."
+      ],
+      rewriteEvidenceCaveat:
+        "Use these as factual structures, not claims to copy verbatim. Replace each general phrase with the real tool, audience, scope, and outcome from your experience.",
+      thirtyMinuteActionPlan: {
+        tenMinutes: "Rewrite the summary to name the target role and one real proof point.",
+        nextTenMinutes: "Rewrite the two strongest bullets using action, context, and truthful evidence.",
+        finalTenMinutes: "Align the skills section and first experience entry with one target job description."
+      }
+    },
     freePreview: {
       overallScore,
       atsReadinessScore: atsCompatibilityScore,

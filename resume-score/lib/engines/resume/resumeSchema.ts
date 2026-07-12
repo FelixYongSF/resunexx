@@ -55,6 +55,60 @@ const rewriteExamplesSchema = {
   }
 } as const;
 
+const fullReportSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: [
+    "targetRoleMatch",
+    "missingKeywordDetails",
+    "rewrittenSummary",
+    "rewrittenAchievementBullets",
+    "rewriteEvidenceCaveat",
+    "thirtyMinuteActionPlan"
+  ],
+  properties: {
+    targetRoleMatch: {
+      type: "object",
+      additionalProperties: false,
+      required: ["fitAssessment", "strongestMatchingEvidence", "missingRoleSignals"],
+      properties: {
+        fitAssessment: { type: "string" },
+        strongestMatchingEvidence: { type: "array", minItems: 2, maxItems: 5, items: { type: "string" } },
+        missingRoleSignals: { type: "array", minItems: 2, maxItems: 5, items: { type: "string" } }
+      }
+    },
+    missingKeywordDetails: {
+      type: "array",
+      minItems: 5,
+      maxItems: 10,
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["keyword", "status", "whyItMatters", "placementRecommendation"],
+        properties: {
+          keyword: { type: "string" },
+          status: { type: "string", enum: ["missing", "weakly_represented"] },
+          whyItMatters: { type: "string" },
+          placementRecommendation: { type: "string" }
+        }
+      }
+    },
+    rewrittenSummary: { type: "string" },
+    rewrittenAchievementBullets: { type: "array", minItems: 5, maxItems: 5, items: { type: "string" } },
+    rewriteEvidenceCaveat: { type: "string" },
+    thirtyMinuteActionPlan: {
+      type: "object",
+      additionalProperties: false,
+      required: ["tenMinutes", "nextTenMinutes", "finalTenMinutes"],
+      properties: {
+        tenMinutes: { type: "string" },
+        nextTenMinutes: { type: "string" },
+        finalTenMinutes: { type: "string" }
+      }
+    }
+  }
+} as const;
+
 const premiumReportSchema = {
   type: "object",
   additionalProperties: false,
@@ -272,6 +326,7 @@ export const resumeReportJsonSchema = {
     "sectionFeedback",
     "rewriteExamples",
     "finalActionPlan",
+    "fullReport",
     "freePreview",
     "paidReport",
     "recruiterFirstImpression",
@@ -313,6 +368,7 @@ export const resumeReportJsonSchema = {
     sectionFeedback: sectionFeedbackSchema,
     rewriteExamples: rewriteExamplesSchema,
     finalActionPlan: { type: "array", minItems: 5, maxItems: 8, items: { type: "string" } },
+    fullReport: fullReportSchema,
     freePreview: {
       type: "object",
       additionalProperties: false,
@@ -415,6 +471,7 @@ export function validateResumeReport(value: unknown): asserts value is ResumeRep
     "finalActionPlan",
     "freePreview",
     "paidReport"
+    ,"fullReport"
   ];
 
   const missing = required.filter((key) => report[key] === undefined);

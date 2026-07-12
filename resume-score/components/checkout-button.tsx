@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { trackClientEvent } from "@/lib/analytics";
 
 type CheckoutResponse = {
@@ -11,6 +11,7 @@ type CheckoutResponse = {
   successUrl?: string;
   customData?: {
     reportId?: string;
+    selectedPlan?: "standard" | "full";
   };
   error?: string;
 };
@@ -52,22 +53,37 @@ declare global {
   }
 }
 
-export function CheckoutButton({ reportId }: { reportId: string }) {
+export function CheckoutButton({
+  reportId,
+  plan,
+  autoStart = false
+}: {
+  reportId: string;
+  plan: "standard" | "full";
+  autoStart?: boolean;
+}) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const hasAutoStarted = useRef(false);
+
+  useEffect(() => {
+    if (!autoStart || hasAutoStarted.current) return;
+    hasAutoStarted.current = true;
+    void startCheckout();
+  }, [autoStart]);
 
   async function startCheckout() {
     setIsLoading(true);
     setError("");
 
     try {
-      trackClientEvent({ event: "checkout_clicked", reportId, source: "preview_unlock_button" });
+      trackClientEvent({ event: "checkout_clicked", reportId, source: `preview_${plan}_checkout` });
       const controller = new AbortController();
       const timeout = window.setTimeout(() => controller.abort(), 25_000);
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ reportId }),
+        body: JSON.stringify({ reportId, plan }),
         signal: controller.signal
       });
       window.clearTimeout(timeout);
@@ -124,7 +140,7 @@ export function CheckoutButton({ reportId }: { reportId: string }) {
         disabled={isLoading}
         className="nexx-button-primary w-full"
       >
-        {isLoading ? "Opening checkout..." : "Unlock My Improvement Plan — $4.99"}
+        {isLoading ? "Opening checkout..." : plan === "full" ? "Unlock Full Report - $9.99" : "Unlock Standard Report - $4.99"}
       </button>
       {error ? <p className="nexx-error mt-3">{error}</p> : null}
     </div>

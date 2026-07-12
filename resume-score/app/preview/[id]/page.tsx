@@ -10,8 +10,15 @@ import { toPreview } from "@/lib/report-schema";
 
 export const runtime = "nodejs";
 
-export default async function PreviewPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function PreviewPage({
+  params,
+  searchParams
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ plan?: string }>;
+}) {
   const { id } = await params;
+  const { plan } = await searchParams;
   const stored = await getReport(id);
 
   if (!stored) {
@@ -30,7 +37,7 @@ export default async function PreviewPage({ params }: { params: Promise<{ id: st
 
   const preview = toPreview(stored.report);
 
-  if (stored.paid) {
+  if ((stored.accessPlan || (stored.paid ? "standard" : "free")) !== "free") {
     redirect(`/report/${id}`);
   }
 
@@ -72,20 +79,31 @@ export default async function PreviewPage({ params }: { params: Promise<{ id: st
             </div>
           </div>
 
-          <aside className="nexx-card h-fit p-7">
-            <p className="text-sm font-semibold text-blue-600">Unlock my improvement plan</p>
-            <p className="mt-3 text-4xl font-semibold text-slate-950">$4.99</p>
-            <ul className="mt-6 grid gap-3 text-sm text-slate-600">
-              <li>See what recruiters may notice first</li>
-              <li>Understand what may be hurting your interview chances</li>
-              <li>Get the 5 most important changes to make</li>
-              <li>Receive rewrite examples</li>
-              <li>Download your personalized report</li>
-            </ul>
-            <CheckoutButton reportId={id} />
-            <div className="mt-5">
-              <Disclaimer />
-            </div>
+          <aside className="grid h-fit gap-4">
+            <section className="nexx-card p-7">
+              <p className="text-sm font-semibold text-blue-600">Standard Report</p>
+              <p className="mt-3 text-4xl font-semibold text-slate-950">$4.99</p>
+              <ul className="mt-6 grid gap-3 text-sm text-slate-600">
+                <li>Recruiter-style read</li>
+                <li>Five priority fixes</li>
+                <li>Suggested rewrite examples</li>
+                <li>Standard PDF report</li>
+              </ul>
+              <CheckoutButton reportId={id} plan="standard" autoStart={plan === "standard"} />
+            </section>
+            <section className="nexx-card border-slate-900 bg-slate-950 p-7 text-white">
+              <p className="text-sm font-semibold text-[#d7ff4f]">Full Report</p>
+              <p className="mt-3 text-4xl font-semibold">$9.99</p>
+              <ul className="mt-6 grid gap-3 text-sm text-white/75">
+                <li>Everything in Standard</li>
+                <li>Target-role match and keyword gaps</li>
+                <li>Rewritten summary and five bullets</li>
+                <li>30-minute action plan and full PDF</li>
+              </ul>
+              <CheckoutButton reportId={id} plan="full" autoStart={plan === "full"} />
+            </section>
+            {plan === "full" ? <p className="text-sm text-slate-600">Your Full Report is selected. Complete checkout to unlock it.</p> : null}
+            <div className="px-1"><Disclaimer /></div>
           </aside>
         </div>
       </section>

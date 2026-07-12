@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { trackServerEvent } from "@/lib/analytics";
 import { getReport, markReportPaid } from "@/lib/report-store";
-import { getPaddleTransaction, isPaidPaddleTransaction } from "@/lib/paddle";
+import { getPaidPlanFromPaddleTransaction, getPaddleTransaction, isPaidPaddleTransaction } from "@/lib/paddle";
 
 export const runtime = "nodejs";
 
@@ -30,16 +30,17 @@ export default async function SuccessPage({
       }
 
       reportId = transactionReportId;
+      const purchasedPlan = getPaidPlanFromPaddleTransaction(transaction);
 
-      if (isPaidPaddleTransaction(transaction, transactionReportId)) {
-        const unlockedReport = await markReportPaid(transactionReportId, transaction.id);
+      if (purchasedPlan && isPaidPaddleTransaction(transaction, transactionReportId)) {
+        const unlockedReport = await markReportPaid(transactionReportId, transaction.id, purchasedPlan);
         if (unlockedReport) {
           verifiedReportId = transactionReportId;
           trackServerEvent({
             event: "payment_completed",
             reportId: transactionReportId,
             source: "success_page",
-            metadata: { transactionId: transaction.id }
+            metadata: { transactionId: transaction.id, purchasedPlan }
           });
         }
       }

@@ -162,6 +162,26 @@ export type ThirtyMinuteImprovementPlan = {
   finalTenMinutes: string;
 };
 
+export type MissingKeywordDetail = {
+  keyword: string;
+  status: "missing" | "weakly_represented";
+  whyItMatters: string;
+  placementRecommendation: string;
+};
+
+export type FullReportAdditions = {
+  targetRoleMatch: {
+    fitAssessment: string;
+    strongestMatchingEvidence: string[];
+    missingRoleSignals: string[];
+  };
+  missingKeywordDetails: MissingKeywordDetail[];
+  rewrittenSummary: string;
+  rewrittenAchievementBullets: string[];
+  rewriteEvidenceCaveat: string;
+  thirtyMinuteActionPlan: ThirtyMinuteImprovementPlan;
+};
+
 export type PremiumReportExperience = {
   executiveSummary: string;
   biggestOpportunity: BiggestOpportunity;
@@ -222,6 +242,7 @@ export type ResumeReport = {
   sectionFeedback: SectionFeedback;
   rewriteExamples: RewriteExamples;
   finalActionPlan: string[];
+  fullReport: FullReportAdditions;
   freePreview: ResumeFreePreview;
   paidReport: ResumePaidReport;
 

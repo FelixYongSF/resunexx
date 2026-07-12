@@ -1,4 +1,10 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
+import {
+  getConfiguredPaddlePriceId,
+  getPaddlePlanForPriceId,
+  isPaidReportPlan,
+  type PaidReportPlan
+} from "@/lib/report-plan";
 
 export type PaddleEnvironment = "sandbox" | "production";
 
@@ -13,6 +19,7 @@ export type PaddleTransaction = {
   }>;
   custom_data?: {
     reportId?: string;
+    selectedPlan?: string;
     [key: string]: unknown;
   } | null;
 };
@@ -33,20 +40,24 @@ export function getPaddleApiBaseUrl() {
   return getPaddleEnvironment() === "sandbox" ? "https://sandbox-api.paddle.com" : "https://api.paddle.com";
 }
 
-export function assertPaddleCheckoutConfig() {
-  const missing = getMissingPaddleConfig();
+export function assertPaddleCheckoutConfig(plan: PaidReportPlan) {
+  const missing = getMissingPaddleConfig(plan);
 
   if (missing.length > 0) {
     throw new Error(`Paddle is not configured. Missing: ${missing.join(", ")}.`);
   }
 }
 
-export function getMissingPaddleConfig() {
+export function getMissingPaddleConfig(plan?: PaidReportPlan) {
   return [
     !process.env.PADDLE_API_KEY ? "PADDLE_API_KEY" : "",
     !process.env.PADDLE_CLIENT_TOKEN ? "PADDLE_CLIENT_TOKEN" : "",
     !process.env.PADDLE_WEBHOOK_SECRET ? "PADDLE_WEBHOOK_SECRET" : "",
-    !process.env.PADDLE_PRICE_ID ? "PADDLE_PRICE_ID" : "",
+    plan && !getConfiguredPaddlePriceId(plan)
+      ? plan === "full"
+        ? "PADDLE_FULL_PRICE_ID"
+        : "PADDLE_STANDARD_PRICE_ID"
+      : "",
     !process.env.NEXT_PUBLIC_APP_URL ? "NEXT_PUBLIC_APP_URL" : ""
   ].filter(Boolean);
 }
@@ -74,19 +85,24 @@ export async function getPaddleTransaction(transactionId: string) {
   return json.data;
 }
 
+export function getPaidPlanFromPaddleTransaction(transaction: PaddleTransaction): PaidReportPlan | null {
+  const matchingPriceId = transaction.items
+    ?.map((item) => item.price?.id || item.price_id)
+    .find((priceId) => Boolean(getPaddlePlanForPriceId(priceId)));
+  return getPaddlePlanForPriceId(matchingPriceId);
+}
+
 export function isPaidPaddleTransaction(transaction: PaddleTransaction, expectedReportId?: string) {
-  const configuredPriceId = process.env.PADDLE_PRICE_ID;
   const transactionReportId = transaction.custom_data?.reportId;
-  const hasConfiguredPrice = Boolean(
-    configuredPriceId &&
-      transaction.items?.some((item) => item.price?.id === configuredPriceId || item.price_id === configuredPriceId)
-  );
+  const selectedPlan = transaction.custom_data?.selectedPlan;
+  const purchasedPlan = getPaidPlanFromPaddleTransaction(transaction);
 
   return (
     (transaction.status === "completed" || transaction.status === "paid") &&
     Boolean(transactionReportId) &&
     (!expectedReportId || transactionReportId === expectedReportId) &&
-    hasConfiguredPrice
+    Boolean(purchasedPlan) &&
+    (!selectedPlan || (isPaidReportPlan(selectedPlan) && selectedPlan === purchasedPlan))
   );
 }
 

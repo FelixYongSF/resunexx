@@ -10,7 +10,8 @@ Add these to `.env.local` for local testing and to Vercel Project Settings for d
 PADDLE_API_KEY=
 PADDLE_CLIENT_TOKEN=
 PADDLE_WEBHOOK_SECRET=
-PADDLE_PRICE_ID=
+PADDLE_STANDARD_PRICE_ID=
+PADDLE_FULL_PRICE_ID=
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
@@ -97,16 +98,16 @@ transaction.paid
 
 7. Copy the endpoint secret and paste it into `PADDLE_WEBHOOK_SECRET`.
 
-### `PADDLE_PRICE_ID`
+### `PADDLE_STANDARD_PRICE_ID` and `PADDLE_FULL_PRICE_ID`
 
-Used by Paddle Checkout to sell the full report.
+Used by Paddle Checkout to sell the two paid report plans. `PADDLE_PRICE_ID` remains a temporary backwards-compatible alias for the Standard price only; configure both explicit variables before launch.
 
 In Paddle:
 
 1. Create a product.
-2. Create a one-time price for that product.
-3. Copy the price ID.
-4. Paste it into `PADDLE_PRICE_ID`.
+2. Create one-time prices for the Standard and Full products (or two prices under one product).
+3. Copy the price IDs.
+4. Paste the $4.99 price into `PADDLE_STANDARD_PRICE_ID` and the $9.99 price into `PADDLE_FULL_PRICE_ID`.
 
 Price IDs normally look like `pri_...`.
 
@@ -119,13 +120,15 @@ In Paddle Dashboard:
 3. Create a product:
 
 ```text
-Name: Resume Improvement Plan
-Description: AI-estimated recruiter-style resume feedback by ScoreLab.
+Name: ResuNexx Standard Report
+Description: Recruiter-style resume feedback, five priority fixes, rewrite examples, and a standard PDF.
 ```
 
 4. Save the product.
 
-## Create The Price
+Create a second product or price for `ResuNexx Full Report`, including target-role match, keyword placement guidance, a factual rewrite toolkit, 30-minute action plan, and full PDF.
+
+## Create The Prices
 
 In Paddle Dashboard:
 
@@ -136,14 +139,15 @@ In Paddle Dashboard:
 ```text
 Type: One-time
 Currency: USD
-Amount: 4.99
+Standard amount: 4.99 USD
+Full amount: 9.99 USD
 Billing period: none / one-time
 ```
 
 4. Save the price.
-5. Copy the price ID into `PADDLE_PRICE_ID`.
+5. Copy the corresponding price IDs into `PADDLE_STANDARD_PRICE_ID` and `PADDLE_FULL_PRICE_ID`.
 
-The app pricing copy already says `$4.99`. Keep the Paddle price aligned with that copy.
+Keep the Paddle price IDs aligned with their named plan. The backend rejects unknown price IDs and never trusts a plan supplied by the browser.
 
 ## Configure Webhooks
 
@@ -175,7 +179,8 @@ Sandbox:
 PADDLE_API_KEY=pdl_sdbx_...
 PADDLE_CLIENT_TOKEN=...
 PADDLE_WEBHOOK_SECRET=...
-PADDLE_PRICE_ID=pri_sandbox_or_sandbox_created_price
+PADDLE_STANDARD_PRICE_ID=pri_sandbox_standard_price
+PADDLE_FULL_PRICE_ID=pri_sandbox_full_price
 ```
 
 Production:
@@ -184,7 +189,8 @@ Production:
 PADDLE_API_KEY=pdl_live_...
 PADDLE_CLIENT_TOKEN=...
 PADDLE_WEBHOOK_SECRET=...
-PADDLE_PRICE_ID=pri_live_created_price
+PADDLE_STANDARD_PRICE_ID=pri_live_standard_price
+PADDLE_FULL_PRICE_ID=pri_live_full_price
 ```
 
 Important:
@@ -209,7 +215,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 4. Start the app.
 5. Upload a resume.
 6. Confirm the free preview appears.
-7. Click **Unlock My Improvement Plan — $4.99**.
+7. Test Standard checkout, then test Full checkout with separate reports.
 8. Complete Paddle sandbox checkout.
 9. Confirm the app returns to the success page.
 10. Confirm the full report unlocks.
@@ -225,7 +231,8 @@ OPENAI_MODEL=gpt-4o-mini
 PADDLE_API_KEY=
 PADDLE_CLIENT_TOKEN=
 PADDLE_WEBHOOK_SECRET=
-PADDLE_PRICE_ID=
+PADDLE_STANDARD_PRICE_ID=
+PADDLE_FULL_PRICE_ID=
 NEXT_PUBLIC_APP_URL=
 KV_REST_API_URL=
 KV_REST_API_TOKEN=
@@ -255,7 +262,7 @@ ScoreLab blocks checkout in production when:
 - Production report storage is not configured.
 - Persistent report storage is not configured.
 - Paddle credentials are missing.
-- The report is already unlocked.
+- The selected report plan is already unlocked.
 
 The full report and PDF download remain locked until payment is verified.
 

@@ -8,7 +8,7 @@ Flow:
 2. The app extracts resume text.
 3. Resume Engine generates a structured JSON report through OpenAI.
 4. The user sees a free preview score.
-5. The user pays $4.99 through Paddle Checkout.
+5. The user chooses a $4.99 Standard Report or $9.99 Full Report through Paddle Checkout.
 6. Paddle success/webhook marks the report as paid.
 7. The user views and downloads the full report.
 
@@ -29,7 +29,8 @@ HTTPS_PROXY=http://127.0.0.1:7890 # optional, use your VPN client's local proxy 
 PADDLE_API_KEY=...
 PADDLE_CLIENT_TOKEN=...
 PADDLE_WEBHOOK_SECRET=...
-PADDLE_PRICE_ID=...
+PADDLE_STANDARD_PRICE_ID=...
+PADDLE_FULL_PRICE_ID=...
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
@@ -48,7 +49,7 @@ include `7890`, `1087`, and `6152`. Restart `pnpm dev` after changing `.env.loca
 
 ## Paddle checkout
 
-The checkout route creates a one-time $4.99 payment using Paddle Checkout.
+The checkout route opens a one-time Paddle Checkout for the selected Standard or Full report plan. Price-to-plan mapping is verified server-side.
 
 Configure the Paddle notification destination at `/api/paddle/webhook` and copy its
 secret into `PADDLE_WEBHOOK_SECRET`.
@@ -83,7 +84,8 @@ OPENAI_MODEL
 PADDLE_API_KEY
 PADDLE_CLIENT_TOKEN
 PADDLE_WEBHOOK_SECRET
-PADDLE_PRICE_ID
+PADDLE_STANDARD_PRICE_ID
+PADDLE_FULL_PRICE_ID
 NEXT_PUBLIC_APP_URL
 KV_REST_API_URL
 KV_REST_API_TOKEN

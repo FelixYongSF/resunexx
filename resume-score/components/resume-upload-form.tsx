@@ -6,6 +6,7 @@ import { trackClientEvent } from "@/lib/analytics";
 
 type ResumeUploadFormProps = {
   compact?: boolean;
+  theme?: "default" | "dark";
 };
 
 const maxFileSize = 4 * 1024 * 1024;
@@ -14,8 +15,9 @@ const allowedMimeTypesByExtension: Record<string, string> = {
   ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 };
 
-export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
+export function ResumeUploadForm({ compact, theme = "default" }: ResumeUploadFormProps) {
   const router = useRouter();
+  const isDark = theme === "dark";
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [isUploading, setIsUploading] = useState(false);
@@ -52,6 +54,8 @@ export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
     });
     const formData = new FormData();
     formData.append("resume", file);
+    const selectedPlan = new URLSearchParams(window.location.search).get("plan");
+    if (selectedPlan === "standard" || selectedPlan === "full") formData.append("selectedPlan", selectedPlan);
 
     try {
       const controller = new AbortController();
@@ -76,7 +80,7 @@ export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
         reportId: data.id,
         source: compact ? "home_upload_form" : "upload_page"
       });
-      router.push(`/preview/${data.id}`);
+      router.push(`/preview/${data.id}${selectedPlan === "standard" || selectedPlan === "full" ? `?plan=${selectedPlan}` : ""}`);
     } catch (err) {
       setIsUploading(false);
       const message =
@@ -94,41 +98,48 @@ export function ResumeUploadForm({ compact }: ResumeUploadFormProps) {
     <form
       onSubmit={onSubmit}
       className={[
-        "nexx-card animate-editorial-reveal p-5",
+        "animate-editorial-reveal p-5",
+        isDark
+          ? "rounded-[1.25rem] border border-white/15 bg-white/[0.06] text-[#f3f0e9] shadow-[0_22px_60px_rgba(0,0,0,0.22)]"
+          : "nexx-card",
         compact ? "sm:p-6" : "sm:p-7"
       ].join(" ")}
     >
       <div className="flex items-center justify-between gap-4">
         <div>
-          <p className="text-sm font-semibold text-[#171714]">Start with your resume</p>
-          <p className="mt-1 text-sm text-[#706b61]">Upload your resume as PDF or DOCX.</p>
+          <p className={isDark ? "text-sm font-semibold text-[#f3f0e9]" : "text-sm font-semibold text-[#171714]"}>Start with your resume</p>
+          <p className={isDark ? "mt-1 text-sm text-white/60" : "mt-1 text-sm text-[#706b61]"}>Upload your resume as PDF or DOCX.</p>
         </div>
-        <span className="rounded-full bg-[#eef8de] px-3 py-1 text-xs font-semibold text-[#36521f]">
+        <span className={isDark ? "rounded-full bg-[#d7ff4f] px-3 py-1 text-xs font-semibold text-[#151515]" : "rounded-full bg-[#eef8de] px-3 py-1 text-xs font-semibold text-[#36521f]"}>
           Free preview
         </span>
       </div>
 
-      <label className="mt-5 block">
+      <label className={isDark ? "mt-5 block rounded-xl transition focus-within:ring-2 focus-within:ring-[#d7ff4f]/70" : "mt-5 block"}>
         <span className="sr-only">Resume file</span>
         <input
-          className="focus-ring block w-full cursor-pointer rounded-[1.5rem] border border-dashed border-[#cfc7b9] bg-[#faf8f3] px-4 py-7 text-sm text-[#625c52] transition hover:border-[#a89f8f] file:mr-4 file:rounded-full file:border-0 file:bg-[#171714] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
+          className={isDark
+            ? "block w-full cursor-pointer rounded-xl border border-dashed border-white/30 bg-black/20 px-4 py-7 text-sm text-white/70 transition hover:border-[#d7ff4f] file:mr-4 file:rounded-md file:border-0 file:bg-[#f3f0e9] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-[#151515]"
+            : "focus-ring block w-full cursor-pointer rounded-[1.5rem] border border-dashed border-[#cfc7b9] bg-[#faf8f3] px-4 py-7 text-sm text-[#625c52] transition hover:border-[#a89f8f] file:mr-4 file:rounded-full file:border-0 file:bg-[#171714] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"}
           type="file"
           accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           onChange={(event) => setFile(event.target.files?.[0] || null)}
         />
       </label>
-      <p className="mt-3 text-xs leading-5 text-[#817a6e]">
+      <p className={isDark ? "mt-3 text-xs leading-5 text-white/45" : "mt-3 text-xs leading-5 text-[#817a6e]"}>
         Text-based PDF or DOCX, up to 4MB.
       </p>
 
-      {file ? <p className="mt-3 text-sm text-[#706b61]">Selected: {file.name}</p> : null}
+      {file ? <p className={isDark ? "mt-3 text-sm text-white/70" : "mt-3 text-sm text-[#706b61]"}>Selected: {file.name}</p> : null}
       {error ? <p className="nexx-error mt-4">{error}</p> : null}
 
       <button
         disabled={isUploading}
-        className="nexx-button-primary mt-5 w-full py-3.5 shadow-[0_16px_36px_rgba(20,20,18,0.18)]"
+        className={isDark
+          ? "group mt-5 flex min-h-12 w-full items-center justify-center rounded-md bg-[#d7ff4f] py-3.5 text-sm font-semibold text-[#151515] transition hover:bg-[#f3f0e9] disabled:cursor-not-allowed disabled:opacity-60"
+          : "nexx-button-primary mt-5 w-full py-3.5 shadow-[0_16px_36px_rgba(20,20,18,0.18)]"}
       >
-        {isUploading ? "Reading your resume..." : "Analyze My Resume - Free"}
+        {isUploading ? "Reading your resume..." : <><span>Analyze My Resume - Free</span>{isDark ? <span className="ml-2 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-0.5">↗</span> : null}</>}
       </button>
     </form>
   );

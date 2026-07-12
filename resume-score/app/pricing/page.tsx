@@ -11,12 +11,21 @@ export default function PricingPage() {
         </p>
       </LegalSection>
 
-      <LegalSection title="Paid report">
+      <LegalSection title="Standard Report">
         <p>
-          The full Resume Improvement Plan costs <strong className="text-[#171714]">$4.99 USD</strong> as a one-time purchase.
+          The Standard Report costs <strong className="text-[#171714]">$4.99 USD</strong> as a one-time purchase.
         </p>
         <p>
-          After payment, you receive the full AI-generated report, detailed scoring, recruiter-style feedback, prioritized improvement plan, rewrite examples, and a downloadable PDF report.
+          It includes recruiter-style feedback, five priority changes, suggested rewrite examples, and a downloadable standard PDF report.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="Full Report">
+        <p>
+          The Full Report costs <strong className="text-[#171714]">$9.99 USD</strong> as a one-time purchase.
+        </p>
+        <p>
+          It includes everything in Standard plus target-role match, detailed keyword placement guidance, a factual rewrite toolkit, a 30-minute action plan, and a full PDF report.
         </p>
       </LegalSection>
 
