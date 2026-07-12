@@ -45,15 +45,21 @@ export async function POST(request: Request) {
       customData: { reportId }
     });
   } catch (error) {
-    console.error(error);
     const message = error instanceof Error ? error.message : "Could not start Paddle Checkout.";
+    console.error("[paddle:checkout] request failed", {
+      message,
+      hasApiKey: Boolean(process.env.PADDLE_API_KEY),
+      hasClientToken: Boolean(process.env.PADDLE_CLIENT_TOKEN),
+      hasPriceId: Boolean(process.env.PADDLE_PRICE_ID),
+      appUrlConfigured: Boolean(process.env.NEXT_PUBLIC_APP_URL)
+    });
     const userMessage = message.includes("Paddle is not configured")
       ? "Checkout is not available yet. Please contact support if you need help."
       : message;
 
     return NextResponse.json(
       { error: userMessage },
-      { status: 500 }
+      { status: message.includes("Paddle is not configured") ? 503 : 500 }
     );
   }
 }

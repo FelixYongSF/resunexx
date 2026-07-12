@@ -53,6 +53,7 @@ export async function getReport(id: string) {
 export async function markReportPaid(id: string, paddleTransactionId: string) {
   const report = await getReport(id);
   if (!report) return null;
+  if (report.paid) return report;
 
   const updated = {
     ...report,
