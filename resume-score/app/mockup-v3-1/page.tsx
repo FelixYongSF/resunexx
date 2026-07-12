@@ -94,7 +94,7 @@ function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) 
   }, [enableMotion]);
 
   return (
-    <main ref={pageRef} className={[styles.page, motionReady ? styles.motion : ""].filter(Boolean).join(" ")}>
+    <main ref={pageRef} className={[styles.page, "resunexx-dark-page", motionReady ? styles.motion : ""].filter(Boolean).join(" ")}>
       <nav className={styles.nav} data-reveal aria-label="ResuNexx prototype navigation">
         <Link href="/" className={styles.logo}><span className={styles.logoMark}>R</span>ResuNexx</Link>
         <div className={styles.navLinks}>
@@ -179,12 +179,13 @@ function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) 
             </div>
             <div className={styles.priceCardPaid} data-reveal style={{ "--reveal-delay": "100ms" } as CSSProperties}>
               <span>STANDARD REPORT</span><strong>$4.99</strong>
-              <ul><li>Recruiter-style read</li><li>Five priority fixes</li><li>Suggested rewrite examples</li><li>Downloadable PDF report</li></ul>
-              <Link href="/upload?plan=standard" className={styles.planCta}>Continue to preview <span>↗</span></Link>
+              <ul><li>Everything in Free Preview</li><li>Recruiter-style read</li><li>Five priority fixes</li><li>Suggested rewrite examples</li><li>Downloadable Standard PDF report</li></ul>
+              <Link href="/upload?plan=standard" className={styles.planCta}>Get Standard Report <span>↗</span></Link>
             </div>
             <div className={styles.priceCardFull} data-reveal style={{ "--reveal-delay": "200ms" } as CSSProperties}>
               <span>FULL REPORT</span><strong>$9.99</strong>
-              <Link href="/upload?plan=full" className={styles.planCta}>Continue to preview <span>↗</span></Link>
+              <ul><li>Everything in Standard Report</li><li>Target-role match analysis</li><li>Missing keyword analysis</li><li>Rewritten professional summary</li><li>Five rewritten achievement bullets</li><li>30-minute action plan</li><li>Downloadable Full PDF report</li></ul>
+              <Link href="/upload?plan=full" className={styles.planCta}>Get Full Report <span>↗</span></Link>
             </div>
           </aside>
         </div>
