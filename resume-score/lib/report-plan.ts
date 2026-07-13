@@ -9,6 +9,9 @@ export type ReportPlanConfig = {
   priceLabel: string;
   entitlement: ReportPlan;
   ctaLabel: string;
+  uploadHeading: string;
+  uploadCtaLabel: string;
+  uploadSupport: string;
   priceEnvironmentVariable?: "PADDLE_STANDARD_PRICE_ID" | "PADDLE_FULL_PRICE_ID";
   features: readonly string[];
 };
@@ -20,6 +23,9 @@ export const reportPlanConfig: Record<ReportPlan, ReportPlanConfig> = {
     priceLabel: "FREE",
     entitlement: "free",
     ctaLabel: "Start Free",
+    uploadHeading: "Start with your free resume analysis",
+    uploadCtaLabel: "Analyze My Resume — Free",
+    uploadSupport: "Upload your resume as PDF or DOCX. No payment is required for your free preview.",
     features: ["AI-estimated preview", "Resume score", "ATS score", "Interview readiness", "Top 3 issues"]
   },
   standard: {
@@ -28,6 +34,9 @@ export const reportPlanConfig: Record<ReportPlan, ReportPlanConfig> = {
     priceLabel: "$4.99",
     entitlement: "standard",
     ctaLabel: "Get Standard Report",
+    uploadHeading: "Upload your resume to unlock your Standard Report",
+    uploadCtaLabel: "Continue to Payment — $4.99",
+    uploadSupport: "Your analysis is prepared first, then you can securely unlock your Standard Report.",
     priceEnvironmentVariable: "PADDLE_STANDARD_PRICE_ID",
     features: ["Everything in Free Preview", "Recruiter-style read", "Five priority fixes", "Suggested rewrite examples", "Downloadable Standard PDF report"]
   },
@@ -37,6 +46,9 @@ export const reportPlanConfig: Record<ReportPlan, ReportPlanConfig> = {
     priceLabel: "$9.99",
     entitlement: "full",
     ctaLabel: "Get Full Report",
+    uploadHeading: "Upload your resume to unlock your Full Report",
+    uploadCtaLabel: "Continue to Payment — $9.99",
+    uploadSupport: "Your analysis is prepared first, then you can securely unlock your Full Report.",
     priceEnvironmentVariable: "PADDLE_FULL_PRICE_ID",
     features: ["Everything in Standard Report", "Target-role match analysis", "Missing keyword analysis", "Professional summary rewrite", "Action plan and Full PDF report"]
   }

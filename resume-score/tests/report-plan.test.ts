@@ -44,6 +44,9 @@ test("normalizes untrusted requested plan values and centralizes the plan config
   assert.equal(getRequestedReportPlan(null), "free");
   assert.equal(reportPlanConfig.standard.priceEnvironmentVariable, "PADDLE_STANDARD_PRICE_ID");
   assert.equal(reportPlanConfig.full.priceEnvironmentVariable, "PADDLE_FULL_PRICE_ID");
+  assert.equal(reportPlanConfig.free.uploadCtaLabel, "Analyze My Resume — Free");
+  assert.equal(reportPlanConfig.standard.uploadCtaLabel, "Continue to Payment — $4.99");
+  assert.equal(reportPlanConfig.full.uploadCtaLabel, "Continue to Payment — $9.99");
   assert.equal(reportPlanConfig.free.features.length, 5);
   assert.equal(reportPlanConfig.standard.features.length, 5);
   assert.equal(reportPlanConfig.full.features.length, 5);

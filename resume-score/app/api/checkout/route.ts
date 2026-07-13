@@ -7,6 +7,8 @@ import { getReport, hasPersistentReportStore } from "@/lib/report-store";
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
+  let selectedPlan: PaidReportPlan | "unknown" = "unknown";
+
   try {
     const rateLimit = checkRateLimit({
       key: `checkout:${getRequestIp(request)}`,
@@ -20,7 +22,7 @@ export async function POST(request: Request) {
     const { reportId, plan } = (await request.json()) as { reportId?: string; plan?: unknown };
     if (!reportId) return NextResponse.json({ error: "Missing reportId." }, { status: 400 });
     if (!isPaidReportPlan(plan)) return NextResponse.json({ error: "Please choose a valid paid report plan." }, { status: 400 });
-    const selectedPlan: PaidReportPlan = plan;
+    selectedPlan = plan;
 
     const report = await getReport(reportId);
     if (!report) return NextResponse.json({ error: "Report not found." }, { status: 404 });
@@ -60,7 +62,7 @@ export async function POST(request: Request) {
       message,
       hasApiKey: Boolean(process.env.PADDLE_API_KEY),
       hasClientToken: Boolean(process.env.PADDLE_CLIENT_TOKEN),
-      selectedPlan: "request_validation_failed",
+      selectedPlan,
       hasStandardPriceId: Boolean(getConfiguredPaddlePriceId("standard")),
       hasFullPriceId: Boolean(getConfiguredPaddlePriceId("full")),
       appUrlConfigured: Boolean(process.env.NEXT_PUBLIC_APP_URL)
@@ -68,7 +70,7 @@ export async function POST(request: Request) {
     const userMessage = message.includes("Paddle is not configured")
       ? process.env.NODE_ENV === "development"
         ? message
-        : "Checkout is not available yet. Please contact support if you need help."
+        : "Checkout is temporarily unavailable. Please try again later."
       : message;
 
     return NextResponse.json(

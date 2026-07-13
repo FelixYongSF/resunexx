@@ -112,6 +112,7 @@ export async function POST(request: Request) {
     const storageDurationMs = Date.now() - storageStartedAt;
     console.info(`[analyze:${requestId}] report saved`, {
       reportId: id,
+      requestedPlan,
       storageDurationMs,
       totalDurationMs: Date.now() - requestStartedAt
     });

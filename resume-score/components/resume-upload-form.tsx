@@ -9,6 +9,7 @@ import { getRequestedReportPlan, reportPlanConfig, type ReportPlan } from "@/lib
 type ResumeUploadFormProps = {
   compact?: boolean;
   theme?: "default" | "dark";
+  initialPlan?: ReportPlan;
 };
 
 const maxFileSize = 4 * 1024 * 1024;
@@ -17,10 +18,10 @@ const allowedMimeTypesByExtension: Record<string, string> = {
   ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 };
 
-export function ResumeUploadForm({ compact, theme = "default" }: ResumeUploadFormProps) {
+export function ResumeUploadForm({ compact, theme = "default", initialPlan = "free" }: ResumeUploadFormProps) {
   const router = useRouter();
   const isDark = theme === "dark";
-  const [selectedPlan, setSelectedPlan] = useState<ReportPlan>("free");
+  const [selectedPlan, setSelectedPlan] = useState<ReportPlan>(initialPlan);
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [isUploading, setIsUploading] = useState(false);
@@ -112,8 +113,8 @@ export function ResumeUploadForm({ compact, theme = "default" }: ResumeUploadFor
     >
       <div className="flex items-center justify-between gap-4">
         <div>
-          <p className={isDark ? "text-sm font-semibold text-[#f3f0e9]" : "text-sm font-semibold text-[#171714]"}>Start with your resume</p>
-          <p className={isDark ? "mt-1 text-sm text-white/60" : "mt-1 text-sm text-[#706b61]"}>Upload your resume as PDF or DOCX.</p>
+          <p className={isDark ? "text-sm font-semibold text-[#f3f0e9]" : "text-sm font-semibold text-[#171714]"}>{selectedPlanDetails.uploadHeading}</p>
+          <p className={isDark ? "mt-1 text-sm text-white/60" : "mt-1 text-sm text-[#706b61]"}>{selectedPlanDetails.uploadSupport}</p>
         </div>
         <div className="text-right">
           <span className={isDark ? "rounded-full bg-[#d7ff4f] px-3 py-1 text-xs font-semibold text-[#151515]" : "rounded-full bg-[#eef8de] px-3 py-1 text-xs font-semibold text-[#36521f]"}>
@@ -143,6 +144,15 @@ export function ResumeUploadForm({ compact, theme = "default" }: ResumeUploadFor
         Text-based PDF or DOCX, up to 4MB.
       </p>
 
+      <div className={isDark ? "mt-4 border-t border-white/10 pt-4" : "mt-4 border-t border-[#e4dfd5] pt-4"}>
+        <p className={isDark ? "text-[11px] font-semibold uppercase tracking-[0.12em] text-white/45" : "text-[11px] font-semibold uppercase tracking-[0.12em] text-[#817a6e]"}>
+          {selectedPlan === "free" ? "Your free preview includes" : `${selectedPlanDetails.displayName} includes`}
+        </p>
+        <ul className={isDark ? "mt-2 grid gap-1.5 text-xs leading-5 text-white/65 sm:grid-cols-2" : "mt-2 grid gap-1.5 text-xs leading-5 text-[#625c52] sm:grid-cols-2"}>
+          {selectedPlanDetails.features.map((feature) => <li key={feature}>• {feature}</li>)}
+        </ul>
+      </div>
+
       {file ? <p className={isDark ? "mt-3 text-sm text-white/70" : "mt-3 text-sm text-[#706b61]"}>Selected: {file.name}</p> : null}
       {error ? <p className="nexx-error mt-4">{error}</p> : null}
 
@@ -152,7 +162,7 @@ export function ResumeUploadForm({ compact, theme = "default" }: ResumeUploadFor
           ? "group mt-5 flex min-h-12 w-full items-center justify-center rounded-md bg-[#d7ff4f] py-3.5 text-sm font-semibold text-[#151515] transition hover:bg-[#f3f0e9] disabled:cursor-not-allowed disabled:opacity-60"
           : "nexx-button-primary mt-5 w-full py-3.5 shadow-[0_16px_36px_rgba(20,20,18,0.18)]"}
       >
-        {isUploading ? "Reading your resume..." : <><span>Analyze My Resume - Free</span>{isDark ? <span className="ml-2 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-0.5">↗</span> : null}</>}
+        {isUploading ? "Reading your resume..." : <><span>{selectedPlanDetails.uploadCtaLabel}</span>{isDark ? <span className="ml-2 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-0.5">↗</span> : null}</>}
       </button>
     </form>
   );

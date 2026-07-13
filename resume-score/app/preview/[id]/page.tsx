@@ -6,6 +6,7 @@ import { ScoreRing } from "@/components/score-ring";
 import { Disclaimer } from "@/components/disclaimer";
 import { CheckoutButton } from "@/components/checkout-button";
 import { getReport } from "@/lib/report-store";
+import { reportPlanConfig } from "@/lib/report-plan";
 import { toPreview } from "@/lib/report-schema";
 
 export const runtime = "nodejs";
@@ -37,6 +38,7 @@ export default async function PreviewPage({
 
   const preview = toPreview(stored.report);
   const requestedPlan = stored.requestedPlan || "free";
+  const selectedPlanDetails = reportPlanConfig[requestedPlan];
 
   if ((stored.accessPlan || (stored.paid ? "standard" : "free")) !== "free") {
     redirect(`/report/${id}`);
@@ -81,17 +83,26 @@ export default async function PreviewPage({
           </div>
 
           <aside className="grid h-fit gap-4">
+            <section className="rounded-2xl border border-[#ddd7ca] bg-white px-5 py-4 shadow-[0_10px_24px_rgba(34,30,22,0.05)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Selected report</p>
+              <div className="mt-2 flex items-baseline justify-between gap-4">
+                <p className="font-semibold text-slate-950">{selectedPlanDetails.displayName}</p>
+                <p className="text-lg font-semibold text-slate-950">{selectedPlanDetails.priceLabel}</p>
+              </div>
+              <p className="mt-2 text-sm leading-5 text-slate-600">
+                {requestedPlan === "free"
+                  ? "Your preview is ready. No payment is required."
+                  : "Your analysis is ready. Complete secure checkout to unlock this report."}
+              </p>
+            </section>
             <section className="nexx-card p-7">
               <p className="text-sm font-semibold text-blue-600">Standard Report</p>
               <p className="mt-3 text-4xl font-semibold text-slate-950">$4.99</p>
               <ul className="mt-6 grid gap-3 text-sm text-slate-600">
-                <li>Recruiter-style read</li>
-                <li>Five priority fixes</li>
-                <li>Suggested rewrite examples</li>
-                <li>Standard PDF report</li>
+                {reportPlanConfig.standard.features.map((feature) => <li key={feature}>{feature}</li>)}
               </ul>
               {requestedPlan === "standard" ? (
-                <CheckoutButton reportId={id} plan="standard" autoStart={plan === "standard"} />
+                <CheckoutButton reportId={id} plan="standard" autoStart={plan === requestedPlan} />
               ) : (
                 <Link href="/upload?plan=standard" className="nexx-button-primary mt-7 w-full">
                   Choose Standard before upload
@@ -102,20 +113,16 @@ export default async function PreviewPage({
               <p className="text-sm font-semibold text-[#d7ff4f]">Full Report</p>
               <p className="mt-3 text-4xl font-semibold">$9.99</p>
               <ul className="mt-6 grid gap-3 text-sm text-white/75">
-                <li>Everything in Standard</li>
-                <li>Target-role match and keyword gaps</li>
-                <li>Rewritten summary and five bullets</li>
-                <li>30-minute action plan and full PDF</li>
+                {reportPlanConfig.full.features.map((feature) => <li key={feature}>{feature}</li>)}
               </ul>
               {requestedPlan === "full" ? (
-                <CheckoutButton reportId={id} plan="full" autoStart={plan === "full"} />
+                <CheckoutButton reportId={id} plan="full" autoStart={plan === requestedPlan} />
               ) : (
                 <Link href="/upload?plan=full" className="nexx-button-primary mt-7 w-full">
                   Choose Full before upload
                 </Link>
               )}
             </section>
-            {plan === "full" ? <p className="text-sm text-slate-600">Your Full Report is selected. Complete checkout to unlock it.</p> : null}
             <div className="px-1"><Disclaimer /></div>
           </aside>
         </div>

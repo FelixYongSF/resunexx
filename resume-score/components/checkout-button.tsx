@@ -84,7 +84,7 @@ export function CheckoutButton({
       const data = (await readApiResponse(res)) as CheckoutResponse;
       if (!res.ok) throw new Error(data.error || "Could not start checkout.");
       if (!data.clientToken || !data.priceId || !data.successUrl || !data.environment) {
-        throw new Error("Checkout is not available yet. Please contact support if you need help.");
+        throw new Error("Checkout is temporarily unavailable. Please try again later.");
       }
 
       await loadPaddleScript();

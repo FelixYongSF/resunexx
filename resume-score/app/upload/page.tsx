@@ -1,9 +1,18 @@
 import Link from "next/link";
 import { Disclaimer } from "@/components/disclaimer";
 import { ResumeUploadForm } from "@/components/resume-upload-form";
+import { getRequestedReportPlan, reportPlanConfig } from "@/lib/report-plan";
 import styles from "./upload.module.css";
 
-export default function UploadPage() {
+export default async function UploadPage({
+  searchParams
+}: {
+  searchParams: Promise<{ plan?: string }>;
+}) {
+  const { plan } = await searchParams;
+  const selectedPlan = getRequestedReportPlan(plan);
+  const selectedPlanDetails = reportPlanConfig[selectedPlan];
+
   return (
     <main className={styles.page}>
       <nav className={styles.nav} aria-label="ResuNexx navigation">
@@ -16,11 +25,11 @@ export default function UploadPage() {
         <div className={styles.copy}>
           <p className={styles.eyebrow}>RESUNEXX / RECRUITER LENS</p>
           <h1>Show recruiters<br />your <em>signal.</em></h1>
-          <p className={styles.support}>Upload your resume and get a recruiter-style free preview before you decide what to improve.</p>
+          <p className={styles.support}>{selectedPlanDetails.uploadSupport}</p>
           <p className={styles.fileNote}>PDF / DOCX <i /> Up to 4MB <i /> No signup required</p>
         </div>
         <div className={styles.formArea}>
-          <ResumeUploadForm theme="dark" />
+          <ResumeUploadForm theme="dark" initialPlan={selectedPlan} />
           <div className={styles.disclaimer}><Disclaimer /></div>
         </div>
       </section>
