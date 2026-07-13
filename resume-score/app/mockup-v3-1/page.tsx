@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { AnalyticsPageView } from "@/components/analytics-page-view";
 import styles from "./mockup-v3-1.module.css";
 
 const fallingLetters = [
@@ -99,6 +100,7 @@ function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) 
 
   return (
     <main ref={pageRef} className={[styles.page, "resunexx-dark-page", motionReady ? styles.motion : ""].filter(Boolean).join(" ")}>
+      <AnalyticsPageView event="landing_page_visit" />
       <nav className={styles.nav} data-reveal aria-label="ResuNexx prototype navigation">
         <Link href="/" className={styles.logo}><span className={styles.logoMark}>R</span>ResuNexx</Link>
         <div className={styles.navLinks}>

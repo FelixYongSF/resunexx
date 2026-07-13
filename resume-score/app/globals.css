@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #fbfaf7;
-  --foreground: #171714;
-  --surface: #ffffff;
-  --surface-subtle: #f6f4ef;
+  --background: #f3f0e9;
+  --foreground: #151515;
+  --surface: #f7f4ee;
+  --surface-subtle: #ebe7de;
   --border-soft: #e3ddd2;
   --text-muted: #625c52;
-  --accent: #2563eb;
-  --accent-soft: #eff6ff;
+  --accent: #7e9700;
+  --accent-soft: #eef5c9;
 }
 
 * {
@@ -37,6 +37,10 @@ body:has(.resunexx-dark-page) {
   background: #151515;
 }
 
+body:has(.resunexx-dark-page) > footer {
+  display: none;
+}
+
 ::selection {
   background: #d9f99d;
   color: #151512;
@@ -61,22 +65,22 @@ body:has(.resunexx-dark-page) {
   }
 
   .nexx-card {
-    @apply rounded-[2rem] border bg-white shadow-[0_24px_80px_rgba(20,20,18,0.08)];
+    @apply rounded-2xl border bg-white shadow-[0_18px_54px_rgba(20,20,18,0.08)];
     border-color: var(--border-soft);
   }
 
   .nexx-card-soft {
-    @apply rounded-[2rem] border shadow-[0_18px_60px_rgba(20,20,18,0.06)];
+    @apply rounded-2xl border shadow-[0_18px_54px_rgba(20,20,18,0.06)];
     border-color: var(--border-soft);
     background: var(--surface-subtle);
   }
 
   .nexx-button-primary {
-    @apply focus-ring inline-flex min-h-11 items-center justify-center rounded-full bg-[#171714] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#2b2924] disabled:cursor-not-allowed disabled:opacity-60;
+    @apply focus-ring inline-flex min-h-11 items-center justify-center rounded-lg bg-[#151515] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#2b2924] disabled:cursor-not-allowed disabled:opacity-60;
   }
 
   .nexx-button-secondary {
-    @apply focus-ring inline-flex min-h-11 items-center justify-center rounded-full border border-[#d8d1c5] bg-white px-5 py-3 text-sm font-semibold text-[#171714] transition duration-300 hover:-translate-y-0.5 hover:border-[#bfb5a7];
+    @apply focus-ring inline-flex min-h-11 items-center justify-center rounded-lg border border-[#d8d1c5] bg-white px-5 py-3 text-sm font-semibold text-[#171714] transition duration-300 hover:-translate-y-0.5 hover:border-[#8aa500];
   }
 
   .nexx-error {
