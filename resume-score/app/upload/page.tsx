@@ -5,7 +5,7 @@ import styles from "./upload.module.css";
 
 export default function UploadPage() {
   return (
-    <main className={`${styles.page} resunexx-dark-page`}>
+    <main className={styles.page}>
       <nav className={styles.nav} aria-label="ResuNexx navigation">
         <Link href="/" className={styles.logo}><span className={styles.logoMark}>R</span>ResuNexx</Link>
         <div className={styles.navLinks}><Link href="/">Home</Link><Link href="/privacy">Privacy</Link></div>

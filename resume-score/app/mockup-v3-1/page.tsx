@@ -33,6 +33,7 @@ const insights = [
 function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) {
   const pathname = usePathname();
   const compactPricing = pathname === "/mockup-v3-4";
+  const separatePricing = pathname === "/mockup-v3-5";
   const pageRef = useRef<HTMLElement>(null);
   const [motionReady, setMotionReady] = useState(false);
 
@@ -174,7 +175,7 @@ function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) 
             </div>
           </article>
 
-          <aside id="pricing" className={styles.pricingPanel}>
+          {!separatePricing ? <aside id="pricing" className={styles.pricingPanel}>
             <div className={styles.priceCard} data-reveal style={{ "--reveal-delay": "0ms" } as CSSProperties}>
               <span>{compactPricing ? "01 / FREE" : "FREE PREVIEW"}</span><strong>{compactPricing ? "FREE" : "$0"}</strong>
               <ul>{compactPricing ? <><li>AI-estimated preview</li><li>Resume score</li><li>ATS score</li><li>Interview readiness</li><li>Top 3 issues</li></> : <><li>Resume score</li><li>ATS score</li><li>Top 3 issues</li></>}</ul>
@@ -190,8 +191,13 @@ function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) 
               <ul>{compactPricing ? <><li>Everything in Standard Report</li><li>Target-role match analysis</li><li>Missing keyword analysis</li><li>Professional summary rewrite</li><li>Achievement bullet rewrites</li><li>Action plan and Full PDF report</li></> : <><li>Everything in Standard Report</li><li>Target-role match analysis</li><li>Missing keyword analysis</li><li>Rewritten professional summary</li><li>Five rewritten achievement bullets</li><li>30-minute action plan</li><li>Downloadable Full PDF report</li></>}</ul>
               <Link href="/upload?plan=full" className={styles.planCta}>Get Full Report <span>↗</span></Link>
             </div>
-          </aside>
+          </aside> : null}
         </div>
+        {separatePricing ? <section id="pricing" className={styles.pricingPanel}>
+          <div className={styles.priceCard} data-reveal><span>01 / FREE</span><strong>FREE</strong><ul><li>AI-estimated preview</li><li>Resume score</li><li>ATS score</li><li>Interview readiness</li><li>Top 3 issues</li></ul><Link href="/upload" className={styles.planCta}>Start free <span>↗</span></Link></div>
+          <div className={styles.priceCardPaid} data-reveal><span>02 / STANDARD REPORT</span><strong>$4.99</strong><ul><li>Everything in Free Preview</li><li>Recruiter-style read</li><li>Five priority fixes</li><li>Suggested rewrite examples</li><li>Downloadable Standard PDF report</li></ul><Link href="/upload?plan=standard" className={styles.planCta}>Get Standard Report <span>↗</span></Link></div>
+          <div className={styles.priceCardFull} data-reveal><span>03 / FULL REPORT</span><strong>$9.99</strong><ul><li>Everything in Standard Report</li><li>Target-role match analysis</li><li>Missing keyword analysis</li><li>Professional summary rewrite</li><li>Action plan and Full PDF report</li></ul><Link href="/upload?plan=full" className={styles.planCta}>Get Full Report <span>↗</span></Link></div>
+        </section> : null}
       </section>
 
       <footer className={styles.footer}>
