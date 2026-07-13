@@ -15,7 +15,7 @@ export function Footer() {
       <div className="nexx-shell flex flex-col gap-6 py-9 text-sm text-white/60 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="font-semibold text-[#f3f0e9]">{productName}</p>
-          <p className="mt-1">AI-estimated resume feedback for early-career job seekers.</p>
+          <p className="mt-1">AI-powered resume analysis and feedback for early-career job seekers.</p>
           <a className="mt-2 inline-flex transition-colors hover:text-[#d7ff4f]" href={`mailto:${contactEmail}`}>
             {contactEmail}
           </a>

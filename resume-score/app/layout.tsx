@@ -7,26 +7,26 @@ const productionUrl = "https://www.resunexx.com";
 export const metadata: Metadata = {
   metadataBase: new URL(productionUrl),
   title: {
-    default: "ResuNexx | AI Resume Improvement Plan",
+    default: "ResuNexx | AI Resume Analysis & Feedback",
     template: "%s | ResuNexx"
   },
   description:
-    "Upload your resume, get an AI-estimated recruiter-style preview, and unlock a focused resume improvement plan with rewrite examples and a PDF report.",
+    "Upload your existing resume for AI-powered recruiter-style analysis, ATS readiness insights, and practical improvement recommendations.",
   alternates: {
     canonical: productionUrl
   },
   openGraph: {
     title: "ResuNexx | See what recruiters see",
     description:
-      "AI-estimated resume feedback for early-career job seekers. Free preview, $4.99 improvement plan, no signup required.",
+      "AI resume analysis and recruiter-style feedback for early-career job seekers. Free preview, clear recommendations, no signup required.",
     url: productionUrl,
     siteName: "ResuNexx",
     type: "website"
   },
   twitter: {
     card: "summary",
-    title: "ResuNexx | AI Resume Improvement Plan",
-    description: "See your resume through a recruiter-style AI coach before you apply."
+    title: "ResuNexx | AI Resume Analysis & Feedback",
+    description: "Understand how recruiters and ATS systems may read your existing resume before you apply."
   },
   robots: {
     index: true,

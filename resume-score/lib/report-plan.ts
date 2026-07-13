@@ -25,7 +25,7 @@ export const reportPlanConfig: Record<ReportPlan, ReportPlanConfig> = {
     ctaLabel: "Start Free",
     uploadHeading: "Start your free resume analysis",
     uploadCtaLabel: "Analyze My Resume — Free",
-    uploadSupport: "Upload your resume as PDF or DOCX. No payment is required for your free preview.",
+    uploadSupport: "Upload your existing resume as PDF or DOCX for an AI-powered recruiter-style analysis. No payment is required for your free preview.",
     features: ["AI-estimated preview", "Resume score", "ATS score", "Interview readiness", "Top 3 issues"]
   },
   standard: {
@@ -36,9 +36,9 @@ export const reportPlanConfig: Record<ReportPlan, ReportPlanConfig> = {
     ctaLabel: "Get Standard Report",
     uploadHeading: "Upload your resume to unlock your Standard Report",
     uploadCtaLabel: "Unlock Standard Report — $4.99",
-    uploadSupport: "Your analysis is prepared first, then you can securely unlock your Standard Report.",
+    uploadSupport: "Upload your existing resume for an AI-powered recruiter-style analysis, then securely unlock your Standard Report.",
     priceEnvironmentVariable: "PADDLE_STANDARD_PRICE_ID",
-    features: ["Everything in Free Preview", "Recruiter-style read", "Five priority fixes", "Suggested rewrite examples", "Downloadable Standard PDF report"]
+    features: ["Everything in Free Preview", "Recruiter-style analysis", "Five priority improvements", "Improvement examples", "Downloadable Standard PDF report"]
   },
   full: {
     key: "full",
@@ -48,9 +48,9 @@ export const reportPlanConfig: Record<ReportPlan, ReportPlanConfig> = {
     ctaLabel: "Get Full Report",
     uploadHeading: "Upload your resume to unlock your Full Report",
     uploadCtaLabel: "Unlock Full Report — $9.99",
-    uploadSupport: "Your analysis is prepared first, then you can securely unlock your Full Report.",
+    uploadSupport: "Upload your existing resume for an AI-powered recruiter-style analysis, then securely unlock your Full Report.",
     priceEnvironmentVariable: "PADDLE_FULL_PRICE_ID",
-    features: ["Everything in Standard Report", "Target-role match analysis", "Missing keyword analysis", "Professional summary rewrite", "Action plan and Full PDF report"]
+    features: ["Everything in Standard Report", "Target-role match analysis", "Missing keyword analysis", "Professional summary improvement suggestions", "Action plan and Full PDF report"]
   }
 } as const;
 

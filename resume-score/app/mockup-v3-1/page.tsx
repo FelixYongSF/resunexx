@@ -188,12 +188,12 @@ function MockupV31Content({
             </div>
             <div className={styles.priceCardPaid} data-reveal style={{ "--reveal-delay": "100ms" } as CSSProperties}>
               <span>STANDARD REPORT</span><strong>$4.99</strong>
-              <ul><li>Everything in Free Preview</li><li>Recruiter-style read</li><li>Five priority fixes</li><li>Suggested rewrite examples</li><li>Downloadable Standard PDF report</li></ul>
+              <ul><li>Everything in Free Preview</li><li>Recruiter-style analysis</li><li>Five priority improvements</li><li>Improvement examples</li><li>Downloadable Standard PDF report</li></ul>
               <Link href="/upload?plan=standard" className={styles.planCta}>Get Standard Report <span>↗</span></Link>
             </div>
             <div className={styles.priceCardFull} data-reveal style={{ "--reveal-delay": "200ms" } as CSSProperties}>
               <span>FULL REPORT</span><strong>$9.99</strong>
-              <ul><li>Everything in Standard Report</li><li>Target-role match analysis</li><li>Missing keyword analysis</li><li>Rewritten professional summary</li><li>Five rewritten achievement bullets</li><li>30-minute action plan</li><li>Downloadable Full PDF report</li></ul>
+              <ul><li>Everything in Standard Report</li><li>Target-role match analysis</li><li>Missing keyword analysis</li><li>Professional summary improvement suggestions</li><li>Five achievement improvement recommendations</li><li>30-minute action plan</li><li>Downloadable Full PDF report</li></ul>
               <Link href="/upload?plan=full" className={styles.planCta}>Get Full Report <span>↗</span></Link>
             </div>
           </aside> : null}
@@ -206,7 +206,7 @@ function MockupV31Content({
       </section>
 
       <footer className={styles.footer}>
-        <div><p className={styles.footerBrand}>ResuNexx</p><p>AI-powered resume feedback for early-career job seekers.</p><a href="mailto:support@resunexx.com">support@resunexx.com</a></div>
+        <div><p className={styles.footerBrand}>ResuNexx</p><p>AI-powered resume analysis and feedback for early-career job seekers.</p><p>AI feedback only. No resume creation, recruitment services, or outcome guarantees.</p><a href="mailto:support@resunexx.com">support@resunexx.com</a></div>
         <nav><Link href="/pricing">Pricing</Link><Link href="/terms">Terms</Link><Link href="/privacy">Privacy</Link><Link href="/refund">Refund</Link><Link href="/contact">Contact</Link></nav>
       </footer>
     </main>

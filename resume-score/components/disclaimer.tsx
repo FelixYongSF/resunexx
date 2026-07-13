@@ -1,7 +1,7 @@
 export function Disclaimer() {
   return (
     <p className="nexx-disclaimer">
-      This product provides AI-generated feedback only. It is not professional career, legal, or employment advice and does not guarantee interviews, callbacks, or job offers.
+      ResuNexx provides AI-generated resume analysis and feedback only. It does not create resumes, provide recruitment services, or guarantee interviews, callbacks, or employment outcomes.
     </p>
   );
 }

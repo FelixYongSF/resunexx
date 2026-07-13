@@ -108,7 +108,7 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
         </section>
 
         <section className="nexx-card mt-8 p-7">
-          <h2 className="text-2xl font-semibold text-slate-950">Suggested Rewrite</h2>
+          <h2 className="text-2xl font-semibold text-slate-950">Improvement Example</h2>
           <div className="mt-6 grid gap-4 lg:grid-cols-2">
             <div className="rounded-2xl bg-slate-50 p-5">
               <p className="text-sm font-semibold text-slate-500">Before</p>
@@ -184,13 +184,13 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
         </section>
 
         {isFullReport ? <section className="nexx-card mt-8 p-7">
-          <h2 className="text-2xl font-semibold text-slate-950">Suggested rewrite examples</h2>
+          <h2 className="text-2xl font-semibold text-slate-950">Improvement examples</h2>
           <div className="mt-6 grid gap-4">
             {report.rewriteExamples.improvedBulletPoints.map((bullet) => (
               <p key={bullet} className="rounded-2xl bg-blue-50 p-4 text-sm leading-6 text-blue-950">{bullet}</p>
             ))}
             <div className="rounded-2xl bg-slate-950 p-5 text-white">
-              <p className="text-sm font-semibold text-white/70">Improved professional summary</p>
+              <p className="text-sm font-semibold text-white/70">Professional summary improvement example</p>
               <p className="mt-2 leading-7">{report.rewriteExamples.improvedProfessionalSummary}</p>
             </div>
           </div>
@@ -233,7 +233,7 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
             </div>
           </section>
           <section className="nexx-card mt-8 p-7">
-            <h2 className="text-2xl font-semibold text-slate-950">Full rewrite toolkit</h2>
+            <h2 className="text-2xl font-semibold text-slate-950">Full improvement toolkit</h2>
             <div className="mt-5 grid gap-4">
               <p className="rounded-2xl bg-slate-950 p-5 text-sm leading-6 text-white">{report.fullReport.rewrittenSummary}</p>
               {report.fullReport.rewrittenAchievementBullets.map((bullet) => <p key={bullet} className="rounded-2xl bg-blue-50 p-4 text-sm leading-6 text-blue-950">{bullet}</p>)}

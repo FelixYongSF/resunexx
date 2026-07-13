@@ -17,7 +17,7 @@ export default function PricingPage() {
           The Standard Report costs <strong className="text-[#171714]">$4.99 USD</strong> as a one-time purchase.
         </p>
         <p>
-          It includes recruiter-style feedback, five priority changes, suggested rewrite examples, and a downloadable standard PDF report.
+          It includes recruiter-style analysis, five priority improvement recommendations, improvement examples, and a downloadable Standard PDF report.
         </p>
       </LegalSection>
 
@@ -26,7 +26,7 @@ export default function PricingPage() {
           The Full Report costs <strong className="text-[#171714]">$9.99 USD</strong> as a one-time purchase.
         </p>
         <p>
-          It includes everything in Standard plus target-role match, detailed keyword placement guidance, a factual rewrite toolkit, a 30-minute action plan, and a full PDF report.
+          It includes everything in Standard plus target-role match, detailed keyword placement guidance, professional summary and achievement improvement suggestions, a 30-minute action plan, and a Full PDF report.
         </p>
       </LegalSection>
 

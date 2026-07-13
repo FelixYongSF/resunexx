@@ -40,7 +40,7 @@ ${premiumReport.highImpactImprovements
   )
   .join("\n")}
 
-## Suggested Rewrite
+## Improvement Example
 
 Before:
 ${premiumReport.suggestedRewrite.before}
@@ -112,12 +112,12 @@ ${report.sectionFeedback.education}
 ### Formatting
 ${report.sectionFeedback.formatting}
 
-## Rewrite Examples
+## Improvement Examples
 
-### Improved Bullet Points
+### Achievement Improvement Examples
 ${report.rewriteExamples.improvedBulletPoints.map((item) => `- ${item}`).join("\n")}
 
-### Improved Professional Summary
+### Professional Summary Improvement Example
 ${report.rewriteExamples.improvedProfessionalSummary}
 
 ## 30-Minute Improvement Plan

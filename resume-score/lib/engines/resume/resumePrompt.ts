@@ -115,7 +115,7 @@ Output:
 - Do not return freePreview, paidReport, precheckSummary, or precheckTriggeredRules. The application derives those fields deterministically after analysis.
 
 Disclaimer requirement:
-The disclaimer must communicate that the report is AI-generated feedback, is not professional career, legal, or employment advice, and does not guarantee interviews or job offers.`;
+The disclaimer must communicate that the report provides AI-generated resume analysis and feedback only, does not create resumes or provide recruitment services, is not professional career, legal, or employment advice, and does not guarantee interviews, callbacks, job offers, or employment outcomes.`;
 
 export function buildResumeUserPrompt(input: {
   resumeText: string;
