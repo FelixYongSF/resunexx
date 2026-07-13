@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { trackClientEvent } from "@/lib/analytics";
+import { getRequestedReportPlan, reportPlanConfig, type ReportPlan } from "@/lib/report-plan";
 
 type ResumeUploadFormProps = {
   compact?: boolean;
@@ -18,6 +20,7 @@ const allowedMimeTypesByExtension: Record<string, string> = {
 export function ResumeUploadForm({ compact, theme = "default" }: ResumeUploadFormProps) {
   const router = useRouter();
   const isDark = theme === "dark";
+  const [selectedPlan, setSelectedPlan] = useState<ReportPlan>("free");
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [isUploading, setIsUploading] = useState(false);
@@ -26,7 +29,10 @@ export function ResumeUploadForm({ compact, theme = "default" }: ResumeUploadFor
     const params = new URLSearchParams(window.location.search);
     const errorParam = params.get("error");
     if (errorParam) setError(errorParam);
+    setSelectedPlan(getRequestedReportPlan(params.get("plan")));
   }, []);
+
+  const selectedPlanDetails = reportPlanConfig[selectedPlan];
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -54,14 +60,13 @@ export function ResumeUploadForm({ compact, theme = "default" }: ResumeUploadFor
     });
     const formData = new FormData();
     formData.append("resume", file);
-    const selectedPlan = new URLSearchParams(window.location.search).get("plan");
-    if (selectedPlan === "standard" || selectedPlan === "full") formData.append("selectedPlan", selectedPlan);
+    formData.append("selectedPlan", selectedPlan);
 
     try {
       const controller = new AbortController();
       const timeout = window.setTimeout(() => controller.abort(), 115_000);
 
-      router.push("/analyzing");
+      router.push(`/analyzing?plan=${selectedPlan}`);
       const res = await fetch("/api/analyze", {
         method: "POST",
         body: formData,
@@ -80,7 +85,7 @@ export function ResumeUploadForm({ compact, theme = "default" }: ResumeUploadFor
         reportId: data.id,
         source: compact ? "home_upload_form" : "upload_page"
       });
-      router.push(`/preview/${data.id}${selectedPlan === "standard" || selectedPlan === "full" ? `?plan=${selectedPlan}` : ""}`);
+      router.push(`/preview/${data.id}?plan=${selectedPlan}`);
     } catch (err) {
       setIsUploading(false);
       const message =
@@ -90,7 +95,7 @@ export function ResumeUploadForm({ compact, theme = "default" }: ResumeUploadFor
             ? err.message
             : "We couldn't analyze your resume right now. Please try again.";
       setError(message);
-      router.push(`/upload?error=${encodeURIComponent(message)}`);
+      router.push(`/upload?plan=${selectedPlan}&error=${encodeURIComponent(message)}`);
     }
   }
 
@@ -110,9 +115,17 @@ export function ResumeUploadForm({ compact, theme = "default" }: ResumeUploadFor
           <p className={isDark ? "text-sm font-semibold text-[#f3f0e9]" : "text-sm font-semibold text-[#171714]"}>Start with your resume</p>
           <p className={isDark ? "mt-1 text-sm text-white/60" : "mt-1 text-sm text-[#706b61]"}>Upload your resume as PDF or DOCX.</p>
         </div>
-        <span className={isDark ? "rounded-full bg-[#d7ff4f] px-3 py-1 text-xs font-semibold text-[#151515]" : "rounded-full bg-[#eef8de] px-3 py-1 text-xs font-semibold text-[#36521f]"}>
-          Free preview
-        </span>
+        <div className="text-right">
+          <span className={isDark ? "rounded-full bg-[#d7ff4f] px-3 py-1 text-xs font-semibold text-[#151515]" : "rounded-full bg-[#eef8de] px-3 py-1 text-xs font-semibold text-[#36521f]"}>
+            {selectedPlanDetails.displayName} — {selectedPlan === "free" ? "$0" : selectedPlanDetails.priceLabel}
+          </span>
+          <Link
+            href="/#pricing"
+            className={isDark ? "mt-2 block text-[11px] text-white/55 underline-offset-4 hover:text-[#d7ff4f] hover:underline" : "mt-2 block text-[11px] text-[#706b61] underline-offset-4 hover:text-[#151515] hover:underline"}
+          >
+            Change plan
+          </Link>
+        </div>
       </div>
 
       <label className={isDark ? "mt-5 block rounded-xl transition focus-within:ring-2 focus-within:ring-[#d7ff4f]/70" : "mt-5 block"}>

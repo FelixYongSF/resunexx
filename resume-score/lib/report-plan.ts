@@ -3,26 +3,58 @@ export const reportPlans = ["free", "standard", "full"] as const;
 export type ReportPlan = (typeof reportPlans)[number];
 export type PaidReportPlan = Exclude<ReportPlan, "free">;
 
-export const reportPlanDetails = {
+export type ReportPlanConfig = {
+  key: ReportPlan;
+  displayName: string;
+  priceLabel: string;
+  entitlement: ReportPlan;
+  ctaLabel: string;
+  priceEnvironmentVariable?: "PADDLE_STANDARD_PRICE_ID" | "PADDLE_FULL_PRICE_ID";
+  features: readonly string[];
+};
+
+export const reportPlanConfig: Record<ReportPlan, ReportPlanConfig> = {
   free: {
-    label: "Free Preview",
-    priceLabel: "$0",
-    ctaLabel: "Analyze My Resume - Free"
+    key: "free",
+    displayName: "Free Preview",
+    priceLabel: "FREE",
+    entitlement: "free",
+    ctaLabel: "Start Free",
+    features: ["AI-estimated preview", "Resume score", "ATS score", "Interview readiness", "Top 3 issues"]
   },
   standard: {
-    label: "Standard Report",
+    key: "standard",
+    displayName: "Standard Report",
     priceLabel: "$4.99",
-    ctaLabel: "Unlock Standard Report - $4.99"
+    entitlement: "standard",
+    ctaLabel: "Get Standard Report",
+    priceEnvironmentVariable: "PADDLE_STANDARD_PRICE_ID",
+    features: ["Everything in Free Preview", "Recruiter-style read", "Five priority fixes", "Suggested rewrite examples", "Downloadable Standard PDF report"]
   },
   full: {
-    label: "Full Report",
+    key: "full",
+    displayName: "Full Report",
     priceLabel: "$9.99",
-    ctaLabel: "Unlock Full Report - $9.99"
+    entitlement: "full",
+    ctaLabel: "Get Full Report",
+    priceEnvironmentVariable: "PADDLE_FULL_PRICE_ID",
+    features: ["Everything in Standard Report", "Target-role match analysis", "Missing keyword analysis", "Professional summary rewrite", "Action plan and Full PDF report"]
   }
+} as const;
+
+// Kept for existing components while all plan data is now sourced from reportPlanConfig.
+export const reportPlanDetails = {
+  free: { label: reportPlanConfig.free.displayName, priceLabel: "$0", ctaLabel: "Analyze My Resume - Free" },
+  standard: { label: reportPlanConfig.standard.displayName, priceLabel: reportPlanConfig.standard.priceLabel, ctaLabel: "Unlock Standard Report - $4.99" },
+  full: { label: reportPlanConfig.full.displayName, priceLabel: reportPlanConfig.full.priceLabel, ctaLabel: "Unlock Full Report - $9.99" }
 } as const;
 
 export function isReportPlan(value: unknown): value is ReportPlan {
   return typeof value === "string" && reportPlans.includes(value as ReportPlan);
+}
+
+export function getRequestedReportPlan(value: unknown): ReportPlan {
+  return isReportPlan(value) ? value : "free";
 }
 
 export function isPaidReportPlan(value: unknown): value is PaidReportPlan {
@@ -45,7 +77,7 @@ export function getPdfReportTitle(accessPlan: ReportPlan) {
 export function getConfiguredPaddlePriceId(plan: PaidReportPlan) {
   if (plan === "full") return process.env.PADDLE_FULL_PRICE_ID || "";
 
-  // PADDLE_PRICE_ID is a temporary backwards-compatible alias for existing $4.99 deployments.
+  // PADDLE_PRICE_ID remains a backwards-compatible alias for existing Standard deployments.
   return process.env.PADDLE_STANDARD_PRICE_ID || process.env.PADDLE_PRICE_ID || "";
 }
 

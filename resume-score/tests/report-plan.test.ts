@@ -3,9 +3,11 @@ import test from "node:test";
 
 import {
   getConfiguredPaddlePriceId,
+  getRequestedReportPlan,
   getPaddlePlanForPriceId,
   getPdfReportTitle,
   hasPlanAccess,
+  reportPlanConfig,
   shouldApplyPurchasedPlan
 } from "../lib/report-plan.ts";
 
@@ -32,6 +34,19 @@ test("plan access prevents an unpaid or Standard report from exposing Full conte
   assert.equal(shouldApplyPurchasedPlan("standard", "full"), true);
   assert.equal(shouldApplyPurchasedPlan("full", "standard"), false);
   assert.equal(shouldApplyPurchasedPlan("full", "full"), false);
+});
+
+test("normalizes untrusted requested plan values and centralizes the plan configuration", () => {
+  assert.equal(getRequestedReportPlan("free"), "free");
+  assert.equal(getRequestedReportPlan("standard"), "standard");
+  assert.equal(getRequestedReportPlan("full"), "full");
+  assert.equal(getRequestedReportPlan("admin"), "free");
+  assert.equal(getRequestedReportPlan(null), "free");
+  assert.equal(reportPlanConfig.standard.priceEnvironmentVariable, "PADDLE_STANDARD_PRICE_ID");
+  assert.equal(reportPlanConfig.full.priceEnvironmentVariable, "PADDLE_FULL_PRICE_ID");
+  assert.equal(reportPlanConfig.free.features.length, 5);
+  assert.equal(reportPlanConfig.standard.features.length, 5);
+  assert.equal(reportPlanConfig.full.features.length, 5);
 });
 
 test("PDF selection remains plan-specific", () => {

@@ -24,6 +24,12 @@ export async function POST(request: Request) {
 
     const report = await getReport(reportId);
     if (!report) return NextResponse.json({ error: "Report not found." }, { status: 404 });
+    if (report.requestedPlan !== selectedPlan) {
+      return NextResponse.json(
+        { error: "This report was created for a different plan. Return to pricing to choose a new plan." },
+        { status: 409 }
+      );
+    }
     const currentPlan = report.accessPlan || (report.paid ? "standard" : "free");
     if (hasPlanAccess(currentPlan, selectedPlan)) {
       return NextResponse.json({ error: "This report plan is already unlocked." }, { status: 409 });

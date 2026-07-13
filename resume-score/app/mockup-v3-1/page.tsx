@@ -5,6 +5,7 @@ import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnalyticsPageView } from "@/components/analytics-page-view";
+import { reportPlanConfig } from "@/lib/report-plan";
 import styles from "./mockup-v3-1.module.css";
 
 const fallingLetters = [
@@ -108,7 +109,7 @@ function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) 
           <a href="#report">The report</a>
           <a href="#pricing">Pricing</a>
         </div>
-        <Link href="/upload" className={styles.navCta}>Start free <span>↗</span></Link>
+        <Link href="/upload?plan=free" className={styles.navCta}>Start free <span>↗</span></Link>
       </nav>
 
       <section className={styles.hero}>
@@ -117,7 +118,7 @@ function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) 
           <p className={styles.kicker} data-reveal>RESUNEXX / RECRUITER LENS</p>
           <h1 data-reveal>See what<br />recruiters<br /><em>see.</em></h1>
           <p className={styles.heroText} data-reveal>Know what gets noticed.<br />Fix what gets ignored.</p>
-          <Link href="/upload" className={styles.heroCta} data-reveal>Analyze my resume <span>↗</span></Link>
+          <Link href="/upload?plan=free" className={styles.heroCta} data-reveal>Analyze my resume <span>↗</span></Link>
           <p className={styles.meta} data-reveal>Free preview <i /> PDF / DOCX</p>
         </div>
         <div className={styles.heroLetters} aria-hidden="true">
@@ -181,7 +182,7 @@ function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) 
             <div className={styles.priceCard} data-reveal style={{ "--reveal-delay": "0ms" } as CSSProperties}>
               <span>{compactPricing ? "01 / FREE" : "FREE PREVIEW"}</span><strong>{compactPricing ? "FREE" : "$0"}</strong>
               <ul>{compactPricing ? <><li>AI-estimated preview</li><li>Resume score</li><li>ATS score</li><li>Interview readiness</li><li>Top 3 issues</li></> : <><li>Resume score</li><li>ATS score</li><li>Top 3 issues</li></>}</ul>
-              <Link href="/upload" className={styles.planCta}>Start free <span>↗</span></Link>
+              <Link href="/upload?plan=free" className={styles.planCta}>Start free <span>↗</span></Link>
             </div>
             <div className={styles.priceCardPaid} data-reveal style={{ "--reveal-delay": "100ms" } as CSSProperties}>
               <span>{compactPricing ? "02 / STANDARD REPORT" : "STANDARD REPORT"}</span><strong>$4.99</strong>
@@ -196,9 +197,9 @@ function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) 
           </aside> : null}
         </div>
         {separatePricing ? <section id="pricing" className={styles.pricingPanel}>
-          <div className={styles.priceCard} data-reveal><span>01 / FREE</span><strong>FREE</strong><ul><li>AI-estimated preview</li><li>Resume score</li><li>ATS score</li><li>Interview readiness</li><li>Top 3 issues</li></ul><Link href="/upload" className={styles.planCta}>Start free <span>↗</span></Link></div>
-          <div className={styles.priceCardPaid} data-reveal><span>02 / STANDARD REPORT</span><strong>$4.99</strong><ul><li>Everything in Free Preview</li><li>Recruiter-style read</li><li>Five priority fixes</li><li>Suggested rewrite examples</li><li>Downloadable Standard PDF report</li></ul><Link href="/upload?plan=standard" className={styles.planCta}>Get Standard Report <span>↗</span></Link></div>
-          <div className={styles.priceCardFull} data-reveal><span>03 / FULL REPORT</span><strong>$9.99</strong><ul><li>Everything in Standard Report</li><li>Target-role match analysis</li><li>Missing keyword analysis</li><li>Professional summary rewrite</li><li>Action plan and Full PDF report</li></ul><Link href="/upload?plan=full" className={styles.planCta}>Get Full Report <span>↗</span></Link></div>
+          <div className={styles.priceCard} data-reveal><span>01 / FREE</span><strong>FREE</strong><ul>{reportPlanConfig.free.features.map((feature) => <li key={feature}>{feature}</li>)}</ul><Link href="/upload?plan=free" className={styles.planCta}>{reportPlanConfig.free.ctaLabel} <span>↗</span></Link></div>
+          <div className={styles.priceCardPaid} data-reveal><span>02 / STANDARD REPORT</span><strong>{reportPlanConfig.standard.priceLabel}</strong><ul>{reportPlanConfig.standard.features.map((feature) => <li key={feature}>{feature}</li>)}</ul><Link href="/upload?plan=standard" className={styles.planCta}>{reportPlanConfig.standard.ctaLabel} <span>↗</span></Link></div>
+          <div className={styles.priceCardFull} data-reveal><span>03 / FULL REPORT</span><strong>{reportPlanConfig.full.priceLabel}</strong><ul>{reportPlanConfig.full.features.map((feature) => <li key={feature}>{feature}</li>)}</ul><Link href="/upload?plan=full" className={styles.planCta}>{reportPlanConfig.full.ctaLabel} <span>↗</span></Link></div>
         </section> : null}
       </section>
 

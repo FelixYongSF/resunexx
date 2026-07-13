@@ -29,6 +29,7 @@ export async function GET(
     createdAt: report.createdAt,
     paid: report.paid,
     paymentStatus: report.paymentStatus,
+    requestedPlan: report.requestedPlan,
     accessPlan,
     analysisMode: report.analysisMode,
     preview: toPreview(report.report),

@@ -39,7 +39,7 @@ export default function PricingPage() {
         <p>
           Contact <a className="font-semibold text-[#171714]" href={`mailto:${contactEmail}`}>{contactEmail}</a> with billing or product questions.
         </p>
-        <Link href="/upload" className="nexx-button-primary mt-2">
+        <Link href="/upload?plan=free" className="nexx-button-primary mt-2">
           Analyze My Resume - Free
         </Link>
       </LegalSection>

@@ -4,6 +4,7 @@ import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
 import { getReport, markReportPaid } from "@/lib/report-store";
 import {
   getPaidPlanFromPaddleTransaction,
+  getPaddlePriceIdFromTransaction,
   isPaidPaddleTransaction,
   PaddleTransaction,
   verifyPaddleWebhookSignature
@@ -42,8 +43,9 @@ export async function POST(request: Request) {
       const transactionId = event.data?.id;
       const reportId = event.data?.custom_data?.reportId;
       const purchasedPlan = event.data ? getPaidPlanFromPaddleTransaction(event.data) : null;
+      const paddlePriceId = event.data ? getPaddlePriceIdFromTransaction(event.data) : "";
 
-      if (!transactionId || !reportId || !event.data || !purchasedPlan) {
+      if (!transactionId || !reportId || !event.data || !purchasedPlan || !paddlePriceId) {
         return NextResponse.json({ error: "Payment event is missing report metadata." }, { status: 400 });
       }
 
@@ -55,6 +57,9 @@ export async function POST(request: Request) {
       if (!existingReport) {
         return NextResponse.json({ error: "Matching report was not found." }, { status: 409 });
       }
+      if (existingReport.requestedPlan !== purchasedPlan) {
+        return NextResponse.json({ error: "Payment plan does not match the requested report plan." }, { status: 409 });
+      }
 
       const currentPlan = existingReport.accessPlan || (existingReport.paid ? "standard" : "free");
       if (hasPlanAccess(currentPlan, purchasedPlan)) {
@@ -65,7 +70,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ received: true, duplicate: true });
       }
 
-      const report = await markReportPaid(reportId, transactionId, purchasedPlan);
+      const report = await markReportPaid(reportId, transactionId, purchasedPlan, paddlePriceId);
       if (!report) {
         return NextResponse.json({ error: "Matching report was not found." }, { status: 409 });
       }

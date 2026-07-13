@@ -16,12 +16,13 @@ export type StoredReport = {
   resumeTextHash: string;
   resumeTextPreview: string;
   paid: boolean;
-  paymentStatus: "unpaid" | "paid";
-  requestedPlan?: ReportPlan;
-  accessPlan?: ReportPlan;
+  paymentStatus: "unpaid" | "not_required" | "pending" | "paid";
+  requestedPlan: ReportPlan;
+  accessPlan: ReportPlan;
   purchasedPlan?: "standard" | "full";
   analysisMode: "openai";
   paddleTransactionId?: string;
+  paddlePriceId?: string;
   report: ResumeReport;
 };
 

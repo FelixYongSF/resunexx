@@ -36,6 +36,7 @@ export default async function PreviewPage({
   }
 
   const preview = toPreview(stored.report);
+  const requestedPlan = stored.requestedPlan || "free";
 
   if ((stored.accessPlan || (stored.paid ? "standard" : "free")) !== "free") {
     redirect(`/report/${id}`);
@@ -89,7 +90,13 @@ export default async function PreviewPage({
                 <li>Suggested rewrite examples</li>
                 <li>Standard PDF report</li>
               </ul>
-              <CheckoutButton reportId={id} plan="standard" autoStart={plan === "standard"} />
+              {requestedPlan === "standard" ? (
+                <CheckoutButton reportId={id} plan="standard" autoStart={plan === "standard"} />
+              ) : (
+                <Link href="/upload?plan=standard" className="nexx-button-primary mt-7 w-full">
+                  Choose Standard before upload
+                </Link>
+              )}
             </section>
             <section className="nexx-card border-slate-900 bg-slate-950 p-7 text-white">
               <p className="text-sm font-semibold text-[#d7ff4f]">Full Report</p>
@@ -100,7 +107,13 @@ export default async function PreviewPage({
                 <li>Rewritten summary and five bullets</li>
                 <li>30-minute action plan and full PDF</li>
               </ul>
-              <CheckoutButton reportId={id} plan="full" autoStart={plan === "full"} />
+              {requestedPlan === "full" ? (
+                <CheckoutButton reportId={id} plan="full" autoStart={plan === "full"} />
+              ) : (
+                <Link href="/upload?plan=full" className="nexx-button-primary mt-7 w-full">
+                  Choose Full before upload
+                </Link>
+              )}
             </section>
             {plan === "full" ? <p className="text-sm text-slate-600">Your Full Report is selected. Complete checkout to unlock it.</p> : null}
             <div className="px-1"><Disclaimer /></div>

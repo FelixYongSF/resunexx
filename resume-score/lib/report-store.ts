@@ -1,5 +1,5 @@
 import type { StoredReport } from "@/lib/report-schema";
-import { shouldApplyPurchasedPlan, type PaidReportPlan } from "@/lib/report-plan";
+import { isPaidReportPlan, shouldApplyPurchasedPlan, type PaidReportPlan } from "@/lib/report-plan";
 
 type KvResponse<T> = { result: T };
 
@@ -48,14 +48,31 @@ export async function saveReport(report: StoredReport) {
 export async function getReport(id: string) {
   const value = await kvCommand<string | null>(["GET", `report:${id}`]);
   if (!value) return null;
-  return JSON.parse(value) as StoredReport;
+  const report = JSON.parse(value) as Partial<StoredReport>;
+  const accessPlan = report.accessPlan || (report.paid ? "standard" : "free");
+  return {
+    ...report,
+    requestedPlan: report.requestedPlan || "free",
+    accessPlan,
+    paymentStatus: report.paymentStatus || (report.paid ? "paid" : "unpaid")
+  } as StoredReport;
 }
 
-export async function markReportPaid(id: string, paddleTransactionId: string, purchasedPlan: PaidReportPlan) {
+export async function markReportPaid(
+  id: string,
+  paddleTransactionId: string,
+  purchasedPlan: PaidReportPlan,
+  paddlePriceId: string
+) {
   const report = await getReport(id);
   if (!report) return null;
+  if (report.requestedPlan !== purchasedPlan || !isPaidReportPlan(report.requestedPlan)) {
+    throw new Error("Paid transaction does not match the report's requested plan.");
+  }
   const existingPlan = report.accessPlan || (report.paid ? "standard" : "free");
-  if (!shouldApplyPurchasedPlan(existingPlan, purchasedPlan)) return report;
+  if (!shouldApplyPurchasedPlan(existingPlan, purchasedPlan)) {
+    return report.paddleTransactionId === paddleTransactionId ? report : null;
+  }
 
   const updated = {
     ...report,
@@ -64,6 +81,7 @@ export async function markReportPaid(id: string, paddleTransactionId: string, pu
     accessPlan: purchasedPlan,
     purchasedPlan,
     paddleTransactionId,
+    paddlePriceId,
     updatedAt: new Date().toISOString()
   };
   await saveReport(updated);

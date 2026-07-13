@@ -86,10 +86,14 @@ export async function getPaddleTransaction(transactionId: string) {
 }
 
 export function getPaidPlanFromPaddleTransaction(transaction: PaddleTransaction): PaidReportPlan | null {
-  const matchingPriceId = transaction.items
-    ?.map((item) => item.price?.id || item.price_id)
-    .find((priceId) => Boolean(getPaddlePlanForPriceId(priceId)));
+  const matchingPriceId = getPaddlePriceIdFromTransaction(transaction);
   return getPaddlePlanForPriceId(matchingPriceId);
+}
+
+export function getPaddlePriceIdFromTransaction(transaction: PaddleTransaction) {
+  return transaction.items
+    ?.map((item) => item.price?.id || item.price_id)
+    .find((priceId) => Boolean(getPaddlePlanForPriceId(priceId))) || "";
 }
 
 export function isPaidPaddleTransaction(transaction: PaddleTransaction, expectedReportId?: string) {
@@ -102,7 +106,7 @@ export function isPaidPaddleTransaction(transaction: PaddleTransaction, expected
     Boolean(transactionReportId) &&
     (!expectedReportId || transactionReportId === expectedReportId) &&
     Boolean(purchasedPlan) &&
-    (!selectedPlan || (isPaidReportPlan(selectedPlan) && selectedPlan === purchasedPlan))
+    isPaidReportPlan(selectedPlan) && selectedPlan === purchasedPlan
   );
 }
 
@@ -125,7 +129,7 @@ export function verifyPaddleWebhookSignature(rawBody: string, signatureHeader: s
 
   if (!timestamp || signatures.length === 0) return false;
   const timestampSeconds = Number(timestamp);
-  if (!Number.isFinite(timestampSeconds) || Math.abs(Date.now() / 1000 - timestampSeconds) > 5) return false;
+  if (!Number.isFinite(timestampSeconds) || Math.abs(Date.now() / 1000 - timestampSeconds) > 5 * 60) return false;
 
   const signedPayload = `${timestamp}:${rawBody}`;
   const expected = createHmac("sha256", process.env.PADDLE_WEBHOOK_SECRET)

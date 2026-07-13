@@ -15,7 +15,7 @@ export function Header() {
         <Link href="/#pricing" className="hover:text-[#151512]">Pricing</Link>
       </nav>
       <Link
-        href="/upload"
+        href="/upload?plan=free"
         className="nexx-button-primary min-h-0 px-4 py-2"
       >
         Start free

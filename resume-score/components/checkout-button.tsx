@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { trackClientEvent } from "@/lib/analytics";
 
 type CheckoutResponse = {
@@ -66,13 +66,7 @@ export function CheckoutButton({
   const [error, setError] = useState("");
   const hasAutoStarted = useRef(false);
 
-  useEffect(() => {
-    if (!autoStart || hasAutoStarted.current) return;
-    hasAutoStarted.current = true;
-    void startCheckout();
-  }, [autoStart]);
-
-  async function startCheckout() {
+  const startCheckout = useCallback(async () => {
     setIsLoading(true);
     setError("");
 
@@ -131,7 +125,13 @@ export function CheckoutButton({
       setError(message);
       setIsLoading(false);
     }
-  }
+  }, [plan, reportId]);
+
+  useEffect(() => {
+    if (!autoStart || hasAutoStarted.current) return;
+    hasAutoStarted.current = true;
+    void startCheckout();
+  }, [autoStart, startCheckout]);
 
   return (
     <div className="mt-7">

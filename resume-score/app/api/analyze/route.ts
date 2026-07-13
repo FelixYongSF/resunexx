@@ -6,7 +6,7 @@ import { trackServerEvent } from "@/lib/analytics";
 import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
 import { saveReport } from "@/lib/report-store";
 import { toPreview, StoredReport } from "@/lib/report-schema";
-import { isReportPlan, type ReportPlan } from "@/lib/report-plan";
+import { getRequestedReportPlan, type ReportPlan } from "@/lib/report-plan";
 
 export const runtime = "nodejs";
 export const maxDuration = 120;
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     const formData = await request.formData();
     const file = formData.get("resume");
     const requestedPlanValue = formData.get("selectedPlan");
-    const requestedPlan: ReportPlan = isReportPlan(requestedPlanValue) ? requestedPlanValue : "free";
+    const requestedPlan: ReportPlan = getRequestedReportPlan(requestedPlanValue);
 
     if (!(file instanceof File)) {
       return fail(requestId, step, "Please upload a PDF or DOCX resume.", 400);
@@ -99,7 +99,7 @@ export async function POST(request: Request) {
       resumeTextHash: createHash("sha256").update(resumeText).digest("hex"),
       resumeTextPreview: resumeText.slice(0, 700),
       paid: false,
-      paymentStatus: "unpaid",
+      paymentStatus: requestedPlan === "free" ? "not_required" : "pending",
       requestedPlan,
       accessPlan: "free",
       analysisMode: "openai",

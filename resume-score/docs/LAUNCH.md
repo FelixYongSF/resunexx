@@ -83,6 +83,8 @@ The webhook listens for:
 
 When Paddle sends a paid transaction with `custom_data.reportId`, ScoreLab marks the matching report as paid.
 
+Each report also stores its requested plan, payment status, Paddle transaction ID, and verified Paddle price ID. URL parameters only express a customer choice; they never unlock report content. The server verifies the transaction price ID and plan against the stored report before granting Standard or Full entitlement.
+
 Local fallback:
 
 - The `/success` page can verify a Paddle transaction server-side when a `transaction_id` is present.
