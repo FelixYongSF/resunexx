@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import { appUrl, assertPaddleCheckoutConfig, getPaddleEnvironment } from "@/lib/paddle";
-import { getConfiguredPaddlePriceId, hasPlanAccess, isPaidReportPlan, type PaidReportPlan } from "@/lib/report-plan";
+import { getConfiguredPaddlePriceId, isPaidReportPlan, type PaidReportPlan } from "@/lib/report-plan";
+import { createCheckout } from "@/lib/payment";
 import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
-import { getReport, hasPersistentReportStore } from "@/lib/report-store";
 
 export const runtime = "nodejs";
 
@@ -24,38 +23,7 @@ export async function POST(request: Request) {
     if (!isPaidReportPlan(plan)) return NextResponse.json({ error: "Please choose a valid paid report plan." }, { status: 400 });
     selectedPlan = plan;
 
-    const report = await getReport(reportId);
-    if (!report) return NextResponse.json({ error: "Report not found." }, { status: 404 });
-    if (report.requestedPlan !== selectedPlan) {
-      return NextResponse.json(
-        { error: "This report was created for a different plan. Return to pricing to choose a new plan." },
-        { status: 409 }
-      );
-    }
-    const currentPlan = report.accessPlan || (report.paid ? "standard" : "free");
-    if (hasPlanAccess(currentPlan, selectedPlan)) {
-      return NextResponse.json({ error: "This report plan is already unlocked." }, { status: 409 });
-    }
-    assertPaddleCheckoutConfig(selectedPlan);
-
-    if (process.env.NODE_ENV === "production" && !hasPersistentReportStore()) {
-      return NextResponse.json(
-        {
-          error:
-            "Payment is not ready yet. Production report storage is not configured, so we cannot safely accept payment."
-        },
-        { status: 503 }
-      );
-    }
-
-    return NextResponse.json({
-      provider: "paddle",
-      environment: getPaddleEnvironment(),
-      clientToken: process.env.PADDLE_CLIENT_TOKEN,
-      priceId: getConfiguredPaddlePriceId(selectedPlan),
-      successUrl: `${appUrl()}/success?report_id=${reportId}`,
-      customData: { reportId, selectedPlan }
-    });
+    return NextResponse.json(await createCheckout({ reportId, plan: selectedPlan }));
   } catch (error) {
     const message = error instanceof Error ? error.message : "Could not start Paddle Checkout.";
     console.error("[paddle:checkout] request failed", {
@@ -67,15 +35,27 @@ export async function POST(request: Request) {
       hasFullPriceId: Boolean(getConfiguredPaddlePriceId("full")),
       appUrlConfigured: Boolean(process.env.NEXT_PUBLIC_APP_URL)
     });
-    const userMessage = message.includes("Paddle is not configured")
-      ? process.env.NODE_ENV === "development"
-        ? message
-        : "Checkout is temporarily unavailable. Please try again later."
-      : message;
+    const userMessage = getCheckoutUserMessage(message);
 
     return NextResponse.json(
       { error: userMessage },
-      { status: message.includes("Paddle is not configured") ? 503 : 500 }
+      { status: message.includes("Paddle is not configured") || message.includes("storage is not configured") ? 503 : 500 }
     );
   }
+}
+
+function getCheckoutUserMessage(message: string) {
+  if (message.includes("Paddle is not configured") || message.includes("storage is not configured")) {
+    return "Checkout is temporarily unavailable. Please try again later.";
+  }
+  if (message.includes("Report not found")) {
+    return "We couldn't find this resume analysis. Please upload your resume again.";
+  }
+  if (message.includes("different plan")) {
+    return "This analysis belongs to a different plan. Please choose your report plan and upload again.";
+  }
+  if (message.includes("already unlocked")) {
+    return "This report is already unlocked. You can open it from your report page.";
+  }
+  return "We couldn't open checkout right now. Please try again.";
 }

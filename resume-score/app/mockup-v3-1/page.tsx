@@ -3,7 +3,6 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
 import { AnalyticsPageView } from "@/components/analytics-page-view";
 import { reportPlanConfig } from "@/lib/report-plan";
 import styles from "./mockup-v3-1.module.css";
@@ -32,10 +31,13 @@ const insights = [
   ["WHAT YOU SHOULD FIX", "The changes that improve your next application.", "ink"],
 ];
 
-function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) {
-  const pathname = usePathname();
-  const compactPricing = pathname === "/mockup-v3-4";
-  const separatePricing = pathname === "/mockup-v3-5";
+function MockupV31Content({
+  enableMotion = false,
+  separatePricing = false
+}: {
+  enableMotion?: boolean;
+  separatePricing?: boolean;
+}) {
   const pageRef = useRef<HTMLElement>(null);
   const [motionReady, setMotionReady] = useState(false);
 
@@ -180,18 +182,18 @@ function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) 
 
           {!separatePricing ? <aside id="pricing" className={styles.pricingPanel}>
             <div className={styles.priceCard} data-reveal style={{ "--reveal-delay": "0ms" } as CSSProperties}>
-              <span>{compactPricing ? "01 / FREE" : "FREE PREVIEW"}</span><strong>{compactPricing ? "FREE" : "$0"}</strong>
-              <ul>{compactPricing ? <><li>AI-estimated preview</li><li>Resume score</li><li>ATS score</li><li>Interview readiness</li><li>Top 3 issues</li></> : <><li>Resume score</li><li>ATS score</li><li>Top 3 issues</li></>}</ul>
+              <span>FREE PREVIEW</span><strong>$0</strong>
+              <ul><li>Resume score</li><li>ATS score</li><li>Top 3 issues</li></ul>
               <Link href="/upload?plan=free" className={styles.planCta}>Start free <span>↗</span></Link>
             </div>
             <div className={styles.priceCardPaid} data-reveal style={{ "--reveal-delay": "100ms" } as CSSProperties}>
-              <span>{compactPricing ? "02 / STANDARD REPORT" : "STANDARD REPORT"}</span><strong>$4.99</strong>
+              <span>STANDARD REPORT</span><strong>$4.99</strong>
               <ul><li>Everything in Free Preview</li><li>Recruiter-style read</li><li>Five priority fixes</li><li>Suggested rewrite examples</li><li>Downloadable Standard PDF report</li></ul>
               <Link href="/upload?plan=standard" className={styles.planCta}>Get Standard Report <span>↗</span></Link>
             </div>
             <div className={styles.priceCardFull} data-reveal style={{ "--reveal-delay": "200ms" } as CSSProperties}>
-              <span>{compactPricing ? "03 / FULL REPORT" : "FULL REPORT"}</span><strong>$9.99</strong>
-              <ul>{compactPricing ? <><li>Everything in Standard Report</li><li>Target-role match analysis</li><li>Missing keyword analysis</li><li>Professional summary rewrite</li><li>Achievement bullet rewrites</li><li>Action plan and Full PDF report</li></> : <><li>Everything in Standard Report</li><li>Target-role match analysis</li><li>Missing keyword analysis</li><li>Rewritten professional summary</li><li>Five rewritten achievement bullets</li><li>30-minute action plan</li><li>Downloadable Full PDF report</li></>}</ul>
+              <span>FULL REPORT</span><strong>$9.99</strong>
+              <ul><li>Everything in Standard Report</li><li>Target-role match analysis</li><li>Missing keyword analysis</li><li>Rewritten professional summary</li><li>Five rewritten achievement bullets</li><li>30-minute action plan</li><li>Downloadable Full PDF report</li></ul>
               <Link href="/upload?plan=full" className={styles.planCta}>Get Full Report <span>↗</span></Link>
             </div>
           </aside> : null}
@@ -212,5 +214,5 @@ function MockupV31Content({ enableMotion = false }: { enableMotion?: boolean }) 
 }
 
 export default function MockupV31Page() {
-  return <MockupV31Content />;
+  return <MockupV31Content separatePricing />;
 }

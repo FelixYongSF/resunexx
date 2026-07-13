@@ -1,15 +1,11 @@
 import { NextResponse } from "next/server";
 import { trackServerEvent } from "@/lib/analytics";
 import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
-import { getReport, markReportPaid } from "@/lib/report-store";
 import {
-  getPaidPlanFromPaddleTransaction,
-  getPaddlePriceIdFromTransaction,
-  isPaidPaddleTransaction,
   PaddleTransaction,
   verifyPaddleWebhookSignature
 } from "@/lib/paddle";
-import { hasPlanAccess } from "@/lib/report-plan";
+import { unlockEntitlement, verifyTransaction } from "@/lib/payment";
 
 export const runtime = "nodejs";
 
@@ -41,47 +37,28 @@ export async function POST(request: Request) {
 
     if (event.event_type === "transaction.completed" || event.event_type === "transaction.paid") {
       const transactionId = event.data?.id;
-      const reportId = event.data?.custom_data?.reportId;
-      const purchasedPlan = event.data ? getPaidPlanFromPaddleTransaction(event.data) : null;
-      const paddlePriceId = event.data ? getPaddlePriceIdFromTransaction(event.data) : "";
-
-      if (!transactionId || !reportId || !event.data || !purchasedPlan || !paddlePriceId) {
+      if (!transactionId) {
         return NextResponse.json({ error: "Payment event is missing report metadata." }, { status: 400 });
       }
 
-      if (!isPaidPaddleTransaction(event.data, reportId)) {
-        return NextResponse.json({ error: "Payment event does not match the configured product." }, { status: 409 });
-      }
-
-      const existingReport = await getReport(reportId);
-      if (!existingReport) {
-        return NextResponse.json({ error: "Matching report was not found." }, { status: 409 });
-      }
-      if (existingReport.requestedPlan !== purchasedPlan) {
-        return NextResponse.json({ error: "Payment plan does not match the requested report plan." }, { status: 409 });
-      }
-
-      const currentPlan = existingReport.accessPlan || (existingReport.paid ? "standard" : "free");
-      if (hasPlanAccess(currentPlan, purchasedPlan)) {
+      const payment = await verifyTransaction(transactionId);
+      const { alreadyUnlocked } = await unlockEntitlement(payment);
+      if (alreadyUnlocked) {
         console.info("[paddle:webhook] duplicate payment event ignored", {
           eventType: event.event_type,
-          reportId
+          reportId: payment.reportId
         });
         return NextResponse.json({ received: true, duplicate: true });
       }
 
-      const report = await markReportPaid(reportId, transactionId, purchasedPlan, paddlePriceId);
-      if (!report) {
-        return NextResponse.json({ error: "Matching report was not found." }, { status: 409 });
-      }
       trackServerEvent({
         event: "payment_completed",
-        reportId,
+        reportId: payment.reportId,
         source: "paddle_webhook",
         metadata: {
-          transactionId,
+          transactionId: payment.transactionId,
           eventType: event.event_type,
-          purchasedPlan
+          purchasedPlan: payment.purchasedPlan
         }
       });
     }

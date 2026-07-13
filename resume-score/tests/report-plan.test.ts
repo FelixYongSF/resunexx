@@ -14,8 +14,10 @@ import {
 test("maps explicit Paddle prices to the correct plan and rejects unknown prices", () => {
   const previousStandard = process.env.PADDLE_STANDARD_PRICE_ID;
   const previousFull = process.env.PADDLE_FULL_PRICE_ID;
+  const previousLegacy = process.env.PADDLE_PRICE_ID;
   process.env.PADDLE_STANDARD_PRICE_ID = "pri_standard";
   process.env.PADDLE_FULL_PRICE_ID = "pri_full";
+  process.env.PADDLE_PRICE_ID = "pri_legacy";
 
   assert.equal(getConfiguredPaddlePriceId("standard"), "pri_standard");
   assert.equal(getConfiguredPaddlePriceId("full"), "pri_full");
@@ -25,6 +27,19 @@ test("maps explicit Paddle prices to the correct plan and rejects unknown prices
 
   process.env.PADDLE_STANDARD_PRICE_ID = previousStandard;
   process.env.PADDLE_FULL_PRICE_ID = previousFull;
+  process.env.PADDLE_PRICE_ID = previousLegacy;
+});
+
+test("Standard checkout never falls back to the old generic Paddle price variable", () => {
+  const previousStandard = process.env.PADDLE_STANDARD_PRICE_ID;
+  const previousLegacy = process.env.PADDLE_PRICE_ID;
+  delete process.env.PADDLE_STANDARD_PRICE_ID;
+  process.env.PADDLE_PRICE_ID = "pri_legacy";
+
+  assert.equal(getConfiguredPaddlePriceId("standard"), "");
+
+  process.env.PADDLE_STANDARD_PRICE_ID = previousStandard;
+  process.env.PADDLE_PRICE_ID = previousLegacy;
 });
 
 test("plan access prevents an unpaid or Standard report from exposing Full content", () => {
@@ -45,8 +60,8 @@ test("normalizes untrusted requested plan values and centralizes the plan config
   assert.equal(reportPlanConfig.standard.priceEnvironmentVariable, "PADDLE_STANDARD_PRICE_ID");
   assert.equal(reportPlanConfig.full.priceEnvironmentVariable, "PADDLE_FULL_PRICE_ID");
   assert.equal(reportPlanConfig.free.uploadCtaLabel, "Analyze My Resume — Free");
-  assert.equal(reportPlanConfig.standard.uploadCtaLabel, "Continue to Payment — $4.99");
-  assert.equal(reportPlanConfig.full.uploadCtaLabel, "Continue to Payment — $9.99");
+  assert.equal(reportPlanConfig.standard.uploadCtaLabel, "Unlock Standard Report — $4.99");
+  assert.equal(reportPlanConfig.full.uploadCtaLabel, "Unlock Full Report — $9.99");
   assert.equal(reportPlanConfig.free.features.length, 5);
   assert.equal(reportPlanConfig.standard.features.length, 5);
   assert.equal(reportPlanConfig.full.features.length, 5);

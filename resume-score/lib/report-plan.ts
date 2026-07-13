@@ -23,7 +23,7 @@ export const reportPlanConfig: Record<ReportPlan, ReportPlanConfig> = {
     priceLabel: "FREE",
     entitlement: "free",
     ctaLabel: "Start Free",
-    uploadHeading: "Start with your free resume analysis",
+    uploadHeading: "Start your free resume analysis",
     uploadCtaLabel: "Analyze My Resume — Free",
     uploadSupport: "Upload your resume as PDF or DOCX. No payment is required for your free preview.",
     features: ["AI-estimated preview", "Resume score", "ATS score", "Interview readiness", "Top 3 issues"]
@@ -35,7 +35,7 @@ export const reportPlanConfig: Record<ReportPlan, ReportPlanConfig> = {
     entitlement: "standard",
     ctaLabel: "Get Standard Report",
     uploadHeading: "Upload your resume to unlock your Standard Report",
-    uploadCtaLabel: "Continue to Payment — $4.99",
+    uploadCtaLabel: "Unlock Standard Report — $4.99",
     uploadSupport: "Your analysis is prepared first, then you can securely unlock your Standard Report.",
     priceEnvironmentVariable: "PADDLE_STANDARD_PRICE_ID",
     features: ["Everything in Free Preview", "Recruiter-style read", "Five priority fixes", "Suggested rewrite examples", "Downloadable Standard PDF report"]
@@ -47,7 +47,7 @@ export const reportPlanConfig: Record<ReportPlan, ReportPlanConfig> = {
     entitlement: "full",
     ctaLabel: "Get Full Report",
     uploadHeading: "Upload your resume to unlock your Full Report",
-    uploadCtaLabel: "Continue to Payment — $9.99",
+    uploadCtaLabel: "Unlock Full Report — $9.99",
     uploadSupport: "Your analysis is prepared first, then you can securely unlock your Full Report.",
     priceEnvironmentVariable: "PADDLE_FULL_PRICE_ID",
     features: ["Everything in Standard Report", "Target-role match analysis", "Missing keyword analysis", "Professional summary rewrite", "Action plan and Full PDF report"]
@@ -88,9 +88,7 @@ export function getPdfReportTitle(accessPlan: ReportPlan) {
 
 export function getConfiguredPaddlePriceId(plan: PaidReportPlan) {
   if (plan === "full") return process.env.PADDLE_FULL_PRICE_ID || "";
-
-  // PADDLE_PRICE_ID remains a backwards-compatible alias for existing Standard deployments.
-  return process.env.PADDLE_STANDARD_PRICE_ID || process.env.PADDLE_PRICE_ID || "";
+  return process.env.PADDLE_STANDARD_PRICE_ID || "";
 }
 
 export function getPaddlePlanForPriceId(priceId: string | undefined): PaidReportPlan | null {

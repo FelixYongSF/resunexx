@@ -100,7 +100,7 @@ transaction.paid
 
 ### `PADDLE_STANDARD_PRICE_ID` and `PADDLE_FULL_PRICE_ID`
 
-Used by Paddle Checkout to sell the two paid report plans. `PADDLE_PRICE_ID` remains a temporary backwards-compatible alias for the Standard price only; configure both explicit variables before launch.
+Used by Paddle Checkout to sell the two paid report plans. Configure both explicit variables before launch.
 
 `PADDLE_STANDARD_PRICE_ID` is the source of truth for the $4.99 Standard Report. `PADDLE_FULL_PRICE_ID` is the source of truth for the $9.99 Full Report. A selected plan is stored with each report, but it never grants access by itself: only a verified Paddle transaction upgrades the report entitlement.
 

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { trackServerEvent } from "@/lib/analytics";
-import { getReport, markReportPaid } from "@/lib/report-store";
-import { getPaddlePriceIdFromTransaction, getPaidPlanFromPaddleTransaction, getPaddleTransaction, isPaidPaddleTransaction } from "@/lib/paddle";
+import { getReport } from "@/lib/report-store";
+import { unlockEntitlement, verifyTransaction } from "@/lib/payment";
 
 export const runtime = "nodejs";
 
@@ -22,28 +22,17 @@ export default async function SuccessPage({
 
   if (transactionId) {
     try {
-      const transaction = await getPaddleTransaction(transactionId);
-      const transactionReportId = transaction.custom_data?.reportId;
-
-      if (!transactionReportId || (reportIdFromUrl && transactionReportId !== reportIdFromUrl)) {
-        throw new Error("Paddle transaction does not match this report.");
-      }
-
-      reportId = transactionReportId;
-      const purchasedPlan = getPaidPlanFromPaddleTransaction(transaction);
-      const paddlePriceId = getPaddlePriceIdFromTransaction(transaction);
-
-      if (purchasedPlan && paddlePriceId && isPaidPaddleTransaction(transaction, transactionReportId)) {
-        const unlockedReport = await markReportPaid(transactionReportId, transaction.id, purchasedPlan, paddlePriceId);
-        if (unlockedReport) {
-          verifiedReportId = transactionReportId;
-          trackServerEvent({
-            event: "payment_completed",
-            reportId: transactionReportId,
-            source: "success_page",
-            metadata: { transactionId: transaction.id, purchasedPlan }
-          });
-        }
+      const payment = await verifyTransaction(transactionId, reportIdFromUrl);
+      reportId = payment.reportId;
+      const { alreadyUnlocked } = await unlockEntitlement(payment);
+      verifiedReportId = payment.reportId;
+      if (!alreadyUnlocked) {
+        trackServerEvent({
+          event: "payment_completed",
+          reportId: payment.reportId,
+          source: "success_page",
+          metadata: { transactionId: payment.transactionId, purchasedPlan: payment.purchasedPlan }
+        });
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : "Paddle could not verify this payment.";

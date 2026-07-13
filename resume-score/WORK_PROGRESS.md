@@ -76,7 +76,8 @@ app/api/paddle/webhook/route.ts
 PADDLE_API_KEY
 PADDLE_CLIENT_TOKEN
 PADDLE_WEBHOOK_SECRET
-PADDLE_PRICE_ID
+PADDLE_STANDARD_PRICE_ID
+PADDLE_FULL_PRICE_ID
 ```
 
 - Added production checkout guard requiring Paddle config, persistent storage, and non-mock analysis mode.
@@ -123,7 +124,8 @@ OPENAI_API_KEY=<real OpenAI API key>
 PADDLE_API_KEY=<Paddle sandbox or live API key>
 PADDLE_CLIENT_TOKEN=<matching Paddle client token>
 PADDLE_WEBHOOK_SECRET=<matching Paddle webhook secret>
-PADDLE_PRICE_ID=<matching Paddle price ID>
+PADDLE_STANDARD_PRICE_ID=<matching Paddle Standard Report price ID>
+PADDLE_FULL_PRICE_ID=<matching Paddle Full Report price ID>
 NEXT_PUBLIC_APP_URL=<local or deployed app URL>
 KV_REST_API_URL=<production storage URL>
 KV_REST_API_TOKEN=<production storage token>

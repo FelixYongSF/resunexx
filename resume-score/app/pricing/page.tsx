@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LegalPage, LegalSection } from "@/components/legal-page";
 import { contactEmail, paymentProvider, productName } from "@/lib/site";
+import { reportPlanConfig } from "@/lib/report-plan";
 
 export default function PricingPage() {
   return (
@@ -39,10 +40,25 @@ export default function PricingPage() {
         <p>
           Contact <a className="font-semibold text-[#171714]" href={`mailto:${contactEmail}`}>{contactEmail}</a> with billing or product questions.
         </p>
-        <Link href="/upload?plan=free" className="nexx-button-primary mt-2">
-          Analyze My Resume - Free
-        </Link>
       </LegalSection>
+
+      <section className="grid gap-4 sm:grid-cols-3">
+        {(["free", "standard", "full"] as const).map((plan) => {
+          const details = reportPlanConfig[plan];
+          return (
+            <article key={plan} className="rounded-2xl border border-[#e3ddd2] bg-[#f7f4ee] p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#625c52]">{details.displayName}</p>
+              <p className="mt-2 text-2xl font-semibold text-[#171714]">{details.priceLabel}</p>
+              <ul className="mt-4 grid gap-2 text-xs leading-5 text-[#625c52]">
+                {details.features.map((feature) => <li key={feature}>• {feature}</li>)}
+              </ul>
+              <Link href={`/upload?plan=${plan}`} className="nexx-button-primary mt-5 w-full">
+                {plan === "free" ? "Start Free" : details.ctaLabel}
+              </Link>
+            </article>
+          );
+        })}
+      </section>
     </LegalPage>
   );
 }
