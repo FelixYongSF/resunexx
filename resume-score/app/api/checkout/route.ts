@@ -42,7 +42,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { error: userMessage },
-      { status: isConfigurationError(message) ? 503 : 500 }
+      { status: isConfigurationError(message) ? 503 : isCheckoutInputError(message) ? 400 : 500 }
     );
   }
 }
@@ -60,9 +60,19 @@ function getCheckoutUserMessage(message: string) {
   if (message.includes("already unlocked")) {
     return "This report is already unlocked. You can open it from your report page.";
   }
+  if (message.includes("target-role details are required")) {
+    return "Add a target role before unlocking the ELITE report.";
+  }
   return "We couldn't open checkout right now. Please try again.";
 }
 
 function isConfigurationError(message: string) {
   return message.includes("Polar is not configured") || message.includes("storage is not configured");
+}
+
+function isCheckoutInputError(message: string) {
+  return message.includes("Report not found") ||
+    message.includes("different plan") ||
+    message.includes("already unlocked") ||
+    message.includes("target-role details are required");
 }

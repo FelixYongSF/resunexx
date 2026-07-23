@@ -220,6 +220,12 @@ test("paid checkout cancellation returns to the matching pending upload and unpa
   assert.match(reportApiSource, /Payment is required to view the paid report/);
 });
 
+test("checkout returns a user-actionable error when ELITE details are missing", () => {
+  const checkoutSource = readProjectFile("app/api/checkout/route.ts");
+  assert.match(checkoutSource, /Add a target role before unlocking the ELITE report/);
+  assert.match(checkoutSource, /isCheckoutInputError/);
+});
+
 test("duplicate webhook delivery cannot claim paid analysis twice", () => {
   const storeSource = readProjectFile("lib/report-store.ts");
   const paymentSource = readProjectFile("lib/payment/index.ts");
