@@ -147,3 +147,17 @@ vite.config.ts.timestamp-*
 tmp/
 .vercel
 .env*.local
+
+# Legacy static-site artifacts outside the ResuNexx application.
+/assets/
+/cases-en.html
+/cases.html
+/en.html
+/index.html
+/script.js
+/services-en.html
+/services.html
+/start-en.html
+/start.html
+/styles.css
+/zh.html
