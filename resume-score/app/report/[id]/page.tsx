@@ -55,7 +55,7 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
       <section className="nexx-shell py-12">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <p className="text-sm font-semibold text-blue-600">{isFullReport ? "ELITE — Resume Intelligence Engine" : "PRO — Resume Intelligence Report"}</p>
+            <p className="text-sm font-semibold text-blue-600">{isFullReport ? "ELITE — Resume Intelligence Report" : "PRO — Resume Intelligence Report"}</p>
             <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
               {getPdfReportTitle(accessPlan)}
             </h1>
@@ -187,7 +187,7 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
         </section>
 
         {isFullReport ? <section className="nexx-card mt-8 p-7">
-          <p className="text-sm font-semibold text-blue-600">ELITE Resume Intelligence Engine</p>
+          <p className="text-sm font-semibold text-blue-600">ELITE Resume Intelligence Report</p>
           <h2 className="mt-3 text-2xl font-semibold text-slate-950">Stronger improvement examples</h2>
           <div className="mt-6 grid gap-4">
             <div className="grid gap-4 lg:grid-cols-2">
@@ -266,7 +266,7 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
           <section className="nexx-card mt-8 p-7">
             <h2 className="text-2xl font-semibold text-slate-950">Final Resume Blueprint</h2>
             <div className="mt-5 grid gap-4">
-              <div className="rounded-2xl bg-slate-950 p-5 text-sm leading-6 text-white"><div className="mb-3 flex items-center justify-between gap-4"><span className="font-semibold text-white/70">Professional Summary Draft</span><CopyDraftButton text={report.fullReport.rewrittenSummary} /></div><p>{report.fullReport.rewrittenSummary}</p></div>
+              <div className="rounded-2xl bg-slate-950 p-5 text-sm leading-6 text-white"><div className="mb-3 flex items-center justify-between gap-4"><span className="font-semibold text-white/70">Professional Summary Improvement Example</span><CopyDraftButton text={report.fullReport.rewrittenSummary} /></div><p>{report.fullReport.rewrittenSummary}</p></div>
               {report.fullReport.rewrittenAchievementBullets.map((bullet) => <div key={bullet} className="rounded-2xl bg-blue-50 p-4 text-sm leading-6 text-blue-950"><div className="mb-2 flex justify-end"><CopyDraftButton text={bullet} /></div><p>{bullet}</p></div>)}
               <p className="text-sm leading-6 text-slate-500">Review before using: {report.fullReport.rewriteEvidenceCaveat}</p>
             </div>
@@ -278,10 +278,10 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
           <h2 className="mt-3 text-2xl font-semibold text-slate-950">Now see how your strongest resume sections could be expressed more clearly, professionally, and with greater impact.</h2>
           <div className="mt-6 max-w-md rounded-2xl border border-slate-900 bg-slate-950 p-5 text-white">
             <p className="text-sm font-semibold text-[#d7ff4f]">ELITE — $9.99</p>
-            <p className="mt-2 text-lg font-semibold">Resume Intelligence Engine</p>
+            <p className="mt-2 text-lg font-semibold">Resume Intelligence Report</p>
             <ul className="mt-4 grid gap-2 text-sm text-white/75">
-              <li>Professional Summary Draft</li>
-              <li>Stronger Achievement Statement Drafts</li>
+              <li>Professional Summary Improvement Suggestions</li>
+              <li>Achievement Improvement Recommendations</li>
               <li>Target-role Optimization</li>
               <li>Recruiter-ready Content Suggestions</li>
               <li>Job-match Insights</li>

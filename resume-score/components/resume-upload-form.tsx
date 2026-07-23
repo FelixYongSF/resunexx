@@ -58,7 +58,7 @@ export function ResumeUploadForm({ compact, theme = "default", initialPlan = "fr
       }
     }
 
-    if (selectedPlan === "full" && !targetRole.trim()) {
+    if (selectedPlan === "full" && !targetRole.trim() && !pendingReportId) {
       setError("Target Role / Job Title is required for ELITE.");
       return;
     }

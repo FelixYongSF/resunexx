@@ -49,7 +49,7 @@ export async function createPolarCheckout({ reportId, plan }: { reportId: string
     products: [getPolarProductId(plan)],
     metadata: { reportId, selectedPlan: plan },
     successUrl: `${appUrl()}/payment/success?report_id=${encodeURIComponent(reportId)}`,
-    returnUrl: `${appUrl()}/upload?plan=${encodeURIComponent(plan)}&report_id=${encodeURIComponent(reportId)}`
+    returnUrl: `${appUrl()}/payment/cancel?plan=${encodeURIComponent(plan)}&report_id=${encodeURIComponent(reportId)}`
   });
 
   if (!checkout.url) throw new Error("Polar did not return a checkout URL.");

@@ -80,10 +80,10 @@ test("normalizes untrusted requested plan values and centralizes the plan config
   assert.equal(reportPlanConfig.standard.displayName, "PRO");
   assert.equal(reportPlanConfig.full.displayName, "ELITE");
   assert.equal(reportPlanConfig.standard.productName, "Resume Intelligence Report");
-  assert.equal(reportPlanConfig.full.productName, "Resume Intelligence Engine");
+  assert.equal(reportPlanConfig.full.productName, "Resume Intelligence Report");
   assert.equal(reportPlanConfig.free.ctaLabel, "START FREE");
   assert.equal(reportPlanConfig.standard.ctaLabel, "UNLOCK MY IMPROVEMENT PLAN — $4.99");
-  assert.equal(reportPlanConfig.full.ctaLabel, "SEE MY STRONGER VERSION — $9.99");
+  assert.equal(reportPlanConfig.full.ctaLabel, "UNLOCK ELITE REPORT — $9.99");
   assert.equal(reportPlanConfig.standard.uploadCtaLabel, "CONTINUE TO SECURE CHECKOUT — $4.99");
   assert.equal(reportPlanConfig.full.uploadCtaLabel, "CONTINUE TO SECURE CHECKOUT — $9.99");
   assert.equal(reportPlanConfig.free.features.length, 5);
@@ -93,7 +93,7 @@ test("normalizes untrusted requested plan values and centralizes the plan config
 
 test("PDF selection remains plan-specific", () => {
   assert.equal(getPdfReportTitle("standard"), "PRO Resume Intelligence Report");
-  assert.equal(getPdfReportTitle("full"), "ELITE Resume Intelligence Engine");
+  assert.equal(getPdfReportTitle("full"), "ELITE Resume Intelligence Report");
 });
 
 test("an existing completed free report can be prepared for a paid upgrade without a new analysis", () => {
@@ -211,9 +211,11 @@ test("paid analysis route refuses client-submitted paid plans and the webhook ow
 
 test("paid checkout cancellation returns to the matching pending upload and unpaid reports stay gated", () => {
   const polarSource = readProjectFile("lib/polar.ts");
+  const cancelSource = readProjectFile("app/payment/cancel/page.tsx");
   const downloadSource = readProjectFile("app/api/download/[id]/route.ts");
   const reportApiSource = readProjectFile("app/api/reports/[id]/route.ts");
-  assert.match(polarSource, /\/upload\?plan=\$\{encodeURIComponent\(plan\)\}&report_id=/);
+  assert.match(polarSource, /\/payment\/cancel\?plan=\$\{encodeURIComponent\(plan\)\}&report_id=/);
+  assert.match(cancelSource, /redirect\(`\/upload\?plan=\$\{selectedPlan\}\$\{reportQuery\}`\)/);
   assert.match(downloadSource, /Payment is required before downloading the PDF report/);
   assert.match(reportApiSource, /Payment is required to view the paid report/);
 });

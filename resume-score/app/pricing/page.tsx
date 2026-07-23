@@ -29,12 +29,12 @@ export default async function PricingPage({
         </p>
       </LegalSection>
 
-      <LegalSection title="ELITE — Resume Intelligence Engine">
+      <LegalSection title="ELITE — Resume Intelligence Report">
         <p>
-          See what your stronger resume could look like. The ELITE Resume Intelligence Engine costs <strong className="text-[#f3f0e9]">$9.99 USD</strong> as a separate one-time premium purchase.
+          Get a clearer, role-focused improvement plan. The ELITE Resume Intelligence Report costs <strong className="text-[#f3f0e9]">$9.99 USD</strong> as a separate one-time premium purchase.
         </p>
         <p>
-          It includes everything in PRO plus target-role optimization, a professional summary draft, achievement statement drafts, recruiter-ready content suggestions, job-match insights, a high-impact resume blueprint, and a premium ELITE PDF report. You remain responsible for verifying and personalizing every draft before using it.
+          It includes everything in PRO plus target-role match insights, professional summary improvement suggestions, achievement improvement recommendations, recruiter-ready content suggestions, job-match insights, a prioritized improvement plan, and a premium ELITE PDF report. You remain responsible for reviewing and personalizing every suggestion before using it.
         </p>
       </LegalSection>
 

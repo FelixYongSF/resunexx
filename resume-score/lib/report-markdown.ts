@@ -110,7 +110,7 @@ ${report.sectionFeedback.education}
 ### Formatting
 ${report.sectionFeedback.formatting}
 
-${isElite ? `## ELITE Resume Intelligence Engine
+${isElite ? `## ELITE Resume Intelligence Report
 
 ### Current Version
 ${premiumReport.suggestedRewrite.before}
@@ -130,10 +130,10 @@ ${report.fullReport.rewriteEvidenceCaveat}
 ### Missing Keywords
 ${report.missingKeywords.map((item) => `- ${item}`).join("\n")}
 
-### Achievement Statement Drafts
+### Achievement Improvement Examples
 ${report.fullReport.rewrittenAchievementBullets.map((item) => `- ${item}`).join("\n")}
 
-### Professional Summary Draft
+### Professional Summary Improvement Example
 ${report.fullReport.rewrittenSummary}
 
 ### Experience Section Improvements

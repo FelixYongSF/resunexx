@@ -49,16 +49,16 @@ export const reportPlanConfig: Record<ReportPlan, ReportPlanConfig> = {
   full: {
     key: "full",
     displayName: "ELITE",
-    productName: "Resume Intelligence Engine",
-    positioning: "See what your stronger resume could look like.",
+    productName: "Resume Intelligence Report",
+    positioning: "Get a clearer, role-focused improvement plan.",
     priceLabel: "$9.99",
     entitlement: "full",
-    ctaLabel: "SEE MY STRONGER VERSION — $9.99",
+    ctaLabel: "UNLOCK ELITE REPORT — $9.99",
     uploadHeading: "Upload your resume to unlock your ELITE Report",
     uploadCtaLabel: "CONTINUE TO SECURE CHECKOUT — $9.99",
     uploadSupport: "Upload your existing resume for Resume Intelligence analysis, then securely unlock your ELITE Report.",
     productEnvironmentVariable: "POLAR_FULL_PRODUCT_ID",
-    features: ["Everything in PRO", "Target-role Optimization", "Professional Summary Draft", "Achievement Statement Drafts", "Recruiter-ready Content Suggestions", "Job-match Insights", "High-impact Resume Blueprint", "Premium PDF Report"]
+    features: ["Everything in PRO", "Target-role Match Insights", "Professional Summary Improvement Suggestions", "Achievement Improvement Recommendations", "Recruiter-ready Content Suggestions", "Job-match Insights", "Prioritized Improvement Plan", "Premium PDF Report"]
   }
 } as const;
 
@@ -131,5 +131,5 @@ export function preparePendingReportPlan<
 }
 
 export function getPdfReportTitle(accessPlan: ReportPlan) {
-  return accessPlan === "full" ? "ELITE Resume Intelligence Engine" : "PRO Resume Intelligence Report";
+  return accessPlan === "full" ? "ELITE Resume Intelligence Report" : "PRO Resume Intelligence Report";
 }
