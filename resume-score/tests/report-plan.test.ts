@@ -226,6 +226,15 @@ test("duplicate webhook delivery cannot claim paid analysis twice", () => {
   assert.match(paymentSource, /alreadyUnlocked/);
 });
 
+test("refund creation does not revoke access until Polar confirms the refund", () => {
+  const webhookSource = readProjectFile("app/api/polar/webhook/route.ts");
+  assert.match(webhookSource, /onRefundCreated/);
+  assert.match(webhookSource, /payload\.data\.status === "succeeded"/);
+  assert.match(webhookSource, /onRefundUpdated/);
+  assert.match(webhookSource, /onOrderRefunded/);
+  assert.match(webhookSource, /revokeRefundedReport/);
+});
+
 test("ELITE drafts include anti-fabrication safeguards", () => {
   const source = readProjectFile("lib/engines/resume/resumeEliteEnhancement.ts");
   assert.match(source, /Never invent metrics, revenue, team size, employers/);

@@ -28,13 +28,22 @@ const polarWebhookHandler = Webhooks({
     }
   },
   onRefundCreated: async (payload) => {
-    const report = await markReportRefundedFromPolar(payload.data.orderId, payload.data.createdAt.toISOString());
-    if (report) {
-      console.info("[polar:webhook] report access revoked after refund", {
-        orderId: payload.data.orderId,
-        reportId: report.id
-      });
+    if (payload.data.status === "succeeded") {
+      await revokeRefundedReport(payload.data.orderId, payload.data.modifiedAt || payload.data.createdAt);
+      return;
     }
+    console.info("[polar:webhook] refund recorded; access remains available until refund succeeds", {
+      orderId: payload.data.orderId,
+      refundStatus: payload.data.status
+    });
+  },
+  onRefundUpdated: async (payload) => {
+    if (payload.data.status === "succeeded") {
+      await revokeRefundedReport(payload.data.orderId, payload.data.modifiedAt || payload.data.createdAt);
+    }
+  },
+  onOrderRefunded: async (payload) => {
+    await revokeRefundedReport(payload.data.id, payload.data.modifiedAt || new Date());
   }
 });
 
@@ -66,4 +75,14 @@ async function storePolarOrder(order: PolarOrderRecord) {
     currency: order.currency,
     createdAt: order.createdAt.toISOString()
   });
+}
+
+async function revokeRefundedReport(orderId: string, refundedAt: Date) {
+  const report = await markReportRefundedFromPolar(orderId, refundedAt.toISOString());
+  if (report) {
+    console.info("[polar:webhook] report access revoked after confirmed refund", {
+      orderId,
+      reportId: report.id
+    });
+  }
 }

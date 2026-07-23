@@ -21,7 +21,7 @@ KV_REST_API_TOKEN
 3. Set their IDs in `POLAR_STANDARD_PRODUCT_ID` and `POLAR_FULL_PRODUCT_ID`.
 4. Add the Polar organization access token and webhook signing secret to Vercel.
 5. Configure `https://resunexx.com/api/polar/webhook` for `order.created`, `order.paid`,
-   and `refund.created`.
+   `refund.created`, `refund.updated`, and `order.refunded`.
 6. Deploy with the final `NEXT_PUBLIC_APP_URL`.
 7. Complete one controlled transaction: upload -> free preview -> Polar Checkout -> verified
    `order.paid` -> report unlock -> PDF download.

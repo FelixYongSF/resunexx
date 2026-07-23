@@ -57,9 +57,9 @@ Configure the Polar webhook endpoint as:
 https://resunexx.com/api/polar/webhook
 ```
 
-Enable `order.created`, `order.paid`, and `refund.created`. ResuNexx records the order when
-created, unlocks access only after a signed paid event, and revokes paid access on a signed
-refund event. Detailed setup is in [setup.md](./setup.md).
+Enable `order.created`, `order.paid`, `refund.created`, `refund.updated`, and `order.refunded`.
+ResuNexx records the order when created, unlocks access only after a signed paid event, and
+revokes paid access only after a confirmed refund. Detailed setup is in [setup.md](./setup.md).
 
 ## Engine architecture
 

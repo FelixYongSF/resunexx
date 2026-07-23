@@ -35,6 +35,8 @@ https://resunexx.com/api/polar/webhook
 - `order.created`
 - `order.paid`
 - `refund.created`
+- `refund.updated`
+- `order.refunded`
 
 Copy the generated signing secret to `POLAR_WEBHOOK_SECRET`. Production reports are stored in
 Upstash Redis so checkout redirects and webhook deliveries can access the same record.

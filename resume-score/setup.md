@@ -45,6 +45,8 @@ Subscribe to these events:
 - `order.created`
 - `order.paid`
 - `refund.created`
+- `refund.updated`
+- `order.refunded`
 
 Copy the webhook signing secret into `POLAR_WEBHOOK_SECRET`. The official Polar Next.js
 webhook handler verifies this signature before processing an event.
@@ -57,7 +59,8 @@ webhook handler verifies this signature before processing an event.
 4. Polar sends signed `order.paid`; ResuNexx validates the product, plan, order status,
    and stored report before unlocking the same report.
 5. The success page waits for verified payment, then redirects to the existing report page.
-6. `refund.created` revokes paid-report access while keeping the original free preview.
+6. A succeeded `refund.created` / `refund.updated`, or `order.refunded`, revokes paid-report
+   access while keeping the original free preview.
 
 If checkout is cancelled, Polar returns the visitor to the existing report preview through
 `/pricing?report_id=...`; the selected report remains stored and checkout can be retried
