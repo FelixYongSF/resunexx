@@ -14,7 +14,7 @@ Use GPT only for:
 
 - Understanding resume content
 - Recruiter-style feedback
-- Rewriting examples
+- Improvement examples
 - Coaching tone
 - Human explanation
 - Prioritizing nuanced improvements
@@ -96,7 +96,7 @@ Required fields:
 - Use "may", "can help", and "AI-estimated" where appropriate.
 - Prioritize 5 high-impact changes over many low-value suggestions.
 - Explain why each issue matters to recruiters.
-- Give rewrite examples that are realistic for early-career candidates.
+- Give improvement examples that are realistic for early-career candidates.
 - Keep the report action-oriented.
 
 ## OpenAI Production Mode
@@ -104,7 +104,7 @@ Required fields:
 Resume analysis uses the real OpenAI API through the server-side Resume Engine.
 
 OpenAI responses must use the same structured JSON schema expected by the report UI,
-Paddle checkout flow, full report page, and PDF download.
+Polar checkout flow, full report page, and PDF download.
 
 Local and production testing should use a real `OPENAI_API_KEY` with billing/quota enabled.
 If OpenAI is unavailable, return a clear user-facing error instead of generating a fake report.

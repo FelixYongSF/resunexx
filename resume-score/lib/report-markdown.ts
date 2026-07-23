@@ -1,10 +1,12 @@
 import { engineName } from "@/lib/resumeEngine";
 import { ResumeReport } from "@/lib/report-schema";
+import { getPdfReportTitle, type ReportPlan } from "@/lib/report-plan";
 
-export function reportToMarkdown(report: ResumeReport) {
+export function reportToMarkdown(report: ResumeReport, accessPlan: ReportPlan = "standard") {
   const premiumReport = report.paidReport.premiumReport;
+  const isElite = accessPlan === "full";
 
-  return `# Recruiter Mind Report
+  return `# ${getPdfReportTitle(accessPlan)}
 
 ## Scores
 
@@ -74,10 +76,6 @@ ${report.strengths.map((item) => `- ${item}`).join("\n")}
 
 ${report.weaknesses.map((item) => `- ${item}`).join("\n")}
 
-## Missing Keywords
-
-${report.missingKeywords.map((item) => `- ${item}`).join("\n")}
-
 ## The 5 Most Important Changes Before Applying Again
 
 ${report.fiveMostImportantChanges
@@ -95,7 +93,7 @@ ${report.whatToFixFirst}
 
 ${report.whyThisMattersToRecruiters}
 
-## Section-by-section Feedback
+## Section-by-section Review
 
 ### Summary
 ${report.sectionFeedback.summary}
@@ -112,13 +110,40 @@ ${report.sectionFeedback.education}
 ### Formatting
 ${report.sectionFeedback.formatting}
 
-## Improvement Examples
+${isElite ? `## ELITE Resume Intelligence Engine
 
-### Achievement Improvement Examples
-${report.rewriteExamples.improvedBulletPoints.map((item) => `- ${item}`).join("\n")}
+### Current Version
+${premiumReport.suggestedRewrite.before}
 
-### Professional Summary Improvement Example
-${report.rewriteExamples.improvedProfessionalSummary}
+### Why It Underperforms
+${premiumReport.biggestOpportunity.whyItMatters}
+
+### Improvement Draft
+${report.fullReport.rewrittenSummary}
+
+### Why This Is Stronger
+${premiumReport.suggestedRewrite.whyThisWorksBetter}
+
+### Review Before Using
+${report.fullReport.rewriteEvidenceCaveat}
+
+### Missing Keywords
+${report.missingKeywords.map((item) => `- ${item}`).join("\n")}
+
+### Achievement Statement Drafts
+${report.fullReport.rewrittenAchievementBullets.map((item) => `- ${item}`).join("\n")}
+
+### Professional Summary Draft
+${report.fullReport.rewrittenSummary}
+
+### Experience Section Improvements
+${report.sectionFeedback.workExperience}
+
+### Skills Positioning Suggestions
+${report.sectionFeedback.skills}
+
+### Final Resume Blueprint
+Review and personalize the professional summary and achievement statement drafts above before using them.
 
 ## 30-Minute Improvement Plan
 
@@ -129,6 +154,7 @@ ${report.rewriteExamples.improvedProfessionalSummary}
 ## Long-Term Career Signal
 
 ${premiumReport.longTermCareerSignal}
+` : ""}
 
 ## Encouraging Closing Note
 

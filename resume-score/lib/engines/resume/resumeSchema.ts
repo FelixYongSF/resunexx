@@ -55,7 +55,7 @@ const rewriteExamplesSchema = {
   }
 } as const;
 
-const fullReportSchema = {
+export const eliteEnhancementJsonSchema = {
   type: "object",
   additionalProperties: false,
   required: [
@@ -368,7 +368,7 @@ export const resumeReportJsonSchema = {
     sectionFeedback: sectionFeedbackSchema,
     rewriteExamples: rewriteExamplesSchema,
     finalActionPlan: { type: "array", minItems: 5, maxItems: 8, items: { type: "string" } },
-    fullReport: fullReportSchema,
+    fullReport: eliteEnhancementJsonSchema,
     freePreview: {
       type: "object",
       additionalProperties: false,

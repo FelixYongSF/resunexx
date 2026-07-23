@@ -58,7 +58,7 @@ Premium report structure:
 - highImpactImprovements: only the top three. Each one should make the user understand what was
   detected, why it matters, recruiter impact, ATS impact when relevant, the next edit, and expected
   benefit.
-- suggestedRewrite: show a practical Before / After / Why this works better example for the most
+- suggestedRewrite: show a practical Before / After / Why this works better improvement example for the most
   important issue.
 - recruiterFirstImpression: 2-3 sentences naming the visible direction, strongest proof, and main
   uncertainty after a fast scan.

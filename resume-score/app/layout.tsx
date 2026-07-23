@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ResuNexx | See what recruiters see",
     description:
-      "AI resume analysis and recruiter-style feedback for early-career job seekers. Free preview, clear recommendations, no signup required.",
+      "Resume Intelligence analysis and recruiter-style feedback for early-career job seekers. FREE Resume Signal Check, clear recommendations, no signup required.",
     url: productionUrl,
     siteName: "ResuNexx",
     type: "website"
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body className="font-sans">
         {children}
-        <Footer />
+        <Footer global />
       </body>
     </html>
   );

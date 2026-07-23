@@ -6,7 +6,7 @@ export default function TermsPage() {
     <LegalPage eyebrow="Terms" title="Terms of service.">
       <LegalSection title="Service">
         <p>
-          {productName} provides automated, AI-generated resume feedback for early-career job seekers. The service is intended to help users understand how their resume may be read by recruiters and applicant tracking systems.
+          {productName} provides automated, AI-generated analysis and resume feedback for early-career job seekers. The service is intended to help users understand how their resume may be read by recruiters and applicant tracking systems.
         </p>
       </LegalSection>
 
@@ -24,7 +24,7 @@ export default function TermsPage() {
 
       <LegalSection title="Payment">
         <p>
-          Paid reports are one-time purchases processed by {paymentProvider}. Full report access is unlocked after successful payment verification.
+          PRO and ELITE reports are one-time purchases processed by {paymentProvider}. Paid report access is unlocked after successful payment verification.
         </p>
       </LegalSection>
 
@@ -36,7 +36,7 @@ export default function TermsPage() {
 
       <LegalSection title="Contact">
         <p>
-          For questions about these terms, contact <a className="font-semibold text-[#171714]" href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+          For questions about these terms, contact <a className="font-semibold text-[#d7ff4f] hover:text-[#f3f0e9]" href={`mailto:${contactEmail}`}>{contactEmail}</a>.
         </p>
       </LegalSection>
     </LegalPage>

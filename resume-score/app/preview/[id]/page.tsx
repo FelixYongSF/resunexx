@@ -12,17 +12,14 @@ import { toPreview } from "@/lib/report-schema";
 export const runtime = "nodejs";
 
 export default async function PreviewPage({
-  params,
-  searchParams
+  params
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ plan?: string }>;
 }) {
   const { id } = await params;
-  const { plan } = await searchParams;
   const stored = await getReport(id);
 
-  if (!stored) {
+  if (!stored || stored.analysisStatus !== "completed" || !stored.report) {
     return (
       <main className="min-h-screen bg-slate-50">
         <Header />
@@ -36,9 +33,12 @@ export default async function PreviewPage({
     );
   }
 
-  const preview = toPreview(stored.report);
+  const report = stored.report;
+  const preview = toPreview(report);
   const requestedPlan = stored.requestedPlan || "free";
-  const selectedPlanDetails = reportPlanConfig[requestedPlan];
+  const primaryPlan = requestedPlan === "full" ? "full" : "standard";
+  const primaryPlanDetails = reportPlanConfig[primaryPlan];
+  const eliteContextReady = Boolean(stored.targetRole);
 
   if ((stored.accessPlan || (stored.paid ? "standard" : "free")) !== "free") {
     redirect(`/report/${id}`);
@@ -49,11 +49,10 @@ export default async function PreviewPage({
       <AnalyticsPageView event="preview_viewed" reportId={id} />
       <Header />
       <section className="nexx-shell py-12 sm:py-14">
-        <div className="grid gap-8 lg:grid-cols-[1fr_360px]">
-          <div>
-            <p className="text-sm font-semibold text-blue-600">Free preview</p>
+        <div className="mx-auto max-w-4xl">
+            <p className="text-sm font-semibold text-blue-600">FREE — Resume Signal Check</p>
             <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">
-              Your recruiter-style preview is ready.
+              Your Resume Signal Check is ready.
             </h1>
             <p className="mt-4 max-w-2xl text-slate-600">
               Your resume has potential. Here are the top things that may be holding it back today.
@@ -80,51 +79,54 @@ export default async function PreviewPage({
                 ))}
               </ol>
             </div>
-          </div>
 
-          <aside className="grid h-fit gap-4">
-            <section className="rounded-2xl border border-[#ddd7ca] bg-white px-5 py-4 shadow-[0_10px_24px_rgba(34,30,22,0.05)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">Selected report</p>
-              <div className="mt-2 flex items-baseline justify-between gap-4">
-                <p className="font-semibold text-slate-950">{selectedPlanDetails.displayName}</p>
-                <p className="text-lg font-semibold text-slate-950">{selectedPlanDetails.priceLabel}</p>
+            <section className="nexx-card mt-8 p-7">
+              <p className="text-sm font-semibold text-blue-600">Recruiter First Impression</p>
+              <p className="mt-3 text-sm leading-6 text-slate-700">{report.paidReport.premiumReport.recruiterFirstImpression}</p>
+              <div className="mt-6 grid gap-5 md:grid-cols-2">
+                <div>
+                  <h2 className="text-base font-semibold text-slate-950">What Recruiters Notice</h2>
+                  <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-600">
+                    {report.positiveStandouts.slice(0, 2).map((item) => <li key={item}>• {item}</li>)}
+                  </ul>
+                </div>
+                <div>
+                  <h2 className="text-base font-semibold text-slate-950">What They Miss</h2>
+                  <ul className="mt-3 grid gap-2 text-sm leading-6 text-slate-600">
+                    {report.hesitationSignals.slice(0, 2).map((item) => <li key={item}>• {item}</li>)}
+                  </ul>
+                </div>
               </div>
-              <p className="mt-2 text-sm leading-5 text-slate-600">
-                {requestedPlan === "free"
-                  ? "Your preview is ready. No payment is required."
-                  : "Your analysis is ready. Complete secure checkout to unlock this report."}
+            </section>
+
+            <section className="nexx-card mt-8 p-7">
+              <p className="text-sm font-semibold text-blue-600">You&apos;re closer than you think.</p>
+              <h2 className="mt-3 text-2xl font-semibold text-slate-950">Your resume already has potential.</h2>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
+                You now know what needs attention. Unlock your complete improvement plan to see exactly what to change, why it matters, and where the biggest gains can come from.
               </p>
+              <div className="mt-6 max-w-xl rounded-2xl border border-[#d8d1c5] bg-[#f6f4ef] p-5">
+                <p className="text-sm font-semibold text-blue-600">{primaryPlanDetails.displayName} — {primaryPlanDetails.priceLabel}</p>
+                <p className="mt-2 text-lg font-semibold text-slate-950">{primaryPlanDetails.productName}</p>
+                <ul className="mt-4 grid gap-2 text-sm text-slate-600">
+                  {(primaryPlan === "standard" ? [
+                    "Detailed analysis of your weakest sections",
+                    "Priority fixes ranked by impact",
+                    "Section-by-section guidance",
+                    "Professional improvement examples",
+                    "Downloadable PDF report"
+                  ] : primaryPlanDetails.features.slice(1)).map((feature) => <li key={feature}>• {feature}</li>)}
+                </ul>
+                <CheckoutButton reportId={id} plan={primaryPlan} eliteContextReady={eliteContextReady} initialTargetRole={stored.targetRole} initialJobDescription={stored.jobDescription} />
+              </div>
+              {primaryPlan === "standard" ? (
+                <div className="mt-5 text-sm text-slate-600">
+                  <span>Looking for a more complete optimization? </span>
+                  <CheckoutButton reportId={id} plan="full" eliteContextReady={eliteContextReady} initialTargetRole={stored.targetRole} initialJobDescription={stored.jobDescription} variant="link" />
+                </div>
+              ) : null}
             </section>
-            <section className="nexx-card p-7">
-              <p className="text-sm font-semibold text-blue-600">Standard Report</p>
-              <p className="mt-3 text-4xl font-semibold text-slate-950">$4.99</p>
-              <ul className="mt-6 grid gap-3 text-sm text-slate-600">
-                {reportPlanConfig.standard.features.map((feature) => <li key={feature}>{feature}</li>)}
-              </ul>
-              {requestedPlan === "standard" ? (
-                <CheckoutButton reportId={id} plan="standard" autoStart={plan === requestedPlan} />
-              ) : (
-                <Link href="/upload?plan=standard" className="nexx-button-primary mt-7 w-full">
-                  Choose Standard before upload
-                </Link>
-              )}
-            </section>
-            <section className="nexx-card border-slate-900 bg-slate-950 p-7 text-white">
-              <p className="text-sm font-semibold text-[#d7ff4f]">Full Report</p>
-              <p className="mt-3 text-4xl font-semibold">$9.99</p>
-              <ul className="mt-6 grid gap-3 text-sm text-white/75">
-                {reportPlanConfig.full.features.map((feature) => <li key={feature}>{feature}</li>)}
-              </ul>
-              {requestedPlan === "full" ? (
-                <CheckoutButton reportId={id} plan="full" autoStart={plan === requestedPlan} />
-              ) : (
-                <Link href="/upload?plan=full" className="nexx-button-primary mt-7 w-full">
-                  Choose Full before upload
-                </Link>
-              )}
-            </section>
-            <div className="px-1"><Disclaimer /></div>
-          </aside>
+            <div className="mt-6 px-1"><Disclaimer /></div>
         </div>
       </section>
     </main>

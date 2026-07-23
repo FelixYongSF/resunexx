@@ -37,6 +37,7 @@ export async function analyzeResumeWithEngineResult(input: AnalyzeResumeInput): 
     const report = await generateOpenAIReport({
       resumeText: input.resumeText.trim(),
       targetRole: input.targetRole,
+      jobDescription: input.jobDescription,
       deterministicPrechecks
     });
 
@@ -198,7 +199,7 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
         "Several bullets may still need clearer context, action, and result."
       ],
       improvementAdvice: [
-        "Rewrite the first three experience or project bullets in this order: action, tool or context, audience or scope, result.",
+        "Revise the first three experience or project bullets in this order: action, tool or context, audience or scope, result.",
         "Replace task-only phrasing with evidence of what changed because of the work."
       ]
     },
@@ -250,9 +251,9 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
       : `The resume needs a visible skills section with tools and role keywords for ${targetRole}.`
   ];
   const finalActionPlan = [
-    `Choose one ${targetRole} job posting and use it as the rewrite benchmark.`,
-    "Rewrite the top summary to include target role, strongest relevant skill, and one evidence point.",
-    "Rewrite the first three bullets so each one shows action, context, and result.",
+    `Choose one ${targetRole} job posting and use it as an improvement reference.`,
+    "Revise the top summary to include target role, strongest relevant skill, and one evidence point.",
+    "Revise the first three bullets so each one shows action, context, and result.",
     "Add truthful keywords from the benchmark job posting to the skills and experience sections.",
     "Export a clean ATS-friendly PDF after removing layout elements that do not help scanning."
   ];
@@ -360,8 +361,8 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
       rewriteEvidenceCaveat:
         "Use these as factual structures, not claims to copy verbatim. Replace each general phrase with the real tool, audience, scope, and outcome from your experience.",
       thirtyMinuteActionPlan: {
-        tenMinutes: "Rewrite the summary to name the target role and one real proof point.",
-        nextTenMinutes: "Rewrite the two strongest bullets using action, context, and truthful evidence.",
+        tenMinutes: "Revise the summary to name the target role and one real proof point.",
+        nextTenMinutes: "Revise the two strongest bullets using action, context, and truthful evidence.",
         finalTenMinutes: "Align the skills section and first experience entry with one target job description."
       }
     },
@@ -375,7 +376,7 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
       premiumReport: undefined as never,
       categoryBreakdown,
       detailedExplanation:
-        `The resume can become more competitive quickly if it is rewritten around ${targetRole}. The highest-impact work is to make the top third communicate fit, then turn the strongest bullets into evidence of contribution.`,
+        `The resume can communicate fit more clearly when it is revised around ${targetRole}. The highest-impact work is to make the top third communicate fit, then turn the strongest bullets into evidence of contribution.`,
       sectionFeedback: {
         summary: `Open with ${targetRole}, then connect two strengths to one resume-backed proof point.`,
         workExperience: "Start each important bullet with a concrete action, then add the tool, audience, or result that proves contribution.",
@@ -385,7 +386,7 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
       },
       top10ImprovementPriorities: [
         `Choose one ${targetRole} job posting as the benchmark.`,
-        `Rewrite the summary so ${targetRole} is named in the first line.`,
+        `Revise the summary so ${targetRole} is named in the first line.`,
         "Move the strongest internship, project, or work example into the top half of the resume.",
         "Add truthful scope or result details to the first three bullets.",
         "Replace task-only bullets with action, context, and result.",
@@ -393,7 +394,7 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
         "Add only keywords that match real experience or coursework.",
         "Use standard ATS section headings.",
         "Make dates, titles, and organization names easy to scan.",
-        "Export a clean text-based PDF after the rewrite."
+        "Export a clean text-based PDF after the revisions."
       ],
       missingKeywords: [
         "stakeholder management",
@@ -429,7 +430,7 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
     positiveStandouts: [
       "There is enough substance to create a focused early-career narrative.",
       "The existing experience can be reframed into stronger evidence of contribution.",
-      "The resume appears close enough to improve through prioritization and rewriting rather than major rebuilding."
+      "The resume appears close enough to improve through prioritization and targeted revisions rather than major restructuring."
     ],
     hesitationSignals: [
       `The target role of ${targetRole} is not obvious quickly enough.`,
@@ -440,12 +441,12 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
       {
         whatWeNoticed: `The opening does not clearly position the candidate for ${targetRole}.`,
         whyItMattersToRecruiters: "Recruiters scan quickly and need to place you into a role category fast.",
-        whatToChangeNext: `Rewrite the summary around ${targetRole}, two relevant skills, and one proof point from the resume.`
+        whatToChangeNext: `Revise the summary around ${targetRole}, two relevant skills, and one proof point from the resume.`
       },
       {
         whatWeNoticed: "Several bullets describe tasks rather than outcomes.",
         whyItMattersToRecruiters: "Early-career candidates stand out when they show ownership and contribution.",
-        whatToChangeNext: "Rewrite the first three bullets with action, context, audience, and result."
+        whatToChangeNext: "Revise the first three bullets with action, context, audience, and result."
       },
       {
         whatWeNoticed: "Keywords are not yet focused enough.",
@@ -468,9 +469,9 @@ export function generateMockReport(input: AnalyzeResumeInput, prechecks = runRes
     whyThisMattersToRecruiters:
       "Recruiters compare many early-career resumes quickly. Clear role fit, visible keywords, and concrete examples help them understand your potential faster.",
     encouragingClosingNote:
-      "Your resume has potential. The next step is not to rewrite everything, but to make your strongest signals easier to see.",
+      "Your resume has potential. The next step is not to replace everything, but to make your strongest signals easier to see.",
     disclaimer:
-      "This report is AI-generated feedback and is not professional career, legal, or employment advice. It does not guarantee interviews or job offers."
+      "This report provides AI-generated analysis and resume feedback only. It does not create resumes, provide recruitment services, or guarantee interviews, callbacks, job offers, or employment outcomes."
   };
 
   return normalizeResumeReport(baseReport);

@@ -261,6 +261,7 @@ export type ResumeReport = {
 export type AnalyzeResumeInput = {
   resumeText: string;
   targetRole?: string;
+  jobDescription?: string;
 };
 
 export type ResumeEngineSuccess = {

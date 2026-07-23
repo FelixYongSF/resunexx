@@ -37,7 +37,7 @@ body:has(.resunexx-dark-page) {
   background: #151515;
 }
 
-body:has(.resunexx-dark-page) > footer {
+body:has(.resunexx-dark-page) > footer[data-site-footer="global"] {
   display: none;
 }
 

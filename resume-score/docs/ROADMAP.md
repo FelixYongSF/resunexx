@@ -20,7 +20,7 @@ Scope:
 - Mock mode
 - OpenAI analysis
 - Free preview
-- Paddle Checkout
+- Polar Checkout
 - Payment verification
 - Full improvement plan
 - PDF download
@@ -67,7 +67,7 @@ Work:
 - Add persistent report/payment storage
 - Add basic rate limiting
 - Add upload limits
-- Add production Paddle webhook verification
+- Add production Polar webhook verification
 - Add robust AI output validation
 - Add better PDF generation
 - Add monitoring and error logging
@@ -138,7 +138,7 @@ Each engine should help users understand what to improve next.
 ## Current Priorities
 
 1. Complete the resume MVP flow.
-2. Add Paddle sandbox keys and verify checkout.
+2. Add Polar credentials and verify checkout.
 3. Confirm PDF download quality.
 4. Configure OpenAI billing and test real analysis.
 5. Add production storage before public launch.

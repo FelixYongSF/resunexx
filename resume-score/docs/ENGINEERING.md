@@ -9,7 +9,7 @@ Build small, reliable, automated product flows that can be shipped quickly, test
 - Keep the user flow automated end to end.
 - Avoid unnecessary API calls.
 - Prefer deterministic logic where possible.
-- Use GPT only where language understanding, recruiter-style feedback, rewriting, coaching, or human explanation is needed.
+- Use GPT only where language understanding, recruiter-style feedback, improvement guidance, coaching, or human explanation is needed.
 - Keep future engines modular and reusable.
 - Prioritize speed, cost control, and reliability.
 - Do not overbuild infrastructure before product demand is proven.
@@ -19,7 +19,7 @@ Build small, reliable, automated product flows that can be shipped quickly, test
 - Next.js
 - Tailwind CSS
 - OpenAI API
-- Paddle Checkout
+- Polar Checkout
 - Vercel-ready deployment
 - PDF text extraction
 - Server-side OpenAI analysis
@@ -49,7 +49,7 @@ Show clear user-facing messages for:
 
 - PDF extraction failed
 - AI service unavailable
-- Paddle not configured
+- Polar not configured
 - Payment not verified
 - Report not found
 
@@ -61,11 +61,10 @@ Required or supported:
 
 - `OPENAI_API_KEY`
 - `OPENAI_MODEL`
-- `PADDLE_API_KEY`
-- `PADDLE_CLIENT_TOKEN`
-- `PADDLE_WEBHOOK_SECRET`
-- `PADDLE_STANDARD_PRICE_ID`
-- `PADDLE_FULL_PRICE_ID`
+- `POLAR_ACCESS_TOKEN`
+- `POLAR_WEBHOOK_SECRET`
+- `POLAR_STANDARD_PRODUCT_ID`
+- `POLAR_FULL_PRODUCT_ID`
 - `NEXT_PUBLIC_APP_URL`
 
 Local development may also use:
@@ -76,12 +75,12 @@ Local development may also use:
 
 Never print API keys or secrets in logs.
 
-## Paddle Principles
+## Polar Principles
 
-- Use Paddle Checkout in sandbox first.
-- Verify payment and the exact Paddle price before granting plan access.
+- Create Polar Checkout server-side with the exact selected product ID.
+- Verify the signed `order.paid` webhook and exact Polar product before granting plan access.
 - Do not expose Standard or Full report content before the matching successful payment.
-- If Paddle variables are missing, show a clear developer error.
+- If Polar variables are missing, show a clear developer error.
 - Keep one-time purchase simple before adding upgrades.
 
 ## Data Storage

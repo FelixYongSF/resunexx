@@ -145,3 +145,5 @@ vite.config.ts.timestamp-*
 # Local OS and test artifacts
 .DS_Store
 tmp/
+.vercel
+.env*.local

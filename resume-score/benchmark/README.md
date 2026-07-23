@@ -80,7 +80,7 @@ Human review should additionally assess:
 - recruiter realism
 - emotional tone
 - recommendation specificity
-- rewrite truthfulness
+- improvement-suggestion truthfulness
 - paid-report perceived value
 
 The benchmark measures product quality, not actual hiring probability. Scores must never

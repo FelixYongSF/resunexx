@@ -4,23 +4,48 @@ type RateLimitOptions = {
   windowMs: number;
 };
 
-const buckets = new Map<string, { count: number; resetAt: number }>();
+import { hasRedisConfig, redisCommand } from "@/lib/redis";
 
-export function checkRateLimit({ key, limit, windowMs }: RateLimitOptions) {
-  const now = Date.now();
-  const current = buckets.get(key);
+export type RateLimitResult = {
+  allowed: boolean;
+  available: boolean;
+  remaining: number;
+  resetAt: number;
+};
 
-  if (!current || current.resetAt <= now) {
-    buckets.set(key, { count: 1, resetAt: now + windowMs });
-    return { allowed: true, remaining: limit - 1, resetAt: now + windowMs };
+const INCREMENT_WITH_TTL = [
+  "local count = redis.call('INCR', KEYS[1])",
+  "if count == 1 then redis.call('PEXPIRE', KEYS[1], ARGV[1]) end",
+  "return count"
+].join("\n");
+
+export async function checkRateLimit({ key, limit, windowMs }: RateLimitOptions): Promise<RateLimitResult> {
+  const resetAt = Date.now() + windowMs;
+  if (!hasRedisConfig()) {
+    console.error("[rate-limit] Redis is not configured.");
+    return { allowed: false, available: false, remaining: 0, resetAt };
   }
 
-  if (current.count >= limit) {
-    return { allowed: false, remaining: 0, resetAt: current.resetAt };
+  try {
+    const count = await redisCommand<number>([
+      "EVAL",
+      INCREMENT_WITH_TTL,
+      1,
+      `rate-limit:${key}`,
+      windowMs
+    ]);
+    return {
+      allowed: count <= limit,
+      available: true,
+      remaining: Math.max(0, limit - count),
+      resetAt
+    };
+  } catch (error) {
+    console.error("[rate-limit] Redis request failed.", {
+      message: error instanceof Error ? error.message : "Unknown Redis error."
+    });
+    return { allowed: false, available: false, remaining: 0, resetAt };
   }
-
-  current.count += 1;
-  return { allowed: true, remaining: limit - current.count, resetAt: current.resetAt };
 }
 
 export function getRequestIp(request: Request) {

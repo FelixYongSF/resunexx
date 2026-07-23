@@ -9,8 +9,8 @@ The first goal is not maximizing revenue per user. The first goal is proving tha
 ## Current Model
 
 - Free preview: $0
-- Standard Report: $4.99
-- Full Report: $9.99
+- PRO Resume Intelligence Report: $4.99
+- ELITE Resume Intelligence Engine: $9.99
 
 The paid product should be positioned as:
 
@@ -18,7 +18,7 @@ Unlock My Improvement Plan
 
 Not:
 
-Unlock Full Report
+SEE MY STRONGER VERSION — $9.99
 
 ## Free Preview
 
@@ -30,9 +30,9 @@ The free preview should show enough value to build trust:
 - Top 3 issues
 - Human summary
 
-The preview should not reveal the full improvement plan, rewrite examples, or downloadable PDF.
+The preview should not reveal the full improvement plan, improvement examples, or downloadable PDF.
 
-## Standard Report
+## PRO Resume Intelligence Report
 
 Price: $4.99
 
@@ -41,10 +41,10 @@ Paid value:
 - See what recruiters may notice first
 - Understand what may be hurting interview chances
 - Get the 5 most important changes to make
-- Receive rewrite examples
+- Receive improvement examples
 - Download a standard personalized PDF report
 
-## Full Report
+## ELITE Resume Intelligence Engine
 
 Price: $9.99
 
@@ -53,7 +53,7 @@ Paid value:
 - Everything in Standard
 - Target-role fit assessment
 - Missing and weakly represented keyword placement guidance
-- Factual rewritten summary and five achievement-bullet structures
+- Factual professional summary improvement suggestions and five achievement improvement recommendations
 - 30-minute action plan and full PDF report
 
 ## Future Offers
@@ -79,8 +79,8 @@ Generate a role-specific interview preparation kit from the resume and target jo
 Possible future ladder:
 
 1. Free recruiter-style preview
-2. $4.99 Standard Report
-3. $9.99 Full Report
+2. $4.99 PRO Resume Intelligence Report
+3. $9.99 ELITE Resume Intelligence Engine
 4. $14.99-$19.99 Target Match
 5. $29.99-$39.99 Interview Kit
 
@@ -100,7 +100,7 @@ Do not add subscriptions until there is evidence of repeated use.
 
 Primary paid CTA:
 
-Unlock Standard Report - $4.99
+UNLOCK MY IMPROVEMENT PLAN — $4.99
 
 Supporting line:
 
@@ -108,10 +108,10 @@ Choose the level of guidance you need before the next application goes out.
 
 ## Checkout Requirements
 
-- Use Paddle Checkout.
+- Use Polar Checkout.
 - Keep checkout simple.
 - Verify payment before unlocking the report.
-- If Paddle is not configured, show a clear developer error.
+- If Polar is not configured, show a clear developer error.
 - Do not expose paid report content without successful payment verification.
 
 ## Pricing Experiments

@@ -6,7 +6,7 @@ export default function ContactPage() {
     <LegalPage eyebrow="Contact" title="Contact ResuNexx.">
       <LegalSection title="Support email">
         <p>
-          For product, billing, refund, privacy, or payment questions, email <a className="font-semibold text-[#171714]" href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+          For product, billing, refund, privacy, or payment questions, email <a className="font-semibold text-[#d7ff4f] hover:text-[#f3f0e9]" href={`mailto:${contactEmail}`}>{contactEmail}</a>.
         </p>
       </LegalSection>
 

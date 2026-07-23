@@ -45,7 +45,7 @@ ScoreLab reduces uncertainty by showing:
 - What recruiters may notice first
 - What may cause hesitation
 - What to fix before applying again
-- How to rewrite the most important parts
+- How to improve the most important parts
 
 ## Core User Journey
 
@@ -76,7 +76,7 @@ The MVP should focus only on:
 - Text extraction
 - AI or mock analysis
 - Free preview
-- Paddle Checkout
+- Polar Checkout
 - Payment verification
 - Full improvement plan
 - PDF download

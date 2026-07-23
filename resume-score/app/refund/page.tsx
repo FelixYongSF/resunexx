@@ -6,7 +6,7 @@ export default function RefundPage() {
     <LegalPage eyebrow="Refund policy" title="Refunds and billing help.">
       <LegalSection title="Digital report purchase">
         <p>
-          The Resume Improvement Plan is a digital report delivered after payment. Because access is provided immediately after successful payment, completed purchases are generally final.
+          A PRO or ELITE Resume Intelligence report is delivered digitally after payment. Because access is provided immediately after successful payment, completed purchases are generally final.
         </p>
       </LegalSection>
 
@@ -18,7 +18,7 @@ export default function RefundPage() {
 
       <LegalSection title="How to request help">
         <p>
-          Email <a className="font-semibold text-[#171714]" href={`mailto:${contactEmail}`}>{contactEmail}</a> within 7 days of purchase. Include the email address used at checkout and a short description of the issue.
+          Email <a className="font-semibold text-[#d7ff4f] hover:text-[#f3f0e9]" href={`mailto:${contactEmail}`}>{contactEmail}</a> within 7 days of purchase. Include the email address used at checkout and a short description of the issue.
         </p>
       </LegalSection>
 

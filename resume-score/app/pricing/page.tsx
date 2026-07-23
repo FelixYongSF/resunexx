@@ -1,44 +1,52 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { LegalPage, LegalSection } from "@/components/legal-page";
-import { contactEmail, paymentProvider, productName } from "@/lib/site";
+import { contactEmail, productName } from "@/lib/site";
 import { reportPlanConfig } from "@/lib/report-plan";
 
-export default function PricingPage() {
+export default async function PricingPage({
+  searchParams
+}: {
+  searchParams: Promise<{ report_id?: string }>;
+}) {
+  const { report_id: reportId } = await searchParams;
+  if (reportId && /^[0-9a-f-]{36}$/i.test(reportId)) redirect(`/preview/${reportId}`);
+
   return (
-    <LegalPage eyebrow="Pricing" title="Simple resume review pricing.">
-      <LegalSection title="Free preview">
+    <LegalPage eyebrow="Pricing" title="Choose the right level of Resume Intelligence.">
+      <LegalSection title="FREE — Resume Signal Check">
         <p>
-          {productName} lets you upload a resume and receive a free AI-estimated preview before paying. The free preview includes an overall resume score, ATS readiness score, interview readiness level, and the top 3 issues.
+          Discover what&apos;s holding your resume back. Upload your existing resume for a FREE Resume Signal Check with a Resume Score, Recruiter First Impression, what recruiters notice, what they miss, and your top 3 priority improvements.
         </p>
       </LegalSection>
 
-      <LegalSection title="Standard Report">
+      <LegalSection title="PRO — Resume Intelligence Report">
         <p>
-          The Standard Report costs <strong className="text-[#171714]">$4.99 USD</strong> as a one-time purchase.
+          Know exactly how to improve it. The PRO Resume Intelligence Report costs <strong className="text-[#f3f0e9]">$4.99 USD</strong> as a one-time purchase.
         </p>
         <p>
-          It includes recruiter-style analysis, five priority improvement recommendations, improvement examples, and a downloadable Standard PDF report.
+          It includes detailed Resume Intelligence analysis, section-by-section review, a priority improvement roadmap, resume keyword insights, professional improvement examples, and a downloadable PRO PDF report.
         </p>
       </LegalSection>
 
-      <LegalSection title="Full Report">
+      <LegalSection title="ELITE — Resume Intelligence Engine">
         <p>
-          The Full Report costs <strong className="text-[#171714]">$9.99 USD</strong> as a one-time purchase.
+          See what your stronger resume could look like. The ELITE Resume Intelligence Engine costs <strong className="text-[#f3f0e9]">$9.99 USD</strong> as a separate one-time premium purchase.
         </p>
         <p>
-          It includes everything in Standard plus target-role match, detailed keyword placement guidance, professional summary and achievement improvement suggestions, a 30-minute action plan, and a Full PDF report.
+          It includes everything in PRO plus target-role optimization, a professional summary draft, achievement statement drafts, recruiter-ready content suggestions, job-match insights, a high-impact resume blueprint, and a premium ELITE PDF report. You remain responsible for verifying and personalizing every draft before using it.
         </p>
       </LegalSection>
 
       <LegalSection title="Payment provider">
         <p>
-          Payments are processed by {paymentProvider}. {productName} does not store full card details.
+          Payments are processed by Polar. {productName} does not store full card details.
         </p>
       </LegalSection>
 
       <LegalSection title="Questions">
         <p>
-          Contact <a className="font-semibold text-[#171714]" href={`mailto:${contactEmail}`}>{contactEmail}</a> with billing or product questions.
+          Contact <a className="font-semibold text-[#d7ff4f] hover:text-[#f3f0e9]" href={`mailto:${contactEmail}`}>{contactEmail}</a> with billing or product questions.
         </p>
       </LegalSection>
 
@@ -46,14 +54,16 @@ export default function PricingPage() {
         {(["free", "standard", "full"] as const).map((plan) => {
           const details = reportPlanConfig[plan];
           return (
-            <article key={plan} className="rounded-2xl border border-[#e3ddd2] bg-[#f7f4ee] p-5">
+            <article key={plan} className="rounded-2xl border border-white/15 bg-[#f3f0e9] p-5 text-[#151515]">
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#625c52]">{details.displayName}</p>
+              <p className="mt-1 text-sm font-semibold text-[#171714]">{details.productName}</p>
               <p className="mt-2 text-2xl font-semibold text-[#171714]">{details.priceLabel}</p>
+              <p className="mt-1 text-xs text-[#625c52]">{details.positioning}</p>
               <ul className="mt-4 grid gap-2 text-xs leading-5 text-[#625c52]">
                 {details.features.map((feature) => <li key={feature}>• {feature}</li>)}
               </ul>
-              <Link href={`/upload?plan=${plan}`} className="nexx-button-primary mt-5 w-full">
-                {plan === "free" ? "Start Free" : details.ctaLabel}
+              <Link href={`/upload?plan=${plan}`} className="mt-5 flex min-h-11 w-full items-center justify-center rounded-md bg-[#151515] px-4 py-3 text-xs font-bold uppercase tracking-[0.04em] text-[#f3f0e9] transition hover:bg-[#7e9700]">
+                {details.ctaLabel}
               </Link>
             </article>
           );

@@ -13,6 +13,8 @@
     "test:plans": "node --experimental-strip-types --test tests/report-plan.test.ts"
   },
   "dependencies": {
+    "@polar-sh/nextjs": "^0.9.6",
+    "@polar-sh/sdk": "^0.49.0",
     "next": "^15.1.6",
     "openai": "^4.80.1",
     "pdf-parse": "^1.1.1",

@@ -1,4 +1,5 @@
 export * from "./resumeEngine";
+export * from "./resumeEliteEnhancement";
 export * from "./resumePrompt";
 export * from "./resumePrechecks";
 export * from "./resumeReportBuilder";

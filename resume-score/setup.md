@@ -1,276 +1,74 @@
-# Paddle Setup Guide For ScoreLab
+# Polar Setup
 
-This guide prepares ScoreLab for Paddle approval. After Paddle approves the account, no code changes should be required.
+ResuNexx uses Polar for one-time Standard ($4.99) and Full ($9.99) report purchases.
+Checkout is created server-side and report access is granted only after a signed Polar
+`order.paid` webhook is received.
 
-## Required Environment Variables
+## Environment variables
 
-Add these to `.env.local` for local testing and to Vercel Project Settings for deployment:
-
-```bash
-PADDLE_API_KEY=
-PADDLE_CLIENT_TOKEN=
-PADDLE_WEBHOOK_SECRET=
-PADDLE_STANDARD_PRICE_ID=
-PADDLE_FULL_PRICE_ID=
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
-
-ScoreLab also needs the existing app variables:
+Add these values to `.env.local` for local development and to the matching Vercel
+environment for deployment:
 
 ```bash
-OPENAI_API_KEY=
-OPENAI_MODEL=gpt-4o-mini
-KV_REST_API_URL=
-KV_REST_API_TOKEN=
+POLAR_ACCESS_TOKEN=
+POLAR_WEBHOOK_SECRET=
+POLAR_STANDARD_PRODUCT_ID=
+POLAR_FULL_PRODUCT_ID=
+NEXT_PUBLIC_APP_URL=https://resunexx.com
 ```
 
-## OpenAI API Key
+`POLAR_ACCESS_TOKEN` and `POLAR_WEBHOOK_SECRET` are server-only. Do not prefix either
+with `NEXT_PUBLIC_` and never place them in client-side code.
 
-Used server-side for real resume analysis.
+## Create the Polar products
 
-1. Open the OpenAI API dashboard.
-2. Create or copy an API key.
-3. Paste it into `OPENAI_API_KEY`.
-4. Confirm billing/quota is active before testing paid checkout.
+1. In Polar, create two one-time products in the same organization.
+2. Price the Standard product at `USD 4.99` and the Full product at `USD 9.99`.
+3. Set `POLAR_STANDARD_PRODUCT_ID` to `73bf4f74-27df-477c-ad25-e14dbd238e70`.
+4. Set `POLAR_FULL_PRODUCT_ID` to `37e6e212-82af-4021-ac34-efd03c3d2e13`.
+5. Create an organization access token with checkout access and store it in
+   `POLAR_ACCESS_TOKEN`.
 
-## Where To Find Each Paddle Key
+The product IDs are checked server-side. A browser-selected plan alone can never
+grant paid access.
 
-### `PADDLE_API_KEY`
+## Configure the webhook
 
-Used server-side to verify transactions.
-
-In Paddle:
-
-1. Open Paddle Dashboard.
-2. Go to **Developer tools**.
-3. Open **Authentication**.
-4. Create or copy an API key.
-5. Paste it into `PADDLE_API_KEY`.
-
-Sandbox keys normally begin with `pdl_sdbx_`. Live keys normally begin with `pdl_live_`.
-
-ScoreLab automatically uses Paddle sandbox when the API key starts with `pdl_sdbx_`. Otherwise it uses production.
-
-### `PADDLE_CLIENT_TOKEN`
-
-Used client-side by Paddle.js to open Paddle Checkout.
-
-In Paddle:
-
-1. Open Paddle Dashboard.
-2. Go to **Developer tools**.
-3. Open **Authentication**.
-4. Create or copy a client-side token.
-5. Paste it into `PADDLE_CLIENT_TOKEN`.
-
-Use a sandbox client token with a sandbox API key. Use a live client token with a live API key.
-
-### `PADDLE_WEBHOOK_SECRET`
-
-Used by ScoreLab to verify Paddle webhook signatures.
-
-In Paddle:
-
-1. Open Paddle Dashboard.
-2. Go to **Developer tools**.
-3. Open **Notifications**.
-4. Create a notification destination.
-5. Set the destination URL:
-
-Use the deployed `NEXT_PUBLIC_APP_URL` followed by `/api/paddle/webhook`.
+Create a Polar webhook endpoint at:
 
 ```text
-<NEXT_PUBLIC_APP_URL>/api/paddle/webhook
+https://resunexx.com/api/polar/webhook
 ```
 
-For local testing with a tunnel:
+Subscribe to these events:
 
-```text
-<public tunnel URL>/api/paddle/webhook
-```
+- `order.created`
+- `order.paid`
+- `refund.created`
 
-6. Select transaction events:
+Copy the webhook signing secret into `POLAR_WEBHOOK_SECRET`. The official Polar Next.js
+webhook handler verifies this signature before processing an event.
 
-```text
-transaction.completed
-transaction.paid
-```
+## Customer flow
 
-7. Copy the endpoint secret and paste it into `PADDLE_WEBHOOK_SECRET`.
+1. A resume is analyzed once to create the free preview.
+2. The selected paid plan creates a Polar checkout with the report ID in checkout metadata.
+3. Polar sends `order.created` to record the pending order.
+4. Polar sends signed `order.paid`; ResuNexx validates the product, plan, order status,
+   and stored report before unlocking the same report.
+5. The success page waits for verified payment, then redirects to the existing report page.
+6. `refund.created` revokes paid-report access while keeping the original free preview.
 
-### `PADDLE_STANDARD_PRICE_ID` and `PADDLE_FULL_PRICE_ID`
+If checkout is cancelled, Polar returns the visitor to the existing report preview through
+`/pricing?report_id=...`; the selected report remains stored and checkout can be retried
+without another upload or AI analysis.
 
-Used by Paddle Checkout to sell the two paid report plans. Configure both explicit variables before launch.
+## Sandbox and production
 
-`PADDLE_STANDARD_PRICE_ID` is the source of truth for the $4.99 Standard Report. `PADDLE_FULL_PRICE_ID` is the source of truth for the $9.99 Full Report. A selected plan is stored with each report, but it never grants access by itself: only a verified Paddle transaction upgrades the report entitlement.
+Set the corresponding Polar access token, product IDs, webhook secret, and
+`NEXT_PUBLIC_APP_URL` together for each environment. The application currently initializes
+Polar against production; use production credentials and the `https://resunexx.com` URL for
+the live launch.
 
-In Paddle:
-
-1. Create a product.
-2. Create one-time prices for the Standard and Full products (or two prices under one product).
-3. Copy the price IDs.
-4. Paste the $4.99 price into `PADDLE_STANDARD_PRICE_ID` and the $9.99 price into `PADDLE_FULL_PRICE_ID`.
-
-Price IDs normally look like `pri_...`.
-
-## Create The Product
-
-In Paddle Dashboard:
-
-1. Go to **Catalog**.
-2. Open **Products**.
-3. Create a product:
-
-```text
-Name: ResuNexx Standard Report
-Description: Recruiter-style resume feedback, five priority fixes, rewrite examples, and a standard PDF.
-```
-
-4. Save the product.
-
-Create a second product or price for `ResuNexx Full Report`, including target-role match, keyword placement guidance, a factual rewrite toolkit, 30-minute action plan, and full PDF.
-
-## Create The Prices
-
-In Paddle Dashboard:
-
-1. Open the product you created.
-2. Add a price.
-3. Configure:
-
-```text
-Type: One-time
-Currency: USD
-Standard amount: 4.99 USD
-Full amount: 9.99 USD
-Billing period: none / one-time
-```
-
-4. Save the price.
-5. Copy the corresponding price IDs into `PADDLE_STANDARD_PRICE_ID` and `PADDLE_FULL_PRICE_ID`.
-
-Keep the Paddle price IDs aligned with their named plan. The backend rejects unknown price IDs and never trusts a plan supplied by the browser.
-
-## Configure Webhooks
-
-Create a Paddle notification destination for the deployed app URL:
-
-```text
-<NEXT_PUBLIC_APP_URL>/api/paddle/webhook
-```
-
-Required events:
-
-```text
-transaction.completed
-transaction.paid
-```
-
-ScoreLab verifies the `Paddle-Signature` header with `PADDLE_WEBHOOK_SECRET`.
-
-When Paddle sends a successful transaction with `custom_data.reportId`, ScoreLab marks the matching report as paid and unlocks:
-
-- Full report page
-- PDF download
-
-## Switch From Sandbox To Production
-
-Sandbox:
-
-```bash
-PADDLE_API_KEY=pdl_sdbx_...
-PADDLE_CLIENT_TOKEN=...
-PADDLE_WEBHOOK_SECRET=...
-PADDLE_STANDARD_PRICE_ID=pri_sandbox_standard_price
-PADDLE_FULL_PRICE_ID=pri_sandbox_full_price
-```
-
-Production:
-
-```bash
-PADDLE_API_KEY=pdl_live_...
-PADDLE_CLIENT_TOKEN=...
-PADDLE_WEBHOOK_SECRET=...
-PADDLE_STANDARD_PRICE_ID=pri_live_standard_price
-PADDLE_FULL_PRICE_ID=pri_live_full_price
-```
-
-Important:
-
-- Use sandbox API key with sandbox client token, sandbox webhook secret, and sandbox price ID.
-- Use live API key with live client token, live webhook secret, and live price ID.
-- Update `NEXT_PUBLIC_APP_URL` to the deployed production URL.
-- Configure production webhook destination with the production domain.
-
-No code change is needed to switch. ScoreLab detects sandbox vs production from `PADDLE_API_KEY`.
-
-## Test A Successful Payment
-
-1. Set Paddle sandbox variables in `.env.local`.
-2. Set:
-
-```bash
-NEXT_PUBLIC_APP_URL=http://localhost:3000
-```
-
-3. Confirm `OPENAI_API_KEY` is configured and billing/quota is active.
-4. Start the app.
-5. Upload a resume.
-6. Confirm the free preview appears.
-7. Test Standard checkout, then test Full checkout with separate reports.
-8. Complete Paddle sandbox checkout.
-9. Confirm the app returns to the success page.
-10. Confirm the full report unlocks.
-11. Click **Download PDF Report** and confirm the PDF downloads.
-
-## Vercel Environment Variables
-
-Add these in Vercel Project Settings -> Environment Variables:
-
-```bash
-OPENAI_API_KEY=
-OPENAI_MODEL=gpt-4o-mini
-PADDLE_API_KEY=
-PADDLE_CLIENT_TOKEN=
-PADDLE_WEBHOOK_SECRET=
-PADDLE_STANDARD_PRICE_ID=
-PADDLE_FULL_PRICE_ID=
-NEXT_PUBLIC_APP_URL=
-KV_REST_API_URL=
-KV_REST_API_TOKEN=
-```
-
-Vercel build settings:
-
-```text
-Framework Preset: Next.js
-Build Command: next build
-Output Directory: .next
-Install Command: use Vercel default
-```
-
-Before production launch:
-
-1. Confirm OpenAI billing/quota is active.
-2. Configure KV/Upstash variables so reports persist after checkout redirects.
-3. Run one full sandbox payment test.
-4. Switch to live Paddle credentials.
-5. Run one small live payment if Paddle allows it, then refund it from Paddle Dashboard.
-
-## Production Safety Checks
-
-ScoreLab blocks checkout in production when:
-
-- Production report storage is not configured.
-- Persistent report storage is not configured.
-- Paddle credentials are missing.
-- The selected report plan is already unlocked.
-
-The full report and PDF download remain locked until payment is verified.
-
-## Useful Paddle Docs
-
-- Paddle API authentication: https://developer.paddle.com/api-reference/overview
-- Paddle Checkout: https://developer.paddle.com/build/checkout/overview
-- Paddle webhooks / notifications: https://developer.paddle.com/webhooks/overview
-- Paddle sandbox: https://developer.paddle.com/build/sandbox/overview
+For implementation details, see the official [Polar Next.js integration](https://polar.sh/docs/integrate/sdk/adapters/nextjs)
+and [Orders documentation](https://polar.sh/docs/features/orders).

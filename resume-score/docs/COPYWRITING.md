@@ -124,7 +124,7 @@ Value bullets:
 - See what recruiters may notice first
 - Understand what may be hurting your interview chances
 - Get the 5 most important changes to make
-- Receive rewrite examples
+- Receive improvement examples
 - Download your personalized report
 
 ## Report Copy

@@ -6,59 +6,67 @@ export type PaidReportPlan = Exclude<ReportPlan, "free">;
 export type ReportPlanConfig = {
   key: ReportPlan;
   displayName: string;
+  productName: string;
+  positioning: string;
   priceLabel: string;
   entitlement: ReportPlan;
   ctaLabel: string;
   uploadHeading: string;
   uploadCtaLabel: string;
   uploadSupport: string;
-  priceEnvironmentVariable?: "PADDLE_STANDARD_PRICE_ID" | "PADDLE_FULL_PRICE_ID";
+  productEnvironmentVariable?: "POLAR_STANDARD_PRODUCT_ID" | "POLAR_FULL_PRODUCT_ID";
   features: readonly string[];
 };
 
 export const reportPlanConfig: Record<ReportPlan, ReportPlanConfig> = {
   free: {
     key: "free",
-    displayName: "Free Preview",
-    priceLabel: "FREE",
+    displayName: "FREE",
+    productName: "Resume Signal Check",
+    positioning: "Discover what’s holding your resume back.",
+    priceLabel: "Free",
     entitlement: "free",
-    ctaLabel: "Start Free",
-    uploadHeading: "Start your free resume analysis",
-    uploadCtaLabel: "Analyze My Resume — Free",
-    uploadSupport: "Upload your existing resume as PDF or DOCX for an AI-powered recruiter-style analysis. No payment is required for your free preview.",
-    features: ["AI-estimated preview", "Resume score", "ATS score", "Interview readiness", "Top 3 issues"]
+    ctaLabel: "START FREE",
+    uploadHeading: "Start your FREE Resume Signal Check",
+    uploadCtaLabel: "START FREE",
+    uploadSupport: "Upload your existing resume as PDF or DOCX for a recruiter-style Resume Intelligence analysis. No payment is required.",
+    features: ["Resume Score", "Recruiter First Impression", "What Recruiters Notice", "What They Miss", "Top 3 Priority Improvements"]
   },
   standard: {
     key: "standard",
-    displayName: "Standard Report",
+    displayName: "PRO",
+    productName: "Resume Intelligence Report",
+    positioning: "Know exactly how to improve it.",
     priceLabel: "$4.99",
     entitlement: "standard",
-    ctaLabel: "Get Standard Report",
-    uploadHeading: "Upload your resume to unlock your Standard Report",
-    uploadCtaLabel: "Unlock Standard Report — $4.99",
-    uploadSupport: "Upload your existing resume for an AI-powered recruiter-style analysis, then securely unlock your Standard Report.",
-    priceEnvironmentVariable: "PADDLE_STANDARD_PRICE_ID",
-    features: ["Everything in Free Preview", "Recruiter-style analysis", "Five priority improvements", "Improvement examples", "Downloadable Standard PDF report"]
+    ctaLabel: "UNLOCK MY IMPROVEMENT PLAN — $4.99",
+    uploadHeading: "Upload your resume to unlock your PRO Report",
+    uploadCtaLabel: "CONTINUE TO SECURE CHECKOUT — $4.99",
+    uploadSupport: "Upload your existing resume for Resume Intelligence analysis, then securely unlock your PRO Report.",
+    productEnvironmentVariable: "POLAR_STANDARD_PRODUCT_ID",
+    features: ["Everything in FREE", "Detailed Resume Intelligence Analysis", "Section-by-section Review", "Priority Improvement Roadmap", "Resume Keyword Insights", "Professional Improvement Examples", "Downloadable PDF Report"]
   },
   full: {
     key: "full",
-    displayName: "Full Report",
+    displayName: "ELITE",
+    productName: "Resume Intelligence Engine",
+    positioning: "See what your stronger resume could look like.",
     priceLabel: "$9.99",
     entitlement: "full",
-    ctaLabel: "Get Full Report",
-    uploadHeading: "Upload your resume to unlock your Full Report",
-    uploadCtaLabel: "Unlock Full Report — $9.99",
-    uploadSupport: "Upload your existing resume for an AI-powered recruiter-style analysis, then securely unlock your Full Report.",
-    priceEnvironmentVariable: "PADDLE_FULL_PRICE_ID",
-    features: ["Everything in Standard Report", "Target-role match analysis", "Missing keyword analysis", "Professional summary improvement suggestions", "Action plan and Full PDF report"]
+    ctaLabel: "SEE MY STRONGER VERSION — $9.99",
+    uploadHeading: "Upload your resume to unlock your ELITE Report",
+    uploadCtaLabel: "CONTINUE TO SECURE CHECKOUT — $9.99",
+    uploadSupport: "Upload your existing resume for Resume Intelligence analysis, then securely unlock your ELITE Report.",
+    productEnvironmentVariable: "POLAR_FULL_PRODUCT_ID",
+    features: ["Everything in PRO", "Target-role Optimization", "Professional Summary Draft", "Achievement Statement Drafts", "Recruiter-ready Content Suggestions", "Job-match Insights", "High-impact Resume Blueprint", "Premium PDF Report"]
   }
 } as const;
 
 // Kept for existing components while all plan data is now sourced from reportPlanConfig.
 export const reportPlanDetails = {
-  free: { label: reportPlanConfig.free.displayName, priceLabel: "$0", ctaLabel: "Analyze My Resume - Free" },
-  standard: { label: reportPlanConfig.standard.displayName, priceLabel: reportPlanConfig.standard.priceLabel, ctaLabel: "Unlock Standard Report - $4.99" },
-  full: { label: reportPlanConfig.full.displayName, priceLabel: reportPlanConfig.full.priceLabel, ctaLabel: "Unlock Full Report - $9.99" }
+  free: { label: reportPlanConfig.free.displayName, priceLabel: reportPlanConfig.free.priceLabel, ctaLabel: reportPlanConfig.free.ctaLabel },
+  standard: { label: reportPlanConfig.standard.displayName, priceLabel: reportPlanConfig.standard.priceLabel, ctaLabel: reportPlanConfig.standard.ctaLabel },
+  full: { label: reportPlanConfig.full.displayName, priceLabel: reportPlanConfig.full.priceLabel, ctaLabel: reportPlanConfig.full.ctaLabel }
 } as const;
 
 export function isReportPlan(value: unknown): value is ReportPlan {
@@ -82,25 +90,46 @@ export function shouldApplyPurchasedPlan(currentPlan: ReportPlan | undefined, pu
   return !hasPlanAccess(currentPlan, purchasedPlan);
 }
 
+export function preparePendingReportPlan<
+  T extends {
+    paid: boolean;
+    paymentStatus: "unpaid" | "not_required" | "pending" | "paid" | "refunded";
+    requestedPlan: ReportPlan;
+    accessPlan: ReportPlan;
+    analysisStatus: "awaiting_payment" | "processing" | "completed" | "failed";
+    targetRole?: string;
+    eliteEnhancementStatus?: "not_started" | "processing" | "completed" | "failed";
+    report?: unknown;
+    updatedAt: string;
+  }
+>(report: T, plan: PaidReportPlan): T {
+  if (report.analysisStatus === "awaiting_payment") {
+    if (report.requestedPlan === plan && report.paymentStatus === "pending") return report;
+    throw new Error("This pending upload belongs to a different plan.");
+  }
+
+  if (report.analysisStatus !== "completed" || !report.report) {
+    throw new Error("Resume analysis is still in progress.");
+  }
+
+  if (plan === "full" && !report.targetRole) {
+    throw new Error("ELITE target-role details are required before checkout.");
+  }
+
+  if (hasPlanAccess(report.accessPlan || (report.paid ? "standard" : "free"), plan)) {
+    throw new Error("This report plan is already unlocked.");
+  }
+
+  if (report.requestedPlan === plan && report.paymentStatus === "pending") return report;
+
+  return {
+    ...report,
+    requestedPlan: plan,
+    paymentStatus: "pending",
+    updatedAt: new Date().toISOString()
+  };
+}
+
 export function getPdfReportTitle(accessPlan: ReportPlan) {
-  return accessPlan === "full" ? "Full Recruiter Mind Report" : "Standard Recruiter Mind Report";
-}
-
-export function getConfiguredPaddlePriceId(plan: PaidReportPlan) {
-  if (plan === "full") return process.env.PADDLE_FULL_PRICE_ID || "";
-  return process.env.PADDLE_STANDARD_PRICE_ID || "";
-}
-
-export function getPaddlePlanForPriceId(priceId: string | undefined): PaidReportPlan | null {
-  if (!priceId) return null;
-  if (priceId === getConfiguredPaddlePriceId("full")) return "full";
-  if (priceId === getConfiguredPaddlePriceId("standard")) return "standard";
-  return null;
-}
-
-export function getMissingPaddlePriceConfig() {
-  const missing: string[] = [];
-  if (!getConfiguredPaddlePriceId("standard")) missing.push("PADDLE_STANDARD_PRICE_ID");
-  if (!getConfiguredPaddlePriceId("full")) missing.push("PADDLE_FULL_PRICE_ID");
-  return missing;
+  return accessPlan === "full" ? "ELITE Resume Intelligence Engine" : "PRO Resume Intelligence Report";
 }

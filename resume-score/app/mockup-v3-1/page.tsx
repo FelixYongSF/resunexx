@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import { AnalyticsPageView } from "@/components/analytics-page-view";
+import { Footer } from "@/components/footer";
 import { reportPlanConfig } from "@/lib/report-plan";
 import styles from "./mockup-v3-1.module.css";
 
@@ -102,7 +103,8 @@ function MockupV31Content({
   }, [enableMotion]);
 
   return (
-    <main ref={pageRef} className={[styles.page, "resunexx-dark-page", motionReady ? styles.motion : ""].filter(Boolean).join(" ")}>
+    <>
+      <main ref={pageRef} className={[styles.page, "resunexx-dark-page", motionReady ? styles.motion : ""].filter(Boolean).join(" ")}>
       <AnalyticsPageView event="landing_page_visit" />
       <nav className={styles.nav} data-reveal aria-label="ResuNexx prototype navigation">
         <Link href="/" className={styles.logo}><span className={styles.logoMark}>R</span>ResuNexx</Link>
@@ -121,7 +123,7 @@ function MockupV31Content({
           <h1 data-reveal>See what<br />recruiters<br /><em>see.</em></h1>
           <p className={styles.heroText} data-reveal>Know what gets noticed.<br />Fix what gets ignored.</p>
           <Link href="/upload?plan=free" className={styles.heroCta} data-reveal>Analyze my resume <span>↗</span></Link>
-          <p className={styles.meta} data-reveal>Free preview <i /> PDF / DOCX</p>
+          <p className={styles.meta} data-reveal>FREE SIGNAL CHECK <i /> PDF / DOCX</p>
         </div>
         <div className={styles.heroLetters} aria-hidden="true">
           {fallingLetters.map(({ letter, ...motion }) => (
@@ -182,34 +184,35 @@ function MockupV31Content({
 
           {!separatePricing ? <aside id="pricing" className={styles.pricingPanel}>
             <div className={styles.priceCard} data-reveal style={{ "--reveal-delay": "0ms" } as CSSProperties}>
-              <span>FREE PREVIEW</span><strong>$0</strong>
-              <ul><li>Resume score</li><li>ATS score</li><li>Top 3 issues</li></ul>
+              <span>FREE / RESUME SIGNAL CHECK</span><strong>FREE</strong>
+              <ul><li>Resume Score</li><li>Recruiter First Impression</li><li>Top 3 Priority Improvements</li></ul>
               <Link href="/upload?plan=free" className={styles.planCta}>Start free <span>↗</span></Link>
             </div>
             <div className={styles.priceCardPaid} data-reveal style={{ "--reveal-delay": "100ms" } as CSSProperties}>
-              <span>STANDARD REPORT</span><strong>$4.99</strong>
-              <ul><li>Everything in Free Preview</li><li>Recruiter-style analysis</li><li>Five priority improvements</li><li>Improvement examples</li><li>Downloadable Standard PDF report</li></ul>
-              <Link href="/upload?plan=standard" className={styles.planCta}>Get Standard Report <span>↗</span></Link>
+              <span>PRO / RESUME INTELLIGENCE REPORT</span><strong>$4.99</strong>
+              <ul><li>Everything in FREE</li><li>Resume Intelligence Analysis</li><li>Priority Improvement Roadmap</li><li>Resume Improvement Examples</li><li>Downloadable PDF Report</li></ul>
+              <Link href="/upload?plan=standard" className={styles.planCta}>Get PRO Report <span>↗</span></Link>
             </div>
             <div className={styles.priceCardFull} data-reveal style={{ "--reveal-delay": "200ms" } as CSSProperties}>
-              <span>FULL REPORT</span><strong>$9.99</strong>
-              <ul><li>Everything in Standard Report</li><li>Target-role match analysis</li><li>Missing keyword analysis</li><li>Professional summary improvement suggestions</li><li>Five achievement improvement recommendations</li><li>30-minute action plan</li><li>Downloadable Full PDF report</li></ul>
-              <Link href="/upload?plan=full" className={styles.planCta}>Get Full Report <span>↗</span></Link>
+              <span>ELITE / RESUME INTELLIGENCE ENGINE</span><strong>$9.99</strong>
+              <ul><li>Everything in PRO</li><li>Optimized Improvement Examples</li><li>Stronger Achievement Examples</li><li>High-impact Resume Blueprint</li><li>Premium PDF Report</li></ul>
+              <Link href="/upload?plan=full" className={styles.planCta}>Get ELITE Report <span>↗</span></Link>
             </div>
           </aside> : null}
         </div>
         {separatePricing ? <section id="pricing" className={styles.pricingPanel}>
-          <div className={styles.priceCard} data-reveal><span>01 / FREE</span><strong>FREE</strong><ul>{reportPlanConfig.free.features.map((feature) => <li key={feature}>{feature}</li>)}</ul><Link href="/upload?plan=free" className={styles.planCta}>{reportPlanConfig.free.ctaLabel} <span>↗</span></Link></div>
-          <div className={styles.priceCardPaid} data-reveal><span>02 / STANDARD REPORT</span><strong>{reportPlanConfig.standard.priceLabel}</strong><ul>{reportPlanConfig.standard.features.map((feature) => <li key={feature}>{feature}</li>)}</ul><Link href="/upload?plan=standard" className={styles.planCta}>{reportPlanConfig.standard.ctaLabel} <span>↗</span></Link></div>
-          <div className={styles.priceCardFull} data-reveal><span>03 / FULL REPORT</span><strong>{reportPlanConfig.full.priceLabel}</strong><ul>{reportPlanConfig.full.features.map((feature) => <li key={feature}>{feature}</li>)}</ul><Link href="/upload?plan=full" className={styles.planCta}>{reportPlanConfig.full.ctaLabel} <span>↗</span></Link></div>
+          <div className={styles.priceCard} data-reveal><span>01 / FREE</span><strong>{reportPlanConfig.free.priceLabel}</strong><p>{reportPlanConfig.free.productName}</p><ul>{reportPlanConfig.free.features.map((feature) => <li key={feature}>{feature}</li>)}</ul><Link href="/upload?plan=free" className={styles.planCta}>{reportPlanConfig.free.ctaLabel} <span>↗</span></Link></div>
+          <div className={styles.priceCardPaid} data-reveal><span>02 / PRO</span><strong>{reportPlanConfig.standard.priceLabel}</strong><p>{reportPlanConfig.standard.productName}</p><ul>{reportPlanConfig.standard.features.map((feature) => <li key={feature}>{feature}</li>)}</ul><Link href="/upload?plan=standard" className={styles.planCta}>{reportPlanConfig.standard.ctaLabel} <span>↗</span></Link></div>
+          <div className={styles.priceCardFull} data-reveal><span>03 / ELITE</span><strong>{reportPlanConfig.full.priceLabel}</strong><p>{reportPlanConfig.full.productName}</p><ul>{reportPlanConfig.full.features.map((feature) => <li key={feature}>{feature}</li>)}</ul><Link href="/upload?plan=full" className={styles.planCta}>{reportPlanConfig.full.ctaLabel} <span>↗</span></Link></div>
         </section> : null}
       </section>
 
-      <footer className={styles.footer}>
-        <div><p className={styles.footerBrand}>ResuNexx</p><p>AI-powered resume analysis and feedback for early-career job seekers.</p><p>AI feedback only. No resume creation, recruitment services, or outcome guarantees.</p><a href="mailto:support@resunexx.com">support@resunexx.com</a></div>
-        <nav><Link href="/pricing">Pricing</Link><Link href="/terms">Terms</Link><Link href="/privacy">Privacy</Link><Link href="/refund">Refund</Link><Link href="/contact">Contact</Link></nav>
-      </footer>
-    </main>
+      </main>
+      <section className={styles.landingTrustNote}>
+        <p>AI feedback only. No resume creation, recruitment services, or outcome guarantees.</p>
+      </section>
+      <Footer showDisclaimer={false} />
+    </>
   );
 }
 

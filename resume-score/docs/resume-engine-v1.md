@@ -372,7 +372,7 @@ Paid users can see:
 - Section-by-section feedback
 - Top 10 improvement priorities
 - Missing keywords
-- Rewrite examples
+- Improvement examples
 - Final action plan
 - Triggered rule breakdown
 - Download option
@@ -461,7 +461,7 @@ Premium Report sections:
 - Executive Summary
 - Biggest Opportunity
 - High Impact Improvements
-- Suggested Rewrite
+- Improvement Example
 - Recruiter's First Impression
 - ATS Perspective
 - 30-Minute Improvement Plan
@@ -479,7 +479,7 @@ Quality principles:
 
 - Target role matching against a job description
 - Resume-to-job keyword gap analysis
-- Separate rewrite engine
+- Separate improvement-suggestion engine
 - Interview kit generation
 - Deterministic rule engine pre-checks before GPT
 - Persistent report storage for production

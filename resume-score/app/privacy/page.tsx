@@ -33,7 +33,7 @@ export default function PrivacyPage() {
 
       <LegalSection title="Data requests">
         <p>
-          To ask about your report data or privacy, contact <a className="font-semibold text-[#171714]" href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+          To ask about your report data or privacy, contact <a className="font-semibold text-[#d7ff4f] hover:text-[#f3f0e9]" href={`mailto:${contactEmail}`}>{contactEmail}</a>.
         </p>
       </LegalSection>
     </LegalPage>

@@ -304,7 +304,7 @@ function ensureActionableIssue(issue: string) {
     case "contact":
       return `${issue.replace(/[.\s]+$/, "")}; add one professional email and phone number in the document body.`;
     case "evidence":
-      return `${issue.replace(/[.\s]+$/, "")}; rewrite the first two experience bullets to show the action, scope, and result.`;
+      return `${issue.replace(/[.\s]+$/, "")}; revise the first two experience bullets to show the action, scope, and result.`;
     case "skills":
       return `${issue.replace(/[.\s]+$/, "")}; add a focused skills section and connect its most important capabilities to experience evidence.`;
     case "role":
@@ -369,7 +369,7 @@ function buildExecutiveSummary(report: ResumeReport) {
 
   return [
     primaryStrength,
-    `The biggest opportunity is not to rewrite everything, but to make your strongest evidence easier for a recruiter to recognize in the first scan.`,
+    `The biggest opportunity is not to replace your entire resume, but to make your strongest evidence easier for a recruiter to recognize in the first scan.`,
     `If you improve ${opportunity.toLowerCase()}, the resume should feel clearer, more focused, and more useful for both ATS review and human screening.`
   ].join(" ");
 }
@@ -442,7 +442,7 @@ function buildThirtyMinutePlan(report: ResumeReport): ThirtyMinuteImprovementPla
   const skillsAction = report.sectionFeedback.skills || report.finalActionPlan[2];
 
   return {
-    tenMinutes: `Rewrite the top summary so it names the target direction and one proof point. ${summaryAction}`,
+    tenMinutes: `Revise the top summary so it names the target direction and one proof point. ${summaryAction}`,
     nextTenMinutes: `Improve the strongest experience bullet first. ${impactAction}`,
     finalTenMinutes: `Clean up the skills and ATS signals. ${skillsAction}`
   };

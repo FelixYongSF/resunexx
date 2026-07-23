@@ -1,70 +1,77 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { trackClientEvent } from "@/lib/analytics";
+import { reportPlanConfig } from "@/lib/report-plan";
 
-type CheckoutResponse = {
-  provider?: "paddle";
-  environment?: "sandbox" | "production";
-  clientToken?: string;
-  priceId?: string;
-  successUrl?: string;
-  customData?: {
-    reportId?: string;
-    selectedPlan?: "standard" | "full";
-  };
-  error?: string;
-};
-
-type PaddleCheckoutEvent = {
-  name?: string;
-  data?: {
-    id?: string;
-    transaction_id?: string;
-    transactionId?: string;
-    transaction?: {
-      id?: string;
-    };
-  };
-};
-
-declare global {
-  interface Window {
-    Paddle?: {
-      Environment: {
-        set(environment: "sandbox"): void;
-      };
-      Initialize(options: {
-        token: string;
-        eventCallback?: (event: PaddleCheckoutEvent) => void;
-      }): void;
-      Checkout: {
-        open(options: {
-          items: Array<{ priceId: string; quantity: number }>;
-          customData?: Record<string, unknown>;
-          settings: {
-            displayMode: "overlay";
-            theme: "light";
-            successUrl: string;
-          };
-        }): void;
-      };
-    };
-  }
-}
+type CheckoutResponse = { provider?: "polar"; checkoutUrl?: string; checkoutId?: string; error?: string };
 
 export function CheckoutButton({
   reportId,
   plan,
-  autoStart = false
+  eliteContextReady = false,
+  initialTargetRole = "",
+  initialJobDescription = "",
+  variant = "primary"
 }: {
   reportId: string;
   plan: "standard" | "full";
-  autoStart?: boolean;
+  eliteContextReady?: boolean;
+  initialTargetRole?: string;
+  initialJobDescription?: string;
+  variant?: "primary" | "link";
 }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [isConfirming, setIsConfirming] = useState(false);
+  const [isCollectingEliteContext, setIsCollectingEliteContext] = useState(false);
+  const [isPreparingElite, setIsPreparingElite] = useState(false);
+  const [isEliteReady, setIsEliteReady] = useState(eliteContextReady);
+  const [targetRole, setTargetRole] = useState(initialTargetRole);
+  const [jobDescription, setJobDescription] = useState(initialJobDescription);
   const [error, setError] = useState("");
-  const hasAutoStarted = useRef(false);
+  const planDetails = reportPlanConfig[plan];
+
+  async function prepareEliteContext(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+    if (!targetRole.trim()) {
+      setError("Target Role / Job Title is required for ELITE.");
+      return;
+    }
+
+    setIsPreparingElite(true);
+    try {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 115_000);
+      const res = await fetch(`/api/reports/${reportId}/elite-context`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ targetRole, jobDescription }),
+        signal: controller.signal
+      });
+      window.clearTimeout(timeout);
+      const data = (await readApiResponse(res)) as { ready?: boolean; error?: string };
+      if (!res.ok || !data.ready) throw new Error(data.error || "We couldn't prepare the ELITE report.");
+      setIsEliteReady(true);
+      setIsCollectingEliteContext(false);
+      setIsConfirming(true);
+    } catch (err) {
+      setError(err instanceof DOMException && err.name === "AbortError"
+        ? "ELITE preparation took too long. Please try again."
+        : err instanceof Error ? err.message : "We couldn't prepare the ELITE report.");
+    } finally {
+      setIsPreparingElite(false);
+    }
+  }
+
+  function beginCheckout() {
+    setError("");
+    if (plan === "full" && !isEliteReady) {
+      setIsCollectingEliteContext(true);
+      return;
+    }
+    setIsConfirming(true);
+  }
 
   const startCheckout = useCallback(async () => {
     setIsLoading(true);
@@ -74,7 +81,7 @@ export function CheckoutButton({
       trackClientEvent({ event: "checkout_clicked", reportId, source: `preview_${plan}_checkout` });
       const controller = new AbortController();
       const timeout = window.setTimeout(() => controller.abort(), 25_000);
-      const res = await fetch("/api/checkout", {
+      const res = await fetch(`/api/checkout?plan=${encodeURIComponent(plan)}`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ reportId, plan }),
@@ -83,38 +90,11 @@ export function CheckoutButton({
       window.clearTimeout(timeout);
       const data = (await readApiResponse(res)) as CheckoutResponse;
       if (!res.ok) throw new Error(data.error || "Could not start checkout.");
-      if (!data.clientToken || !data.priceId || !data.successUrl || !data.environment) {
-        throw new Error("Checkout is temporarily unavailable. Please try again later.");
+      if (data.provider === "polar" && data.checkoutUrl) {
+        window.location.assign(data.checkoutUrl);
+        return;
       }
-
-      await loadPaddleScript();
-      if (!window.Paddle) throw new Error("Paddle Checkout could not be loaded. Please try again.");
-
-      if (data.environment === "sandbox") {
-        window.Paddle.Environment.set("sandbox");
-      }
-      window.Paddle.Initialize({
-        token: data.clientToken,
-        eventCallback: (event) => {
-          if (event.name === "checkout.completed") {
-            const transactionId = getTransactionId(event);
-            const separator = data.successUrl?.includes("?") ? "&" : "?";
-            window.location.href = transactionId
-              ? `${data.successUrl}${separator}transaction_id=${encodeURIComponent(transactionId)}`
-              : data.successUrl || `/success?report_id=${reportId}`;
-          }
-        }
-      });
-      window.Paddle.Checkout.open({
-        items: [{ priceId: data.priceId, quantity: 1 }],
-        customData: data.customData,
-        settings: {
-          displayMode: "overlay",
-          theme: "light",
-          successUrl: data.successUrl
-        }
-      });
-      setIsLoading(false);
+      throw new Error("Checkout is temporarily unavailable. Please try again later.");
     } catch (err) {
       const message =
         err instanceof DOMException && err.name === "AbortError"
@@ -127,53 +107,61 @@ export function CheckoutButton({
     }
   }, [plan, reportId]);
 
-  useEffect(() => {
-    if (!autoStart || hasAutoStarted.current) return;
-    hasAutoStarted.current = true;
-    void startCheckout();
-  }, [autoStart, startCheckout]);
-
   return (
-    <div className="mt-7">
-      <button
-        onClick={startCheckout}
-        disabled={isLoading}
-        className="nexx-button-primary w-full"
-      >
-        {isLoading ? "Opening checkout..." : plan === "full" ? "Unlock Full Report - $9.99" : "Unlock Standard Report - $4.99"}
-      </button>
+    <div className={variant === "link" ? "inline-block" : "mt-7"}>
+      {isCollectingEliteContext ? (
+        <form onSubmit={prepareEliteContext} className="rounded-xl border border-[#d8d1c5] bg-[#f6f4ef] p-4 text-left text-sm leading-5 text-slate-700">
+          <p className="font-semibold text-slate-950">Tailor ELITE to your next role.</p>
+          <label className="mt-3 grid gap-1.5 text-xs font-semibold text-slate-700">
+            Target Role / Job Title
+            <input
+              required
+              maxLength={160}
+              value={targetRole}
+              onChange={(event) => setTargetRole(event.target.value)}
+              placeholder="e.g. Junior Product Manager"
+              className="rounded-lg border border-[#d8d1c5] bg-white px-3 py-2.5 text-sm font-normal text-slate-950 outline-none focus:border-slate-950"
+            />
+          </label>
+          <label className="mt-3 grid gap-1.5 text-xs font-semibold text-slate-700">
+            Job Description <span className="font-normal text-slate-500">(optional)</span>
+            <textarea
+              maxLength={8000}
+              value={jobDescription}
+              onChange={(event) => setJobDescription(event.target.value)}
+              placeholder="Paste the role requirements for more specific job-match insights."
+              className="min-h-24 resize-y rounded-lg border border-[#d8d1c5] bg-white px-3 py-2.5 text-sm font-normal text-slate-950 outline-none focus:border-slate-950"
+            />
+          </label>
+          <div className="mt-3 flex gap-2">
+            <button type="submit" disabled={isPreparingElite} className="nexx-button-primary flex-1 px-3 py-2 text-xs">
+              {isPreparingElite ? "Preparing ELITE..." : "Continue"}
+            </button>
+            <button type="button" onClick={() => setIsCollectingEliteContext(false)} disabled={isPreparingElite} className="nexx-button-secondary px-3 py-2 text-xs">Cancel</button>
+          </div>
+        </form>
+      ) : isConfirming ? (
+        <div className="rounded-xl border border-[#d8d1c5] bg-[#f6f4ef] p-4 text-left text-sm leading-5 text-slate-700">
+          <p className="font-semibold text-slate-950">Continue to secure checkout for {planDetails.displayName} — {planDetails.productName} ({planDetails.priceLabel}).</p>
+          <p className="mt-1">Your completed analysis will be reused and unlock after payment.</p>
+          {plan === "full" ? <p className="mt-1 text-xs text-slate-500">ELITE is a separate premium report.</p> : null}
+          <div className="mt-3 flex gap-2">
+            <button onClick={startCheckout} disabled={isLoading} className="nexx-button-primary flex-1 px-3 py-2 text-xs">
+              {isLoading ? "Opening checkout..." : "Continue to checkout"}
+            </button>
+            <button onClick={() => setIsConfirming(false)} disabled={isLoading} className="nexx-button-secondary px-3 py-2 text-xs">Cancel</button>
+          </div>
+        </div>
+      ) : (
+        <button
+          onClick={beginCheckout}
+          className={variant === "link" ? "text-sm font-semibold text-slate-700 underline decoration-slate-400 underline-offset-4 transition hover:text-slate-950" : "nexx-button-primary w-full"}
+        >
+          {variant === "link" ? "Explore ELITE." : planDetails.ctaLabel}
+        </button>
+      )}
       {error ? <p className="nexx-error mt-3">{error}</p> : null}
     </div>
-  );
-}
-
-function loadPaddleScript() {
-  if (window.Paddle) return Promise.resolve();
-
-  return new Promise<void>((resolve, reject) => {
-    const existing = document.querySelector<HTMLScriptElement>('script[src="https://cdn.paddle.com/paddle/v2/paddle.js"]');
-    if (existing) {
-      existing.addEventListener("load", () => resolve(), { once: true });
-      existing.addEventListener("error", () => reject(new Error("Paddle Checkout could not be loaded.")), { once: true });
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.src = "https://cdn.paddle.com/paddle/v2/paddle.js";
-    script.async = true;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error("Paddle Checkout could not be loaded."));
-    document.head.appendChild(script);
-  });
-}
-
-function getTransactionId(event: PaddleCheckoutEvent) {
-  return (
-    event.data?.transaction_id ||
-    event.data?.transactionId ||
-    event.data?.transaction?.id ||
-    event.data?.id ||
-    ""
   );
 }
 
