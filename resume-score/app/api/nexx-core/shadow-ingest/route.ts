@@ -34,7 +34,11 @@ export async function POST(request: Request) {
       new CoreIngestionService(new PostgresCoreEventStore(sql), { allowedEnvironments: [config.environment] }),
       config.serverToken
     );
-    const result = await ingest({ authorization: request.headers.get("authorization") || undefined, event: body.event });
+    const serverToken = request.headers.get("x-nexx-core-token");
+    const result = await ingest({
+      authorization: serverToken ? `Bearer ${serverToken}` : undefined,
+      event: body.event
+    });
     return NextResponse.json(result.body, { status: result.status });
   } catch (error) {
     const message = error instanceof Error ? error.message : "unknown";

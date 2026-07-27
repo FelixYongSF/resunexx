@@ -302,7 +302,7 @@ export async function emitShadowAnalyticsEvent(
   const timeout = setTimeout(() => controller.abort(), LOCAL_SHADOW_TIMEOUT_MS);
   try {
     const headers: Record<string, string> = {
-      authorization: `Bearer ${config.serverToken}`,
+      "x-nexx-core-token": config.serverToken!,
       "content-type": "application/json"
     };
     const ingestUrl = process.env.VERCEL_ENV === "preview"
