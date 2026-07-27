@@ -39,7 +39,7 @@ export async function runVerifiedPaidReportAnalysis(reportId: string) {
     });
 
     await completePaidReportAnalysis(reportId, generated);
-    trackServerEvent({
+    await trackServerEvent({
       event: "analysis_completed",
       reportId,
       source: "polar_verified_payment",

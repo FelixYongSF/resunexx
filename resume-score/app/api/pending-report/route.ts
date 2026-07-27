@@ -5,6 +5,8 @@ import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
 import { hasPersistentReportStore, saveReport } from "@/lib/report-store";
 import { isPaidReportPlan, type PaidReportPlan } from "@/lib/report-plan";
 import type { StoredReport } from "@/lib/report-schema";
+import { trackServerEvent } from "@/lib/analytics";
+import { toNexxCoreUploadMetadata } from "@/lib/nexx-core/phase2-event-metadata";
 
 export const runtime = "nodejs";
 
@@ -43,6 +45,10 @@ export async function POST(request: Request) {
         { error: `Text extraction succeeded but only found ${parsed.text.length} characters. Please try a text-based PDF or DOCX resume.` },
         { status: 400 }
       );
+    }
+    const uploadMetadata = toNexxCoreUploadMetadata(parsed, file.size);
+    if (uploadMetadata) {
+      await trackServerEvent({ event: "upload_completed", source: "api_pending_report", metadata: uploadMetadata });
     }
 
     const id = crypto.randomUUID();

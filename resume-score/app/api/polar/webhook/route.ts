@@ -19,7 +19,7 @@ const polarWebhookHandler = Webhooks({
     const { alreadyUnlocked } = await unlockPolarEntitlement(payment);
 
     if (!alreadyUnlocked) {
-      trackServerEvent({
+      await trackServerEvent({
         event: "payment_completed",
         reportId: payment.reportId,
         source: "polar_webhook",

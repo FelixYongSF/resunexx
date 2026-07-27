@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { isPaidReportPlan, type PaidReportPlan } from "@/lib/report-plan";
 import { createCheckout } from "@/lib/payment";
 import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
+import { trackServerEvent } from "@/lib/analytics";
 
 export const runtime = "nodejs";
 
@@ -26,8 +27,11 @@ export async function POST(request: Request) {
     if (!reportId) return NextResponse.json({ error: "Missing reportId." }, { status: 400 });
     if (!isPaidReportPlan(plan)) return NextResponse.json({ error: "Please choose a valid paid report plan." }, { status: 400 });
     selectedPlan = plan;
+    await trackServerEvent({ event: "checkout_requested", source: "api_checkout", metadata: { plan: selectedPlan } });
 
-    return NextResponse.json(await createCheckout({ reportId, plan: selectedPlan }));
+    const checkout = await createCheckout({ reportId, plan: selectedPlan });
+    await trackServerEvent({ event: "checkout_created", source: "api_checkout", metadata: { plan: selectedPlan } });
+    return NextResponse.json(checkout);
   } catch (error) {
     const message = error instanceof Error ? error.message : "Could not start checkout.";
     console.error("[polar:checkout] request failed", {

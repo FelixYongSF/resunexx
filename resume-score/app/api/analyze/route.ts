@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { analyzeResumeWithEngine } from "@/lib/resumeEngine";
 import { extractResumeText } from "@/lib/file-extraction";
 import { trackServerEvent } from "@/lib/analytics";
+import { toNexxCoreUploadMetadata } from "@/lib/nexx-core/phase2-event-metadata";
 import { checkRateLimit, getRequestIp } from "@/lib/rate-limit";
 import { markReportAnalysisFailed, saveReport } from "@/lib/report-store";
 import { toPreview, StoredReport } from "@/lib/report-schema";
@@ -79,6 +80,10 @@ export async function POST(request: Request) {
       warnings: parsed.warnings,
       extractedCharacters: resumeText.length
     });
+    const uploadMetadata = toNexxCoreUploadMetadata(parsed, file.size);
+    if (uploadMetadata) {
+      await trackServerEvent({ event: "upload_completed", source: "api_analyze", metadata: uploadMetadata });
+    }
 
     step = "file:validate-text";
     if (resumeText.length < 400) {
@@ -113,6 +118,7 @@ export async function POST(request: Request) {
     await saveReport(stored);
 
     step = "engine:analyze-resume";
+    await trackServerEvent({ event: "analysis_started", source: "api_analyze", metadata: { requestedPlan: "free" } });
     const engineStartedAt = Date.now();
     console.info(`[analyze:${requestId}] running resume engine`, {
       model: process.env.OPENAI_MODEL || "gpt-4o-mini",
@@ -144,7 +150,7 @@ export async function POST(request: Request) {
       storageDurationMs,
       totalDurationMs: Date.now() - requestStartedAt
     });
-    trackServerEvent({
+    await trackServerEvent({
       event: "analysis_completed",
       reportId: id,
       source: "api_analyze",
