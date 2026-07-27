@@ -62,7 +62,7 @@ test("Production Shadow Mode fails closed until its fixed same-deployment config
   }).enabled, false);
   const production = getShadowConfig({
     VERCEL_ENV: "production",
-    VERCEL_URL: "resunexx-prod.vercel.app",
+    NEXT_PUBLIC_APP_URL: "https://resunexx.com",
     NEXX_CORE_ENABLED: "true",
     NEXX_CORE_ENVIRONMENT: "production",
     NEXX_CORE_SHADOW_MODE: "true",
@@ -77,7 +77,7 @@ test("Production Shadow Mode fails closed until its fixed same-deployment config
   assert.deepEqual(production, {
     enabled: true,
     environment: "production",
-    ingestUrl: "https://resunexx-prod.vercel.app/api/nexx-core/shadow-ingest",
+    ingestUrl: "https://resunexx.com/api/nexx-core/shadow-ingest",
     serverToken: "production-server-token-with-sufficient-length"
   });
   assert.throws(

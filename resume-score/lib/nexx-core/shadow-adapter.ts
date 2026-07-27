@@ -31,6 +31,7 @@ const LOCAL_SHADOW_TIMEOUT_MS = 3_000;
 const PREVIEW_SELF_INGEST_MARKER = "vercel-preview-self";
 const PRODUCTION_SELF_INGEST_MARKER = "vercel-production-self";
 const PREVIEW_SELF_INGEST_PATH = "/api/nexx-core/shadow-ingest";
+const PRODUCTION_APP_ORIGIN = "https://resunexx.com";
 
 /**
  * Shadow Mode is opt-in and fail-closed. Local development uses localhost;
@@ -50,7 +51,7 @@ export function getShadowConfig(env: Readonly<Record<string, string | undefined>
       env.NEXX_CORE_PRODUCT_KEY !== "resunexx" ||
       env.NEXX_CORE_CONTRACT_VERSION !== CORE_CONTRACT_VERSION ||
       env.NEXX_CORE_PRIVACY_POLICY_VERSION !== "2026-07-01" ||
-      !env.VERCEL_URL ||
+      env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") !== PRODUCTION_APP_ORIGIN ||
       !env.NEXX_CORE_DATABASE_URL ||
       !env.NEXX_CORE_SERVER_TOKEN
     ) {
@@ -59,7 +60,7 @@ export function getShadowConfig(env: Readonly<Record<string, string | undefined>
     return {
       enabled: true,
       environment: "production",
-      ingestUrl: `https://${env.VERCEL_URL}${PREVIEW_SELF_INGEST_PATH}`,
+      ingestUrl: `${PRODUCTION_APP_ORIGIN}${PREVIEW_SELF_INGEST_PATH}`,
       serverToken: env.NEXX_CORE_SERVER_TOKEN
     };
   }
