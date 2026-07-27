@@ -6,7 +6,7 @@ import type { CoreEventStore } from "./event-store.ts";
 type ExistingEvent = Readonly<{ event_id: string }>;
 
 /**
- * Development-only append-only store. Product data is never accepted here
+ * Append-only Core store. Product data is never accepted here
  * until it has passed the shared privacy sanitizer.
  */
 export class PostgresCoreEventStore implements CoreEventStore {
@@ -58,7 +58,7 @@ export class PostgresCoreEventStore implements CoreEventStore {
       WHERE organization_key = 'nexx' AND product_key = ${event.productKey}
       LIMIT 1
     `;
-    if (!productExists[0]) throw new Error(`Registered development product not found: ${event.productKey}`);
+    if (!productExists[0]) throw new Error(`Registered product not found: ${event.productKey}`);
     return "duplicate";
   }
 
@@ -75,9 +75,9 @@ export class PostgresCoreEventStore implements CoreEventStore {
   }
 }
 
-export async function ensureNonProductionProductRegistration(
+export async function ensureProductRegistration(
   sql: Sql,
-  environment: "development" | "staging",
+  environment: "development" | "staging" | "production",
   productKey = "resunexx"
 ): Promise<void> {
   const productRows = await sql<{ product_id: string }[]>`
@@ -105,5 +105,14 @@ export async function ensureNonProductionProductRegistration(
 
 /** Backwards-compatible helper for existing local development commands. */
 export async function ensureDevelopmentProductRegistration(sql: Sql, productKey = "resunexx"): Promise<void> {
-  return ensureNonProductionProductRegistration(sql, "development", productKey);
+  return ensureProductRegistration(sql, "development", productKey);
+}
+
+/** Backwards-compatible helper for the existing non-production commands. */
+export async function ensureNonProductionProductRegistration(
+  sql: Sql,
+  environment: "development" | "staging",
+  productKey = "resunexx"
+): Promise<void> {
+  return ensureProductRegistration(sql, environment, productKey);
 }

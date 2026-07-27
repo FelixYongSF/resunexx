@@ -15,7 +15,8 @@ const previewEnv = {
 test("Preview staging ingestion fails closed outside the dedicated preview boundary", () => {
   assert.deepEqual(getPreviewStagingConfig(previewEnv), {
     databaseUrl: previewEnv.NEXX_CORE_STAGING_DATABASE_URL,
-    serverToken: previewEnv.NEXX_CORE_SERVER_TOKEN
+    serverToken: previewEnv.NEXX_CORE_SERVER_TOKEN,
+    environment: "staging"
   });
   assert.throws(() => getPreviewStagingConfig({ ...previewEnv, VERCEL_ENV: "production" }), /disabled/i);
   assert.throws(() => getPreviewStagingConfig({ ...previewEnv, NEXX_CORE_ENABLED: "true" }), /disabled/i);

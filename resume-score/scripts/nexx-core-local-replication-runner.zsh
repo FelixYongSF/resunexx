@@ -13,8 +13,11 @@ case "${TARGET}" in
   staging)
     ENV_FILE=".env.staging.local"
     ;;
+  production)
+    ENV_FILE=".env.production.local"
+    ;;
   *)
-    echo "Nexx Core local replication target must be development or staging." >&2
+    echo "Nexx Core local replication target must be development, staging, or production." >&2
     exit 2
     ;;
 esac
@@ -28,6 +31,10 @@ trap cleanup EXIT
 
 cd "${ROOT_DIRECTORY}"
 export NEXX_CORE_LOCAL_REPLICATION_TARGET="${TARGET}"
+if [[ "${TARGET}" == "production" ]]; then
+  export NEXX_CORE_LOCAL_REPLICA_DIR="${NEXX_CORE_LOCAL_REPLICA_DIR:-$HOME/.resunexx/nexx-core-production}"
+  export NEXX_CORE_LOCAL_REPLICA_KEY_SCOPE="${NEXX_CORE_LOCAL_REPLICA_KEY_SCOPE:-production-v1}"
+fi
 
 case "${MODE}" in
   replicate)

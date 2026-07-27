@@ -23,7 +23,8 @@ async function applyPendingExports(args: Readonly<{ exportsDirectory: string; da
 
 export async function replicateLocal(args: Readonly<{
   databaseUrl: string;
-  environment: "development" | "test" | "staging";
+  environment: "development" | "test" | "staging" | "production";
+  allowProduction?: boolean;
   exportsDirectory: string;
   dataDirectory: string;
   key: Buffer;
@@ -33,7 +34,12 @@ export async function replicateLocal(args: Readonly<{
   const db = await openLocalReplica(args.dataDirectory);
   try {
     const watermark = await currentWatermark(db);
-    const payload = await readSourceDelta({ databaseUrl: args.databaseUrl, environment: args.environment, watermark });
+    const payload = await readSourceDelta({
+      databaseUrl: args.databaseUrl,
+      environment: args.environment,
+      allowProduction: args.allowProduction,
+      watermark
+    });
     const knownEventIds = await existingEventIds(db, payload.events.map((event) => event.eventId));
     const newEvents = payload.events.filter((event) => !knownEventIds.has(event.eventId));
     const knownPaymentFactIds = await existingPaymentFactIds(db, payload.paymentFacts.map((fact) => fact.providerEventId));

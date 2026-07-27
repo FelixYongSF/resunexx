@@ -47,8 +47,39 @@ test("Phase 2 Shadow mappings require server authority and emit only catalog-saf
   assert.equal(mapAnalyticsToShadowEvent({ event: "payment_completed", source: "polar_webhook" }), undefined);
 });
 
-test("Shadow Mode is disabled in production and rejects remote destinations", () => {
+test("Production Shadow Mode fails closed until its fixed same-deployment configuration is complete", () => {
   assert.equal(getShadowConfig({ NEXX_CORE_SHADOW_MODE: "true", VERCEL_ENV: "production" }).enabled, false);
+  assert.equal(getShadowConfig({
+    VERCEL_ENV: "production",
+    VERCEL_URL: "resunexx-prod.vercel.app",
+    NEXX_CORE_ENABLED: "true",
+    NEXX_CORE_ENVIRONMENT: "production",
+    NEXX_CORE_SHADOW_MODE: "true",
+    NEXX_CORE_SHADOW_TARGET: "production",
+    NEXX_CORE_INGEST_URL: "https://example.com/v1/events",
+    NEXX_CORE_DATABASE_URL: "postgresql://core.example.test/production",
+    NEXX_CORE_SERVER_TOKEN: "production-server-token-with-sufficient-length"
+  }).enabled, false);
+  const production = getShadowConfig({
+    VERCEL_ENV: "production",
+    VERCEL_URL: "resunexx-prod.vercel.app",
+    NEXX_CORE_ENABLED: "true",
+    NEXX_CORE_ENVIRONMENT: "production",
+    NEXX_CORE_SHADOW_MODE: "true",
+    NEXX_CORE_SHADOW_TARGET: "production",
+    NEXX_CORE_INGEST_URL: "vercel-production-self",
+    NEXX_CORE_PRODUCT_KEY: "resunexx",
+    NEXX_CORE_CONTRACT_VERSION: "nexx-core-event-v1",
+    NEXX_CORE_PRIVACY_POLICY_VERSION: "2026-07-01",
+    NEXX_CORE_DATABASE_URL: "postgresql://core.example.test/production",
+    NEXX_CORE_SERVER_TOKEN: "production-server-token-with-sufficient-length"
+  });
+  assert.deepEqual(production, {
+    enabled: true,
+    environment: "production",
+    ingestUrl: "https://resunexx-prod.vercel.app/api/nexx-core/shadow-ingest",
+    serverToken: "production-server-token-with-sufficient-length"
+  });
   assert.throws(
     () => getShadowConfig({
       NEXX_CORE_SHADOW_MODE: "true",

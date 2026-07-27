@@ -1,5 +1,5 @@
--- Phase 1 only. Apply to a non-production Neon database after explicit local
--- provisioning approval. This migration intentionally contains no product data.
+-- Apply only to an explicitly approved, dedicated Nexx Core database. This
+-- migration intentionally contains no product data.
 
 CREATE SCHEMA IF NOT EXISTS core_registry;
 CREATE SCHEMA IF NOT EXISTS core_raw;

@@ -15,8 +15,12 @@ function run(command: string, args: string[]): Promise<void> {
 }
 
 async function main() {
-  if (process.env.NEXX_CORE_LOCAL_REPLICATION_TARGET !== "development") {
-    throw new Error("Set NEXX_CORE_LOCAL_REPLICATION_TARGET=development to install the local replication schedule.");
+  const target = process.env.NEXX_CORE_LOCAL_REPLICATION_TARGET;
+  if (target !== "development" && target !== "production") {
+    throw new Error("Set NEXX_CORE_LOCAL_REPLICATION_TARGET=development or production to install the local replication schedule.");
+  }
+  if (target === "production" && process.env.NEXX_CORE_PRODUCTION_REPLICATION_APPROVED !== "true") {
+    throw new Error("Production replication scheduling requires explicit local production replication approval.");
   }
   if (process.platform !== "darwin" || typeof process.getuid !== "function") {
     throw new Error("The founder-owned local replication scheduler currently requires macOS.");
@@ -41,7 +45,7 @@ async function main() {
   </array>
   <key>WorkingDirectory</key><string>${process.cwd()}</string>
   <key>EnvironmentVariables</key><dict>
-    <key>NEXX_CORE_LOCAL_REPLICATION_TARGET</key><string>development</string>
+    <key>NEXX_CORE_LOCAL_REPLICATION_TARGET</key><string>${target}</string>
   </dict>
   <key>StartInterval</key><integer>${INTERVAL_SECONDS}</integer>
   <key>StandardOutPath</key><string>${join(logDirectory, "replication.out.log")}</string>
@@ -53,7 +57,7 @@ async function main() {
   const domain = `gui/${process.getuid()}`;
   await run("/bin/launchctl", ["bootout", domain, plistPath]).catch(() => undefined);
   await run("/bin/launchctl", ["bootstrap", domain, plistPath]);
-  console.info(`[nexx-core] local replication schedule installed: every ${INTERVAL_SECONDS / 3600} hours.`);
+  console.info(`[nexx-core] ${target} local replication schedule installed: every ${INTERVAL_SECONDS / 3600} hours.`);
 }
 
 main().catch((error: unknown) => {

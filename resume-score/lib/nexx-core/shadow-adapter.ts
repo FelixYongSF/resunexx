@@ -1,5 +1,5 @@
 import { buildNexxCoreEvent } from "./events.ts";
-import type { CoreEventInput } from "../../nexx-core/packages/contracts/src/index.ts";
+import { CORE_CONTRACT_VERSION, type CoreEventInput } from "../../nexx-core/packages/contracts/src/index.ts";
 
 type ShadowAnalyticsPayload = Readonly<{
   event: string;
@@ -10,7 +10,7 @@ type ShadowAnalyticsPayload = Readonly<{
 
 type ShadowConfig = Readonly<{
   enabled: boolean;
-  environment?: "development" | "staging";
+  environment?: "development" | "staging" | "production";
   ingestUrl?: string;
   serverToken?: string;
 }>;
@@ -29,16 +29,39 @@ export type PreviewShadowRequestAuth = Readonly<{
 const LOCAL_INGEST_HOSTS = new Set(["127.0.0.1", "localhost", "::1"]);
 const LOCAL_SHADOW_TIMEOUT_MS = 3_000;
 const PREVIEW_SELF_INGEST_MARKER = "vercel-preview-self";
+const PRODUCTION_SELF_INGEST_MARKER = "vercel-production-self";
 const PREVIEW_SELF_INGEST_PATH = "/api/nexx-core/shadow-ingest";
 
 /**
  * Shadow Mode is opt-in and fail-closed. Local development uses localhost;
  * Gate B may use a same-deployment Preview endpoint backed by staging only.
- * Production can never emit or receive Shadow events.
+ * Production requires an explicit, same-deployment, minimum-data Shadow Mode
+ * configuration. Every partial or mismatched production configuration is off.
  */
 export function getShadowConfig(env: Readonly<Record<string, string | undefined>> = process.env): ShadowConfig {
   if (env.VERCEL_ENV === "production" || env.NEXX_CORE_ENVIRONMENT === "production") {
-    return { enabled: false };
+    if (
+      env.VERCEL_ENV !== "production" ||
+      env.NEXX_CORE_ENABLED !== "true" ||
+      env.NEXX_CORE_ENVIRONMENT !== "production" ||
+      env.NEXX_CORE_SHADOW_MODE !== "true" ||
+      env.NEXX_CORE_SHADOW_TARGET !== "production" ||
+      env.NEXX_CORE_INGEST_URL !== PRODUCTION_SELF_INGEST_MARKER ||
+      env.NEXX_CORE_PRODUCT_KEY !== "resunexx" ||
+      env.NEXX_CORE_CONTRACT_VERSION !== CORE_CONTRACT_VERSION ||
+      env.NEXX_CORE_PRIVACY_POLICY_VERSION !== "2026-07-01" ||
+      !env.VERCEL_URL ||
+      !env.NEXX_CORE_DATABASE_URL ||
+      !env.NEXX_CORE_SERVER_TOKEN
+    ) {
+      return { enabled: false };
+    }
+    return {
+      enabled: true,
+      environment: "production",
+      ingestUrl: `https://${env.VERCEL_URL}${PREVIEW_SELF_INGEST_PATH}`,
+      serverToken: env.NEXX_CORE_SERVER_TOKEN
+    };
   }
   if (env.NEXX_CORE_SHADOW_MODE !== "true") return { enabled: false };
   const environment = env.NEXX_CORE_SHADOW_TARGET;
@@ -123,7 +146,7 @@ function resolvePreviewSelfIngestUrl(configuredUrl: string, requestOrigin?: stri
 /** Maps only safe, low-cardinality ResuNexx telemetry into the Core catalog. */
 export function mapAnalyticsToShadowEvent(
   payload: ShadowAnalyticsPayload,
-  environment: "development" | "staging" = "development"
+  environment: "development" | "staging" | "production" = "development"
 ): CoreEventInput | undefined {
   switch (payload.event) {
     case "landing_page_visit":

@@ -29,7 +29,7 @@ export type ReplicationManifest = Readonly<{
   version: 1;
   exportId: string;
   createdAt: string;
-  sourceEnvironment: "development" | "test" | "staging";
+  sourceEnvironment: "development" | "test" | "staging" | "production";
   previousWatermark?: ReplicationWatermark;
   nextWatermark?: ReplicationWatermark;
   eventCount: number;

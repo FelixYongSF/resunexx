@@ -1,18 +1,22 @@
 import postgres from "postgres";
 import type { ReplicaPayload, ReplicationWatermark } from "./types.ts";
 
-function assertNonProduction(environment: string | undefined): asserts environment is "development" | "test" | "staging" {
-  if (environment !== "development" && environment !== "test" && environment !== "staging") {
-    throw new Error("Founder-owned replication is restricted to development, test, or staging.");
-  }
+function assertReplicationEnvironment(
+  environment: string | undefined,
+  allowProduction: boolean | undefined
+): asserts environment is "development" | "test" | "staging" | "production" {
+  if (environment === "production" && allowProduction === true) return;
+  if (environment === "development" || environment === "test" || environment === "staging") return;
+  throw new Error("Founder-owned replication requires a permitted environment and explicit production approval.");
 }
 
 export async function readSourceDelta(args: Readonly<{
   databaseUrl: string;
   environment: string | undefined;
+  allowProduction?: boolean;
   watermark?: ReplicationWatermark;
 }>): Promise<ReplicaPayload> {
-  assertNonProduction(args.environment);
+  assertReplicationEnvironment(args.environment, args.allowProduction);
   const sql = postgres(args.databaseUrl, { ssl: "require", max: 1 });
   try {
     const registry = await sql<Readonly<Record<string, unknown>>[]>`

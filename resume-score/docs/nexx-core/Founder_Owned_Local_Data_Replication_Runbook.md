@@ -2,9 +2,10 @@
 
 ## Scope
 
-This runbook is only for the independent Neon development or staging database
-and synthetic/non-production Nexx Core events. It must not be used with
-production data without a separate Gate B decision.
+This runbook covers independent development, staging, and the separately
+approved production Core database. Production commands run only on the
+founder-controlled Mac, require explicit local approval flags, and never run in
+Vercel.
 
 ## What is installed on this Mac
 
@@ -51,6 +52,38 @@ pnpm run nexx-core:validate-shadow-quality:staging
 Staging remains localhost-only until a separate deployment authorization is
 granted. None of these commands writes Vercel variables or deploys ResuNexx.
 
+## Production replica procedure
+
+Production data uses a separate encrypted sparse bundle, PGlite store, and
+Keychain key. It never reuses the development/staging replica.
+
+Create the ignored `.env.production.local` with only the dedicated Core
+connection and explicit local controls:
+
+```sh
+NEXX_CORE_DATABASE_URL=postgresql://...dedicated-production-core...
+NEXX_CORE_ENVIRONMENT=production
+NEXX_CORE_MIGRATION_TARGET=production
+NEXX_CORE_PRODUCTION_MIGRATION_APPROVED=true
+NEXX_CORE_LOCAL_REPLICATION_TARGET=production
+NEXX_CORE_PRODUCTION_REPLICATION_APPROVED=true
+```
+
+Then run from the repository root:
+
+```sh
+pnpm run nexx-core:migrate:production
+pnpm run nexx-core:replicate:production
+pnpm run nexx-core:replica:query:production
+pnpm run nexx-core:replica:schedule:install:production
+```
+
+The scheduler runs every six hours. It reads only the production Core ledger,
+writes only the local encrypted volume at
+`~/.resunexx/nexx-core-production`, and performs no write to the source
+database. The production Keychain account is distinct from the non-production
+account.
+
 ## Local ingestion verification
 
 The Phase 1 event receiver is a development-only service. It is never mounted
@@ -92,7 +125,8 @@ boundary retry does not duplicate local records or skip a late event.
 ## Local retention and device loss
 
 The source database remains the retention authority. The local replica is an
-encrypted founder-owned copy. If the Mac is lost, revoke or replace the
-Keychain secret and recreate the local replica from the non-production source;
-do not place its data in Git or cloud-sync folders. Any future production use
-requires a new retention, deletion, and device-loss decision under Gate B.
+encrypted founder-owned copy. If the Mac is lost, rotate the production
+Keychain secret and recreate the local replica from the source database; do
+not place its data in Git or cloud-sync folders. Local-copy deletion and
+device-loss procedure must be reviewed alongside the annual source retention
+review.

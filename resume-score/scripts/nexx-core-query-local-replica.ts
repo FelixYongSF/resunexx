@@ -1,16 +1,22 @@
 import { acquireReplicationLock, localReplicationKey, mountEncryptedReplicaVolume, verifyReplicaReadOnly } from "../nexx-core/packages/local-replication/src/index.ts";
 
-type NonProductionTarget = "development" | "staging";
+type LocalReplicationTarget = "development" | "staging" | "production";
 
 async function main() {
   const target = process.env.NEXX_CORE_LOCAL_REPLICATION_TARGET;
-  if (target !== "development" && target !== "staging") {
-    throw new Error("Set NEXX_CORE_LOCAL_REPLICATION_TARGET to development or staging to query the local replica.");
+  if (target !== "development" && target !== "staging" && target !== "production") {
+    throw new Error("Set NEXX_CORE_LOCAL_REPLICATION_TARGET to development, staging, or production to query the local replica.");
   }
-  if (process.env.VERCEL_ENV === "production" || process.env.NEXX_CORE_ENVIRONMENT === "production") {
-    throw new Error("Founder-owned local replica queries are blocked in production.");
+  if (process.env.VERCEL_ENV === "production") {
+    throw new Error("Founder-owned local replica queries must run on the founder-controlled local machine, never inside Vercel.");
   }
-  if (process.env.NEXX_CORE_ENVIRONMENT && process.env.NEXX_CORE_ENVIRONMENT !== (target as NonProductionTarget)) {
+  if (target === "production" && (
+    process.env.NEXX_CORE_ENVIRONMENT !== "production" ||
+    process.env.NEXX_CORE_PRODUCTION_REPLICATION_APPROVED !== "true"
+  )) {
+    throw new Error("Production replica queries require explicit local production replication approval.");
+  }
+  if (process.env.NEXX_CORE_ENVIRONMENT && process.env.NEXX_CORE_ENVIRONMENT !== (target as LocalReplicationTarget)) {
     throw new Error("NEXX_CORE_ENVIRONMENT must match the local replication target.");
   }
   const lock = await acquireReplicationLock();

@@ -1,14 +1,20 @@
 import { acquireReplicationLock, localReplicationKey, mountEncryptedReplicaVolume, replicateLocal } from "../nexx-core/packages/local-replication/src/index.ts";
 
-type NonProductionTarget = "development" | "staging";
+type LocalReplicationTarget = "development" | "staging" | "production";
 
-function requireLocalNonProductionTarget(): NonProductionTarget {
+function requireLocalReplicationTarget(): LocalReplicationTarget {
   const target = process.env.NEXX_CORE_LOCAL_REPLICATION_TARGET;
-  if (target !== "development" && target !== "staging") {
-    throw new Error("Set NEXX_CORE_LOCAL_REPLICATION_TARGET to development or staging to run local replication.");
+  if (target !== "development" && target !== "staging" && target !== "production") {
+    throw new Error("Set NEXX_CORE_LOCAL_REPLICATION_TARGET to development, staging, or production to run local replication.");
   }
-  if (process.env.VERCEL_ENV === "production" || process.env.NEXX_CORE_ENVIRONMENT === "production") {
-    throw new Error("Founder-owned local replication is blocked in production.");
+  if (process.env.VERCEL_ENV === "production") {
+    throw new Error("Founder-owned local replication must run on the founder-controlled local machine, never inside Vercel.");
+  }
+  if (target === "production" && (
+    process.env.NEXX_CORE_ENVIRONMENT !== "production" ||
+    process.env.NEXX_CORE_PRODUCTION_REPLICATION_APPROVED !== "true"
+  )) {
+    throw new Error("Production replication requires NEXX_CORE_ENVIRONMENT=production and NEXX_CORE_PRODUCTION_REPLICATION_APPROVED=true.");
   }
   if (process.env.NEXX_CORE_ENVIRONMENT && process.env.NEXX_CORE_ENVIRONMENT !== target) {
     throw new Error("NEXX_CORE_ENVIRONMENT must match the local replication target.");
@@ -17,10 +23,12 @@ function requireLocalNonProductionTarget(): NonProductionTarget {
 }
 
 async function main() {
-  const target = requireLocalNonProductionTarget();
+  const target = requireLocalReplicationTarget();
   const databaseUrl = target === "staging"
     ? process.env.NEXX_CORE_STAGING_DATABASE_URL
-    : process.env.NEXX_CORE_DATABASE_URL || process.env.DATABASE_URL_UNPOOLED || process.env.DATABASE_URL;
+    : target === "production"
+      ? process.env.NEXX_CORE_DATABASE_URL
+      : process.env.NEXX_CORE_DATABASE_URL || process.env.DATABASE_URL_UNPOOLED || process.env.DATABASE_URL;
   if (!databaseUrl) throw new Error(`A ${target} Nexx Core database connection is required.`);
   const lock = await acquireReplicationLock();
   let volume: Awaited<ReturnType<typeof mountEncryptedReplicaVolume>> | undefined;
@@ -29,6 +37,7 @@ async function main() {
     const result = await replicateLocal({
       databaseUrl,
       environment: target,
+      allowProduction: target === "production",
       exportsDirectory: volume.exportsDirectory,
       dataDirectory: volume.dataDirectory,
       key: await localReplicationKey(),

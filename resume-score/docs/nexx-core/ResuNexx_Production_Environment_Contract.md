@@ -2,10 +2,12 @@
 
 ## Status
 
-Documentation contract only. It records variable names and validation rules,
-never values. It does not authorize changing Vercel configuration.
+This contract records variable names and validation rules, never values. The
+founder authorized the Production Finalization Sprint on 2026-07-28. It still
+requires a dedicated production database connection before any Core event can
+be enabled.
 
-Contract version: `resunexx-env-v1`
+Contract version: `resunexx-env-v2`
 
 ## Current runtime variables
 
@@ -44,36 +46,38 @@ or rollback runtime depends on them.
   values.
 - Every deployment records this contract version.
 
-## Phase 1 Nexx Core variables
+## Nexx Core Production Minimal Shadow variables
 
-Names are proposed and remain inactive until ADR approval:
+The following values are required only in Vercel Production. Preview remains
+on its isolated staging database and must retain `NEXX_CORE_ENABLED=false`.
 
 | Variable | Secret | Purpose |
 |---|---:|---|
-| `NEXX_CORE_ENABLED` | No | Server-side feature gate; defaults false |
+| `NEXX_CORE_ENABLED` | No | Server-side production gate; exactly `true` only after database migration |
 | `NEXX_CORE_DATABASE_URL` | Yes | Neon PostgreSQL connection string; server-only and never logged |
-| `NEXX_CORE_INGEST_URL` | Sensitive configuration | Core ingestion origin |
-| `NEXX_CORE_PRODUCT_KEY` | No | Registered product key |
-| `NEXX_CORE_ENVIRONMENT` | No | Development/staging/production boundary |
+| `NEXX_CORE_INGEST_URL` | Sensitive configuration | Exactly `vercel-production-self`; no arbitrary remote destination |
+| `NEXX_CORE_PRODUCT_KEY` | No | Exactly `resunexx` |
+| `NEXX_CORE_ENVIRONMENT` | No | Exactly `production` |
 | `NEXX_CORE_SERVER_TOKEN` | Yes | Product-to-Core server authentication |
-| `NEXX_CORE_CONTRACT_VERSION` | No | Product adapter contract version |
-| `NEXX_CORE_PRIVACY_POLICY_VERSION` | No | Payload policy version |
+| `NEXX_CORE_CONTRACT_VERSION` | No | Exactly `nexx-core-event-v1` |
+| `NEXX_CORE_PRIVACY_POLICY_VERSION` | No | Exactly `2026-07-01` |
+| `NEXX_CORE_SHADOW_MODE` | No | Exactly `true` for approved minimal Shadow Mode |
+| `NEXX_CORE_SHADOW_TARGET` | No | Exactly `production` |
 | `NEXX_CORE_OUTBOX_SIGNING_KEY` | Yes | Optional message authenticity when transport requires it |
 
-The Core adapter must be non-blocking. Missing Core variables while
-`NEXX_CORE_ENABLED=false` must not affect ResuNexx. Enabling Core with missing
-required variables must fail configuration validation before release.
+The Core adapter is non-blocking. Missing or mismatched variables keep it
+disabled without affecting ResuNexx. Production accepts only catalog-approved,
+minimum-data events; resume content, report IDs, direct identifiers, payment
+facts, and cross-product identity links are not emitted.
 
-### Approved Phase 1 database foundation
+### Database and recovery boundary
 
-The founder approved Neon Free Plan through the Vercel Marketplace in AWS US
-East 1 (Virginia) on 2026-07-26, with a US$0 validation budget. An isolated
-development database was provisioned and its credentials are used locally only
-for Phase 1 migration and verification. Vercel Production and Preview contain
-no Neon connection variables. The Free Plan's limited restore history is not
-approved as a production recovery objective; restore testing and a new
-production decision are required before `NEXX_CORE_ENABLED` may be enabled in
-production.
+The existing Neon Free database is development-only. Production must use a new,
+empty, dedicated Core database. Before enablement, apply the guarded production
+migration locally, create the independent encrypted founder replica, and record
+the migration result. Provider point-in-time restore capability remains a
+separate hosting-plan/recovery-policy decision; the founder-owned encrypted
+replica is required regardless of provider plan.
 
 ## Release validation
 

@@ -6,7 +6,12 @@ import { randomBytes } from "node:crypto";
 import { spawn } from "node:child_process";
 
 const KEYCHAIN_SERVICE = "com.resunexx.nexx-core.local-replication";
-const KEYCHAIN_ACCOUNT = "replica-volume-and-export-key-v1";
+const DEFAULT_KEYCHAIN_ACCOUNT = "replica-volume-and-export-key-v1";
+
+function keychainAccount(): string {
+  const scope = process.env.NEXX_CORE_LOCAL_REPLICA_KEY_SCOPE;
+  return scope ? `replica-volume-and-export-key-${scope}` : DEFAULT_KEYCHAIN_ACCOUNT;
+}
 
 export type MountedReplicaVolume = Readonly<{
   rootDirectory: string;
@@ -36,10 +41,10 @@ function run(command: string, args: string[], stdin?: string): Promise<string> {
 
 async function keychainSecret(): Promise<string> {
   try {
-    return (await run("/usr/bin/security", ["find-generic-password", "-s", KEYCHAIN_SERVICE, "-a", KEYCHAIN_ACCOUNT, "-w"])) .trim();
+    return (await run("/usr/bin/security", ["find-generic-password", "-s", KEYCHAIN_SERVICE, "-a", keychainAccount(), "-w"])) .trim();
   } catch {
     const generated = randomBytes(32).toString("base64");
-    await run("/usr/bin/security", ["add-generic-password", "-U", "-s", KEYCHAIN_SERVICE, "-a", KEYCHAIN_ACCOUNT, "-w", generated]);
+    await run("/usr/bin/security", ["add-generic-password", "-U", "-s", KEYCHAIN_SERVICE, "-a", keychainAccount(), "-w", generated]);
     return generated;
   }
 }
