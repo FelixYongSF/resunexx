@@ -2,20 +2,42 @@ export type AnalyticsEventName =
   | "landing_page_visit"
   | "upload_started"
   | "upload_completed"
+  | "analysis_started"
   | "analysis_completed"
   | "preview_viewed"
+  | "report_viewed"
   | "checkout_clicked"
+  | "checkout_requested"
+  | "checkout_created"
+  | "checkout_cancelled"
+  | "pdf_downloaded"
   | "payment_completed";
 
-type AnalyticsPayload = {
+export type AnalyticsPayload = {
   event: AnalyticsEventName;
   reportId?: string;
   source?: string;
   metadata?: Record<string, string | number | boolean | null>;
 };
 
-export function trackServerEvent(payload: AnalyticsPayload) {
-  console.info("[analytics]", sanitizePayload(payload));
+type ServerTrackingRequestContext = Readonly<{
+  oidcToken?: string;
+  cookie?: string;
+  protectionBypass?: string;
+  requestOrigin?: string;
+}>;
+
+export async function trackServerEvent(payload: AnalyticsPayload, requestContext?: ServerTrackingRequestContext): Promise<void> {
+  const safePayload = sanitizePayload(payload);
+  console.info("[analytics]", { event: safePayload.event, source: safePayload.source });
+  if (typeof window === "undefined") {
+    try {
+      const { emitShadowAnalyticsEvent } = await import("@/lib/nexx-core/shadow-adapter");
+      await emitShadowAnalyticsEvent(safePayload, requestContext);
+    } catch {
+      // Shadow Mode remains observational and must never interrupt product flows.
+    }
+  }
 }
 
 export function trackClientEvent(payload: AnalyticsPayload) {

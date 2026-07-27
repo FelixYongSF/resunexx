@@ -6,11 +6,7 @@ export const runtime = "nodejs";
 const allowedEvents = new Set<AnalyticsEventName>([
   "landing_page_visit",
   "upload_started",
-  "upload_completed",
-  "analysis_completed",
-  "preview_viewed",
-  "checkout_clicked",
-  "payment_completed"
+  "checkout_clicked"
 ]);
 
 export async function POST(request: Request) {
@@ -26,11 +22,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ received: false }, { status: 400 });
     }
 
-    trackServerEvent({
+    await trackServerEvent({
       event: payload.event,
-      reportId: payload.reportId,
-      source: payload.source || "client",
-      metadata: payload.metadata
+      source: "client"
+    }, {
+      oidcToken: request.headers.get("x-vercel-oidc-token") || undefined,
+      cookie: request.headers.get("cookie") || undefined,
+      protectionBypass: request.headers.get("x-vercel-protection-bypass") || undefined,
+      requestOrigin: new URL(request.url).origin
     });
 
     return NextResponse.json({ received: true });
