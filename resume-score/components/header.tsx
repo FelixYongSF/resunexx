@@ -13,6 +13,7 @@ export function Header() {
         <Link href="/#signals" className="hover:text-[#151512]">Signals</Link>
         <Link href="/#report" className="hover:text-[#151512]">Report</Link>
         <Link href="/#pricing" className="hover:text-[#151512]">Pricing</Link>
+        <Link href="/resume-resources" className="hover:text-[#151512]">Resume Resources</Link>
       </nav>
       <Link
         href="/upload?plan=free"

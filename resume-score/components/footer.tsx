@@ -2,7 +2,10 @@ import Link from "next/link";
 import { contactEmail, productName } from "@/lib/site";
 
 const links = [
+  ["How it works", "/how-it-works"],
   ["Pricing", "/pricing"],
+  ["FAQ", "/faq"],
+  ["Resume Resources", "/resume-resources"],
   ["Terms", "/terms"],
   ["Privacy", "/privacy"],
   ["Refund", "/refund"],

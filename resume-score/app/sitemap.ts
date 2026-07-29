@@ -1,12 +1,13 @@
 import type { MetadataRoute } from "next";
-
-const baseUrl = "https://www.resunexx.com";
+import { publicSeoPaths, publicSeoUrls } from "@/lib/seo-indexing";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return ["", "/pricing", "/upload", "/terms", "/privacy", "/refund", "/contact"].map((path) => ({
-    url: `${baseUrl}${path}`,
-    lastModified: new Date(),
-    changeFrequency: path === "" ? "weekly" : "monthly",
-    priority: path === "" ? 1 : 0.7
-  }));
+  return publicSeoUrls.map((url, index) => {
+    const path = publicSeoPaths[index];
+    return {
+      url,
+    changeFrequency: path === "" || path === "/resources" || path === "/resume-resources" ? "weekly" : "monthly",
+    priority: path === "" ? 1 : ["/how-it-works", "/resume-score", "/pricing", "/faq"].includes(path) ? 0.8 : 0.6
+    };
+  });
 }
