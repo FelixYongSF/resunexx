@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    "/api/download/[id]": [
+      "./assets/fonts/*.ttf",
+      "./node_modules/@sparticuz/chromium/bin/**"
+    ]
+  },
   async redirects() {
     return [
       { source: "/mockup-v3-1", destination: "/", permanent: false },

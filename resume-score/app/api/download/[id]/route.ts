@@ -22,8 +22,14 @@ export async function GET(
   }
 
   const customerPlan = accessPlan === "full" ? "elite" : "pro";
+  const paidAccessPlan = accessPlan === "full" ? "full" : "standard";
+  const pdf = await reportToPdf(report.report, paidAccessPlan, {
+    reportId: report.id,
+    generatedAt: report.updatedAt,
+    sourceText: report.resumeTextPreview
+  });
 
-  return new Response(reportToPdf(report.report, accessPlan), {
+  return new Response(pdf, {
     headers: {
       "content-type": "application/pdf",
       "content-disposition": `attachment; filename="resunexx-${customerPlan}-report-${id}.pdf"`
