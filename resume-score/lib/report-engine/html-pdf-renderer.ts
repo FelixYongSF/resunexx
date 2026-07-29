@@ -1,4 +1,5 @@
 import chromium from "@sparticuz/chromium";
+import { resolve } from "node:path";
 import puppeteer from "puppeteer-core";
 import type { ReportPlan } from "../report-plan.ts";
 import { renderHtmlReport } from "./pro-html-template.ts";
@@ -43,6 +44,6 @@ export async function renderHtmlReportPdf(
 }
 
 async function getExecutablePath(isVercel: boolean) {
-  if (isVercel) return chromium.executablePath();
+  if (isVercel) return chromium.executablePath(resolve(process.cwd(), "assets/chromium"));
   return process.env.PUPPETEER_EXECUTABLE_PATH || LOCAL_CHROME;
 }

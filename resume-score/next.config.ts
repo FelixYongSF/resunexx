@@ -1,11 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ["@sparticuz/chromium", "puppeteer-core"],
   outputFileTracingIncludes: {
-    "/api/download/[id]": [
-      "./assets/fonts/*.ttf",
-      "./node_modules/@sparticuz/chromium/bin/**"
-    ]
+    "/api/download/[id]": ["./assets/fonts/*.ttf", "./assets/chromium/**"]
   },
   async redirects() {
     return [
