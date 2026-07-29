@@ -14,7 +14,23 @@ export type PolarOrderRecord = {
 };
 
 export function appUrl() {
-  return process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  if (process.env.NEXT_PUBLIC_APP_URL) return process.env.NEXT_PUBLIC_APP_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return "http://localhost:3000";
+}
+
+export type PolarEnvironment = "production" | "sandbox";
+
+export function getPolarEnvironment(): PolarEnvironment {
+  const configuredEnvironment = process.env.POLAR_ENVIRONMENT;
+  if (!configuredEnvironment || configuredEnvironment === "production") return "production";
+  if (configuredEnvironment === "sandbox") {
+    if (process.env.VERCEL_ENV === "production") {
+      throw new Error("Polar sandbox cannot run in a Vercel Production deployment.");
+    }
+    return "sandbox";
+  }
+  throw new Error("Polar is not configured. POLAR_ENVIRONMENT must be either production or sandbox.");
 }
 
 export function getPolarProductId(plan: PaidReportPlan) {
@@ -32,7 +48,7 @@ export function assertPolarCheckoutConfig(plan: PaidReportPlan) {
   const missing = [
     !process.env.POLAR_ACCESS_TOKEN ? "POLAR_ACCESS_TOKEN" : "",
     !getPolarProductId(plan) ? plan === "full" ? "POLAR_FULL_PRODUCT_ID" : "POLAR_STANDARD_PRODUCT_ID" : "",
-    !process.env.NEXT_PUBLIC_APP_URL ? "NEXT_PUBLIC_APP_URL" : ""
+    !process.env.NEXT_PUBLIC_APP_URL && !process.env.VERCEL_URL ? "NEXT_PUBLIC_APP_URL or VERCEL_URL" : ""
   ].filter(Boolean);
 
   if (missing.length) throw new Error(`Polar is not configured. Missing: ${missing.join(", ")}.`);
@@ -40,7 +56,7 @@ export function assertPolarCheckoutConfig(plan: PaidReportPlan) {
 
 export function createPolarClient() {
   if (!process.env.POLAR_ACCESS_TOKEN) throw new Error("Polar is not configured. Missing: POLAR_ACCESS_TOKEN.");
-  return new Polar({ accessToken: process.env.POLAR_ACCESS_TOKEN, server: "production" });
+  return new Polar({ accessToken: process.env.POLAR_ACCESS_TOKEN, server: getPolarEnvironment() });
 }
 
 export async function createPolarCheckout({ reportId, plan }: { reportId: string; plan: PaidReportPlan }) {

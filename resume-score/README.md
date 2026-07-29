@@ -28,6 +28,7 @@ OPENAI_API_KEY=...
 OPENAI_MODEL=gpt-4o-mini
 POLAR_ACCESS_TOKEN=...
 POLAR_WEBHOOK_SECRET=...
+POLAR_ENVIRONMENT=production
 POLAR_STANDARD_PRODUCT_ID=...
 POLAR_FULL_PRODUCT_ID=...
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -50,6 +51,10 @@ POST /api/checkout?plan=full
 The browser sends the completed `reportId`, while the server selects the matching Polar
 product ID, creates the checkout, and redirects the customer to Polar. The browser never
 receives the Polar access token or webhook secret.
+
+For an isolated Preview test, set `POLAR_ENVIRONMENT=sandbox` only in Vercel Preview,
+along with sandbox-only Polar tokens, webhook secret, and product IDs. Production defaults
+to `production`; never use production credentials or products in Preview testing.
 
 Configure the Polar webhook endpoint as:
 
@@ -81,6 +86,7 @@ OPENAI_API_KEY
 OPENAI_MODEL
 POLAR_ACCESS_TOKEN
 POLAR_WEBHOOK_SECRET
+POLAR_ENVIRONMENT
 POLAR_STANDARD_PRODUCT_ID
 POLAR_FULL_PRODUCT_ID
 NEXT_PUBLIC_APP_URL
