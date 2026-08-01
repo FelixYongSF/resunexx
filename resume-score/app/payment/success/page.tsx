@@ -1,8 +1,10 @@
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
 import { PaymentSuccessStatus } from "@/components/payment-success-status";
 import { getReport } from "@/lib/report-store";
 
 export const runtime = "nodejs";
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 export default async function PaymentSuccessPage({
   searchParams

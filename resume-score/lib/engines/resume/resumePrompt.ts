@@ -81,7 +81,7 @@ Feedback rules:
 - Strengths must identify real signals already present, not generic encouragement.
 - Weaknesses must be framed as fixable presentation issues, not personal judgments.
 - Missing keywords must be plausible for the inferred or provided target direction. If no target direction is clear, include role-family keywords and say they should be validated against real job postings.
-- Improvement examples must preserve truthfulness. If a metric is not present, use a structure with a placeholder-like instruction inside the sentence such as "measured by [specific metric]" only when necessary, but prefer non-numeric truthful revisions.
+- Improvement examples must preserve truthfulness. If a metric is not present, write a complete, non-numeric revision that remains truthful. Never place placeholders, bracketed instructions, or requests to add evidence inside a rewritten sentence. Put any evidence reminder in a separate caveat only.
 - The final action plan must be ordered by impact and effort: fix the top third first, then bullets, then skills/keywords, then formatting/export.
 
 ${reportWriterPrompt}

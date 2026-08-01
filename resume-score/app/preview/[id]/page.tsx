@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { AnalyticsPageView } from "@/components/analytics-page-view";
 import { Header } from "@/components/header";
@@ -8,8 +9,10 @@ import { CheckoutButton } from "@/components/checkout-button";
 import { getReport } from "@/lib/report-store";
 import { reportPlanConfig } from "@/lib/report-plan";
 import { toPreview } from "@/lib/report-schema";
+import { trackServerEvent } from "@/lib/analytics";
 
 export const runtime = "nodejs";
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 export default async function PreviewPage({
   params
@@ -43,6 +46,7 @@ export default async function PreviewPage({
   if ((stored.accessPlan || (stored.paid ? "standard" : "free")) !== "free") {
     redirect(`/report/${id}`);
   }
+  await trackServerEvent({ event: "preview_viewed", source: "preview_page" });
 
   return (
     <main className="min-h-screen bg-[#f6f4ef]">

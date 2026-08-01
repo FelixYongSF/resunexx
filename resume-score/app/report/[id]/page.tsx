@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { CheckoutButton } from "@/components/checkout-button";
 import { CopyDraftButton } from "@/components/copy-draft-button";
@@ -7,8 +8,10 @@ import { ScoreRing } from "@/components/score-ring";
 import { getReport } from "@/lib/report-store";
 import { engineName } from "@/lib/resumeEngine";
 import { getPdfReportTitle, hasPlanAccess } from "@/lib/report-plan";
+import { trackServerEvent } from "@/lib/analytics";
 
 export const runtime = "nodejs";
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 export default async function FullReportPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -48,6 +51,7 @@ export default async function FullReportPage({ params }: { params: Promise<{ id:
   const premiumReport = report.paidReport.premiumReport;
   const isFullReport = hasPlanAccess(accessPlan, "full");
   const eliteContextReady = Boolean(stored.targetRole);
+  await trackServerEvent({ event: "report_viewed", source: "report_page", metadata: { accessPlan } });
 
   return (
     <main className="min-h-screen bg-[#f6f4ef]">

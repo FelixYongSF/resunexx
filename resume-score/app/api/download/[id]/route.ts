@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { reportToPdf } from "@/lib/report-pdf";
 import { getReport } from "@/lib/report-store";
 import { hasPlanAccess } from "@/lib/report-plan";
+import { trackServerEvent } from "@/lib/analytics";
 
 export const runtime = "nodejs";
 
@@ -23,7 +24,16 @@ export async function GET(
 
   const customerPlan = accessPlan === "full" ? "elite" : "pro";
 
-  return new Response(reportToPdf(report.report, accessPlan), {
+  const paidAccessPlan = accessPlan === "full" ? "full" : "standard";
+  await trackServerEvent({ event: "pdf_downloaded", source: "api_download", metadata: { accessPlan: paidAccessPlan } });
+
+  const pdf = await reportToPdf(report.report, paidAccessPlan, {
+    reportId: report.id,
+    generatedAt: report.updatedAt,
+    sourceText: report.resumeTextPreview
+  });
+
+  return new Response(pdf, {
     headers: {
       "content-type": "application/pdf",
       "content-disposition": `attachment; filename="resunexx-${customerPlan}-report-${id}.pdf"`

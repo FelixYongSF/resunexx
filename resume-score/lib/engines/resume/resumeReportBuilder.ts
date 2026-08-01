@@ -416,7 +416,9 @@ function buildHighImpactImprovements(report: ResumeReport): HighImpactImprovemen
 
 function buildSuggestedRewrite(report: ResumeReport): SuggestedRewrite {
   const issue = report.fiveMostImportantChanges[0]?.whatWeNoticed || report.topIssues[0];
-  const after = report.rewriteExamples.improvedBulletPoints[0] || report.rewriteExamples.improvedProfessionalSummary;
+  const after = sanitizeRewriteCopy(
+    report.rewriteExamples.improvedBulletPoints[0] || report.rewriteExamples.improvedProfessionalSummary
+  );
 
   return {
     before: reconstructWeakExample(issue),
@@ -424,6 +426,22 @@ function buildSuggestedRewrite(report: ResumeReport): SuggestedRewrite {
     whyThisWorksBetter:
       "The stronger version leads with action, adds clearer context, and gives the reader a more concrete reason to believe the experience matters."
   };
+}
+
+function sanitizeRewriteCopy(value: string) {
+  const sanitized = value
+    .replace(/\[verified result\]/gi, "")
+    .replace(/\[specific metric\]/gi, "")
+    .replace(/add a verified result here[^.!?]*[.!?]?/gi, "")
+    .replace(/measured by\s*(?:\[specific metric\]|a specific metric)[^.!?]*[.!?]?/gi, "")
+    .replace(/such as revenue impact, audience growth, project scale, time saved, or efficiency improved\.?/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/,\s*(?=[.!?]|$)/g, "")
+    .trim();
+
+  if (!sanitized) return "Use this draft only after confirming it reflects your real experience.";
+  return /[.!?]$/.test(sanitized) ? sanitized : `${sanitized}.`;
 }
 
 function buildAtsPerspective(report: ResumeReport) {

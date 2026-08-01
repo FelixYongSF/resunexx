@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/"
   },
+  verification: {
+    google: "SrcMkcfSm-G-AusOn9SESEs-MKaZvvFLxV9CdSdQGCQ"
+  },
   icons: {
     icon: [{ url: "/favicon.ico", type: "image/svg+xml" }],
     shortcut: ["/favicon.ico"]
