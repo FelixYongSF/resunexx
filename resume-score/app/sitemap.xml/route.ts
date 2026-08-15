@@ -1,5 +1,7 @@
 import { publicSeoUrls } from "@/lib/seo-indexing";
 
+export const dynamic = "force-dynamic";
+
 const sitemapNamespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
 
 export function GET() {
