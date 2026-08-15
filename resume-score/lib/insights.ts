@@ -136,6 +136,222 @@ export const insightArticles: InsightArticle[] = [
       { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" },
       { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
     ]
+  },
+  {
+    slug: "resume-summary-with-little-experience",
+    title: "With Little Experience, Your Resume Summary Should Point to Evidence—Not Potential",
+    description: "For early-career applicants, a short opening can be useful when it names a real direction and points to evidence that appears later on the page.",
+    audience: "Students and early-career applicants",
+    publishedAt: "2026-08-17T00:00:00.000Z",
+    opening: [
+      "A resume summary can feel like a test of confidence when you are early in your career. You know you want an opportunity, but you do not want to claim experience you have not had. The result is often a line such as motivated graduate seeking a challenging role.",
+      "That line is understandable, but it does not give a reader much to check. A useful opening does something smaller and more honest: it tells the reader what direction you are pursuing and points toward evidence they can find elsewhere in the resume."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "CareerOneStop describes the top of a resume as the place that introduces you to an employer. Its guidance says a headline can quickly identify your focus, while a summary can highlight skills and accomplishments related to the job. For a recent graduate with very little work experience, it also suggests an objective may be more appropriate than a professional summary.",
+          "The practical problem is not whether you use the label Summary or Objective. It is whether the opening gives the rest of the page a clear frame. A string of personal adjectives cannot do that on its own, and a long paragraph can hide the few relevant facts you do have."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Start by naming a realistic direction: an entry-level data analyst role, customer support work, an operations internship, or another role you can support with real examples. Then choose two proof signals that already appear below—coursework, a project, part-time work, a tool, a deliverable, or an honest scope of responsibility.",
+          "Keep the opening short enough to scan. Do not add every skill you have touched, and do not promise an outcome. If a reader cannot find the evidence elsewhere on the page, remove the claim or replace it with a more specific fact. The summary should guide the reader into the resume, not ask them to take you on trust."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Imagine a recent graduate applying for an entry-level reporting role. Their first line currently expresses enthusiasm but gives no clue about what they have practiced."
+        ],
+        example: {
+          before: "Highly motivated graduate seeking a challenging opportunity to grow.",
+          after: "Business analytics graduate with project experience building SQL dashboards and presenting weekly reporting findings to a student client team.",
+          note: "This is illustrative, not a customer result. It names a direction, a tool, and a setting without turning coursework into professional experience."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "A clearer opening cannot create a missing requirement. Some roles may need a portfolio, a credential, work authorisation, or direct experience that is not yet on your resume. It is better to notice that gap than to cover it with a stronger adjective.",
+          "Save the role and the version you used, then review whether the first third of the page made your intended direction and supporting examples visible. If it did, the next step may be to strengthen the underlying evidence with a project or targeted application—not to keep rewriting the same opening."
+        ]
+      }
+    ],
+    conclusion: [
+      "An early-career summary works best when it is modest, specific, and connected to evidence. Point the reader toward work you can explain, then let the rest of the resume do its job.",
+      "If your experience is already clear at the top of the page, it is also fine to skip the summary entirely."
+    ],
+    cta: "ResuNexx can help you check whether the role direction and evidence on your resume are easy to find.",
+    sources: [
+      { label: "CareerOneStop: Top portion of resume", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/top-portion-of-resume.aspx" },
+      { label: "CareerOneStop: Special tips for recent college graduates", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/special-tips.aspx" }
+    ]
+  },
+  {
+    slug: "career-change-resume-format",
+    title: "Changing Careers? Pick a Resume Format That Keeps Your Work History Visible",
+    description: "A guide for career changers who want to foreground transferable evidence without making their past work difficult to verify.",
+    audience: "Career changers and returners",
+    publishedAt: "2026-08-18T00:00:00.000Z",
+    opening: [
+      "When you are changing careers, a functional resume can seem like an easy answer. It lets you lead with skills instead of a job history that does not match your target title. But hiding the timeline can create a different problem: a reader may struggle to see where your experience came from.",
+      "The useful question is not which format is cleverest. It is which format makes your real work, transferable strengths, and next direction easiest to understand without asking the reader to fill in the gaps."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "CareerOneStop identifies chronological, functional, and combination resumes as the three basic styles. Its formatting guidance says a functional format may emphasise skills but can be misinterpreted by employers or rejected by some applicant tracking systems because detailed work history is limited.",
+          "The same guidance says a combination format can help highlight transferable skills, refocus experience for a career change, or minimise work gaps while still including a detailed work history. This is not a rule that guarantees a result; it is a practical way to keep both sides of your story available."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Keep your actual job titles, employers, and dates easy to locate. Then decide which skills headings or summary statements help a reader connect that history to the new field. Choose a few capabilities you can support with examples, such as coordination, customer research, documentation, scheduling, or process improvement.",
+          "Use a simple, consistent layout with standard section headings. A career change already asks the reader to make a connection; do not add an unusual layout that makes dates, titles, or evidence harder to find. If a past role does not help the target story, shorten its detail rather than disguising it."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Consider an office manager moving toward project coordination. A skills-only section may list planning and stakeholder management, but it gives no context for those claims."
+        ],
+        example: {
+          before: "Project management, leadership, communication, and organisation.",
+          after: "Office Manager | Northfield Services | 2022–2026: coordinated a cross-team office systems rollout, tracked open requests, and prepared weekly status updates for the operations lead.",
+          note: "This illustrative example keeps the original role visible while showing work that may be relevant to a coordination role. It does not rename the job or imply project-management certification."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "Some changes require current proof that a resume format cannot supply: a portfolio, recent training, a credential, or direct technical practice. A transparent timeline is still more useful than a format that makes the reader question what is missing.",
+          "Review one target posting at a time. If the gap is in your wording, strengthen the examples tied to the target. If the gap is a real requirement, identify a practical way to build it and keep your existing experience accurate."
+        ]
+      }
+    ],
+    conclusion: [
+      "A career-change resume should not erase your past. It should make the relevant parts of that past easier to follow.",
+      "Keep the history visible, make the transferable evidence specific, and use formatting to clarify rather than conceal."
+    ],
+    cta: "ResuNexx can help you review whether your target direction and transferable evidence are visible in the first scan.",
+    sources: [
+      { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" },
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
+    ]
+  },
+  {
+    slug: "one-page-or-two-page-resume",
+    title: "One Page or Two? Choose the Resume Length That Keeps Your Best Evidence Intact",
+    description: "A practical decision rule for applicants who are unsure whether to cut detail or add a second page.",
+    audience: "Early-career and developing-career applicants",
+    publishedAt: "2026-08-19T00:00:00.000Z",
+    opening: [
+      "The one-page versus two-page debate can make a simple edit feel high-stakes. Some applicants squeeze every line into one page. Others add a second page because removing anything feels risky. Neither choice is automatically better.",
+      "The more useful standard is whether each page helps a reader understand the role you want, the evidence you have, and the scope of your work. Length is a container; relevance and readability are the real decisions."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "CareerOneStop's formatting guidance recommends a resume length of one to two pages, using two pages only when your amount of experience makes it necessary. It also emphasises clean, consistent layout and readable spacing. That leaves room for judgment rather than a universal page-count rule.",
+          "Early-career applicants often have fewer relevant examples and may benefit from the focus of one page. Someone with several directly relevant roles, projects, or certifications may need a second page to avoid shrinking the type or stripping context from the strongest evidence."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Before changing margins or font size, mark the evidence that directly supports the target role. Keep the strongest recent examples, relevant skills, and qualifications. Then cut repeated duties, generic soft skills, old detail that does not support the target, and anything you could not explain in an interview.",
+          "If a second page still contains specific, relevant evidence, use it intentionally. Make sure it begins with useful content rather than a nearly empty continuation. If the only way to reach one page is to reduce readability, the shorter document is no longer serving its purpose."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Imagine an applicant with three years of relevant experience, two sizeable projects, and a page of early retail duties that repeat the same customer-service point."
+        ],
+        example: {
+          before: "Two pages with every role described in equal detail, including repeated tasks from unrelated work.",
+          after: "One focused page with the two most relevant roles, a targeted project section, and a shorter line for earlier work that confirms employment history.",
+          note: "This is illustrative. The goal is not to remove history indiscriminately; it is to give the most relevant evidence enough room to be understood."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "A shorter resume cannot compensate for a missing requirement or a target that does not match your current experience. Likewise, a second page cannot make unrelated material relevant. Treat length as one clarity check among several.",
+          "Keep a version for each target role and review which examples you chose to protect. If the right evidence is already visible and the application remains quiet, review role fit, required qualifications, and how your examples connect to the posting."
+        ]
+      }
+    ],
+    conclusion: [
+      "Use one page when it keeps your strongest evidence clear. Use two pages when the additional relevant detail genuinely helps the reader understand your fit.",
+      "Do not let a page-count rule force you to hide the facts that matter."
+    ],
+    cta: "ResuNexx can help you identify which evidence is prominent and which detail may be competing for attention.",
+    sources: [
+      { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" },
+      { label: "CareerOneStop: Sample resumes", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/sample-resumes.aspx" }
+    ]
+  },
+  {
+    slug: "resume-keywords-without-copying-job-description",
+    title: "Resume Keywords Work Best When They Sit Next to Real Evidence",
+    description: "How applicants can use the language of a job posting accurately without turning their resume into a copied keyword list.",
+    audience: "Applicants tailoring a resume to a specific role",
+    publishedAt: "2026-08-20T00:00:00.000Z",
+    opening: [
+      "When a job description repeats terms such as stakeholder management, SQL, customer onboarding, or reporting, it is tempting to copy them into a skills section and hope they are noticed. But a list of familiar words does not show whether you have actually used them.",
+      "A better approach is to treat a job posting as a guide to the evidence a reader will look for. Use its language when it accurately describes your work, then place that language next to an example that gives it context."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "CareerOneStop says a summary can highlight skills and accomplishments related to the job by using keywords from the posting. Its work-experience guidance also recommends describing relevant tasks and accomplishments with the employer's language, especially required or desired skills and experience.",
+          "Those suggestions do not mean every repeated word belongs on the page. The same guidance stresses specifics: explain the context of the work, why it mattered, who it served, and what happened as a result when you can support it."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Read the posting and mark the terms that describe the core work, tools, and outcomes—not every adjective. For each marked term, ask where you used it. If you have a real example, place the word near the relevant project, bullet, or skill. If you do not, leave it out and look for adjacent evidence you can describe honestly.",
+          "Check for copied phrases that do not sound like you or do not match the facts below them. A reader should be able to move from a keyword to a title, action, tool, deliverable, scope, or outcome without needing to infer the connection."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Consider a job description that asks for customer onboarding and cross-functional coordination. An applicant has supported new clients and worked with an internal implementation team."
+        ],
+        example: {
+          before: "Customer onboarding, stakeholder management, project coordination, communication.",
+          after: "Supported customer onboarding by tracking implementation questions, updating the shared launch checklist, and coordinating follow-ups between new clients and the internal delivery team.",
+          note: "This illustrative bullet uses relevant role language but makes the setting and actions visible. It does not claim ownership beyond the facts described."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "Keywords cannot replace a required tool, credential, or level of direct experience. Adding a term you cannot defend may create a harder problem later if a reader asks for a specific example.",
+          "Keep a small evidence bank for the roles you target. When you see a repeated requirement, record the real situation where you used it, the tool or setting, and the outcome or scope. That gives you a truthful source for future tailoring instead of copying each job description from scratch."
+        ]
+      }
+    ],
+    conclusion: [
+      "Use the language of the role to help a reader find your experience, not to simulate experience you do not have.",
+      "The strongest keyword is one that leads directly to a credible example."
+    ],
+    cta: "ResuNexx can help you review whether the role language on your resume is supported by clear evidence.",
+    sources: [
+      { label: "CareerOneStop: Top portion of resume", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/top-portion-of-resume.aspx" },
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
+    ]
   }
 ];
 
