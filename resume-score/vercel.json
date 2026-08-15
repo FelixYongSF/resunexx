@@ -6,7 +6,7 @@
   "crons": [
     {
       "path": "/api/indexnow",
-      "schedule": "0 12 * * 1"
+      "schedule": "0 12 * * *"
     }
   ]
 }
