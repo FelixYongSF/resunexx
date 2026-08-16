@@ -128,7 +128,8 @@ export const insightArticles: InsightArticle[] = [
     ],
     conclusion: [
       "Your previous experience is not irrelevant because your next title is different. Make the connection specific, keep the original facts intact, and let the reader see the evidence before the ambition.",
-      "A career-change resume does not need to imitate the new job. It needs to make your real, relevant work legible."
+      "A career-change resume does not need to imitate the new job. It needs to make your real, relevant work legible.",
+      "Choose evidence you can explain in the original context, even when the target role uses different language, tools, title, industry terms, or working methods."
     ],
     cta: "ResuNexx can help you review how clearly your relevant evidence is organised before you apply.",
     sources: [
@@ -183,7 +184,8 @@ export const insightArticles: InsightArticle[] = [
     ],
     conclusion: [
       "An early-career summary works best when it is modest, specific, and connected to evidence. Point the reader toward work you can explain, then let the rest of the resume do its job.",
-      "If your experience is already clear at the top of the page, it is also fine to skip the summary entirely."
+      "If your experience is already clear at the top of the page, it is also fine to skip the summary entirely.",
+      "Before sending the application, read the opening beside the first relevant section. The direction, examples, and dates should tell the same accurate story."
     ],
     cta: "ResuNexx can help you check whether the role direction and evidence on your resume are easy to find.",
     sources: [
@@ -237,7 +239,8 @@ export const insightArticles: InsightArticle[] = [
     ],
     conclusion: [
       "A career-change resume should not erase your past. It should make the relevant parts of that past easier to follow.",
-      "Keep the history visible, make the transferable evidence specific, and use formatting to clarify rather than conceal."
+      "Keep the history visible, make the transferable evidence specific, and use formatting to clarify rather than conceal.",
+      "This approach also makes a later conversation easier to prepare for: each highlighted strength should lead back to a situation you can describe plainly, including the original job, people involved, and work you actually completed. The format cannot remove a transition, but it can prevent the transition from obscuring the evidence you already have. Check the finished page for a clear sequence from headline, to skill, to work-history example, so the reader does not have to assemble that connection alone."
     ],
     cta: "ResuNexx can help you review whether your target direction and transferable evidence are visible in the first scan.",
     sources: [
@@ -291,7 +294,8 @@ export const insightArticles: InsightArticle[] = [
     ],
     conclusion: [
       "Use one page when it keeps your strongest evidence clear. Use two pages when the additional relevant detail genuinely helps the reader understand your fit.",
-      "Do not let a page-count rule force you to hide the facts that matter."
+      "Do not let a page-count rule force you to hide the facts that matter.",
+      "Check the document at normal reading size before you decide. A page crowded with narrow margins, tiny type, and compressed bullets may meet a numerical rule while making the underlying evidence less usable. If a detail survives the cut, it should earn its place by clarifying the role, the work, or a relevant capability—not by filling space. A focused second page is preferable to a first page that leaves the reader unable to distinguish the work you led from the work you merely observed in practice."
     ],
     cta: "ResuNexx can help you identify which evidence is prominent and which detail may be competing for attention.",
     sources: [
@@ -345,12 +349,124 @@ export const insightArticles: InsightArticle[] = [
     ],
     conclusion: [
       "Use the language of the role to help a reader find your experience, not to simulate experience you do not have.",
-      "The strongest keyword is one that leads directly to a credible example."
+      "The strongest keyword is one that leads directly to a credible example.",
+      "This keeps tailoring sustainable as well. Instead of rebuilding the resume around every new posting, you can maintain a small set of truthful examples and select the ones that match each role. The wording may change, but the underlying facts should remain stable enough to explain clearly if a reader asks where a term came from. Read the final page for strings of keywords that have no nearby action, setting, or output; those are the phrases most worth replacing with concrete evidence on the page."
     ],
     cta: "ResuNexx can help you review whether the role language on your resume is supported by clear evidence.",
     sources: [
       { label: "CareerOneStop: Top portion of resume", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/top-portion-of-resume.aspx" },
       { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
+    ]
+  },
+  {
+    slug: "explain-employment-gap-without-overexplaining",
+    title: "An Employment Gap Does Not Need a Long Explanation. It Needs an Honest, Useful One",
+    description: "A practical guide for returners and career changers who need to account for time away from paid work without turning their resume into a personal statement.",
+    audience: "Returners and career changers with an employment gap",
+    publishedAt: "2026-08-21T00:00:00.000Z",
+    opening: [
+      "An employment gap can make the rest of a resume feel harder to trust. You may worry that a reader will stop at the dates and never see the experience that came before or the direction you are pursuing now. That worry can lead to two unhelpful extremes: trying to hide the gap, or explaining far more than a hiring reader needs to know.",
+      "A resume is not the place to resolve every question about time away from paid work. Its job is smaller. Make the timeline accurate, keep the context brief where context helps, and make the evidence relevant to the role easy to find. You can decide what personal information is appropriate to share; you do not need to invent a story to make the dates look smoother."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "CareerOneStop's resume-format guidance notes that a functional or combination layout may be used to minimise work gaps, while also warning that a functional format with limited work history can be misinterpreted by employers. That creates a real design tension: a reader needs enough chronology to understand your experience, but a gap does not need to become the centre of the page.",
+          "People also assume that a gap must be explained with a single impressive achievement. In practice, the useful question is whether there is an accurate fact that helps the reader understand your present direction. This could be a return-to-work course, a portfolio project, volunteer responsibility, caregiving period described only if you choose, or simply a short neutral label for a planned break."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "First, make your dates consistent. Use the same month-and-year format for every role, education entry, and recent project. Keep actual job titles and employers visible. A reader should not need to guess whether a section is work history, training, or a skills list.",
+          "Next, decide whether the gap needs a short context line. Add one only when it is true and helps the target story. For example, a recent data course, a volunteer operations role, or a completed certification can sit in its own relevant section with dates. Do not turn a personal explanation into a claim about skills you did not use. If there is no relevant activity to include, a clean, accurate timeline is often enough.",
+          "Finally, give the reader something current to evaluate. Put the role direction, recent relevant evidence, and strongest prior examples near the top. The gap may still be visible, but it no longer has to do all the talking."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Consider a customer-service professional returning after eighteen months away from paid work and applying for a support-coordinator role. Their resume currently leaves the dates unclear and opens with a broad statement about being ready to return."
+        ],
+        example: {
+          before: "Experienced professional returning to work after a career break and ready for a new challenge.",
+          after: "Customer Support Specialist | Alder Home Services | 2021–2024. Recent: completed a customer-support systems course and organised appointment requests for a local community project, 2025–2026.",
+          note: "This is an illustrative example, not a customer result. It keeps the employment history accurate and names current activity without disclosing personal details or overstating the scope of unpaid work."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "A clearer timeline cannot remove a role's requirements. Some jobs may need recent industry experience, a licence, local work authorisation, or a portfolio that you do not yet have. A quiet application is not evidence that a gap is the only reason for the outcome.",
+          "Keep a simple record of the roles you target and the current evidence you included. If the same missing requirement appears repeatedly, consider whether a focused project, training option, or a different entry point would give you a real example to add. Keep the resume honest while you build that next piece of evidence."
+        ]
+      }
+    ],
+    conclusion: [
+      "A gap in paid work is part of a timeline, not a verdict on your ability. Accuracy, readable dates, and relevant current evidence give the reader a more useful picture than either concealment or overexplanation.",
+      "Make the history clear, keep personal context on your terms, and let your actual work and current direction remain visible."
+    ],
+    cta: "ResuNexx can help you review whether your timeline and current evidence are organised clearly before you apply.",
+    sources: [
+      { label: "CareerOneStop: Resume formats", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/ResumeFormats.aspx" },
+      { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" },
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
+    ]
+  },
+  {
+    slug: "resume-bullets-show-scope-without-inventing-metrics",
+    title: "No Big Numbers to Report? Let Your Resume Bullets Show Scope Instead",
+    description: "For developing-career applicants, a way to make responsibilities concrete when revenue, conversion, or confidential metrics are not available.",
+    audience: "Developing-career applicants with 3–5 years of experience",
+    publishedAt: "2026-08-22T00:00:00.000Z",
+    opening: [
+      "Many resume bullet examples end with a large percentage, a revenue figure, or a dramatic before-and-after result. If you do not have access to those numbers—or if they would be confidential—it can seem as though your day-to-day work does not count. That is not the right conclusion.",
+      "A useful bullet does not need to manufacture a metric. It needs to give a reader enough context to understand what you did, where you did it, and the scale or result you can honestly support. Scope can be a team, a group of customers, a recurring process, a deliverable, a deadline, a system, or a defined responsibility."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "CareerOneStop recommends describing work experience with tasks, accomplishments, relevant employer language, context, and outcomes where available. It also notes that accomplishments can be framed with measures such as money, time, people, processes, or things. The point is to make the work understandable, not to imply that every role produces a public business metric.",
+          "Applicants often start with a vague duty—managed emails, helped customers, supported projects—then feel pressure to attach a number they cannot verify. That can produce a bullet that is harder to defend than the original. An honest scope detail is more useful than a precise-looking claim with no clear source."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Take one duty and write four notes beside it: the setting, the action, the people or process affected, and a result or deliverable you can verify. The result may be that a report was completed for a deadline, a request was handed to the right team, a recurring issue was documented, or a client received the information needed to proceed. Avoid claiming credit for a wider outcome you did not own.",
+          "Use numbers only when you know what they mean and could explain their source. If the number is confidential, replace it with non-sensitive scope: a regional team, a weekly reporting cycle, a shared tracker, a group event, a queue, or an agreed deadline. This gives the reader a concrete picture without revealing protected information.",
+          "Then check whether the bullet fits the target role. A well-described task is still less useful if it is unrelated to the work you want next. Give the most relevant evidence the clearest space."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Imagine a coordinator applying for an operations-support role. They handled a shared request inbox and updated a weekly status file, but do not have permission to disclose performance data."
+        ],
+        example: {
+          before: "Managed emails and created reports for the team.",
+          after: "Triaged requests in the shared operations inbox, recorded open items in the team tracker, and prepared the weekly status file for the regional operations meeting.",
+          note: "This illustrative bullet names the process, tools, and recurring responsibility. It does not claim a turnaround improvement or cost saving that the applicant cannot substantiate."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "More detailed bullets cannot make a role equivalent to a requirement you have not met. A posting may need a specific system, industry background, seniority level, or formal qualification. Keep those boundaries visible instead of forcing unrelated work to sound identical to the target job.",
+          "Build a small evidence bank as you work: the process you supported, the tools you used, the regular outputs, and the scope you can share. This makes future tailoring easier and gives you a factual starting point for interviews, portfolios, and performance discussions."
+        ]
+      }
+    ],
+    conclusion: [
+      "A resume bullet becomes stronger when it shows a real setting and a defendable scope. Numbers can help, but they are only one kind of evidence.",
+      "Describe the work you actually did, protect confidential information, and make the most relevant responsibilities easy to understand."
+    ],
+    cta: "ResuNexx can help you review whether your resume bullets make your real scope and contribution easier to see.",
+    sources: [
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" },
+      { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" }
     ]
   }
 ];
