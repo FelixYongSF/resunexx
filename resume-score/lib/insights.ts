@@ -468,6 +468,61 @@ export const insightArticles: InsightArticle[] = [
       { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" },
       { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" }
     ]
+  },
+  {
+    slug: "promotion-resume-show-progression-without-new-title",
+    title: "You Took On More at Work. Make the Progression Visible Before You Ask for a New Title",
+    description: "For early-to-mid-career applicants whose responsibilities grew before their job title changed, a practical way to document real progression without overstating a promotion.",
+    audience: "Established early-to-mid-career applicants whose responsibilities have expanded",
+    publishedAt: "2026-08-23T00:00:00.000Z",
+    opening: [
+      "Sometimes your job title stays still while the work around it changes. You may become the person who trains a new teammate, owns a recurring handover, coordinates a supplier issue, or keeps a shared process from slipping. When you update your resume, the old title can make that extra responsibility difficult to see.",
+      "You do not need to imply a promotion that never happened. You do need to show the progression that did happen: what you were trusted to handle, how the scope changed, and which details you can support. That makes your work history more useful without rewriting it into a different role."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "Titles are administrative labels, and they do not always change at the same pace as a team's needs. A manager may add a responsibility because you know a process well, while a formal title change depends on a budget cycle, job architecture, or a decision outside your control. A resume that repeats the original job description can hide that shift.",
+          "CareerOneStop advises job seekers to describe work experience with relevant tasks, accomplishments, context, and outcomes where available. That is a useful standard here: the reader needs enough detail to see the work, but the language should not claim authority, people management, or results that were not actually yours."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Keep the official job title and employer dates exactly as they were. Under that title, compare the work you handled near the start of the role with work you handle now. Look for a real change in scope: a new system, a recurring handover, a larger group of stakeholders, an additional workstream, or responsibility for checking a process before it moves on.",
+          "Then turn the change into a bullet with an action, setting, and defensible scope. Use words such as coordinated, documented, trained, prepared, monitored, or supported only when they describe your actual part. If a manager made the final decision, say that you prepared information or coordinated the process rather than claiming that you set the direction.",
+          "Choose two or three progression bullets that relate to the role you want next. A long list of every extra task can make the change harder to spot. The aim is a clear record of growing responsibility, not a case for a title you did not hold."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Consider a customer support specialist applying for a service-operations role. Their title has not changed, but they now prepare the weekly issue summary and help new starters use the team's case tracker."
+        ],
+        example: {
+          before: "Answered customer questions and helped train new staff.",
+          after: "Answered customer cases, prepared the weekly recurring-issue summary for the support lead, and showed new starters how to record updates in the shared case tracker.",
+          note: "This is an illustrative example, not a customer result. It does not call the applicant a manager or claim that the summary improved service outcomes; it makes the added responsibility visible."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "Clearer progression cannot replace a requirement such as direct people management, a specific system, a licence, or sector experience. A quiet application is not proof that your title alone caused the outcome, and it is not a reason to inflate your role.",
+          "Keep a short evidence record as responsibilities change: the date, the process, your part, and a non-confidential detail you can verify. If you repeatedly target a role that asks for experience you do not yet have, look for a bounded project or training opportunity that lets you build a real example rather than invent one on the page."
+        ]
+      }
+    ],
+    conclusion: [
+      "A title is one part of a work history, not the whole story. Keep it accurate, then show the responsibilities and scope that genuinely grew around it.",
+      "The most credible progression is specific enough to understand and modest enough to defend."
+    ],
+    cta: "ResuNexx can help you review whether your resume makes your real progression and current scope easy to understand.",
+    sources: [
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" },
+      { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" }
+    ]
   }
 ];
 
