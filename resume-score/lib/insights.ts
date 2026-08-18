@@ -523,6 +523,117 @@ export const insightArticles: InsightArticle[] = [
       { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" },
       { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" }
     ]
+  },
+  {
+    slug: "early-career-resume-skills-list-evidence",
+    title: "Your Skills List Is Not a Substitute for Evidence: An Early-Career Resume Check",
+    description: "For early-career applicants whose resume lists tools and strengths without showing where they used them, a practical way to add credible context.",
+    audience: "Early-career applicants with 0–2 years of experience",
+    publishedAt: "2026-08-24T00:00:00.000Z",
+    opening: [
+      "A skills section can grow quickly when you are early in your career. You may list Excel, customer service, research, presentation design, CRM software, or a programming language because you have used each one at some point. The problem is not the list itself. The problem is that the list can leave a reader unable to tell what you actually did with those tools.",
+      "You do not need to turn every skill into a dramatic achievement. You do need to connect the few skills that matter most for a target role to a real setting, task, or output. That gives the reader something more useful than a claim they must interpret alone."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "Early-career applicants often collect skills from classes, internships, part-time jobs, volunteer roles, and online learning. Those experiences can be real and relevant, but they are easy to compress into a dense row of keywords. When a job description also contains a long skills list, copying its language can seem like the fastest way to tailor a resume.",
+          "CareerOneStop treats Skills as an optional section and recommends keeping it relevant to the job. Its work-experience guidance also asks candidates to describe the context, purpose, audience, and outcome of their work where they can support it. Together, those ideas suggest a useful division: use the skills list to help a reader scan, then use your bullets or projects to show the evidence behind the most important items."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Start with one target job and choose no more than three skills that genuinely appear in both the posting and your own experience. For each one, write a short note: where you used it, what you were responsible for, and what you produced, supported, or completed. A class exercise, student project, internship task, or customer-facing shift can all be valid settings when described accurately.",
+          "Move the strongest notes into the section where they belong. A spreadsheet used to track event registrations may fit under a campus role. Research used to prepare a class presentation may fit under Projects or Education. Keep the tool name, but add the action around it. If you cannot describe a real use, it may be better to remove the skill or label it honestly as introductory training.",
+          "Avoid claiming proficiency levels you cannot explain. The goal is not to prove that every skill is advanced. It is to make your current experience specific enough that a reader can see what you know and ask a sensible follow-up question."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Imagine an applicant for a junior marketing-coordinator role. Their resume has a Skills section that lists Excel, Canva, and social media, but their experience section only says that they helped with a student event."
+        ],
+        example: {
+          before: "Skills: Excel, Canva, social media. Helped with student events.",
+          after: "Supported promotion for a student event by updating the attendee spreadsheet, preparing event graphics in Canva, and scheduling approved posts for the society's social channels.",
+          note: "This is an illustrative example, not a customer result. It does not claim that the applicant led a campaign or produced a growth result; it shows how the listed tools were used."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "More context around your skills cannot create experience that a role specifically requires. An employer may be looking for a portfolio, a particular platform, work authorisation, a credential, or a level of responsibility you have not reached yet. A quiet application does not prove that your skills section was the only issue.",
+          "Keep an evidence bank as you learn: the project, tool, task, and a detail you can verify without sharing confidential information. Use it when tailoring future applications. If a recurring requirement is missing, look for a bounded course project, volunteer task, or supervised opportunity that lets you build a truthful example rather than stretching the wording on your resume."
+        ]
+      }
+    ],
+    conclusion: [
+      "A skills list can help a resume scan quickly, but it is most useful when the important items also appear beside real work, projects, or training.",
+      "Choose the evidence you can explain, place it where it belongs, and let the reader see the connection without guessing."
+    ],
+    cta: "ResuNexx can help you review whether the skills on your resume are supported by clear, relevant evidence.",
+    sources: [
+      { label: "CareerOneStop: Top portion of resume", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/top-portion-of-resume.aspx" },
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
+    ]
+  },
+  {
+    slug: "returning-worker-resume-recent-training",
+    title: "Returning to Work? Put Recent Training Where It Supports Your Next Step",
+    description: "For returners who have completed recent training but are unsure where it belongs on a resume, a practical way to show it without hiding their work history.",
+    audience: "Career returners with recent relevant training",
+    publishedAt: "2026-08-25T00:00:00.000Z",
+    opening: [
+      "Returning to work can make a recent course, certificate, refresher programme, or volunteer assignment feel disproportionately important. You may want it near the top of the page because it is current and connected to the work you want next. At the same time, placing it too prominently can make years of earlier experience look less relevant than they are.",
+      "The choice is not between hiding your training and pretending it replaces your work history. A stronger resume lets both do their proper job: recent training signals what you have refreshed or learned, while your experience shows the settings in which you have already contributed."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "A returner often has to reconnect two timelines: earlier paid work and the more recent activities that prepared them to re-enter the market. A resume organised only by date can make a relevant course difficult to notice. A resume organised only around a new qualification can hide practical experience that still matters to the target role.",
+          "CareerOneStop notes that education can include certifications, classes, volunteer training, professional development, and training completed on the job. It also says that current or recent relevant training may be placed before work experience, while candidates with relevant work experience can place Education after it. Placement therefore depends on what best supports the job goal, not on a fixed rule for every returner."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "First, identify what the recent training actually demonstrates. Record its formal name, provider, completion date, and the topic or tool you can honestly claim to have covered. If it led to a recognised credential, use the official credential name. If it was a short course, do not present it as a degree, licence, or work experience.",
+          "Next, decide where a reader needs to see it. Put a directly relevant, current programme in a concise Professional Development or Training section near the top when it explains your target direction. Keep a fuller Education section later if your earlier degree is less central. If your previous work is the stronger evidence, lead with Experience and position the training where it reinforces that story.",
+          "Connect the two sections with careful language. A summary can say that you are returning to a field after recent training, but it should not imply that a course gave you years of practice. Choose one or two past bullets that show related responsibilities and leave unrelated details out of the opening view."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Consider an administrative professional returning after time away and applying for a coordinator role. They completed a recent course on spreadsheet reporting, while their earlier job involved maintaining team records and preparing meeting materials."
+        ],
+        example: {
+          before: "Excel Certificate, 2026. Administrative Assistant, 2018–2022: handled office tasks.",
+          after: "Professional Development: Spreadsheet Reporting, City Skills Centre, completed 2026. Administrative Assistant, 2018–2022: maintained the team records file and prepared meeting materials for weekly staff updates.",
+          note: "This is an illustrative example, not a hiring result. It distinguishes recent training from earlier work and does not claim advanced reporting expertise beyond the course."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "Recent training can show readiness to learn, but it cannot automatically meet requirements for current industry experience, a licence, local work eligibility, or a specific portfolio. Silence after an application may have several causes, and a resume is only one part of the picture.",
+          "Review each target role for the requirement that seems hardest to evidence. If training alone does not cover it, consider a small supervised project, a work sample, or a conversation with a career adviser about a realistic entry route. Keep your resume focused on facts you can explain clearly if asked."
+        ]
+      }
+    ],
+    conclusion: [
+      "Recent training deserves a visible place when it supports the work you want next, but it should sit beside—not replace—your real experience.",
+      "Make the relationship clear, keep each claim proportionate, and help the reader understand both your preparation and your track record."
+    ],
+    cta: "ResuNexx can help you review whether your recent training and earlier experience tell one clear, accurate story.",
+    sources: [
+      { label: "CareerOneStop: Education", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/education.aspx" },
+      { label: "CareerOneStop: Top portion of resume", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/top-portion-of-resume.aspx" },
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
+    ]
   }
 ];
 
