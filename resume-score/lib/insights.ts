@@ -634,6 +634,62 @@ export const insightArticles: InsightArticle[] = [
       { label: "CareerOneStop: Top portion of resume", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/top-portion-of-resume.aspx" },
       { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
     ]
+  },
+  {
+    slug: "experienced-resume-relevance-without-deleting-history",
+    title: "Your Resume Has Enough Experience. Now Make the Relevant Work Easier to Find",
+    description: "For established early-to-mid-career applicants whose resume lists every role but does not make the target direction clear.",
+    audience: "Established early-to-mid-career applicants with 5–8 years of experience",
+    publishedAt: "2026-08-26T00:00:00.000Z",
+    opening: [
+      "After several years at work, the hard part of a resume can stop being what to add. You may have changed teams, supported different customers, learned new systems, helped with projects outside your title, and kept older roles because each one seems too important to remove. The page grows, but the direction becomes harder to see.",
+      "That does not mean your experience lacks value. It means the reader needs help finding the work that is most relevant to this particular role. Editing for relevance is not the same as rewriting your history or making a modest responsibility sound larger than it was."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "An established applicant often writes a resume as a complete record. That instinct is understandable: every role took time, and leaving detail out can feel risky. But a target role does not need equal detail about every task you have performed. It needs a clear, accurate view of the responsibilities, skills, and outcomes that relate to the work on offer.",
+          "CareerOneStop advises job seekers to list past and current jobs with responsibilities and accomplishments related to their job goal. Its guidance also suggests giving more emphasis to work that adds the most value to an application, rather than trying to document every task. That is an editing principle, not permission to omit dates, change titles, or conceal an important part of your history."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Start with one target posting and identify three or four requirements that you can genuinely support. They might involve stakeholder coordination, documentation, customer problem-solving, scheduling, reporting, or a particular system. Then scan your recent roles and mark the bullets that show those activities in a real setting.",
+          "Give the most relevant recent role the clearest detail. Keep its official title, employer, dates, and the facts you can explain. Use concise bullets that show what you did, the setting, and a supported outcome or scope. Where a number is unavailable, do not invent one. A team, process, recurring deliverable, or group served can provide useful context without turning an ordinary responsibility into a performance claim.",
+          "Older or less relevant roles can stay visible with fewer bullets. This preserves a readable timeline while leaving space for the evidence connected to your next step. Check that the summary, skills section, and first detailed role all point in the same direction."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Imagine a customer operations specialist with seven years of experience applying for a service-delivery coordinator role. Their resume gives every past position five general bullets, so the reader cannot quickly see the coordination work in their current job."
+        ],
+        example: {
+          before: "Customer Operations Specialist: answered queries, updated records, worked with other teams, and completed daily tasks.",
+          after: "Customer Operations Specialist: coordinated daily escalations with billing and fulfilment teams, updated the shared case tracker, and prepared a weekly summary of recurring customer issues for the service lead.",
+          note: "This is an illustrative rewrite, not a customer result. It keeps the original role title and makes the setting, actions, and scope easier to recognise without claiming a promotion or a hiring outcome."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "A more focused resume cannot remove every gap. A target role may require a licence, direct industry experience, local work authorisation, a technical portfolio, or a level of responsibility you have not yet held. A quiet application does not prove that your resume is the only issue.",
+          "Keep a record of the role and the version you used. If responses remain limited, compare the first third of the resume with the target requirements you could honestly support. If the evidence is there but the role needs something you do not yet have, identify a practical way to build that evidence rather than stretching the wording."
+        ]
+      }
+    ],
+    conclusion: [
+      "More experience should give you more evidence to choose from, not more unrelated detail for a reader to sort through.",
+      "Keep your history accurate, foreground the work that connects to the target, and let your next direction become visible through facts you can stand behind."
+    ],
+    cta: "ResuNexx can help you review whether the most relevant evidence on your resume is clear before you apply.",
+    sources: [
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" },
+      { label: "CareerOneStop: Top portion of resume", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/top-portion-of-resume.aspx" },
+      { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" }
+    ]
   }
 ];
 
