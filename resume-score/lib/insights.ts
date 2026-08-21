@@ -690,6 +690,90 @@ export const insightArticles: InsightArticle[] = [
       { label: "CareerOneStop: Top portion of resume", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/top-portion-of-resume.aspx" },
       { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" }
     ]
+  },
+  {
+    slug: "federal-resume-work-experience-details",
+    title: "Applying for a U.S. Federal Role? Turn Each Work Entry Into a Clear Record",
+    description: "For early-career applicants to U.S. federal roles, a practical way to describe work history clearly without inflating responsibility.",
+    audience: "Early-career applicants preparing for U.S. federal roles",
+    publishedAt: "2026-08-27T00:00:00.000Z",
+    opening: [
+      "A federal job application can make an early-career resume feel unexpectedly demanding. You may have a part-time role, internship, campus job, or first professional position that seems too modest to describe in detail. Leaving it brief, however, can hide the duties, tools, and context that show what you actually did.",
+      "For U.S. federal applications, the job announcement and application instructions set the standard. Your task is not to make a short role sound senior. It is to create an accurate record that lets the agency see the work, skills, and experience you can genuinely support."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "Many early-career resumes use a familiar commercial format: title, employer, dates, and a few compact bullets. That can be useful elsewhere, but a federal application may ask for more employment detail. USAJOBS says a work-experience entry should include the employer, title, dates, duties, skills, and accomplishments; some details are optional, and the announcement may ask for additional information.",
+        "The pressure to sound qualified can then lead applicants to stretch a supporting role into ownership of a result. That is risky and unnecessary. USAJOBS also states that application information must be true and accurate. Specific, modest detail is a stronger foundation than a polished claim you cannot explain."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Read the announcement before changing your resume. Note the duties, qualifications, required documents, and any requested fields. Then review each relevant job in your history and write down the setting, your regular responsibilities, the tools or records you used, and an outcome or deliverable you can verify. Keep dates, job titles, and employer names consistent with your records.",
+        "Use the announcement's terminology only where it truthfully describes your work. For example, a student assistant who maintained a shared spreadsheet can say that; they should not claim programme management because they observed a programme manager. If a task was completed with a team, name your contribution and the team context instead of taking credit for the full result.",
+        "Finally, check the application instructions again. A federal resume may not follow the same length or document rules as another employer. The announcement—not a generic template—should decide what you submit."
+      ] },
+      { heading: "Concrete example", paragraphs: [
+        "Imagine a recent graduate applying for an administrative-support role. Their campus job involved helping a department prepare materials for recurring meetings, but they were not the person who set policy or chaired the meetings."
+      ], example: {
+        before: "Managed department operations and meetings.",
+        after: "Prepared meeting materials for the department coordinator, updated the shared attendee list, and recorded follow-up items assigned during weekly staff meetings.",
+        note: "This is an illustrative example, not a customer result. It identifies a real supporting function without claiming decision-making authority or a hiring outcome."
+      } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A clearer work entry cannot establish eligibility, a required credential, citizenship status, or specialised experience that the announcement requires. It also cannot correct a missing document or an application submitted after the closing date. A quiet result is not proof that the wording of one resume line was the only issue.",
+        "Keep a factual record of each role as you apply: dates, duties, tools, training, and examples you can substantiate. Review it against the next announcement rather than rebuilding the story from memory. That makes tailoring more careful and helps you keep your application accurate."
+      ] }
+    ],
+    conclusion: [
+      "For a U.S. federal application, clarity is more useful than a bigger-sounding title. Show the real work, follow the announcement, and keep every detail defensible.",
+      "A complete record gives the right reader a fairer view of what you have actually done."
+    ],
+    cta: "ResuNexx can help you review whether the experience on your resume is organised clearly before you adapt it to an application.",
+    sources: [
+      { label: "USAJOBS Help Center: How to fill out your work experience", href: "https://help.usajobs.gov/how-to/account/profile/experience/work" },
+      { label: "USAJOBS Help Center: Signature and false statements", href: "https://help.usajobs.gov/working-in-government/fair-and-transparent/signature-false-statements" }
+    ]
+  },
+  {
+    slug: "federal-application-required-documents-check",
+    title: "Before You Submit a U.S. Federal Application, Check the Documents Your Resume Cannot Replace",
+    description: "For recent graduates applying to U.S. federal roles, a practical pre-submission check for required documents and accurate resume evidence.",
+    audience: "Recent graduates applying to U.S. federal early-career roles",
+    publishedAt: "2026-08-28T00:00:00.000Z",
+    opening: [
+      "When an application is nearly ready, it is easy to spend the last hour adjusting resume wording and overlook the documents around it. For a recent graduate applying to a U.S. federal role, the resume is only one part of the package. The announcement may require evidence that a polished bullet cannot provide.",
+      "This is not a reason to upload every certificate or old file you can find. It is a reason to pause before submitting, read the announcement closely, and make sure each document supports the eligibility or qualification it is meant to show."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "Early-career applicants often assume that education, training, and eligibility can be explained in a resume summary. In a federal application, the Required Documents section can set separate requirements. USAJOBS explains that the documents needed depend on the job and applicant type, and that some are required while others are optional.",
+        "A transcript, professional certification, proof of enrolment, licence, or other record may support a qualification in a way that a resume line alone cannot. The exact document is not universal: it depends on the announcement. Treating a checklist from another job as a substitute for the current instructions can create avoidable confusion."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Open the announcement and make a short list with three columns: required document, why it is requested, and whether you have a current readable copy. Check the eligibility and qualifications sections alongside Required Documents. If the role asks for a transcript or a licence, make sure the resume describes the related education or experience accurately, but do not assume the description replaces the document.",
+        "Then compare dates and names across the package. Your graduation date, employer dates, training dates, job title, and credential name should match the records you submit. If an item is optional, decide whether it adds relevant evidence; more attachments are not automatically more helpful. Follow the announcement's stated upload and submission instructions.",
+        "Keep a simple application folder with the version of your resume, the announcement, and the supporting files you used. This is a personal organisation step, not a promise that the application will be selected. It makes it easier to check what you actually submitted if you apply for another role later."
+      ] },
+      { heading: "Concrete example", paragraphs: [
+        "Consider a recent graduate applying to a role whose announcement lists a transcript as a required document. Their resume says that they completed a relevant degree, but they have not checked whether the application also needs the transcript itself."
+      ], example: {
+        before: "BSc in Environmental Science, 2026. Relevant coursework available on request.",
+        after: "BSc in Environmental Science, 2026. Prepared the requested transcript separately and checked that the degree date and programme name match the application record.",
+        note: "This is an illustrative pre-submission check, not a claim that coursework or a degree meets a particular job's qualification standard."
+      } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A complete document package does not guarantee that you meet the full qualification standard or will receive a response. The role may have a narrow eligibility rule, a specific experience requirement, or a competitive field of eligible applicants. Do not alter a resume or document to make it appear that you meet a condition you do not meet.",
+        "Save the announcement and the documents you submitted, then review the next role against its own instructions. If a recurring requirement is missing, identify the legitimate next step—such as confirming eligibility, obtaining a required record, or gaining relevant experience—rather than trying to solve it through wording alone."
+      ] }
+    ],
+    conclusion: [
+      "Your resume should describe your evidence clearly, but it cannot replace documents an announcement specifically requires. Read the current instructions, keep the facts consistent, and submit only what the role calls for.",
+      "A careful document check is a practical way to make your application complete without overstating what it proves."
+    ],
+    cta: "ResuNexx can help you review whether your resume presents your education and experience clearly before you complete an application.",
+    sources: [
+      { label: "USAJOBS Help Center: What documents do I need to provide when I apply?", href: "https://help.usajobs.gov/faq/application/documents" },
+      { label: "USAJOBS Help Center: How to create an application", href: "https://help.usajobs.gov/how-to/application" }
+    ]
   }
 ];
 
