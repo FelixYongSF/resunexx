@@ -774,6 +774,90 @@ export const insightArticles: InsightArticle[] = [
       { label: "USAJOBS Help Center: What documents do I need to provide when I apply?", href: "https://help.usajobs.gov/faq/application/documents" },
       { label: "USAJOBS Help Center: How to create an application", href: "https://help.usajobs.gov/how-to/application" }
     ]
+  },
+  {
+    slug: "new-graduate-resume-degree-in-progress",
+    title: "Your Degree Is Still in Progress: Make the Education Line Clear Without Guessing",
+    description: "For final-year students applying before graduation, a practical way to show current education, expected completion, and relevant evidence accurately.",
+    audience: "Final-year students applying before graduation",
+    publishedAt: "2026-08-29T00:00:00.000Z",
+    opening: [
+      "Applying before graduation can make the Education section feel awkward. You may be close to finishing, still completing a capstone, or waiting for a formal award date. A rushed resume can turn that uncertainty into an unclear line: a degree appears completed when it is not, or the expected date is missing altogether.",
+      "You do not need to hide that you are still studying. The useful goal is simpler: let a reader see the programme, institution, current status, and timing without having to infer any of them. Then use the rest of the resume to show the work, projects, and skills you can already support."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "Final-year applicants often work from an old template that assumes every qualification is already complete. They may also worry that an expected graduation date looks less convincing than a finished degree. That can produce vague wording such as \"BSc candidate\" with no field or date, or a degree listing that looks final even though remaining requirements are still in progress.",
+        "CareerOneStop's education guidance treats education as a resume section that can include degrees, training, coursework, certifications, and relevant information for the job target. Its formatting guidance also recommends dates that are easy to read and standard section headings. These are useful cues: clarity and relevance matter more than pretending the timeline is settled."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Start with the records you can verify: the institution's name, the official programme name, your current status, and your expected completion date. Use \"Expected\" or \"Anticipated\" only when that wording is true. Do not replace it with a completed degree label until the credential has actually been awarded.",
+        "Next, decide what education evidence belongs near the line. A capstone, thesis, lab, relevant module, or student project may help when it relates directly to the role. Give it a concrete label and describe what you did, rather than turning a course title into a claim of professional experience. If space is limited, keep the details that make the direction understandable and remove unrelated lists.",
+        "Finally, compare the education line with the application form. Some employers ask separately for dates, grades, transcripts, work authorisation, or supporting documents. A clear resume can support the package, but it does not replace instructions in the particular application."
+      ] },
+      { heading: "Concrete example", paragraphs: [
+        "Imagine a final-year student applying for an entry-level data-support role. They are completing a degree in economics and have used spreadsheets in a supervised capstone, but their current resume makes the degree look finished and gives no context for the project."
+      ], example: {
+        before: "BSc Economics, 2026. Advanced Excel and data analysis.",
+        after: "BSc Economics, Northbridge University — Expected June 2026. Capstone project: cleaned and summarised a course dataset in Excel, documenting formulas and source notes for a four-person team.",
+        note: "This is an illustrative example, not a claim of professional certification or a hiring result. The student should use their own verified institution, expected date, and project details."
+      } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A clearer education line cannot make you eligible for a role that requires a completed credential by a specific date, a licence, work authorisation, or experience you have not yet gained. It also cannot show every qualification that an employer may ask for in a separate form. No response is not proof that the degree line was the only issue.",
+        "Keep a small evidence file while you finish your course: project briefs, deliverables you are allowed to describe, training records, and accurate dates. When a role is not yet a fit, use the next application to make the same facts clearer rather than changing the status of your degree."
+      ] }
+    ],
+    conclusion: [
+      "An in-progress degree is useful information when it is stated plainly. Make the programme and timeline easy to find, then support the direction with work you can explain.",
+      "Accuracy now gives you a cleaner update to make once the qualification is complete."
+    ],
+    cta: "ResuNexx can help you review whether your education and project evidence are easy to understand before you apply.",
+    sources: [
+      { label: "CareerOneStop: Education", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/education.aspx" },
+      { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" }
+    ]
+  },
+  {
+    slug: "student-part-time-work-resume-relevance",
+    title: "Your Part-Time Job Counts: Show the Work That Connects to Your First Career Step",
+    description: "For students and recent graduates, a practical way to turn part-time work into truthful, relevant resume evidence without overstating its scope.",
+    audience: "Students and recent graduates with part-time work experience",
+    publishedAt: "2026-08-30T00:00:00.000Z",
+    opening: [
+      "A part-time job can feel unrelated when you are applying for your first role in a new field. Retail, hospitality, campus support, delivery, tutoring, and customer-service work may not match the title you want next. That does not mean it has to disappear from your resume or be rewritten as something it was not.",
+      "The better question is what the work lets you show accurately. A reader may need to see that you handled a process, supported customers, kept records, worked to a schedule, or coordinated with a team. Put those facts in context, and keep the claim at the level of responsibility you actually held."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "Students often divide experience into \"career-relevant\" and \"not worth mentioning.\" That makes it tempting either to delete a real job that explains part of the timeline or to inflate routine tasks into leadership language. Both choices can make the resume harder to trust and harder to read.",
+        "CareerOneStop advises applicants with limited work experience to include past jobs while emphasising the skills, tasks, and outcomes most relevant to the target role. Its work-experience guidance also recommends context: what you did, why it mattered, for whom, and what happened as a result where you can support it. Relevance is not the same thing as renaming a job."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Read one target job description and select a small number of requirements you can honestly connect to the part-time role. For each, note the setting, the recurring task, the people or process involved, and one verifiable detail. A shift handover, booking record, stock check, customer query, or training task can be more useful than a broad adjective such as \"hard-working.\"",
+        "Write bullets with ordinary verbs that match your actual contribution: supported, prepared, updated, checked, explained, logged, scheduled, or assisted. Use a number only if you know what it measures and can stand behind it. If the result belonged to a team, say that. If a task was introductory, do not label it expert-level experience.",
+        "Place the job where a reader expects to find it, usually under Experience, and keep the dates and employer name consistent with your records. A short description of the organisation can help when the title alone does not explain the setting."
+      ] },
+      { heading: "Concrete example", paragraphs: [
+        "Consider a student applying for an operations-coordinator internship. Their weekend café role did not involve managing the business, but it did include a repeatable opening routine, customer requests, and a shared order process."
+      ], example: {
+        before: "Leadership and operations experience in a busy café.",
+        after: "Supported the opening shift at a neighbourhood café by checking the daily order list, preparing the counter with two colleagues, and recording customer requests for the shift supervisor.",
+        note: "This is an illustrative example, not a claim that the student managed operations or improved business results. It makes a supporting role and its setting visible."
+      } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A truthful part-time-work entry cannot substitute for a portfolio, technical qualification, work authorisation, or prior experience that a role specifically requires. It also cannot establish that you have performed a specialised duty you only observed. A quiet application is not evidence that one bullet was the only barrier.",
+        "Keep a factual note of tasks, tools, training, and examples from each role while they are fresh. Add new evidence through coursework, supervised projects, volunteering, or entry-level work where it is genuinely available. That gives you more to tailor without stretching the work you have already done."
+      ] }
+    ],
+    conclusion: [
+      "Part-time work can make a first resume more credible when it shows real responsibilities in a clear setting. Preserve the title, dates, and scope, then foreground the evidence that connects to the next step.",
+      "You do not need to make an ordinary job sound extraordinary for it to show useful, transferable habits."
+    ],
+    cta: "ResuNexx can help you review whether your part-time experience shows clear, relevant evidence for your target role.",
+    sources: [
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" },
+      { label: "CareerOneStop: Special tips for recent college graduates", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/special-tips.aspx" }
+    ]
   }
 ];
 
