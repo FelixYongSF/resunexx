@@ -858,6 +858,90 @@ export const insightArticles: InsightArticle[] = [
       { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" },
       { label: "CareerOneStop: Special tips for recent college graduates", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/special-tips.aspx" }
     ]
+  },
+  {
+    slug: "experienced-resume-choose-relevant-history",
+    title: "Your Resume Has Ten Years of Work: Choose What Supports the Role Without Erasing the Rest",
+    description: "For experienced applicants whose resume is becoming a complete work archive, a practical way to select relevant evidence without hiding their real history.",
+    audience: "Experienced applicants with 8–15 years of work history",
+    publishedAt: "2026-08-31T00:00:00.000Z",
+    opening: [
+      "After years of work, a resume can become harder to edit than it was to write. Each role contains projects, responsibilities, systems, and people you supported. Removing a bullet can feel like removing proof that the job mattered. Keeping every bullet, though, can leave the reader with a long record and no clear reason you fit this particular direction.",
+      "You do not need to rewrite your career or conceal work that explains your history. The aim is to make a reasoned selection: preserve accurate titles and dates, then give the most space to the work that helps a reader understand the role you want now. That is different from claiming every past task was directly relevant."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "Experienced applicants often build a resume by adding to the previous version. Over time, early roles keep the same detail as recent ones, old tools sit beside current ones, and every project competes for attention. The document may be accurate, but its priorities are no longer visible. A reader has to work out which experience is central and which is background.",
+        "CareerOneStop advises applicants with a longer history to include or emphasise the jobs that add the most value to the application, while briefly covering unrelated jobs that explain the timeline. Its guidance also recommends linking work descriptions to the job goal and providing context for tasks and outcomes that can be supported. This is a useful editing rule, not a promise about any hiring decision."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Start with one target role, not a generic idea of the industry. Mark a small number of requirements that recur in the posting: a process, type of stakeholder, technical area, or responsibility. Then review your work history role by role. For each role, choose the evidence that most directly shows that kind of work and leave routine details in a shorter description where they still explain the position.",
+        "Keep the original job title, employer, and dates. Use a bullet to show an action in its real setting, the people or process involved, and a result or scope only when you can verify it. If a useful result cannot be measured, a specific deliverable, handover, system, or audience can still give the reader context. Do not borrow a senior title or imply ownership of work that belonged to a wider team.",
+        "Check the balance on the page. Your current or most relevant role may deserve more detail than an early unrelated position, but older work can remain as a concise record. Remove duplicated skills lists and repeated verbs before removing facts that explain a transition, a gap, or a credential."
+      ] },
+      { heading: "Concrete example", paragraphs: [
+        "Imagine an operations professional applying for a project-coordination role after ten years across customer support, scheduling, and vendor administration. Their draft has six equally detailed jobs and several bullets that repeat that they answered emails and updated files."
+      ], example: {
+        before: "Operations Assistant: Responsible for emails, reports, meetings, administration, suppliers, and supporting projects.",
+        after: "Operations Assistant: Prepared weekly supplier-status updates, maintained the action log for a cross-team rollout, and followed up on agreed next steps with the project lead.",
+        note: "This is an illustrative rewrite, not a claim that the applicant led the rollout or managed suppliers. It identifies the setting and contribution while leaving the actual title intact."
+      } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A more focused resume cannot bridge every gap. A role may require a licence, a specialised portfolio, local work authorisation, direct sector experience, or a level of responsibility that your work history does not show. Silence after an application is not proof that the length of the resume or one omitted bullet caused the result.",
+        "Keep a master record outside the resume with fuller project notes, dates, tools, and outcomes you are allowed to describe. Use it to create a truthful version for each direction, and compare that version with the next role's actual requirements. This gives you a disciplined way to tailor without losing the facts of your career."
+      ] }
+    ],
+    conclusion: [
+      "An experienced resume does not need to be a complete archive. It needs to make the most relevant, supportable parts of a real work history easy to find.",
+      "Preserve the record, choose the evidence deliberately, and let the target role determine where the detail belongs."
+    ],
+    cta: "ResuNexx can help you review whether the strongest evidence in your work history is easy to find for the role you are targeting.",
+    sources: [
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" },
+      { label: "JobAccess: Creating a good resume", href: "https://jobaccess.gov.au/i-am-a-person-with-disability/creating-a-good-resume" }
+    ]
+  },
+  {
+    slug: "early-career-resume-summary-use-evidence",
+    title: "Your Resume Summary Sounds Generic: Give Early-Career Evidence a Clearer Job",
+    description: "For early-career applicants with some experience but a vague opening summary, a practical way to make the top of the resume specific without inflating a title.",
+    audience: "Early-career applicants with 1–3 years of experience",
+    publishedAt: "2026-09-01T00:00:00.000Z",
+    opening: [
+      "When you have one or two years of experience, the top of the resume can be the hardest part to write. You want to sound ready for the next step, but phrases such as \"motivated professional\" or \"strong communicator\" do not show what you have actually done. Adding a bigger title or a crowded skills list can make the opening sound more confident while making it less precise.",
+      "A useful summary is not a miniature biography. It is a short orientation for the reader: the kind of work you have done, the evidence you can support, and the direction you are targeting. If your work history already shows a clear progression, you may not need one at all. The important thing is not to make the page say more than the evidence can carry."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "Early-career applicants often inherit a template designed for much more experienced professionals. It asks for a summary before the writer has selected a target role or reviewed the details in their own work history. The result is a block of positive adjectives that repeats the skills section and gives the reader no concrete way to test the claim.",
+        "CareerOneStop describes a summary as a short section for skills and accomplishments related to the job, and notes that applicants with three years or less of experience may skip it. JobAccess likewise lists a short career summary as one possible part of a resume, alongside work history, education, training, and skills. These sources support a simple choice: use a summary only when it adds accurate orientation."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Read the target job first. Identify two or three requirements you can honestly connect to a real situation: a support process, a tool, a type of customer, a project task, or a training record. Then locate the matching bullets in your experience section. The summary should point toward evidence that is already visible below it, not introduce a claim that appears nowhere else.",
+        "Keep the wording modest and concrete. State your actual area of work, a relevant task or setting, and the direction you are pursuing. Avoid calling yourself a manager, specialist, or strategist unless that is your verified role or qualification. If the only available sentence is a list of personality traits, remove it and let the first relevant experience bullet do the work.",
+        "Finally, compare the summary with the application form and your records. Names of tools, dates, certificates, and scope should match what you can explain. A short opening is easier to keep accurate when it does not try to cover every skill you have ever used."
+      ] },
+      { heading: "Concrete example", paragraphs: [
+        "Consider an applicant with eighteen months of customer-support and scheduling experience who is applying for an entry-level operations role. Their opening currently claims broad leadership and project-management expertise, while the evidence below shows a narrower but useful contribution."
+      ], example: {
+        before: "Dynamic professional with excellent communication, leadership, and project-management skills.",
+        after: "Customer-support and scheduling assistant with experience updating appointment records, responding to routine client questions, and maintaining handover notes; seeking an entry-level operations-support role.",
+        note: "This is an illustrative example, not a claim that the applicant managed projects or will meet every requirement of the target role. The applicant should use only responsibilities and direction they can support."
+      } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A clearer opening does not establish a qualification that a role requires. The employer may need direct technical experience, a portfolio, an academic credential, local work authorisation, or a level of responsibility you have not yet had. A lack of response does not show that the summary was the only problem.",
+        "Save the job posting and the resume version you used. Review whether the opening was supported by the first relevant bullets and whether the target direction was realistic for the requirements. Where a genuine gap remains, identify a legitimate way to build evidence through training, supervised work, or a project rather than trying to solve the gap with a stronger adjective."
+      ] }
+    ],
+    conclusion: [
+      "An early-career resume summary earns its place when it helps a reader understand the evidence that follows. It does not need to sound senior to be useful.",
+      "Use a short, supportable orientation—or leave it out—and make your actual experience easier to see."
+    ],
+    cta: "ResuNexx can help you review whether the opening of your resume matches the evidence in your experience section.",
+    sources: [
+      { label: "CareerOneStop: Top portion of resume", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/top-portion-of-resume.aspx" },
+      { label: "JobAccess: Creating a good resume", href: "https://jobaccess.gov.au/i-am-a-person-with-disability/creating-a-good-resume" }
+    ]
   }
 ];
 
