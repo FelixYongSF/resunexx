@@ -942,6 +942,49 @@ export const insightArticles: InsightArticle[] = [
       { label: "CareerOneStop: Top portion of resume", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/top-portion-of-resume.aspx" },
       { label: "JobAccess: Creating a good resume", href: "https://jobaccess.gov.au/i-am-a-person-with-disability/creating-a-good-resume" }
     ]
+  },
+  {
+    slug: "career-break-resume-keep-dates-honest",
+    title: "A Career Break Does Not Need a Cover Story: Keep the Dates Honest and the Evidence Useful",
+    description: "For international job seekers returning after a career break, a practical way to present a truthful timeline without letting the gap erase relevant skills and experience.",
+    audience: "International job seekers returning after a career break",
+    publishedAt: "2026-09-02T00:00:00.000Z",
+    opening: [
+      "Returning to a job search after time away can make the employment dates on a resume feel more important than everything else. You may have cared for family, studied, moved countries, taken training, or dealt with a change that does not fit neatly inside a job title. The pressure to explain every month can lead to altered dates or a resume that hides useful experience along with the break.",
+      "A more durable approach is simpler: keep the timeline truthful, make your relevant skills and work history easy to find, and include only the additional context that you can support and that helps the reader understand your current direction. A resume is not required to tell every personal detail. It should not ask the reader to rely on dates or claims that you cannot explain either."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "A career break can interrupt the familiar reverse-chronological story of a resume. Applicants may assume that a gap automatically makes every earlier role less relevant, so they give the gap more attention than the skills, responsibilities, and results they can still document. Others try to remove the awkwardness by extending a previous employment date. That creates a record that may be difficult to keep consistent across applications, references, and later conversations.",
+        "CareerOneStop notes that common reasons for employment gaps include education, gaining skills, caregiving, and significant health issues. Its guidance says it is not necessary to explain the reason on a resume, while advising applicants to be truthful about employment dates and to highlight their skills and experience. That distinction is useful: accuracy is necessary, but a detailed personal explanation is not the same thing as useful evidence for a target role."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Start by checking the dates against records you can verify. Keep job titles, employers, locations, and employment periods accurate. If a form asks for months as well as years, provide them honestly. A concise timeline makes it easier for a reader to understand your history and helps you avoid creating different versions of the same facts.",
+        "Next, choose a format that keeps both work history and relevant capabilities visible. CareerOneStop describes a combination format as one way to foreground transferable skills while retaining detailed work history. Use it only if it makes the page clearer: standard headings, a readable sequence of roles, and skills tied to actual experience are more useful than a long list of general strengths.",
+        "If you completed relevant study, certification, volunteer work, or a defined project during the break, include it only with its real name, dates, and scope. For example, a course can belong in Education or Training; volunteer work can describe the organisation and tasks. Do not turn preparation into paid employment, imply a credential you have not earned, or use a broad label such as consultant when the work was informal."
+      ] },
+      { heading: "Concrete example", paragraphs: [
+        "Imagine a customer-service coordinator returning after eighteen months away and applying for an operations-support role. Their draft extends the end date of the last job to cover the gap, then lists \"self-employed consultant\" without a client, project, or service to support it. The timeline looks smoother, but it creates a claim the applicant may not be able to explain."
+      ], example: {
+        before: "Customer Service Coordinator | 2021–2025; Independent Consultant | 2025–2026",
+        after: "Customer Service Coordinator | 2021–2025\nCareer break | 2025–2026\nCompleted a spreadsheet-skills course and volunteered two hours weekly to maintain appointment records for a community programme.",
+        note: "This is an illustrative format, not a requirement to disclose a personal reason for a break. The applicant should include only training or volunteer work they can document, and should use the dates and labels that reflect their own situation."
+      } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A transparent resume cannot remove every barrier in a particular application. A role may require recent sector experience, a licence, local work authorisation, a portfolio, language proficiency, or a technical skill that is not yet demonstrated. No response is not proof that the career break alone caused the result, and changing the dates would not solve a genuine requirement.",
+        "Keep a private record of the role, resume version, and evidence you wanted to make visible. Review whether the target requirements were present in documented experience, training, or work samples. If a gap remains, choose a legitimate next step that builds evidence rather than making the timeline sound more continuous than it was."
+      ] }
+    ],
+    conclusion: [
+      "A career break is part of a real timeline, not a flaw that needs a fictional title. Accurate dates and specific evidence give a reader more to work with than a vague cover story.",
+      "Keep what is relevant, describe it honestly, and let your current direction be supported by facts you can explain."
+    ],
+    cta: "ResuNexx can help you review whether your resume keeps the timeline clear while making your relevant evidence easy to find.",
+    sources: [
+      { label: "CareerOneStop: Special tips for employment gaps", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/special-tips.aspx" },
+      { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" },
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
+    ]
   }
 ];
 
