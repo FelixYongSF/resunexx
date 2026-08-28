@@ -985,6 +985,90 @@ export const insightArticles: InsightArticle[] = [
       { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" },
       { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
     ]
+  },
+  {
+    slug: "international-graduate-resume-label-unpaid-work-clearly",
+    title: "Your Unpaid Work Counts as Experience Only When the Label and Evidence Are Clear",
+    description: "For international graduates with volunteer, campus, or family-business experience, a practical way to show useful work without presenting unpaid activity as a paid role.",
+    audience: "International graduates applying for their first professional role",
+    publishedAt: "2026-09-03T00:00:00.000Z",
+    opening: [
+      "International graduates often have more relevant experience than their resume suggests: a student society role, a community project, a placement, a family-business task, or volunteer work completed while studying. The uncertainty is usually not whether the work mattered. It is how to name it without making the reader guess whether it was paid employment, a course assignment, or an informal favour.",
+      "A clear label does not make the work less valuable. It tells the reader how to understand the setting, then lets the responsibilities and results carry the point. That is especially important when you are applying across borders, where job titles and employment arrangements may not translate neatly. The goal is an accurate record that makes relevant evidence easy to find."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "Many entry-level resume templates organise everything under Professional Experience. That can make an applicant feel that a volunteer role or university project belongs nowhere, or that it must be renamed to look more formal. In response, people may omit work that developed useful skills or use a paid-job title they cannot support.",
+        "JobAccess lists volunteer work as an optional resume section and explains that the contents can depend on career length and the role being sought. CareerOneStop advises applicants with limited experience to emphasise the skills, tasks, and outcomes most relevant to the target job. Together, those points support a practical approach: include relevant unpaid work, but identify its real context rather than asking a title to imply more than it does."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Start with the original arrangement. Was it a volunteer position, an internship, a course project, a student leadership role, or work for a family business? Use that label in the section heading or beside the organisation name. If an internship was unpaid, say so only where that detail is needed to make the arrangement clear; do not invent an employment relationship just because the work was substantial.",
+        "Then write bullets about work you can explain: the people or process you supported, the tools you used, the scope, and an observable result where one exists. CareerOneStop recommends making work descriptions specific and relating tasks to the target job. Specific does not require confidential numbers. You can describe a recurring task, a defined deliverable, or the group served without claiming revenue, authority, or impact you cannot verify.",
+        "Finally, make the dates and location consistent with your education and work-authorisation history. A resume does not need to answer every eligibility question, but it should not create a timeline that conflicts with application forms or records. Keep a contact, project link, or course record privately available in case you later need to explain the entry."
+      ] },
+      { heading: "Concrete example", paragraphs: [
+        "Consider a final-year business student applying for an operations-support role. They helped a local non-profit organise event registrations for one semester, but their draft presents the role as a paid operations coordinator position. The title sounds stronger, while the description gives no clue about the setting or what they actually did."
+      ], example: {
+        before: "Operations Coordinator | Community Events Group | 2025\nManaged operations and improved event performance.",
+        after: "Volunteer Registration Assistant | Community Events Group | Sep–Dec 2025\nUpdated attendee records, prepared weekly registration lists, and handed over changes to the event coordinator using the organisation's spreadsheet template.",
+        note: "This is an illustrative example. Use the organisation, dates, tools, and responsibilities that reflect your own arrangement, and do not imply supervisory authority or paid employment unless you can support it."
+      } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A well-labelled volunteer or project entry does not replace a requirement for a licence, local work authorisation, a specific qualification, or sustained paid experience. A lack of response also does not establish that the unpaid-work label was the reason. The job may have attracted applicants with a different combination of evidence or availability.",
+        "Save the posting and the resume version you used. Check whether the relevant entry was easy to find and whether each bullet matched the role's stated tasks. If the target field requires more direct evidence, pursue a legitimate placement, supervised project, training, or volunteer responsibility with a defined scope. Building a clearer record is more useful than relabelling work you already did."
+      ] }
+    ],
+    conclusion: [
+      "Unpaid work can show real skills when the context is honest and the description is concrete. A clear label gives the reader a reliable way to interpret the evidence.",
+      "Name the arrangement accurately, describe the work specifically, and keep the rest of the application consistent with facts you can explain."
+    ],
+    cta: "ResuNexx can help you check whether volunteer, project, and early-career experience is labelled clearly and connected to the role you are targeting.",
+    sources: [
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" },
+      { label: "JobAccess: Creating a good resume", href: "https://jobaccess.gov.au/i-am-a-person-with-disability/creating-a-good-resume" }
+    ]
+  },
+  {
+    slug: "international-job-seeker-resume-contact-details-travelable",
+    title: "Applying Across Borders? Make Your Resume Contact Details Easy to Use Without Overexplaining",
+    description: "For international job seekers applying from another country, a practical way to present contact details, location, and work authorisation accurately without turning the resume into an immigration statement.",
+    audience: "International job seekers applying from outside the employer's country",
+    publishedAt: "2026-09-04T00:00:00.000Z",
+    opening: [
+      "Applying to roles in another country can make the contact line feel unusually high-stakes. You may wonder whether to use your current city, a planned destination, a local phone number, or a sentence about your visa. Trying to answer every question in the header can create a location or eligibility claim that is not true yet.",
+      "A useful contact section is factual and usable. It identifies you, gives a professional email address, and states a location only as it currently is or as a clearly qualified plan. If an application asks about work authorisation, answer directly and accurately there."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "Many resume examples assume the applicant already lives near the employer. International candidates may copy a local address, use a friend's number, or claim work eligibility before they have checked what it means for that role. These shortcuts can make the document look more familiar, but they can also make later forms, interview scheduling, and records harder to keep consistent.",
+        "JobAccess lists name and contact details among the typical elements of a resume and notes that a resume should contain key information about experience and work history. CareerOneStop's resume guidance also focuses on making qualifications relevant to the job goal. Neither principle requires an applicant to create a local identity. A concise, accurate contact line leaves room for the verified experience that supports the application."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Use the name, email address, and phone number you actually monitor. Include an international calling code when it helps a recruiter dial the number. State your current city and country. If you plan to relocate, use careful language only when that plan is real and you can explain its timing. Do not list an address where you do not live merely to appear local.",
+        "Read the posting and application form separately. Some employers ask where you are based, whether you can work in a location, or whether sponsorship is needed. Those are application questions, not claims to hide in a resume heading. Answer them truthfully according to your present status and the instructions. If wording is unclear, consult the employer's official careers information or the relevant government immigration source rather than guessing.",
+        "Keep the header short. Your contact details, a portfolio or professional profile link where relevant, and a real location are usually enough. Check that linked pages use the same name and do not reveal private details you do not want to share. Then give the first visible resume section to the skills, work, study, or project evidence that relates to the role."
+      ] },
+      { heading: "Concrete example", paragraphs: [
+        "Imagine a data-analysis graduate in Taipei applying for a junior role in Australia. Their current header uses a friend's Melbourne address and claims Australian work rights even though they are still checking the role's requirements. The contact line may look convenient, but it turns an unresolved question into a statement of fact."
+      ], example: {
+        before: "Alex Chen | Melbourne, VIC | Australian work rights | alex@example.com",
+        after: "Alex Chen | Taipei, Taiwan | +886 9XX XXX XXX | alex@example.com | Portfolio: example.com\nPlanning relocation to Melbourne; work-authorisation details available in the application where requested.",
+        note: "This is an illustrative format, not immigration advice. Use only the location, phone number, relocation plan, and work-authorisation statement that are true for you and suitable for the employer's requested process."
+      } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "Accurate contact details cannot remove a role's location, authorisation, timing, language, or experience requirements. No response does not prove that your country or phone number caused the result; employers may have selected candidates whose availability or evidence better matched the process.",
+        "Keep a record of the posting, answers submitted, and resume version. Review whether you answered location or authorisation questions exactly as asked and whether the resume made relevant work easy to find. Seek authoritative immigration guidance before making a new eligibility claim."
+      ] }
+    ],
+    conclusion: [
+      "A cross-border application is clearer when the contact line is true, concise, and easy to use. It does not need to imitate a local applicant's circumstances.",
+      "Keep facts current, answer eligibility questions in the right place, and let the rest of the resume show the evidence for the work."
+    ],
+    cta: "ResuNexx can help you review whether your resume header is clear and whether the evidence below it supports the role you are pursuing.",
+    sources: [
+      { label: "JobAccess: Creating a good resume", href: "https://jobaccess.gov.au/i-am-a-person-with-disability/creating-a-good-resume" },
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
+    ]
   }
 ];
 
