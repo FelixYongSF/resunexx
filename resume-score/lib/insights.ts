@@ -1069,6 +1069,61 @@ export const insightArticles: InsightArticle[] = [
       { label: "JobAccess: Creating a good resume", href: "https://jobaccess.gov.au/i-am-a-person-with-disability/creating-a-good-resume" },
       { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
     ]
+  },
+  {
+    slug: "international-graduate-resume-project-record",
+    title: "Your Best Graduate Project Is Buried: Give It a Clear Record Before You Add Another Skills List",
+    description: "For international recent graduates pursuing entry-level analyst or coordinator roles, a practical way to describe one relevant project without turning coursework into a job title.",
+    audience: "International recent graduates pursuing entry-level analyst or coordinator roles",
+    publishedAt: "2026-09-05T00:00:00.000Z",
+    opening: [
+      "When you have limited paid experience, one substantial course, capstone, or community project can carry more useful evidence than a long list of tools. Yet many graduate resumes hide that work in a single Education line, while the top half of the page repeats broad words such as analytical, organised, and collaborative.",
+      "The answer is not to present coursework as a full-time job. It is to give the project a clear, accurate record: what the setting was, what you contributed, the deliverable you produced, and the evidence you can explain. That makes the work easier to interpret without asking a reader to guess how much responsibility you had."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "International graduates may have completed projects in a different academic system, with team roles and assessment methods that do not map neatly to a job title. If the resume template only offers Professional Experience and Education, it can seem safer to leave the project vague—or to borrow an employer-style title that overstates the arrangement.",
+          "CareerOneStop's U.S.-based guidance for recent college graduates says that relevant skills and accomplishments gained through classes or project work can be highlighted near the top of a resume. Its portfolio guidance also recommends describing a work sample, who it was for, how you contributed, and any results. Those are useful prompts for explaining a project, not a reason to claim paid employment or a client relationship that did not exist."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Choose one project that actually relates to the role. For an entry-level analyst position, that might be cleaning a defined dataset, documenting findings, or presenting a recommendation. For a coordinator position, it might be planning a timetable, maintaining a shared tracker, or handing over a deliverable. The project does not need to prove that you have already held the target job; it needs to show a relevant piece of work clearly.",
+          "Create a Projects section or place the entry under Education, depending on which makes the page easier to scan. Name the project, organisation or course where applicable, location or remote setting if useful, and the dates. Then write two or three bullets with a concrete action, the material or people involved, and a deliverable or bounded outcome you can support.",
+          "Keep the language proportionate. Write ‘analysed survey responses for a class project’ rather than ‘led market intelligence’ if the work was assessed coursework. If the project was a team effort, state your own contribution instead of claiming the entire group result. Do not disclose confidential material, invent a number, or link to work you are not allowed to share."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Imagine an international business graduate applying for a junior operations-coordinator role. Their resume lists Excel, research, and teamwork in a skills block. A capstone project involved a real local charity, but it appears only as the course name, so the reader cannot tell what the graduate did."
+        ],
+        example: {
+          before: "Skills: Excel, research, teamwork\nBachelor of Business, 2026 — Capstone completed.",
+          after: "Projects\nCommunity-service scheduling capstone | 2026\n• Compared appointment records supplied for the course, maintained the team's action tracker, and prepared a handover summary for the charity contact.\n• Presented the team's proposed scheduling changes, identifying the assumptions and data limits used in the analysis.",
+          note: "This is an illustrative example, not a customer result. Use only the course, organisation, data access, contribution, and deliverable that you can describe accurately; a group recommendation is not the same as a change the organisation adopted."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "A clearer project entry cannot establish a required credential, local work authorisation, portfolio standard, language level, or amount of direct employment that a role specifies. A lack of response also does not show that the project section was the deciding factor. The role may have attracted applicants with a different combination of evidence or availability.",
+          "Keep the job description and the resume version you used. Review whether the project was genuinely relevant, whether the bullets named your own contribution, and whether a reader could locate it quickly. If you need more direct evidence, seek a legitimate placement, supervised project, volunteer responsibility, or work sample with a defined scope. Building the next record is more useful than enlarging the previous one."
+        ]
+      }
+    ],
+    conclusion: [
+      "A graduate project becomes more useful when its setting, contribution, and deliverable are visible. It does not need a borrowed job title to earn a place on the page.",
+      "Choose the most relevant project, record it honestly, and let specific work carry more weight than a longer skills list."
+    ],
+    cta: "ResuNexx can help you review whether a project entry is clear, proportionate, and connected to the role you are targeting.",
+    sources: [
+      { label: "CareerOneStop: Special tips for recent college graduates", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/special-tips.aspx" },
+      { label: "CareerOneStop: Portfolios", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/portfolios.aspx" }
+    ]
   }
 ];
 
