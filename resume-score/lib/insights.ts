@@ -1124,6 +1124,48 @@ export const insightArticles: InsightArticle[] = [
       { label: "CareerOneStop: Special tips for recent college graduates", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/special-tips.aspx" },
       { label: "CareerOneStop: Portfolios", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/portfolios.aspx" }
     ]
+  },
+  {
+    slug: "international-student-resume-keep-master-record",
+    title: "Applying in Europe? Keep a Master Record Before You Tailor Your Student Resume",
+    description: "For international students applying for early-career roles in Europe, a practical way to tailor a resume without losing projects, languages, volunteering, or the facts behind each application.",
+    audience: "International students applying for early-career roles in Europe",
+    publishedAt: "2026-09-06T00:00:00.000Z",
+    opening: [
+      "When you are applying across borders, tailoring a resume can feel like starting over each time. One vacancy asks for a language, another highlights a course project, and a third makes a volunteer role look relevant. After several versions, it is easy to lose a useful detail, change a date by accident, or make one application sound different from the next.",
+      "The answer is not to send the same full history everywhere. It is to keep a private master record, then choose the accurate facts that best match each vacancy. That gives you a stable place for your education, projects, languages, work, and volunteering while allowing the resume itself to stay focused and readable."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "International students often have evidence spread across more than one system: a degree from one country, a placement or campus role in another, language learning, and projects completed with different naming conventions. A one-page resume cannot show every detail, so each new version becomes a trade-off between being concise and leaving out something useful.",
+        "The European Commission's Europass guidance describes a profile as a place to record skills, qualifications, work and learning experience, projects, volunteering, and achievements. Its CV guidance then recommends highlighting examples that match the vacancy and focusing on relevant facts rather than a full detailed history. You do not need to use Europass to apply this method; the useful principle is to keep the complete record separate from the tailored document."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Create one private record with the facts you may need later: the official name of each course or qualification, dates, locations, languages, project names, organisations, responsibilities, tools, links you are allowed to share, and any document that supports the entry. Keep the original wording where it matters, especially for degree names, certificates, and employers. Do not copy confidential coursework, client information, or personal documents into a public portfolio.",
+        "For each vacancy, read the stated tasks and requirements first. Select two or three items from the record that you can genuinely connect to that role. Put the most relevant evidence where a reader can find it quickly, and use plain language to explain unfamiliar course titles or local terms. Tailoring means choosing and clarifying facts; it does not mean renaming a project as a job or adding a skill you only plan to learn.",
+        "Before submitting, compare the resume with the application form. Names, dates, language levels, locations, and work-authorisation answers should remain accurate across both. If a vacancy asks for something your record does not show, leave the gap visible and decide whether you can build evidence through legitimate study, a supervised project, or a placement."
+      ] },
+      { heading: "Concrete example", paragraphs: [
+        "Imagine an international student in the Netherlands applying for a junior programme-coordinator role. Their master record includes a university event project, a volunteer mentoring activity, and two languages. Their first resume lists all three as disconnected achievements, while the vacancy asks for event support, clear communication, and accurate records."
+      ], example: {
+        before: "Skills: English, Dutch, communication, organisation, teamwork\nActivities: University project, volunteering, student society.",
+        after: "Selected experience\nUniversity event project | 2026\nMaintained the team's attendee tracker, prepared a bilingual event update, and handed over confirmed changes to the student-services contact.\nVolunteer mentor | 2025–2026\nScheduled monthly check-ins and recorded agreed follow-up actions for first-year students.",
+        note: "This is an illustrative example, not a customer result. Use only the languages, dates, project setting, responsibilities, and records that are true for you. The student should not imply that a course project was paid employment or that a volunteer activity created a professional qualification."
+      } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A well-kept record and a clearer resume cannot remove every requirement. A role may require local work authorisation, a specific language level, a credential, direct experience, or availability that your current record does not establish. No response does not prove that one missing bullet or a different resume format was the cause.",
+        "Save the vacancy, the version you used, and the evidence you selected. Review whether the chosen examples matched the role and whether they were easy to locate. If an important requirement is genuinely absent, use the master record to identify a realistic next step—such as a relevant course, supervised project, or placement—rather than repeatedly expanding the same claims."
+      ] }
+    ],
+    conclusion: [
+      "A tailored student resume is easier to keep accurate when it comes from a complete private record. Preserve the facts first, then select the examples that make sense for one specific vacancy.",
+      "That approach keeps your applications focused without making your education, international experience, or earlier work disappear."
+    ],
+    cta: "ResuNexx can help you review whether the evidence selected for one role is clear, proportionate, and consistent with the rest of your resume.",
+    sources: [
+      { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" },
+      { label: "Europass: The Europass profile", href: "https://europass.europa.eu/en/europass-tools/europass-profile" }
+    ]
   }
 ];
 
