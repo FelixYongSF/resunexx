@@ -1166,6 +1166,61 @@ export const insightArticles: InsightArticle[] = [
       { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" },
       { label: "Europass: The Europass profile", href: "https://europass.europa.eu/en/europass-tools/europass-profile" }
     ]
+  },
+  {
+    slug: "international-job-seeker-resume-select-evidence-for-europe",
+    title: "Applying in Europe? Select Resume Evidence for the Vacancy Instead of Sending Your Full History",
+    description: "For international job seekers pursuing roles in Europe, a practical way to tailor a CV with accurate, relevant evidence without creating a different personal history for every application.",
+    audience: "International job seekers applying for roles in Europe",
+    publishedAt: "2026-09-07T00:00:00.000Z",
+    opening: [
+      "When you apply in a new country, a long career history can feel like both an advantage and a problem. You may have qualifications, projects, language learning, volunteer work, and jobs that matter—but not all of them help a reader understand one vacancy. The pressure to look perfectly matched can lead to a CV that lists everything, changes titles, or quietly leaves out dates that are harder to explain.",
+      "A better approach is to keep the full record privately and select the facts that are genuinely relevant to the vacancy. Tailoring is an act of organisation, not reinvention. It makes the job-related evidence easier to find while keeping your employment, education, and application answers consistent."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "International applicants often need to translate more than language. A degree title, local employer, or project name may be unfamiliar to an employer in another country. It can be tempting to compensate with a crowded skills section or a polished label that sounds closer to the target job. Both choices can make the document less clear if the evidence underneath does not support the label.",
+          "The European Commission's Europass guidance recommends focusing a CV on facts and main points that match the job in mind, rather than including a complete detailed history. Its profile guidance describes a separate place to record qualifications, work, learning, projects, volunteering, and achievements. These are compatible tasks: preserve the complete facts first, then choose the items that help a reader assess one advertised role."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Read the vacancy before editing the CV. Identify a small number of stated tasks, tools, languages, or qualifications. Then look for real examples in your master record: a role, placement, course project, volunteer responsibility, or training item. Choose evidence that you can explain in its original setting instead of copying every keyword from the posting.",
+          "Keep the original job title and employer where possible. If a local title would be hard for an international reader to understand, add a plain-language explanation in the bullet points rather than replacing the title with a seniority or function you did not hold. State the activity, the setting, and a defined output, scope, or responsibility that you can support. Do not turn coursework into paid employment or a team result into a claim about your individual authority.",
+          "Finally, compare the CV with the application form. Dates, qualification names, language levels, location, and work-authorisation answers should remain true in both places. If an employer requests a specific format or supporting document, follow that instruction. A tailored CV can clarify relevant evidence, but it cannot truthfully fill a requirement you do not yet meet."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Imagine an applicant with a logistics degree and customer-service experience applying for a junior supply-chain support role in Belgium. Their draft puts every previous task into one dense paragraph and changes a retail job title to Supply Chain Coordinator. The reader cannot tell what work was actually done, and the altered title creates a problem if the application is checked later."
+        ],
+        example: {
+          before: "Supply Chain Coordinator | Retail Company | 2024–2026\nManaged logistics, suppliers, stock, customer issues, reporting, and operations.",
+          after: "Customer Service Associate | Retail Company | 2024–2026\n• Recorded recurring delivery questions and shared weekly patterns with the store manager.\n• Updated the stock-issue tracker and coordinated accurate customer follow-up using the team's existing process.",
+          note: "This is an illustrative example, not a claim that customer-service experience automatically meets a supply-chain requirement. Use only titles, tasks, dates, tools, and outcomes that reflect your own work."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "A more focused CV cannot remove a requirement for local work authorisation, a language level, a licence, a qualification, or direct sector experience. No response does not prove that one omitted line, your country of residence, or the CV format was the deciding factor. It may simply mean that the role required evidence you have not yet had an opportunity to build.",
+          "Save the posting and the version you submitted. Check whether the selected examples were genuinely connected to the stated work and whether the same facts appear accurately in your application. If an important requirement is missing, identify a legitimate way to build it through study, a supervised project, a placement, or relevant work—not by making the existing experience sound like something else."
+        ]
+      }
+    ],
+    conclusion: [
+      "A tailored CV is not a different life story for every vacancy. It is a clear selection of facts that make your relevant experience easier to understand.",
+      "Keep the complete record private, select evidence carefully, and let each application remain consistent with work you can explain."
+    ],
+    cta: "ResuNexx can help you review whether the evidence selected for one European job application is clear, relevant, and proportionate.",
+    sources: [
+      { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" },
+      { label: "Europass: What information should I include in my Europass profile?", href: "https://europass.europa.eu/en/what-type-information-should-i-include-my-europass-profile" }
+    ]
   }
 ];
 
