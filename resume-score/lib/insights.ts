@@ -1221,6 +1221,116 @@ export const insightArticles: InsightArticle[] = [
       { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" },
       { label: "Europass: What information should I include in my Europass profile?", href: "https://europass.europa.eu/en/what-type-information-should-i-include-my-europass-profile" }
     ]
+  },
+  {
+    slug: "early-career-resume-bullets-show-customer-service-scope",
+    title: "Early-Career Customer Service Applicants: Show the Scope of Your Work Before You Add More Skills",
+    description: "For early-career customer service applicants, a practical way to turn familiar responsibilities into clear, supportable resume evidence.",
+    audience: "Early-career customer service applicants with 0–2 years of experience",
+    publishedAt: "2026-09-08T00:00:00.000Z",
+    opening: [
+      "If your customer service resume feels repetitive, you may be looking at a list of duties that nearly every applicant could claim: answered questions, handled requests, helped customers, worked in a team. Those statements may be true, but they do not tell a reader what you were trusted to handle, where the work happened, or how you contributed within the limits of your role.",
+      "You do not need a management title or a large sales number to make early-career work useful on a resume. The aim is to show accurate scope: the kind of request, the setting, the tools or process you used, and a concrete responsibility you can explain. That gives the reader something more dependable than a long skills list."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "Customer-facing work is often fast, shared, and varied. A shift may include resolving a simple query, checking an order, updating a record, following an escalation process, and handing over an unresolved issue. Because the work can feel routine to the person doing it, applicants sometimes reduce it to a broad label such as customer service or communication.",
+          "CareerOneStop advises job seekers to describe work with context, purpose, audience, and a supportable outcome rather than only listing tasks. Its guidance also notes that candidates with limited work history can emphasise the skills, tasks, and outcomes most relevant to the target role. This is not a reason to invent a metric. It is a reason to preserve enough detail for the reader to understand the responsibility."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Choose two or three situations you can describe accurately. For each one, write down the request or problem, the action you personally took, the tool or process involved, and what happened next. A booking system, returns log, order tracker, product database, handover note, or escalation rule can be useful context when it was genuinely part of your work.",
+          "Then compare those situations with the vacancy. If the role asks for written communication, record keeping, appointment coordination, problem resolution, or working with a team, select the example that shows that exact kind of work. Keep your original title. Do not replace Customer Service Assistant with Account Manager, and do not claim that a team target was your individual result unless you can support that statement.",
+          "Use a number only when you know what it means and can explain it. A daily queue, event attendance, range of products, or number of locations may be useful scope. When no reliable number exists, name the setting and responsibility instead. Clear evidence is more valuable than a precise-looking figure that cannot be checked."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Consider an applicant for a junior client-support role whose current bullet reads like a generic claim. The applicant did not own the company relationship or create the service policy, but they did work directly with customers and follow a defined process."
+        ],
+        example: {
+          before: "Provided excellent customer service and communication support.",
+          after: "Answered customer order-status questions, checked updates in the order system, and recorded unresolved delivery issues for handover to the support team.",
+          note: "This is an illustrative example, not a customer result. It names a real type of responsibility without suggesting that the applicant controlled delivery operations or guaranteed a resolution."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "A clearer bullet cannot make every application competitive. A role may require another language, a specific system, a licence, weekend availability, local work authorisation, or more direct experience than you currently have. A lack of response does not prove that your customer service work was unimportant or that one sentence caused the outcome.",
+          "Keep the posting and the version you submitted. Check whether the first few bullets show the responsibilities named in the vacancy and whether you could explain every detail in an interview. If a recurring requirement is genuinely missing, look for a legitimate way to build it through training, a supervised project, volunteering, or a role with relevant duties."
+        ]
+      }
+    ],
+    conclusion: [
+      "Early-career customer service work can provide useful evidence when its setting and responsibility are visible.",
+      "Select a few honest examples, show what you handled, and let the reader see the scope without overstating your authority."
+    ],
+    cta: "ResuNexx can help you review whether your customer service experience is described clearly and proportionately for a target role.",
+    sources: [
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" },
+      { label: "CareerOneStop: Special tips", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/special-tips.aspx" }
+    ]
+  },
+  {
+    slug: "career-changer-resume-keep-original-title-explain-work",
+    title: "Changing Careers? Keep Your Original Job Title and Explain the Work That Travels With You",
+    description: "For career changers, a practical way to make transferable responsibilities visible without renaming past jobs or overstating seniority.",
+    audience: "Career changers with 3–8 years of experience moving into a related field",
+    publishedAt: "2026-09-09T00:00:00.000Z",
+    opening: [
+      "A new target role can make an old title feel unhelpful. A retail supervisor pursuing operations work, an administrator moving into project coordination, or a hospitality professional applying for customer success may worry that a reader will stop at the previous industry and miss the work that carries across.",
+      "The answer is not to rename the job. A title is part of your employment record, and a closer-sounding substitute can create a mismatch with references, forms, or a later conversation. A more useful approach is to retain the title and use the bullets beneath it to explain the planning, records, communication, problem-solving, or coordination you actually did."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "Career changes ask one document to do two things at once: report past work accurately and make a future direction understandable. When that bridge is not visible, applicants may overcorrect with a headline that sounds like a title they have not held, a crowded list of keywords, or a rewritten job history that removes the original context.",
+          "CareerOneStop describes a combination resume as one option that can highlight transferable skills while retaining detailed work history. Its work-experience guidance also recommends using language from a job posting where it accurately describes your experience and adding context to explain what you did. These recommendations support clearer organisation; they do not support changing a title, credential, or level of responsibility."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Start by listing the target role's stated tasks. Choose a small number that overlap with your actual history, such as coordinating schedules, maintaining records, resolving recurring issues, preparing updates, or supporting a team. For each overlap, identify a real situation, your action, and the output or responsibility you can stand behind.",
+          "Keep the employer name, original job title, dates, and any required location details accurate. If the title is unfamiliar outside your previous sector, the bullet can translate the work in plain language. A headline or summary can state the direction you are pursuing, but it should not imply that you already hold the target position or have experience you cannot demonstrate.",
+          "Read the application form alongside the resume before submitting. The same facts should appear consistently in both. If a role requires a licence, technical tool, qualification, or direct industry experience that you do not have, name only adjacent evidence and decide whether the vacancy remains a reasonable application. A focused resume cannot truthfully remove a stated requirement."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Imagine a hospitality shift supervisor applying for an entry-level operations coordinator position. Their original title is valuable context: it shows the setting in which the work happened. The useful change is to clarify the transferable responsibilities, not to replace the title with Operations Coordinator."
+        ],
+        example: {
+          before: "Operations Coordinator | Hotel Group\nManaged operations and staff across the business.",
+          after: "Shift Supervisor | Hotel Group\nCoordinated daily staff coverage, recorded recurring guest issues, and shared handover notes with the next shift using the site's existing process.",
+          note: "This is an illustrative example. It does not claim responsibility for company-wide operations; it makes planning, record-keeping, and communication visible within the actual role."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "A clearer bridge between fields does not guarantee a response. Employers may prefer direct sector experience, require a credential, or be hiring at a level that does not match your current background. Silence does not tell you which factor mattered, and it is not evidence that you should make your old role sound more senior.",
+          "Track the vacancy, resume version, and the transferable example you chose. Over several applications, review whether your strongest relevant evidence appears near the top and whether it is still accurate. If the same missing requirement keeps appearing, build it through legitimate training, a placement, a project, or a role where that responsibility is real."
+        ]
+      }
+    ],
+    conclusion: [
+      "Career-change resumes work best when they make a truthful connection rather than a replacement identity.",
+      "Keep the original title, explain the relevant work clearly, and let the evidence carry the transition."
+    ],
+    cta: "ResuNexx can help you review whether the transferable evidence in your resume is clear without changing the facts of your work history.",
+    sources: [
+      { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" },
+      { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
+    ]
   }
 ];
 
