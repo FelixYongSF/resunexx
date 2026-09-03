@@ -1331,6 +1331,62 @@ export const insightArticles: InsightArticle[] = [
       { label: "CareerOneStop: Formatting", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/formatting.aspx" },
       { label: "CareerOneStop: Work experience", href: "https://cloudfront.careeronestop.org/JobSearch/Resumes/ResumeGuide/work-experience.aspx" }
     ]
+  },
+  {
+    slug: "european-job-seeker-cv-language-skills-use-cefr",
+    title: "Applying in Europe? Describe Language Skills You Can Explain Instead of Listing Yourself as Fluent",
+    description: "For international job seekers applying in Europe, a practical way to make language skills specific without overstating what you can do at work.",
+    audience: "International job seekers applying for roles in Europe",
+    publishedAt: "2026-09-10T00:00:00.000Z",
+    opening: [
+      "When you apply in another language, the Languages section can feel like a small place carrying a very large question. You may have studied the language, used it with classmates, completed a test, or handled simple work conversations. Then a vacancy asks for English, German, French, or another language, and the easiest label to type seems to be fluent.",
+      "That label is often too vague to help either you or the reader. A more useful CV says which language you use, gives an honest level or evidence where relevant, and avoids suggesting that one strength covers every kind of communication. The goal is not to make your language profile sound stronger. It is to make it clear enough that you can support it if an employer asks."
+    ],
+    sections: [
+      {
+        heading: "Why this happens",
+        paragraphs: [
+          "Language ability is not one single task. You might read technical material comfortably but need more time in spontaneous discussion, or write clear emails while still building confidence in formal presentations. A single adjective can hide those differences. It can also leave you unsure what you meant if a form, interview, or job task later asks for more detail.",
+          "Europass uses the Common European Framework of Reference for Languages (CEFR) as a self-assessment framework. Its guidance asks users to consider listening, reading, spoken interaction, spoken production, and writing separately. The framework is a way to describe what you can do; it is not a promise that every employer, country, or job will use the same language standard."
+        ]
+      },
+      {
+        heading: "What to check or improve",
+        paragraphs: [
+          "Start with the vacancy. Notice whether it names a language, a requested level, a certificate, or a specific task such as customer calls, report writing, training, or working with local clients. Do not assume that a language mentioned in the advert means the same thing in every role. Keep a copy of the wording alongside the version of the CV you submit.",
+          "For each language you include, choose a description you can explain plainly. You might use a CEFR level after reviewing the relevant descriptors, name a recognised certificate with its date if you hold one, or state a concrete context such as writing weekly project updates in English. Use only evidence that is current and yours. Do not turn a course attendance record, a family language, or a short trip into a professional claim you could not support.",
+          "If the CV format allows it, separate the language from the evidence: for example, Spanish — B2 self-assessment (reading and written communication); completed client correspondence in Spanish during a supervised placement. Keep the wording proportionate. A result from a formal assessment should be copied accurately, and a self-assessment should remain a self-assessment rather than being presented as a certificate."
+        ]
+      },
+      {
+        heading: "Concrete example",
+        paragraphs: [
+          "Consider an international graduate applying for a junior administrative role in the Netherlands. The role asks for written English and states that Dutch is helpful. The applicant has completed university projects in English and is learning Dutch, but has not used Dutch in a workplace."
+        ],
+        example: {
+          before: "Languages: Fluent English and Dutch.",
+          after: "Languages: English — used for university reports and group presentations. Dutch — A2 self-assessment; currently completing an introductory course.",
+          note: "This is an illustrative example, not a claim that the applicant meets a particular employer's language requirement. The final wording should reflect the applicant's own evidence and any requested assessment or certificate."
+        }
+      },
+      {
+        heading: "If you still hear nothing",
+        paragraphs: [
+          "A clearer language section cannot substitute for a stated level, a required local-language licence, direct client experience, work authorisation, or another qualification. No response does not show which requirement decided the outcome. It is not a reason to change a self-assessment into fluent or to imply experience in a language you have not used for the work described.",
+          "Keep the posting and your submitted CV. Review whether the language evidence matched the actual task named in the vacancy and whether it remains consistent with the application form. If a language level repeatedly blocks roles you want, choose a legitimate next step: structured study, a recognised assessment, supervised use in a placement, or roles where your current level is accurately accepted."
+        ]
+      }
+    ],
+    conclusion: [
+      "A language section earns trust when it is specific enough to explain and modest enough to remain true across the rest of your application.",
+      "Name the language, use an honest framework or concrete evidence, and let the vacancy tell you which capability needs the closest check."
+    ],
+    cta: "ResuNexx can help you review whether the language evidence in your CV is clear, relevant, and consistent with the role you are targeting.",
+    sources: [
+      { label: "Europass: How to self-assess your language skills", href: "https://europass.europa.eu/en/how-self-assess-your-language-skills" },
+      { label: "Europass: Common European Framework of Reference for Language skills", href: "https://europass.europa.eu/en/common-european-framework-reference-language-skills" },
+      { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }
+    ]
   }
 ];
 
