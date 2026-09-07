@@ -1387,6 +1387,96 @@ export const insightArticles: InsightArticle[] = [
       { label: "Europass: Common European Framework of Reference for Language skills", href: "https://europass.europa.eu/en/common-european-framework-reference-language-skills" },
       { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }
     ]
+  },
+  {
+    slug: "international-graduate-cv-education-explain-qualification",
+    title: "Applying in Europe After Graduation? Explain Your Qualification Instead of Trying to Make It Sound Like Work Experience",
+    description: "For international graduates applying in Europe, a practical way to make education relevant without presenting coursework or a degree as employment.",
+    audience: "International graduates applying for entry-level roles in Europe",
+    publishedAt: "2026-09-11T00:00:00.000Z",
+    opening: [
+      "A degree can be your strongest recent evidence and still be difficult for a reader in another country to interpret. Course names, grading systems, capstone projects, and placement requirements may be familiar where you studied but unfamiliar to the person reading your CV. That uncertainty can make an education section feel too thin, so applicants sometimes turn a module into a job title or describe a group assignment as independent professional work.",
+      "You do not need to minimise your education to avoid that mistake. The useful move is to state the qualification accurately, then select a small amount of relevant, explainable context. A reader should be able to see what you studied, when you completed it, and which project, method, or output connects to the vacancy—without being asked to guess whether it was paid employment."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "International applications often compress different education systems into a few lines. Applicants may worry that a local degree name will not communicate its level, or that an employer will value work experience more than study. A crowded education section can become a list of every module, while a sparse one can hide the only evidence that relates to the target role.",
+        "Europass describes a profile as a place to record qualifications, experience, skills, achievements, and projects from work, study, volunteering, and other parts of life. Its CV guidance says to focus on facts and main points that match the job. Those two ideas leave room for a project or relevant course detail, but they do not turn study into employment or establish a qualification equivalence that a recruiter has not stated."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Keep the institution, official qualification name, field, completion date or expected date, and location accurate. If the vacancy asks for a particular subject, add a short plain-language description only when it helps a reader understand the actual programme. Do not translate a qualification into a protected title, licence, or local level unless an official comparison supports that wording.",
+        "Choose one or two relevant items beneath the qualification. A final project, laboratory method, research question, client brief, portfolio output, or supervised placement can be useful when it is real and connected to the role. Name your contribution precisely: what you analysed, made, documented, tested, or presented. If the work was collaborative, say so. If it was assessed coursework, keep that context visible.",
+        "Read the vacancy alongside the section before you submit. Select evidence for a stated task, tool, or subject area rather than adding broad claims such as business-ready or industry expert. Keep a fuller private record of modules, projects, feedback, and dates. That makes it easier to tailor a CV while keeping later application answers consistent."
+      ] },
+      { heading: "Concrete example", paragraphs: ["Imagine a graduate in Spain applying for a junior data-support role in Germany. Their degree included a team project using spreadsheets and survey data. The degree is relevant, but the project was not a paid analyst position."], example: { before: "Data Analyst | University | 2025\nManaged business data and delivered analytical solutions.", after: "BSc in Business Administration | University | 2025\nFinal team project: cleaned survey responses in spreadsheets, documented assumptions, and presented findings on customer-service patterns.", note: "This is an illustrative example. It identifies a real study context and contribution without implying employment, independent authority, or a result the graduate cannot support." } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A clearer education section cannot replace a stated licence, local qualification recognition, work authorisation, language level, or direct experience. No reply does not prove that your degree title or one project description decided the outcome. It may reflect requirements that were not visible from the first screening step.",
+        "Save the posting and your submitted CV. Check whether the qualification and project were labelled honestly and whether they connect to the work named in the vacancy. If a recurring requirement is missing, look for a legitimate route to build it: further study, recognised assessment, a supervised placement, or an entry-level role where that capability is genuinely developed."
+      ] }
+    ],
+    conclusion: ["Education becomes stronger evidence when its context stays visible.", "State the qualification truthfully, select one relevant project or output, and let the reader see what you can explain."],
+    cta: "ResuNexx can help you review whether the education evidence in your CV is clear, relevant, and accurately labelled for a target role.",
+    sources: [{ label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }, { label: "Europass: What information should I include in my Europass profile?", href: "https://europass.europa.eu/en/what-type-information-should-i-include-my-europass-profile" }]
+  },
+  {
+    slug: "international-job-seeker-cv-projects-show-context",
+    title: "International Job Seekers: Put Projects on Your CV With Enough Context to Explain Them",
+    description: "For international job seekers with project-based evidence, a practical way to make a CV specific without overstating clients, authority, or outcomes.",
+    audience: "International job seekers with study, volunteer, or early-career project experience",
+    publishedAt: "2026-09-12T00:00:00.000Z",
+    opening: [
+      "Projects can be the evidence that makes a new graduate, career changer, or international applicant feel more concrete on paper. They can also create a quiet credibility problem when a one-line description implies a client contract, a leadership role, or a business result that the applicant did not own. A reader may see an impressive headline but still not know where the project happened, who was involved, or what the applicant actually did.",
+      "A useful project entry is not a miniature marketing case study. It is a compact factual record: the setting, the task, the applicant's contribution, the tools or method used, and an output that can be explained. That level of context allows a project to support an application without asking it to prove more than it can."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "People collect project experience across university, online courses, volunteering, internal work, hackathons, and personal learning. These settings are not interchangeable, yet a CV template may place every entry under Experience. Applicants can then feel pressure to use the most senior-sounding label so that the project competes with a conventional job history.",
+        "Europass says that a profile can include achievements and projects from work, home, study, volunteering, and hobbies. That breadth is helpful because it recognises evidence outside paid work. It also makes the context important: a reader should be able to distinguish a supervised course project from a volunteer responsibility or an employer assignment, rather than being led to assume they were the same thing."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Start with the setting. Write whether the project was academic, personal, volunteer, or part of an employment role. Then name the problem or brief in ordinary language, your own contribution, and the material output. A dashboard, prototype, research summary, event plan, tested process, or presentation may be useful if you can show or explain it.",
+        "Keep names and confidentiality boundaries accurate. Do not list a company as a client unless it was genuinely your client or the project was formally commissioned. Do not disclose protected information, copy an employer's internal material, or claim team work as an individual result. If you use a number, make sure you know what it measures and whether it describes your work or the entire group.",
+        "Select projects only when they help answer the vacancy. Two clear entries are usually more useful than six unrelated ones. Match the wording to a stated task where it is true, but avoid copying a job title or tool name when you only watched, read about, or briefly encountered it. Keep supporting notes privately so you can explain the entry consistently later."
+      ] },
+      { heading: "Concrete example", paragraphs: ["Consider an applicant moving into junior operations work after volunteering at a community event. They helped a small team prepare attendee information, but they did not run the organisation or lead the event."], example: { before: "Operations Lead | Community Festival\nDelivered a major event and managed all stakeholder operations.", after: "Volunteer project | Community Festival\nUpdated the attendee-information sheet, checked venue instructions with the coordinator, and prepared a handover note for the event-day team.", note: "This is an illustrative example. It makes a real contribution visible without claiming leadership, commercial responsibility, or an outcome beyond the volunteer's role." } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A well-described project cannot substitute for experience, certification, language ability, or work authorisation that a vacancy explicitly requires. Silence also cannot show whether a reader saw the project, preferred another candidate, or stopped at another requirement. It is not evidence that you should give the project a stronger title.",
+        "Keep the version you sent and revisit the project description after several applications. Check that its setting and your contribution remain clear. If a target role repeatedly asks for work you have not done, build the next project in a legitimate setting where the missing responsibility is real, supervised where appropriate, and documented accurately."
+      ] }
+    ],
+    conclusion: ["Projects earn their place on a CV when they give a reader a truthful, explainable example of your work.", "Name the setting, contribution, and output, then let that specific evidence do its job."],
+    cta: "ResuNexx can help you review whether a project entry shows useful evidence without overstating its context or your role.",
+    sources: [{ label: "Europass: What information should I include in my Europass profile?", href: "https://europass.europa.eu/en/what-type-information-should-i-include-my-europass-profile" }, { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }]
+  },
+  {
+    slug: "international-applicant-cv-contact-details-keep-private",
+    title: "Applying Internationally? Keep CV Contact Details Useful Without Adding Sensitive Personal Information",
+    description: "For international applicants, a practical way to provide reachable contact details while keeping a CV focused on career-relevant information.",
+    audience: "International job seekers applying across borders",
+    publishedAt: "2026-09-13T00:00:00.000Z",
+    opening: [
+      "A cross-border application can make the top of a CV feel like a form with no clear boundary. Applicants may wonder whether they need a full address, a passport detail, a date of birth, a personal identifier, a photo, or every social profile. When the local convention is uncertain, adding more can seem safer. It can also make the document less focused and expose information that a vacancy did not ask for.",
+      "Your contact section has a narrower job: make it possible for an employer to reach you and understand the application context where needed. The rest of the document should help them assess skills, qualifications, and experience. A good rule is to provide information that is relevant to the application and requested by the employer, while keeping sensitive details out unless there is a clear, legitimate reason to provide them."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "Application customs differ across countries, industries, and employers. An applicant may copy a CV template designed for another market or try to anticipate every question that could arise later. The result can be a dense header where the information that matters most—a working email address, phone number, location, or portfolio—is hard to find.",
+        "Europass explicitly advises users not to include sensitive personal information in a profile, including health and beliefs, or information that is not relevant to career and training. Its CV guidance also asks applicants to use a professional email address. These are useful principles for a CV: prioritise reachable, career-relevant details, and do not treat a general resume as the place to disclose every personal fact."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Use a name you can use consistently across the application, a professional email address you monitor, and a phone number with the country code when you are applying internationally. Give a city and country when location helps, but do not add a full street address unless the employer or a formal process requests it. Check every link, especially a portfolio or professional profile, from a device where you are not signed in.",
+        "Read the vacancy and application form separately. If an employer asks a question about work authorisation, location, availability, or a required document, answer it honestly in the place provided. Do not use a vague CV line to imply that you already hold a right, credential, or status you do not have. Conversely, do not add passport numbers, health information, beliefs, or other sensitive data merely because another template included them.",
+        "Keep one private record for documents and application-specific answers. Your public CV can remain concise while the private record helps you respond consistently when a legitimate request arrives. Before sending, ask whether each contact detail helps a reader reach you or understand your work; if it does neither, remove it."
+      ] },
+      { heading: "Concrete example", paragraphs: ["Imagine an applicant living in Malaysia and applying for a junior design role in the Netherlands. They have a portfolio and are prepared to discuss their location, but the vacancy does not ask for identity-document details in the CV."], example: { before: "Full home address | Date of birth | Passport number | Marital status | Personal social accounts", after: "Name | Kuala Lumpur, Malaysia | +60 number | professional email | portfolio link\nWork-authorisation and relocation questions answered accurately in the employer's application form when requested.", note: "This is an illustrative example, not advice about a specific country's legal application requirements. Follow the vacancy and official process where they require additional information." } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A tidy contact section cannot overcome a role's location, work-authorisation, language, licensing, or experience requirements. No response does not prove that a full address, photo, passport detail, or missing social account was the deciding factor. Adding more personal data is not a reliable way to make an application stronger.",
+        "Keep the posting and submitted version. Check whether you were reachable, whether any requested application question was answered accurately, and whether the CV disclosed only relevant information. If you are unsure about a document request, verify it through the employer's official application instructions or the relevant official authority before sharing sensitive information."
+      ] }
+    ],
+    conclusion: ["An international CV needs to be reachable and relevant, not personally exhaustive.", "Keep the header clear, answer formal questions honestly where asked, and protect sensitive details that do not belong in a general application."],
+    cta: "ResuNexx can help you review whether your CV contact details are clear, relevant, and proportionate for an international application.",
+    sources: [{ label: "Europass: What information should I include in my Europass profile?", href: "https://europass.europa.eu/en/what-type-information-should-i-include-my-europass-profile" }, { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }]
   }
 ];
 
