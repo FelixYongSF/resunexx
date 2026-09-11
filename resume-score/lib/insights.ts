@@ -1477,6 +1477,126 @@ export const insightArticles: InsightArticle[] = [
     conclusion: ["An international CV needs to be reachable and relevant, not personally exhaustive.", "Keep the header clear, answer formal questions honestly where asked, and protect sensitive details that do not belong in a general application."],
     cta: "ResuNexx can help you review whether your CV contact details are clear, relevant, and proportionate for an international application.",
     sources: [{ label: "Europass: What information should I include in my Europass profile?", href: "https://europass.europa.eu/en/what-type-information-should-i-include-my-europass-profile" }, { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }]
+  },
+  {
+    slug: "international-job-seeker-cv-select-skills-with-evidence",
+    title: "Applying Across Borders? Choose CV Skills You Can Explain, Not Every Skill You Have Seen",
+    description: "For international job seekers, a practical method for selecting skills that match a vacancy without overstating level or experience.",
+    audience: "International job seekers tailoring a CV for roles in Europe",
+    publishedAt: "2026-09-14T00:00:00.000Z",
+    opening: [
+      "A skills section can become crowded very quickly when you apply in a new country. You may have used a tool in class, watched training, helped a colleague once, or seen a term repeatedly in vacancies. Listing every one of those items can make a CV look broad, but it can also leave a reader unable to tell what you can actually do, explain, or support with an example.",
+      "A better aim is not to create the longest possible skills list. It is to select a small, truthful set that helps the reader connect your evidence to the work in the vacancy. The wording should make your current level clear enough that it remains consistent with the rest of the CV and with any later application question."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "International applicants often compare their experience with unfamiliar job titles and software names. They may worry that omitting a keyword will remove them from consideration, or that a short skills list will make them appear less adaptable. Templates can intensify that pressure by offering long columns of categories with no space for context.",
+        "Europass advises applicants to highlight examples of skills and experience that match the vacancy notice, and to focus a CV on facts and main points that match the job. This does not mean that a named skill guarantees relevance or suitability. It does give a useful editing rule: a skill belongs when you can state where you used it and what you did without adding a larger claim."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Read the vacancy once for tasks, not only for keywords. Mark the tools, methods, languages, and responsibilities that are actually named. Then compare them with a private record of work, study, volunteering, and training. Select skills for which you can give a truthful example of use, a completed learning activity, or a clearly stated beginner level.",
+        "Use ordinary labels. If you used spreadsheets to clean a small dataset, say that rather than claiming advanced analytics. If you completed introductory training, name the training and avoid implying paid production experience. Keep certificates, work samples, dates, and notes privately so that a CV version and an application form do not drift apart.",
+        "Remove items that are only aspirations, passing exposure, or copied terminology. A focused list can contain fewer words and still be easier to understand. Check the final section against the rest of the document: the claimed tool, language, or method should not contradict the dates, role level, or project context you give elsewhere."
+      ] },
+      { heading: "Concrete example", paragraphs: ["Consider an international graduate applying for a junior operations role. The posting mentions spreadsheets and customer records. The graduate used spreadsheets in a university project and completed a short introductory course, but has not owned a company reporting process."], example: { before: "Advanced Excel | CRM expert | Data analytics | Operations management", after: "Spreadsheets — cleaned and organised survey responses for a university team project.\nCustomer-record basics — completed introductory training; seeking a supervised junior role to build workplace experience.", note: "This is an illustrative example. It connects a real setting to the skill without claiming a professional level, a system owner role, or a business outcome the applicant cannot support." } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A clearer skills section cannot replace a required licence, language level, work authorisation, portfolio, or direct experience. No response does not show that a particular keyword was missing or that a different proficiency label would have changed the result. Do not turn silence into a reason to claim a higher level.",
+        "Keep the vacancy and the submitted CV. Review whether your selected evidence really matched the stated tasks and whether you could explain every item. If the same capability is repeatedly required, choose a legitimate way to build it: structured learning, a supervised project, volunteer work with real responsibilities, or an entry-level role where the work is genuinely available."
+      ] }
+    ],
+    conclusion: ["A skills section is most useful when every item has an honest source behind it.", "Choose what matches the role, show the level you can support, and keep the evidence ready to explain."],
+    cta: "ResuNexx can help you review whether your CV skills are relevant, specific, and supported by your real experience.",
+    sources: [{ label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }, { label: "Europass: What information should I include in my Europass profile?", href: "https://europass.europa.eu/en/what-type-information-should-i-include-my-europass-profile" }]
+  },
+  {
+    slug: "career-changer-cv-keep-training-context-clear",
+    title: "Changing Careers? Put Recent Training on Your CV Without Presenting It as Job Experience",
+    description: "For career changers, a practical way to show recent learning and relevant outputs while keeping training distinct from employment.",
+    audience: "Career changers applying for entry-level roles in a new field",
+    publishedAt: "2026-09-15T00:00:00.000Z",
+    opening: [
+      "Recent training can be important evidence when you are changing careers. It may show that you have begun learning a new tool, completed an assessed programme, or made a project that connects to the role you want. The difficulty comes when a CV tries to make that learning carry the weight of a former job, using an invented title or a description that hides the course, provider, or supervised setting.",
+      "You do not need to minimise useful learning. The practical approach is to name the training truthfully, state the parts that relate to the vacancy, and describe any output in proportion to what you actually did. That gives a reader useful context without asking them to mistake education for paid employment."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "A career change often creates a visible gap between the responsibilities in your previous role and the language in a new vacancy. Applicants may fear that a course certificate sounds weaker than experience, especially where recruiters use unfamiliar titles. They can then move a course into the employment section or use a senior title in an attempt to make the transition look smoother.",
+        "Europass describes a profile as a place to record qualifications, experience, skills, achievements, and projects. Its CV guidance also asks applicants to focus on facts and main points matching the job. Those categories allow training and a relevant project to be visible. They do not make a course, exercise, or simulated brief equivalent to a job with employer responsibility."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "State the provider, programme or course name, completion date or current status, and the actual scope. If the course involved assessed work, a capstone, laboratory practice, or a portfolio, describe the task and your contribution in plain language. If a project was a team exercise, mark it as such. Keep the certificate and supporting notes where you can retrieve them later.",
+        "Place training in an education, professional development, or selected projects section rather than disguising it as employment. Select only the details that relate to the target role. A short course in a named method can be useful when it is real, but it does not support claims that you led production work, managed clients, or delivered a commercial result unless that happened.",
+        "Retain your previous employment accurately too. Your former role may contain transferable evidence such as documenting work, handling information, coordinating people, or solving routine problems. Explain those tasks in their real setting instead of rewriting the job title to match the new profession."
+      ] },
+      { heading: "Concrete example", paragraphs: ["Imagine a hospitality supervisor who is moving into junior digital-content work. They completed an evening course and created a group content calendar, but they did not hold a paid marketing role."], example: { before: "Marketing Manager | Independent | 2026\nLed brand strategy and delivered high-performing campaigns.", after: "Professional development | Evening digital-content course | 2026\nGroup project: drafted a four-week content calendar, documented audience assumptions, and presented the plan for tutor feedback.", note: "This is an illustrative example. It preserves the training setting and group context rather than suggesting employment, independent authority, or campaign performance." } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "Training can show purposeful learning, but it cannot substitute for a required licence, portfolio depth, local language level, or paid experience where those are explicitly required. A non-response cannot identify which requirement affected the application. It is not evidence that an applicant should rename a course as a job.",
+        "Save the version you sent and compare it with future vacancies. Check whether the course detail selected a genuine task from the role and whether its context was still visible. If you need further evidence, build it through a legitimate portfolio project, supervised placement, volunteer responsibility, or additional training that you can explain accurately."
+      ] }
+    ],
+    conclusion: ["Career-change training is credible when the learning setting stays visible.", "Name the course, select a real output, and let prior experience remain truthful instead of forcing it into a new title."],
+    cta: "ResuNexx can help you present career-change training and transferable evidence clearly without overstating either.",
+    sources: [{ label: "Europass: What information should I include in my Europass profile?", href: "https://europass.europa.eu/en/what-type-information-should-i-include-my-europass-profile" }, { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }]
+  },
+  {
+    slug: "international-graduate-cv-use-reverse-chronological-order",
+    title: "New Graduate CV Feeling Disconnected? Use Dates and Reverse Chronology to Make the Story Easier to Follow",
+    description: "For new graduates applying internationally, a practical way to organise education, projects, and early experience in a readable order.",
+    audience: "International new graduates preparing their first professional CV",
+    publishedAt: "2026-09-16T00:00:00.000Z",
+    opening: [
+      "A new graduate CV may include a degree, a recent project, a part-time job, volunteering, a placement, and an earlier qualification. All of it can be true, yet the reader may still struggle to see what is current when dates are missing, sections overlap, or the oldest item appears first. In that situation, applicants sometimes remove dates entirely or merge unrelated activities under one impressive heading.",
+      "A clearer structure does not require inventing a continuous career story. It simply helps a reader follow the real sequence: what you did most recently, where it happened, and which evidence relates to the vacancy. Clear dates and labels make it easier to understand a graduate CV without asking a project or a short role to explain everything."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "Graduates often have several activities at once. A degree can overlap with part-time work, a placement, and a portfolio project. International applications can add different date conventions and qualification names. When space feels limited, it can seem simpler to remove timing and context rather than decide what belongs in each section.",
+        "Europass recommends listing the most recent experience first and says that long gaps in work or learning should include an explanation. Its guidance also asks for clear, simple language and relevant facts. These are readability principles, not a rule that every applicant must have an identical CV layout. They support an honest order that lets the reader see the most recent and relevant evidence quickly."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Use one date style throughout the CV, such as month and year. Place current or most recent entries first within each section. Label education, paid work, volunteering, projects, and placements accurately so the reader does not have to infer whether an activity was employment. If two activities overlapped, show the dates rather than trying to hide the overlap.",
+        "Choose the order that makes the target role easiest to understand. A new graduate can place education near the top when it is the strongest current evidence, followed by selected projects and relevant experience. Keep details compact: institution or organisation, role or qualification, date, setting, and one or two facts that connect to the vacancy.",
+        "Check every date against your application form, portfolio, and supporting documents. Do not stretch an end date to cover a gap or make a project appear longer than it was. If a period needs explanation, use a concise truthful phrase only where it helps the reader understand the record."
+      ] },
+      { heading: "Concrete example", paragraphs: ["Consider a graduate who finished a degree in June, volunteered at an event in July, and began a personal portfolio project in August while applying for junior coordination roles."], example: { before: "Experience\nPortfolio project | Volunteer event | Degree\nVarious responsibilities in coordination and research.", after: "Selected projects\nPersonal portfolio project | Aug 2026–present\nDocumenting a small research workflow and sample handover notes.\n\nVolunteer experience\nEvent support volunteer | Jul 2026\nUpdated attendee information with the coordinator.\n\nEducation\nBA in [field] | completed Jun 2026", note: "This is an illustrative example. The order and dates clarify the record without presenting personal work or volunteering as paid employment." } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A more readable chronology cannot overcome a requirement for experience, authorisation, language ability, or a qualification the vacancy specifically names. No response also cannot prove that a date order decided the result. Do not change dates, remove relevant context, or make a short activity appear longer merely to create a smoother sequence.",
+        "Keep each submitted version with the vacancy. Review whether your most recent relevant evidence was easy to find and whether the labels and dates were consistent. If you need stronger evidence for a target role, build it through real work, learning, a placement, or a project whose setting and duration you can describe honestly."
+      ] }
+    ],
+    conclusion: ["A graduate CV becomes easier to trust when the reader can follow its real sequence.", "Use consistent dates, label each setting accurately, and put your most recent relevant evidence where it can be understood."],
+    cta: "ResuNexx can help you organise a graduate CV so the chronology, context, and relevant evidence remain clear.",
+    sources: [{ label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }]
+  },
+  {
+    slug: "international-applicant-cv-keep-master-record-private",
+    title: "Applying for Different Roles? Keep a Private Master Record So Each CV Can Stay Focused and Accurate",
+    description: "For international applicants tailoring multiple applications, a practical way to preserve a complete private record while sending focused CV versions.",
+    audience: "International applicants tailoring CVs for several role types",
+    publishedAt: "2026-09-17T00:00:00.000Z",
+    opening: [
+      "Tailoring a CV can feel risky when you have worked across countries, changed roles, or collected several projects and training records. If you remove an older detail for one vacancy, you may worry that it will be lost for the next. If you keep everything in every version, the document can become difficult to scan and the facts that matter most can disappear in the volume.",
+      "The solution is to separate your private master record from the CV you send. Keep a complete, factual record for yourself, then create a focused version that selects only what helps explain your fit for one vacancy. This protects accuracy while giving each application a clear purpose."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "International job seekers may need different CV versions for different markets, languages, or role families. Dates, qualification names, work-authorisation answers, project context, and contact details can change in relevance from one application to another. Without a reliable record, tailoring can become rushed copying from old documents, which increases the chance of omissions or contradictions.",
+        "Europass describes the profile as a place to keep a record of skills, qualifications, and experience, and says that an up-to-date profile can support tailored CVs and applications. Its CV guidance separately recommends focusing on facts and main points that match the job. Together, those ideas support a practical distinction: retain a complete source record privately, then choose a truthful, vacancy-relevant subset for the document you submit."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Create a private master record with exact job titles, employers or institutions, dates, locations, responsibilities, projects, learning, certificates, language evidence, and links to supporting material. Add brief notes about the setting: paid work, study, volunteer activity, or personal project. Keep this record secure and do not include sensitive data in a CV merely because it exists in your private file.",
+        "For each vacancy, make a copy of the CV and select the most relevant facts. Match a stated task only when your record supports it. Keep role titles, dates, and project context consistent; tailoring means choosing and explaining evidence, not rewriting your history. Read the application form as a separate document and answer any formal question in the place it is asked.",
+        "Use a simple version name and save the vacancy link or description alongside the submitted CV. Before sending, compare the final version with the master record. Check links, dates, spelling, location, and whether every selected claim can be explained."
+      ] },
+      { heading: "Concrete example", paragraphs: ["Imagine an applicant with customer-service work, an academic research project, and volunteer event support who applies for both junior operations and junior research-support roles."], example: { before: "One CV sent everywhere with every role, course, project, and responsibility listed in the same order.", after: "Private master record: full dates, settings, tasks, and supporting notes.\nOperations CV: selects customer records and event handover evidence.\nResearch-support CV: selects the academic project, data-cleaning task, and documented methods.", note: "This is an illustrative example. Each version selects real evidence from one accurate record; it does not change the applicant's titles, dates, or the setting of the work." } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A well-kept master record cannot remove a vacancy's requirements for direct experience, language, authorisation, licensing, or local eligibility. A non-response does not show that a different CV version would have changed the outcome. It is not a reason to add unsupported keywords or alter facts in the next version.",
+        "Keep the posting and submitted file. Review whether the chosen evidence was relevant, easy to find, and consistent with your private record. If a role repeatedly asks for evidence you do not yet have, identify a legitimate way to build it and record that future experience with the same care."
+      ] }
+    ],
+    conclusion: ["A private master record gives tailoring a reliable foundation.", "Keep the full facts for yourself, then send a focused CV that selects only the evidence each vacancy needs."],
+    cta: "ResuNexx can help you turn a complete career record into focused CV versions without losing accuracy or context.",
+    sources: [{ label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }, { label: "Europass: What information should I include in my Europass profile?", href: "https://europass.europa.eu/en/what-type-information-should-i-include-my-europass-profile" }]
   }
 ];
 
