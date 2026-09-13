@@ -1597,6 +1597,66 @@ export const insightArticles: InsightArticle[] = [
     conclusion: ["A private master record gives tailoring a reliable foundation.", "Keep the full facts for yourself, then send a focused CV that selects only the evidence each vacancy needs."],
     cta: "ResuNexx can help you turn a complete career record into focused CV versions without losing accuracy or context.",
     sources: [{ label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }, { label: "Europass: What information should I include in my Europass profile?", href: "https://europass.europa.eu/en/what-type-information-should-i-include-my-europass-profile" }]
+  },
+  {
+    slug: "international-graduate-cv-explain-qualification-name",
+    title: "Applying Abroad With an Unfamiliar Degree? Make Your Qualification Easy to Understand Without Renaming It",
+    description: "For international graduates, a practical way to present a qualification clearly while preserving its official name and scope.",
+    audience: "International graduates applying for early-career roles outside their study country",
+    publishedAt: "2026-09-18T00:00:00.000Z",
+    opening: [
+      "When a degree title, institution name, or grading system is unfamiliar in another country, it can be tempting to replace it with the nearest local label. That can make a CV look simpler at first glance, but it also risks creating a mismatch with transcripts, application forms, or a later request for documents.",
+      "The useful middle ground is to keep the official qualification name and add a short, factual explanation where it helps a reader. Your aim is not to argue that two systems are identical. It is to make the education easy to locate, understand, and verify while leaving the formal comparison to the employer or institution that requests it."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "International graduates often apply into systems with different degree names, subject labels, dates, and grading conventions. A course title may sound narrow when translated directly, or a local abbreviation may mean nothing to a reader abroad. Under pressure to fit a familiar job description, an applicant can turn a factual clarification into a replacement title or an unsupported claim about equivalence.",
+        "Europass treats education, training, qualifications, and experience as distinct information that can be recorded in a profile and selected for a particular CV. That supports a simple principle: retain the exact source information, then add context that helps a reader understand the setting. It does not make a CV the authority that converts one qualification into another."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Start with the official degree or qualification name shown on your institution's documents. Add the institution, country, completion date or expected date, and subject area. If an explanation is useful, keep it short and descriptive: the language of instruction, a concentration, a capstone topic, or the fact that the programme was undergraduate or postgraduate when that is accurate.",
+        "Use the same wording in your CV, application form, LinkedIn-equivalent profile if you use one, and supporting files unless a form asks for a particular format. Do not change a degree level, translate a title into a protected professional designation, or present a grade as a local classification without an official conversion requested by the receiving organisation.",
+        "Keep a private record with the original transcript, certificate, official translation if one exists, and a link to the programme description. That lets you answer a formal request without crowding a CV with sensitive documents or long explanations. Review the vacancy carefully: some employers or regulators specify their own assessment or credential process."
+      ] },
+      { heading: "Concrete example", paragraphs: ["Consider a graduate with a degree whose title includes a local programme name that is not commonly used in the country where they are applying for a junior analyst role."], example: { before: "BSc equivalent | Data Analyst degree | 2026", after: "Bachelor of [official programme name] | [Institution], [Country] | completed 2026\nRelevant study: data organisation and a supervised final project.", note: "This is an illustrative example. It retains the official qualification while offering a small amount of truthful context; it does not claim a credential evaluation or a professional title." } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A clearer qualification entry cannot replace a licence, language requirement, work authorisation, credential evaluation, or experience that a vacancy specifically requires. No response does not prove that a different degree label would have changed the result. Do not solve uncertainty by making the qualification sound more senior or more local than the documents support.",
+        "Save the vacancy and the submitted CV. Check whether the official title, dates, and institution were easy to find, and whether you followed any stated document instructions. If a role repeatedly requires formal recognition, use the route named by the employer, regulator, or education provider and keep the result separate from your CV wording."
+      ] }
+    ],
+    conclusion: ["A qualification is easier to understand when its official name remains intact and its context is clear.", "Keep the source record accurate, add only useful facts, and let formal equivalence be assessed where it is required."],
+    cta: "ResuNexx can help you review whether your education section is clear, consistent, and proportionate for an international application.",
+    sources: [{ label: "Europass FAQ: What is a Europass profile?", href: "https://europass.europa.eu/en/faq?page=2" }, { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }]
+  },
+  {
+    slug: "early-career-cv-describe-team-contribution-clearly",
+    title: "Your Team Project Was Real Work. Describe Your Contribution Without Claiming the Whole Result",
+    description: "For early-career applicants, a practical way to make team-based project work useful on a CV without overstating individual responsibility.",
+    audience: "Early-career international applicants presenting study, volunteer, or junior team projects",
+    publishedAt: "2026-09-19T00:00:00.000Z",
+    opening: [
+      "Early-career applications often depend on work done with other people: a university assignment, volunteer event, placement task, or junior team project. The experience can be relevant, but writing about it is awkward. Use only 'we' and the reader may not see your role; use only 'I led' and you may accidentally claim a decision, result, or authority that belonged to the group.",
+      "A stronger description names the project setting first, then states the part you actually owned, supported, or completed. This is not about making a small task sound larger. It gives a reader a reliable way to understand what you did, how you worked with others, and which parts you can explain in an application or conversation."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "Applicants with limited formal experience may be told to demonstrate impact before they have held a role with broad accountability. A group project can then become the only visible evidence of research, communication, organising information, or presenting a recommendation. The pressure to sound competitive can blur the boundary between contributing to a shared outcome and owning the whole outcome.",
+        "Europass allows people to record work experience, learning, skills, achievements, and projects, then select information for particular applications. That makes project work a legitimate source of evidence when its setting remains visible. It does not turn a team exercise, class brief, or volunteer shift into a claim of employer-level responsibility."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Name the setting and the team context: for example, a course project, supervised placement, volunteer event, or junior workstream. Then use a specific verb for your own contribution: gathered, checked, drafted, organised, compared, presented, documented, or supported. Include the material you worked with or the handover you produced when it is real and relevant to the vacancy.",
+        "Avoid vague superlatives such as 'drove success' unless you can explain exactly what changed and who confirmed it. Do not attribute a team's revenue, attendance, or performance to yourself. If an outcome belongs to the group, say that it was a team output and make your individual task clear. Keep project notes, feedback, links, and dates in your private record.",
+        "Choose only projects that help answer the vacancy's actual tasks. A junior operations role may need evidence of organising information and handovers; a research-support role may need evidence of careful source notes and data handling. The same project can be described differently for relevance, but its setting, dates, and your contribution must stay consistent."
+      ] },
+      { heading: "Concrete example", paragraphs: ["Imagine an early-career applicant who worked in a four-person university group on a service-improvement brief and is applying for a junior coordination role."], example: { before: "Led a successful service transformation that improved customer satisfaction.", after: "University team project | Service-improvement brief\nOrganised interview notes, maintained the team's action list, and drafted the handover summary used in the final group presentation.", note: "This is an illustrative example. It shows a concrete individual contribution and the group setting without claiming ownership of a business result or a customer outcome." } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A clear project entry cannot replace experience, authorisation, a portfolio, or a qualification a vacancy requires. A non-response does not prove that a stronger verb or an invented metric would have changed the outcome. Do not convert shared work into an individual result simply to make the bullet look more impressive.",
+        "Keep the posting and the version you sent. Review whether the project was relevant, whether the setting was visible, and whether every line describes a task you can explain. If you need more evidence, seek a legitimate project, placement, volunteer responsibility, or junior role where your own contribution can be recorded accurately."
+      ] }
+    ],
+    conclusion: ["Team-based work can be useful evidence when the reader can see both the project context and your real contribution.", "Name the setting, describe the part you did, and keep the shared result in proportion."],
+    cta: "ResuNexx can help you turn genuine project experience into CV evidence that is specific without overstating your role.",
+    sources: [{ label: "Europass FAQ: What is a Europass profile?", href: "https://europass.europa.eu/en/faq?page=2" }, { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }]
   }
 ];
 
