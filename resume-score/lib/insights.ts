@@ -1657,6 +1657,36 @@ export const insightArticles: InsightArticle[] = [
     conclusion: ["Team-based work can be useful evidence when the reader can see both the project context and your real contribution.", "Name the setting, describe the part you did, and keep the shared result in proportion."],
     cta: "ResuNexx can help you turn genuine project experience into CV evidence that is specific without overstating your role.",
     sources: [{ label: "Europass FAQ: What is a Europass profile?", href: "https://europass.europa.eu/en/faq?page=2" }, { label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }]
+  },
+  {
+    slug: "early-career-cv-label-personal-project-honestly",
+    title: "Built a Personal Project? Make It Useful CV Evidence Without Calling It Client Work",
+    description: "For early-career applicants, a practical way to present a self-directed project with enough context to keep the claim accurate.",
+    audience: "Early-career international applicants using self-directed projects to support a first professional CV",
+    publishedAt: "2026-09-20T00:00:00.000Z",
+    opening: [
+      "A personal project can be valuable evidence when you are early in your career. It may show that you learned a tool, organised information, made a prototype, documented a process, or completed a small piece of work outside a formal job. The problem begins when the CV leaves out the setting and the reader is asked to assume there was a client, employer, commercial launch, or result that never existed.",
+      "You do not need to hide self-directed work to sound professional. Give it a clear label, name the task you actually completed, and make its limits visible. That lets the project support your application without asking a reader to guess at experience, authority, or outcomes you cannot verify."
+    ],
+    sections: [
+      { heading: "Why this happens", paragraphs: [
+        "Applicants with little paid experience often see vacancies asking for examples of work. A finished personal project may be the most direct evidence they have, especially after study, a career break, or a period of structured learning. Because freelance, contract, and client work can sound more familiar on a CV, it can be tempting to use those labels for a project completed independently.",
+        "Europass describes a profile as a record of skills, qualifications, experience, and achievements, and its CV guidance asks applicants to highlight examples matching the vacancy. That leaves room for relevant evidence beyond one job title. It does not make a self-directed exercise the same as paid employment, commissioned work, or a product used by real customers."
+      ] },
+      { heading: "What to check or improve", paragraphs: [
+        "Choose a label that states the setting: Personal project, Independent learning project, Course project, Open-source contribution, or Volunteer project. Add dates, the tool or method used, and one or two concrete tasks. If the work is unfinished, say that it is in progress. If you followed a tutorial, describe what you adapted or documented rather than presenting the original tutorial as your own design.",
+        "Separate work you did from an outcome you did not measure. You can say that you built a prototype, organised a dataset, drafted a research brief, or wrote test notes when those statements are true. Do not claim that it increased sales, improved customer satisfaction, reached users, or was adopted by a business unless you can identify a real, supportable basis for that statement.",
+        "Keep a private project record with a link, screenshots where appropriate, notes on the source material, dates, and what you personally contributed. Then select only the parts that connect to the vacancy. A junior operations application may need a clear handover or spreadsheet workflow; a junior content role may need a documented editorial decision. The same project should keep the same setting wherever you mention it."
+      ] },
+      { heading: "Concrete example", paragraphs: ["Imagine a recent graduate applying for a junior operations role after making a small independent project to practise organising event information."], example: { before: "Freelance Operations Consultant | 2026\nImproved event operations and delivered successful client outcomes.", after: "Personal project | 2026\nBuilt a sample event-information tracker, defined status labels, and wrote a short handover note explaining how the fields were used.", note: "This is an illustrative example. It names the self-directed setting and the work completed without implying a client relationship, paid role, or measured business result." } },
+      { heading: "If you still hear nothing", paragraphs: [
+        "A well-labelled personal project cannot replace a licence, portfolio depth, direct experience, work authorisation, or language requirement named in a vacancy. No response also cannot show that relabelling the project as freelance work would have changed the decision. Do not add a client, a job title, or a result just to make the entry appear larger.",
+        "Keep the posting and the version you sent. Check whether the project was relevant, whether its setting was obvious, and whether you could explain every line, tool, and date. If you need more evidence, look for a legitimate placement, supervised project, volunteer responsibility, open-source contribution, or junior role where the context and your contribution can be recorded accurately."
+      ] }
+    ],
+    conclusion: ["A personal project becomes stronger CV evidence when it is specific about both the work and the setting.", "Label it honestly, describe the task you completed, and let a reader see what you can explain without inventing a client or outcome."],
+    cta: "ResuNexx can help you review whether a personal project is relevant, clearly labelled, and proportionate to the experience you actually have.",
+    sources: [{ label: "Europass: Create your Europass CV", href: "https://europass.europa.eu/en/create-europass-cv" }, { label: "Europass FAQ: What is a Europass profile?", href: "https://europass.europa.eu/en/faq?page=2" }]
   }
 ];
 
